@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="WhiteList_exp">
+	<select id="WhiteList_exp_select_whiteList_list" parameterClass="com.zjhcsoft.uac.account.whitelist.entity.WhiteList"
+		resultClass="com.zjhcsoft.uac.account.whitelist.entity.WhiteList">
+		<![CDATA[ 
+		from WhiteList WHERE 1=1
+		]]>
+		<isNotEmpty prepend="and" property="user.username"> 
+		<![CDATA[ 
+		user.username like '%' || #user.username# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="endDate"> 
+		<![CDATA[ 
+		to_char(endDate,'YYYY-MM-DD') = to_char(#endDate#,'YYYY-MM-DD')
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="startDate"> 
+		<![CDATA[ 
+		to_char(startDate,'YYYY-MM-DD') = to_char(#startDate#,'YYYY-MM-DD')
+		]]>
+		</isNotEmpty>
+		<![CDATA[
+		order by id desc 
+		]]>
+	</select>
+
+	<select id="WhiteList_exp_select_whiteList_count"
+		parameterClass="com.zjhcsoft.uac.account.whitelist.entity.WhiteList"
+		resultClass="java.lang.Long">
+		<![CDATA[ 
+		select count(*) from WhiteList WHERE 1 = 1
+		]]>
+		<isNotEmpty prepend="and" property="user.username"> 
+		<![CDATA[ 
+		user.username like '%' || #user.username# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="endDate"> 
+		<![CDATA[ 
+		to_char(endDate,'YYYY-MM-DD') = to_char(#endDate#,'YYYY-MM-DD')
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="startDate"> 
+		<![CDATA[ 
+		to_char(startDate,'YYYY-MM-DD') = to_char(#startDate#,'YYYY-MM-DD')
+		]]>
+		</isNotEmpty>
+	</select>
+
+</sqlMap>

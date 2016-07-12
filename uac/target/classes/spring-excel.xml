@@ -1,0 +1,20 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="oracleJdbcDao" class="com.zjhcsoft.exceldb.support.impl.OracleJdbcDao"
+		scope="prototype">
+		<property name="jdbcTemplate" ref="jdbcTemplate" />
+	</bean>
+	<bean id="jdbcDatabaseReader" class="com.zjhcsoft.exceldb.support.impl.JdbcDatabaseReader"
+		scope="prototype">
+		<property name="excelDao" ref="oracleJdbcDao" />
+	</bean>
+	<bean id="jdbcDatabaseWriter" class="com.zjhcsoft.exceldb.support.impl.JdbcDatabaseWriter"
+		scope="prototype">
+		<property name="excelDao" ref="oracleJdbcDao" />
+	</bean>
+	<bean id="poiExcelReader" class="com.zjhcsoft.exceldb.support.impl.PoiExcelReader"
+		scope="prototype" />
+	<bean id="poiExcelWriter" class="com.zjhcsoft.exceldb.support.impl.PoiExcelWriter"
+		scope="prototype" />
+</beans>

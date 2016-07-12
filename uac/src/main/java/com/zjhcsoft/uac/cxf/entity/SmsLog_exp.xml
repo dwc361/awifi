@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="SmsLog_exp">
+
+	<select id="SmsLog_exp_select_sms_code_by_staff" parameterClass="java.util.Map"
+		resultClass="com.zjhcsoft.uac.cxf.entity.SmsLog">
+		<![CDATA[ 
+		select * from U_SMS_LOG WHERE 1 = 1 and sts = 1 and used = 0 and (sysdate - log_time)*24*60 <= 5
+		]]>
+		<isNotEmpty prepend="and" property="staff_id"> 
+		<![CDATA[ 
+		staff_id = #staff_id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="staff_code"> 
+		<![CDATA[ 
+		staff_code = #staff_code#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel"> 
+		<![CDATA[ 
+		tel = #tel#
+		]]>
+		</isNotEmpty>
+		<![CDATA[ 
+		 order by log_time desc
+		]]>
+	</select>
+	
+	<select id="SmsLog_exp_select_sms_code_by_staff_count" 
+	parameterClass="com.zjhcsoft.uac.cxf.entity.SmsLog">
+		<![CDATA[ 
+		select count(*) from SmsLog t WHERE 1 = 1 
+		]]>
+		<isNotEmpty prepend="and" property="staff_id"> 
+		<![CDATA[ 
+		staff_id = #staff_id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="staff_code"> 
+		<![CDATA[ 
+		staff_code = #staff_code#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel"> 
+		<![CDATA[ 
+		tel = #tel#
+		]]>
+		</isNotEmpty>
+		<![CDATA[ 
+		 order by log_time desc
+		]]>
+		
+	</select>
+	
+	<select id="SmsLog_exp_select_sms_code" parameterClass="com.zjhcsoft.uac.cxf.entity.SmsLog"
+		resultClass="com.zjhcsoft.uac.cxf.entity.SmsLog">
+		<![CDATA[ 
+		from SmsLog WHERE 1 = 1 
+		]]>
+		<isNotEmpty prepend="and" property="staff_id"> 
+		<![CDATA[ 
+		staff_id = #staff_id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="staff_code"> 
+		<![CDATA[ 
+		staff_code = #staff_code#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel"> 
+		<![CDATA[ 
+		tel = #tel#
+		]]>
+		</isNotEmpty>
+		<![CDATA[ 
+		 order by log_time desc
+		]]>
+	</select>
+	
+	<select id="SmsLog_exp_select_sms_code_by_staff_1_count" parameterClass="java.util.Map"
+		resultClass="java.lang.Long">
+		<![CDATA[ 
+		select count(*) from U_SMS_LOG WHERE 1 = 1 and sts = 1 and used = 0 and (sysdate - log_time)*24*60 <= 1
+		]]>
+		<isNotEmpty prepend="and" property="staff_id"> 
+		<![CDATA[ 
+		staff_id = #staff_id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="staff_code"> 
+		<![CDATA[ 
+		staff_code = #staff_code#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="tel"> 
+		<![CDATA[ 
+		tel = #tel#
+		]]>
+		</isNotEmpty>
+	</select>
+	
+</sqlMap>

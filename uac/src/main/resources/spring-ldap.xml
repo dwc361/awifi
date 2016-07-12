@@ -1,0 +1,68 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
+		<constructor-arg ref="apchedsContextSource" />
+	</bean>
+
+	<bean id="apchedsContextSource" class="org.springframework.ldap.core.support.LdapContextSource">
+		<property name="base" value="${ldap.baseDN}" />
+		<property name="userDn" value="${ldap.userDn}" />
+		<property name="password" value="${ldap.password}" />
+		<property name="pooled" value="false" />
+		<property name="urls">
+			<list>
+				<value>${ldap.url}</value>
+				<value>${ldap2.url}</value>
+			</list>
+		</property>
+		<property name="baseEnvironmentProperties">
+			<map>
+				<entry>
+					<key>
+						<value>java.naming.security.authentication</value>
+					</key>
+					<value>simple</value>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean id="ldapJdbcTxManager"
+		class="org.springframework.ldap.transaction.compensating.manager.ContextSourceAndDataSourceTransactionManager">
+		<property name="contextSource" ref="apchedsContextSource" />
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	
+	
+	<!-- quartz ldap start -->
+	<bean name="ldapJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+		<property name="jobClass">
+			<value>
+				com.zjhcsoft.uac.ldap.job.LdapSynchronousJobService
+			</value>
+		</property>
+	</bean>
+	<bean id="ldapCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail">
+			<ref bean="ldapJob" />
+		</property>
+		<property name="cronExpression">
+			<!-- <value>0 0/30 * * * ?</value>
+			<value>0 30 3 ? * *</value>
+			<value>0 30 23 ? * *</value> -->
+			<value>0 36 14 ? * *</value>
+		</property>
+	</bean>
+<!-- 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref local="ldapCronTrigger" />
+			</list>
+		</property>
+	</bean> -->
+	<!-- quartz ldap end -->
+	
+	
+</beans>
