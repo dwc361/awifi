@@ -30,7 +30,7 @@
 		<property name="name" value="4A安全管理平台监控" />
 		<property name="monitors">
 			<list>
-				<!-- <ref bean="uacHttpMonitor" /> -->
+				<ref bean="uacHttpMonitor" />
 				<ref bean="uacJdbcMonitor" />
 				<ref bean="uacRedisMonitor" />
 			</list>
