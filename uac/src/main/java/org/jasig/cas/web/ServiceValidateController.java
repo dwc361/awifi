@@ -50,6 +50,8 @@ import com.zjhcsoft.uac.account.user.entity.SubUser;
 import com.zjhcsoft.uac.account.user.service.SubUserService;
 import com.zjhcsoft.uac.ldap.util.LdapUtils;
 import com.zjhcsoft.uac.ldap.util.Person;
+import com.zjhcsoft.uac.ldap.util.PersonServiceHandler;
+import com.zjhcsoft.uac.ldap.util.PersonServiceI;
 
 /**
  * Process the /validate and /serviceValidate URL requests.
@@ -129,7 +131,7 @@ public class ServiceValidateController extends DelegateController {
 	}
 
 	private SubUserService subUserService;
-	private LdapUtils ldapUtils;
+	private PersonServiceI ldapUtils;
 	private Map<String, String> redisMap;
 	private final AntPathMatcher pathMatcher = new AntPathMatcher();
 
@@ -138,7 +140,8 @@ public class ServiceValidateController extends DelegateController {
 		final WebApplicationService service = this.argumentExtractor.extractService(request);
 		final String serviceTicketId = service != null ? service.getArtifactId() : null;
 		if (ldapUtils == null) {
-			ldapUtils = (LdapUtils) CurrentSpringContext.getBean("ldapUtils");
+			PersonServiceHandler personServiceHandler = CurrentSpringContext.getBean("personServiceHandler",PersonServiceHandler.class);
+			ldapUtils = personServiceHandler.getPersonServiceI();
 		}
 		if (subUserService == null) {
 			subUserService = (SubUserService) CurrentSpringContext.getBean("subUserService");

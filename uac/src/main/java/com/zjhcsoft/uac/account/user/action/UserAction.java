@@ -29,6 +29,7 @@ import com.zjhcsoft.uac.account.user.service.UserService;
 import com.zjhcsoft.uac.ldap.job.LdapSynchronousService;
 import com.zjhcsoft.uac.ldap.util.LdapUtils;
 import com.zjhcsoft.uac.ldap.util.Person;
+import com.zjhcsoft.uac.ldap.util.PersonServiceI;
 import com.zjhcsoft.uac.log.service.LogManager;
 
 @Component("uac_account_userAction")
@@ -41,7 +42,7 @@ public class UserAction extends RoofActionSupport {
 	private UserService userService;
 	private List<User> users;
 	private LogManager logManager;
-	private LdapUtils ldapUtils;
+	private PersonServiceI ldapUtils;
 
 	private PasswordPolicyService passwordPolicyService;
 	
@@ -365,7 +366,7 @@ public class UserAction extends RoofActionSupport {
 	}
 
 	@Resource
-	public void setLdapUtils(LdapUtils ldapUtils) {
+	public void setLdapUtils(PersonServiceI ldapUtils) {
 		this.ldapUtils = ldapUtils;
 	}
 

@@ -27,11 +27,12 @@ import com.zjhcsoft.uac.authorization.resource.entity.NetDevice;
 import com.zjhcsoft.uac.authorization.resource.entity.SysResource;
 import com.zjhcsoft.uac.authorization.resource.entity.System;
 import com.zjhcsoft.uac.ldap.util.LdapUtils;
+import com.zjhcsoft.uac.ldap.util.PersonServiceI;
 
 @Component
 public class BljUntils {
 	
-	public LdapUtils ldapUtils;
+	public PersonServiceI ldapUtils;
 	private final static String USERNAME = "username";
 	private final static String REALNAME = "realname";
 	private final static String STATUS = "status";
@@ -470,7 +471,7 @@ public class BljUntils {
 	}
 	
 	@Resource
-	public void setLdapUtils(LdapUtils ldapUtils) {
+	public void setLdapUtils(PersonServiceI ldapUtils) {
 		this.ldapUtils = ldapUtils;
 	}
 

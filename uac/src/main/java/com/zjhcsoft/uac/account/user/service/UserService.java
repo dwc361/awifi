@@ -19,15 +19,15 @@ import com.zjhcsoft.uac.account.user.dao.SubUserDao;
 import com.zjhcsoft.uac.account.user.dao.UserDao;
 import com.zjhcsoft.uac.account.user.entity.SubUser;
 import com.zjhcsoft.uac.account.user.entity.User;
-import com.zjhcsoft.uac.ldap.util.LdapUtils;
 import com.zjhcsoft.uac.ldap.util.Person;
+import com.zjhcsoft.uac.ldap.util.PersonServiceI;
 
 @Component
 @Transactional
 public class UserService {
 
 	private UserDao userDao;
-	private LdapUtils ldapUtils;
+	private PersonServiceI ldapUtils;
 	private SubUserService subUserService;
 	private OrgDao orgDao;
 	private SubUserDao subUserDao;
@@ -237,7 +237,7 @@ public class UserService {
 	}
 
 	@Resource
-	public void setLdapUtils(LdapUtils ldapUtils) {
+	public void setLdapUtils(PersonServiceI ldapUtils) {
 		this.ldapUtils = ldapUtils;
 	}
 

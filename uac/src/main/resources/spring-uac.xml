@@ -21,6 +21,14 @@
 		<constructor-arg index="0" value="uac_login_subuser_map" />
 		<constructor-arg index="1" ref="redisTemplate" />
 	</bean>
+	
+	<bean id="uacUserMap"
+		class="org.springframework.data.redis.support.collections.DefaultRedisMap">
+		<constructor-arg index="0" value="uac_user_map" />
+		<constructor-arg index="1" ref="redisTemplate" />
+	</bean>
+	
+	
 	<!-- <bean id="logQueue" class="java.util.concurrent.ArrayBlockingQueue"> 
 		<constructor-arg index="0" value="100" /> </bean> -->
 

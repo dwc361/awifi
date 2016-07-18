@@ -110,13 +110,13 @@ body {
 			<!-- end of shell -->
 		</div>
 		<!-- end of wrappert -->
-	<c:if test="${empty currUser.user.update_time}">
+	<%-- <c:if test="${empty currUser.user.update_time}">
 		<div class="floatBox" id="updatePwdDiv" style="width: 80%; left: 10%; top: 12%;">
 			<div class="title" style="text-align: center; color: #FFF; font-size: 15px;"><b>第一次登录请先修改密码</b></div>
 			<div class="floatCon">
 			<iframe name="_mainFrame" src="${basePath }/uac_account_userAction!update_pwd_page.action" frameborder="0" scrolling="auto" width="100%"></iframe>
 			</div>
 		</div>
-	</c:if>
+	</c:if> --%>
 </body>
 </html>

@@ -7,7 +7,6 @@ import javax.annotation.Resource;
 
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang.StringUtils;
-import org.apache.regexp.REUtil;
 import org.roof.struts2.Result;
 import org.roof.struts2.RoofActionSupport;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -15,29 +14,32 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 
+import com.zjhcsoft.uac.account.user.entity.SubUser;
 import com.zjhcsoft.uac.account.user.entity.User;
 import com.zjhcsoft.uac.account.user.service.LoginCheck;
 import com.zjhcsoft.uac.account.user.service.PasswordLoginCheckUnit;
+import com.zjhcsoft.uac.account.user.service.SubUserService;
 import com.zjhcsoft.uac.account.user.service.UserIpLoginCheckUnit;
 import com.zjhcsoft.uac.account.whitelist.entity.WhiteList;
 import com.zjhcsoft.uac.account.whitelist.service.WhiteListService;
 import com.zjhcsoft.uac.authorization.resource.entity.App;
+import com.zjhcsoft.uac.authorization.resource.entity.SysResource;
 import com.zjhcsoft.uac.authorization.resource.service.AppService;
 import com.zjhcsoft.uac.cxf.SmsService;
-import com.zjhcsoft.uac.ldap.util.LdapUtils;
 import com.zjhcsoft.uac.ldap.util.Person;
+import com.zjhcsoft.uac.ldap.util.PersonServiceI;
 
 @Component
 @Scope(value = BeanDefinition.SCOPE_PROTOTYPE)
 public class UacLdapAction extends RoofActionSupport {
 	private static final long serialVersionUID = 8254410635003946841L;
-	private LdapUtils ldapUtils;
+	private PersonServiceI ldapUtils;
 	private final AntPathMatcher pathMatcher = new AntPathMatcher();
 	private LoginCheck loginCheck;
 	private AppService appService;
 	private SmsService smsService;
 	private WhiteListService whiteListService;
-
+	private SubUserService subUserService;
 	private PasswordLoginCheckUnit passwordLoginCheckUnit;
 
 	public String login_check() {
@@ -87,8 +89,15 @@ public class UacLdapAction extends RoofActionSupport {
 		boolean isFilter = (StringUtils.isNotEmpty(clientUrl) ? true : false);
 		Person sub = new Person();
 		sub.setParNode(arg.getCn());
+		/*User u = new User();
+		u.setUsername(arg.getCn());
+		SubUser subUser = new SubUser();
+		subUser.setUser(u);
+		subUser.setSysResource(new SysResource(50L));*/
+		//List<SubUser> subs = subUserService.select(subUser);
 		List<Person> subs = ldapUtils.getPersonList(sub);
 		List<Person> filterList = new ArrayList<Person>();
+		//filterList.add(new Person(subs.get(0)));
 		if (isFilter) {
 			for (Person person : subs) {
 				boolean ok = pathMatcher.match(ObjectUtils.toString(person.getUrl()), clientUrl);
@@ -102,6 +111,8 @@ public class UacLdapAction extends RoofActionSupport {
 				}
 			}
 		}
+		
+		r = new Result();
 		r.setState(Result.SUCCESS);
 		r.setData(filterList);
 		result = r;
@@ -167,7 +178,7 @@ public class UacLdapAction extends RoofActionSupport {
 	}
 		
 	@Resource
-	public void setLdapUtils(LdapUtils ldapUtils) {
+	public void setLdapUtils(PersonServiceI ldapUtils) {
 		this.ldapUtils = ldapUtils;
 	}
 
@@ -199,4 +210,10 @@ public class UacLdapAction extends RoofActionSupport {
 	public void setUserIpLoginCheckUnit(UserIpLoginCheckUnit userIpLoginCheckUnit) {
 		this.userIpLoginCheckUnit = userIpLoginCheckUnit;
 	}
+	@Resource
+	public void setSubUserService(SubUserService subUserService) {
+		this.subUserService = subUserService;
+	}
+	
+	
 }

@@ -24,7 +24,7 @@ import com.zjhcsoft.uac.account.user.entity.User;
 import com.zjhcsoft.uac.ldap.util.LdapUtils;
 import com.zjhcsoft.uac.ldap.util.Person;
 
-@Component
+
 public class LdapSynchronousService {
 	private LdapUtils ldapUtils;
 	private RoofDaoSupport roofDaoSupport;

@@ -28,7 +28,7 @@ public class UserImportorTest extends AbstractJUnit4SpringContextTests {
 
 	//@Test
 	public void testimporttmpExc() {
-		accountImportor.tmpexc(new File("E:\\excel\\.xls"), xslDb,66150L);
+		//accountImportor.tmpexc(new File("E:\\excel\\.xls"), xslDb,66150L);
 	}
 
 	@Resource

@@ -10,8 +10,8 @@ import org.roof.struts2.Result;
 import org.roof.struts2.WebUtils;
 import org.springframework.stereotype.Component;
 
-import com.zjhcsoft.uac.ldap.util.LdapUtils;
 import com.zjhcsoft.uac.ldap.util.Person;
+import com.zjhcsoft.uac.ldap.util.PersonServiceI;
 import com.zjhcsoft.uac.log.service.LogManager;
 
 @Component
@@ -19,7 +19,7 @@ public class PasswordLoginCheckUnit implements LoginCheckUnit {
 
 	private LogManager logManager;
 
-	private LdapUtils ldapUtils;
+	private PersonServiceI ldapUtils;
 
 	@Override
 	public Result check(Person person) {
@@ -45,7 +45,7 @@ public class PasswordLoginCheckUnit implements LoginCheckUnit {
 	}
 
 	@Resource
-	public void setLdapUtils(LdapUtils ldapUtils) {
+	public void setLdapUtils(PersonServiceI ldapUtils) {
 		this.ldapUtils = ldapUtils;
 	}
 

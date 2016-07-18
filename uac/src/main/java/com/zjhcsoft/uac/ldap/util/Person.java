@@ -1,5 +1,7 @@
 package com.zjhcsoft.uac.ldap.util;
 
+import java.io.Serializable;
+
 import org.apache.commons.lang.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.proxy.HibernateProxy;
@@ -9,7 +11,14 @@ import com.zjhcsoft.uac.account.user.entity.SubUser;
 import com.zjhcsoft.uac.account.user.entity.User;
 import com.zjhcsoft.uac.authorization.resource.entity.App;
 
-public class Person {
+public class Person implements Serializable{
+	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -4253191314670118710L;
+	
+	
 	public static final String YYYY_MM_DD = "yyyy-MM-dd";
 	private String cn; // 必填属性 登录账号
 	private String sn; // 必填属性

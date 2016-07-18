@@ -32,6 +32,7 @@ import com.zjhcsoft.uac.blj.service.BljService;
 import com.zjhcsoft.uac.cxf.SmsService;
 import com.zjhcsoft.uac.ldap.util.LdapUtils;
 import com.zjhcsoft.uac.ldap.util.Person;
+import com.zjhcsoft.uac.ldap.util.PersonServiceI;
 
 /**
  * 自动生成
@@ -42,7 +43,7 @@ public class SubUserService {
 	public static final long NORMAL_USER_ID = 51L;// 普通用户ID
 
 	private SubUserDao subUserDao;
-	private LdapUtils ldapUtils;
+	private PersonServiceI ldapUtils;
 	private SmsService smsService;
 	private DictionaryDao dictionaryDao;
 
@@ -402,7 +403,7 @@ public class SubUserService {
 	}
 
 	@Resource
-	public void setLdapUtils(LdapUtils ldapUtils) {
+	public void setLdapUtils(PersonServiceI ldapUtils) {
 		this.ldapUtils = ldapUtils;
 	}
 

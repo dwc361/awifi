@@ -29,6 +29,7 @@ import com.zjhcsoft.uac.authorization.resource.dao.AppDao;
 import com.zjhcsoft.uac.authorization.resource.entity.App;
 import com.zjhcsoft.uac.blj.service.BljService;
 import com.zjhcsoft.uac.ldap.util.LdapUtils;
+import com.zjhcsoft.uac.ldap.util.PersonServiceI;
 import com.zjhcsoft.uac.log.service.LogManager;
 
 /**
@@ -58,7 +59,7 @@ public class SubUserAction extends RoofActionSupport {
 	private BljService bljService;
 	private AppDao appDao;
 	
-	private LdapUtils ldapUtils;
+	private PersonServiceI ldapUtils;
 
 	/**
 	 * 加载公共数据
@@ -476,7 +477,7 @@ public class SubUserAction extends RoofActionSupport {
 	}
 	
 	@Resource
-	public void setLdapUtils(LdapUtils ldapUtils) {
+	public void setLdapUtils(PersonServiceI ldapUtils) {
 		this.ldapUtils = ldapUtils;
 	}
 

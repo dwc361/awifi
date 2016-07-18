@@ -211,7 +211,7 @@ public class LdapPersonAttributeDao extends AbstractQueryPersonAttributeDao<Logi
 	@Override
 	protected List<IPersonAttributes> getPeopleForQuery(LogicalFilterWrapper queryBuilder, String queryUserName) {
 		if (ldapUtils == null) {
-			ldapUtils = (LdapUtils) CurrentSpringContext.getBean("ldapUtils");
+			//ldapUtils = (LdapUtils) CurrentSpringContext.getBean("ldapUtils");
 		}
 		if (redisMap == null) {
 			redisMap = (Map<String, String>) CurrentSpringContext.getBean("loginSubUserMap");

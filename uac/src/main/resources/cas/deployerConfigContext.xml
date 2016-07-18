@@ -106,11 +106,15 @@
 				<!-- <bean class="org.jasig.cas.authentication.handler.support.SimpleTestUsernamePasswordAuthenticationHandler" 
 					/> -->
 
-				<bean class="org.jasig.cas.adaptors.ldap.BindLdapAuthenticationHandler">
-					<property name="filter" value="cn=%u" />
-					<property name="searchBase" value="" /><!-- ${ldap.baseDN} -->
-					<property name="contextSource" ref="apchedsContextSource" />
+				<bean class="com.zjhcsoft.uac.redis.RedisUsernamePasswordAuthenticationHandler">
+				<property name="personServiceHandler" ref="personServiceHandler" ></property>
 				</bean>
+
+				<!-- <bean class="org.jasig.cas.adaptors.ldap.BindLdapAuthenticationHandler">
+					<property name="filter" value="cn=%u" />
+					<property name="searchBase" value="" />${ldap.baseDN}
+					<property name="contextSource" ref="apchedsContextSource" />
+				</bean> -->
 
 			</list>
 		</property>
