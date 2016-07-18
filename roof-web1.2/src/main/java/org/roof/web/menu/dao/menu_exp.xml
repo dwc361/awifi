@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="org.roof.web.menu.dao.MenuDao.findMenuByParent"
+		parameterClass="java.util.Map">
+		from Menu m left join fetch m.module left join fetch m.parent where 1=1 
+		<isNotEmpty property="parentId" prepend="and">
+			m.parent.id = #parentId#
+		</isNotEmpty>
+		<isNotEmpty property="lvl" prepend="and">
+			m.lvl = #lvl#
+		</isNotEmpty>
+		<isNotEmpty property="menuType" prepend="and">
+			m.menuType = #menuType#
+		</isNotEmpty>
+		order by m.seq
+	</select>
+
+
+	<select id="org.roof.web.menu.dao.MenuDao.childrenCount"
+		parameterClass="java.lang.Long">
+		select count(*) from Menu where parent.id = #parentId#
+	</select>
+	
+	<select id="org.roof.web.menu.service.MenuService.selectByModule"
+		parameterClass="java.util.Map">
+		from Menu m left join fetch m.module left join fetch m.parent where 1=1 
+		<isNotEmpty prepend="and" property="modules"> 
+			<![CDATA[ 
+			m.module.id in 
+			]]>
+			<iterate property="modules" open="(" close=")" conjunction=",">
+			<![CDATA[ #modules[]# ]]>
+			</iterate>
+		</isNotEmpty>
+		<isNotEmpty property="menuType" prepend="and">
+			m.menuType = #menuType#
+		</isNotEmpty>
+		order by m.seq
+	</select>
+
+</sqlMap>
