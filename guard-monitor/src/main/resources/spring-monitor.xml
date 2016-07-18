@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="monitorJobCronTrigger" />
+			</list>
+		</property>
+	</bean>
+
+	<bean id="monitorJob"
+		class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject">
+			<bean class="org.roof.guardmonitor.MonitorStarter">
+				<property name="monitor" ref="uacMonitor" />
+			</bean>
+		</property>
+		<property name="targetMethod" value="start" />
+	</bean>
+
+	<bean id="monitorJobCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="monitorJob" />
+		<property name="cronExpression" value="0 * * * * ?" />
+	</bean>
+
+	<bean id="uacMonitor" class="org.roof.guardmonitor.impl.GroupedMonitor">
+		<property name="name" value="4A安全管理平台监控" />
+		<property name="monitors">
+			<list>
+				<!-- <ref bean="uacHttpMonitor" /> -->
+				<ref bean="uacJdbcMonitor" />
+				<ref bean="uacRedisMonitor" />
+			</list>
+		</property>
+		<property name="listeners">
+			<list>
+				<ref bean="andStatusMonitorListener" />
+				<ref bean="loggedMonitorListener" />
+			</list>
+		</property>
+	</bean>
+	<bean id="uacHttpMonitor" class="org.roof.guardmonitor.impl.HttpMonitor">
+		<property name="name" value="4A安全管理平台Web监控" />
+		<property name="url" value="http://127.0.0.1:8080/uac" />
+	</bean>
+	<!-- <bean id="uacJdbcMonitor" class="org.roof.guardmonitor.impl.JdbcMonitor">
+		<property name="name" value="4A安全管理平台数据库监控" />
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@134.96.82.218:1521:orcl" />
+		<property name="user" value="uac" />
+		<property name="password" value="uac_123" />
+		<property name="sql" value="SELECT 'Hello' from DUAL" />
+	</bean> -->
+	
+	<bean id="uacJdbcMonitor" class="org.roof.guardmonitor.impl.JdbcMonitor">
+		<property name="name" value="4A安全管理平台数据库监控" />
+		<property name="driverClass" value="com.mysql.jdbc.Driver" />
+		<property name="jdbcUrl" value="jdbc:mysql://127.0.0.1:3306/jeecg?useUnicode=true&amp;characterEncoding=UTF-8" />
+		<property name="user" value="root" />
+		<property name="password" value="123456zx" />
+		<property name="sql" value="SELECT 'z'" />
+	</bean>
+	
+	
+
+
+	<bean id="baiduHttpMonitor" class="org.roof.guardmonitor.impl.HttpMonitor">
+		<property name="name" value="baiduHttpMonitor" />
+		<property name="url" value="http://www.baidu.com" />
+	</bean>
+
+	<bean id="agmsJdbcMonitor" class="org.roof.guardmonitor.impl.JdbcMonitor">
+		<property name="name" value="测试数据库监控" />
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver" />
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@134.96.82.218:1521:orcl" />
+		<property name="user" value="uac" />
+		<property name="password" value="uac_123" />
+		<property name="sql" value="select count(1) from roles" />
+	</bean>
+	<bean id="loggedMonitorListener" class="org.roof.guardmonitor.impl.LoggedMonitorListener" />
+
+	<bean id="statusMap" class="java.util.HashMap" />
+	<bean id="andStatusMonitorListener" class="org.roof.guardmonitor.impl.AndStatusMonitorListener">
+		<property name="statusMap" ref="statusMap" />
+	</bean>
+
+	<bean id="jredisConnectionFactory"
+		class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+		<property name="hostName" value="192.168.159.129" />
+		<property name="port" value="6379" />
+		<property name="usePool" value="false" />
+	</bean>
+	<bean id="redisTemplate" class="org.springframework.data.redis.core.RedisTemplate">
+		<property name="connectionFactory" ref="jredisConnectionFactory" />
+	</bean>
+	<bean id="guard_monitor_test_map"
+		class="org.springframework.data.redis.support.collections.DefaultRedisMap">
+		<constructor-arg index="0" value="guard_monitor_test_map" />
+		<constructor-arg index="1" ref="redisTemplate" />
+	</bean>
+
+	<bean id="uacRedisMonitor" class="org.roof.guardmonitor.impl.RedisMonitor">
+		<property name="name" value="4A安全管理平台Redis监控" />
+		<property name="redisMap" ref="guard_monitor_test_map" />
+	</bean>
+
+	<bean id="monitorStatusManager" class="org.roof.guardmonitor.extension.MonitorStatusManager">
+		<property name="filePath"
+			value="E:\Users\hc_workspace_aiwifi\guard-monitor\src\main\resources\monitor.properties" />
+	</bean>
+
+</beans>
