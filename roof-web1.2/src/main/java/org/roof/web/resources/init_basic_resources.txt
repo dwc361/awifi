@@ -1,7 +1,0 @@
-Privilege|#name#列表|/**#path#!list*|#name#列表|list|#path#!list|1|2|#path#|true||html
-Privilege|#name#详情|/**#path#!detail*||detail|#path#!detail|5|2|#path#|true||html
-Privilege|#name#修改|/**#path#!update*||update|#path#!update|3|2|#path#|false||json
-Privilege|#name#修改页面|/**#path#!update_page*||page|#path#!update_page||3|#path#!update|true||html
-Privilege|#name#新增|/**#path#!create*||create|#path#!create|2|2|#path#|false||json
-Privilege|#name#新增页面|/**#path#!create_page*||page|#path#!create_page||3|#path#!create|true||html
-Privilege|#name#删除|/**#path#!delete*||delete|#path#!delete|4|2|#path#|true||json
