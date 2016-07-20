@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="org.roof.web.resources.dao.ResourceDao.findModuleByParent"
+		parameterClass="java.util.Map">
+		from Module where 1=1
+		<isNotEmpty property="parentId" prepend="and">
+			parent.id =
+			#parentId#
+		</isNotEmpty>
+		<isNotEmpty property="lvl" prepend="and">
+			lvl = #lvl#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="path">
+			path like '%' || #path# || '%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="pathArr">
+			<iterate property="pathArr" open="(" close=")" conjunction="OR">
+				path like '%' || #pathArr[]# || '%'
+			</iterate>
+		</isNotEmpty>
+		order by seq
+	</select>
+
+
+	<select id="org.roof.web.resources.dao.ResourceDao.childrenCount"
+		parameterClass="java.lang.Long">
+		select count(*) from Module where parent.id =
+		#parentId#
+	</select>
+
+</sqlMap>

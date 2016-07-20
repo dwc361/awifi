@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="org.roof.web.org.dao.OrgDao.findOrgByParent"
+		parameterClass="java.util.Map">
+		from Organization where 1=1
+		<isNotEmpty property="parentId" prepend="and">
+			parent.id =
+			#parentId#
+		</isNotEmpty>
+		<isNotEmpty property="lvl" prepend="and">
+			lvl = #lvl#
+		</isNotEmpty>
+		<isNotEmpty property="usable" prepend="and">
+			usable = #usable#
+		</isNotEmpty>
+		order by seq,org_id
+	</select>
+
+
+	<select id="org.roof.web.org.dao.OrgDao.childrenCount"
+		parameterClass="java.lang.Long">
+		select count(*) from Organization where parent.id = #parentId#
+	</select>
+	
+	<select id="org_exp_find_children_by_parent_id"
+		parameterClass="java.lang.Long" resultClass="java.lang.Long">
+		select org_id from organization start with org_id = #id# connect by parent_id = prior org_id
+	</select>
+
+</sqlMap>

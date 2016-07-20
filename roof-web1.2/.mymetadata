@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="roof-web"
+  id="myeclipse.1366795511261"
+  context-root="/neworg"
+  j2ee-spec="6.0"
+  archive="roof-web.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+

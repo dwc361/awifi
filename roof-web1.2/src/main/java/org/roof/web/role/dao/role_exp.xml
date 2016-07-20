@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap
+        PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN"
+        "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+
+	<select id="org.roof.web.role.dao.RoleDao.list" parameterClass="org.roof.web.role.entity.Roles">
+		from Roles where 1=1
+		<isNotEmpty property="name" prepend="and">
+			name like '%'
+			||#name#|| '%'
+		</isNotEmpty>
+		order by create_date desc
+	</select>
+
+	<select id="org.roof.web.role.dao.RoleDao.list_count"
+		parameterClass="org.roof.web.role.entity.Roles">
+		select count(*) from Roles where 1=1
+		<isNotEmpty property="name" prepend="and">
+			name like '%'
+			||#name#|| '%'
+		</isNotEmpty>
+	</select>
+
+	<select id="org.roof.web.role.dao.RoleDao.listVo"
+		parameterClass="org.roof.web.role.entity.Roles" resultClass="org.roof.web.role.entity.Roles">
+		select new org.roof.security.entity.BaseRole(id, name) from Roles
+		<isNotEmpty property="name" prepend="and">
+			name like '%'
+			||#name#|| '%'
+		</isNotEmpty>
+		order by create_date desc
+	</select>
+</sqlMap>
