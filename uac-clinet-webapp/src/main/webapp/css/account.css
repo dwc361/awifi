@@ -1,0 +1,85 @@
+﻿.ehomeBill{clear:both;text-align:left;font-size:12px;line-height:2em;margin:0;}
+	.ehomeBill ul{padding:0 10px;margin:5px 0; list-style:none}
+	.ehomeBill .info{zoom:1;overflow:hidden;}
+	.ehomeBill .info li{float:left;width:45%;}
+	.ehomeBill .info li strong{padding:0 30px 0 0}
+	.ehomeBill .all{ background:#f3f3f3;font-weight:bold;padding:0 10px;margin:10px 0}
+	.ehomeBill .all em{padding:0 10px 0 50px;color:#f60;font-style:normal;}
+	.ehomeBill .expre{}
+	.ehomeBill .expre span{padding:0 20px;font-weight:bold}
+	.ehomeBill .expre .num span{margin-right:30px;font-weight:normal}
+	.ehomeBill .tips{padding:0 20px;margin:10px 0 0;}
+	.ehomeBill .tips2 { background:#fdf5dc;padding:0 20px}
+	.ehomeBill .th{border-bottom:1px dashed #ccc;text-align:center; font-weight:bold;color:#000;}
+	.ehomeBill .infotable{margin:20px 0 0;border:1px solid #ccc;}
+	.ehomeBill .infotable table td{padding:0 8px;word-break:break-all;}
+	.ehomeBill .intro{border:1px #ccc solid; border-top:0;}
+	.ehomeBill .intro h2{margin:0;font-size:12px;}
+	.ehomeBill .intro p{margin:0;padding:0 10px;}
+	.ehomeBill .intro ul{padding:0 10px;}
+	.ehomeBill table{ border-collapse:collapse;}
+	.ehomeBill .billTable{border:1px solid #ccc;}
+	.ehomeBill .contentTb td{padding:0 5px 0 20px;word-break:break-all;}
+	.ehomeBill .contentTb .t{font-weight:bold;padding:0 5px}
+	.ehomeBill .contentTb .b{ background:#f3f3f3;font-weight:bold;padding:0 5px;border-bottom:1px dashed #ccc;}
+	.ehomeBill .contentTb .s{padding-left:30px;}
+	.ehomeBill .contentTb .s1{padding-left:40px}
+	.ehomeBill .contentTb em{color:#f00;font-style:normal}
+	.ehomeBill .h{text-align:center;color:#666;line-height:30px;border:1px #ccc solid; border-top:0;}
+	.ehomeBill .total{ border-collapse:collapse;border:1px solid #ccc; border-top:0;}
+	.ehomeBill .total td{border-right:1px solid #ccc;padding:0 8px;font-weight:bold}
+	.ehomeBill .gzTips{padding:10px}
+	.ehomeBill .gzTips span{color:#f00}
+	.ehomeBill .gzInfo{padding-bottom:15px}
+	.ehomeBill .gzInfo p{margin:0;line-height:25px;font-weight:bold;color:#333;}
+	.ehomeBill .gzInfo p span{padding-right:50px;}
+	.ehomeBill .tyTb{ border-collapse:collapse;margin:10px auto}
+	.ehomeBill .tyTb td{ border:1px solid #ccc;text-align:center;padding:0 8px}
+	.ehomeBill .tyTb .d{text-align:left}
+
+.userzone_tr_bg1{font-size: 12px;font-weight: bold;color: #000000;background-color: #AAD7EA;line-height: 24px;}
+.userzone_td_01{border-bottom:1px dashed #ccc;text-align: center;}
+.userzone_td_dashed{border-bottom:1px dashed #ccc;}
+.userzone_gray_b121{font-size: 12px;font-weight: bold;color: #000000;line-height: 24px;text-align: left;padding-left:20px;border-bottom:1px dashed #ccc;}
+.userzone_gray_b122{font-size: 12px;font-weight: bold;color: #000000;line-height: 24px;text-align: center;border-bottom:1px dashed #ccc;}
+.userzone_gray_b123{font-size: 12px;font-weight: bold;color: #006699;line-height: 24px;text-align: left;padding-left:20px;border-bottom:1px dashed #CCCCCC;background-color:#EEFFFF;}
+.userzone_gray_b124{font-size: 12px;font-weight: bold;color: #006699;line-height: 24px;text-align: center;background-color:#EEFFFF;border-bottom:1px dashed #CCCCCC;}
+.userzone_gray_331{font-size: 12px;color: #333333;text-align: left;padding-left:40px;border-bottom:1px dashed #CCCCCC;line-height: 24px;}
+.userzone_gray_332{font-size: 12px;color: #333333;text-align: center;border-bottom:1px dashed #CCCCCC;line-height: 24px;}
+
+.accountTitle { font:bold 24px tahoma; text-align:center; line-height:40px;}
+.gzInfo{padding-bottom:8px}
+	.gzInfo p{margin:0;line-height:20px;font-weight:bold;color:#333;}
+	.gzInfo p span{padding-right:50px;}
+table { color:#0e0376;}
+.w790 { width:790px;}
+.mainTb { width:100%; border:1px #ccc solid;}
+	.mainTb td { width:33.3%; border-right:1px #ccc solid;}
+	.mainTb td.last { border:0;}
+	.mainTb .list { width:100%;}
+	.mainTb .list li { line-height:20px; height:20px; overflow:hidden; padding-left:27px;}
+	.mainTb .list li.title { padding:0; font-weight:bold; border-bottom:1px #ccc solid;}
+	.mainTb .list li .fr { width:80px; text-align:right; border-left:1px #ccc solid;}
+	.mainTb .list li.t1 { padding:0; font-weight:bold;}
+	.mainTb .list li.t2  { text-align:center;}
+	.mainTb .list li.t2 .fr { text-align:center;}
+	.mainTb .list li.t3 { padding:0; font-weight:bold; border-bottom:1px #ccc solid;}
+.mainTb2 { width:100%; border-left:1px #ccc solid;}
+	.mainTb2 th { width:33%; border-right:1px #ccc solid; border-bottom:1px #ccc solid;}
+	.mainTb2 th.bigT { border-right:0;}
+	.mainTb2 td { border-right:1px #ccc solid; border-bottom:1px #ccc solid; text-align:center; font-weight:bold;}
+	.mainTb2 .money { width:33%; border-right:0; text-align:right;}
+	.mainTb2 .list2 { width:100%;}
+	.mainTb2 .list2 td { border-bottom:0; font-weight:normal; padding-left:2px; text-align:left; line-height:20px;} 
+	.mainTb2 .list2 td.money { text-align:right; padding-right:2px;}
+	.mainTb2 .list2 th { width:auto; line-height:22px;}
+	.mainTb2 .list2 th.money {width:30%; text-align:center;}
+	.mainTb2 .list2 td.tl { text-align:left;}
+	.mainTb2 .list2 td.tr { text-align:right;}
+	.mainTb2 .list2 td.tl10 { padding-left:20px;}
+.userInfo { border:1px #ccc solid; width:788px; border-top:0;}
+.userInfo h2 { text-align:center; font-weight:bold; border-bottom:1px #ccc solid; line-height:20px;}
+.userInfo p { text-align:center; line-height:20px; padding-bottom:8px;}
+.userInfo .fl { height:250px; width:55%;}
+.userInfo .fr { height:250px; width:45%;}
+.userInfo .txt { float:left; clear:both; width:55%;}
