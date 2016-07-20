@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="WhiteList_exp">
+	<select id="WhiteList_exp_select_whiteipList_list" parameterClass="com.zjhcsoft.uac.account.whiteiplist.entity.WhiteIpList"
+		resultClass="com.zjhcsoft.uac.account.whiteiplist.entity.WhiteIpList">
+		<![CDATA[ 
+		from WhiteIpList WHERE 1=1
+		]]>
+		<isNotEmpty prepend="and" property="whiteIP"> 
+		<![CDATA[ 
+		whiteIP = #whiteIP# 
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="nameIP"> 
+		<![CDATA[ 
+		nameIP like '%' || #nameIP# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="endDate"> 
+		<![CDATA[ 
+		to_char(endDate,'YYYY-MM-DD') = to_char(#endDate#,'YYYY-MM-DD')
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="startDate"> 
+		<![CDATA[ 
+		to_char(startDate,'YYYY-MM-DD') = to_char(#startDate#,'YYYY-MM-DD')
+		]]>
+		</isNotEmpty>
+		<![CDATA[
+		order by id desc 
+		]]>
+	</select>
+
+	<select id="WhiteList_exp_select_whiteipList_count"
+		parameterClass="com.zjhcsoft.uac.account.whiteiplist.entity.WhiteIpList"
+		resultClass="java.lang.Long">
+		<![CDATA[ 
+		select count(*) from WhiteIpList WHERE 1 = 1
+		]]>
+		<isNotEmpty prepend="and" property="whiteIP"> 
+		<![CDATA[ 
+		whiteIP = #whiteIP# 
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="nameIP"> 
+		<![CDATA[ 
+		nameIP like '%' || #nameIP# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="endDate"> 
+		<![CDATA[ 
+		to_char(endDate,'YYYY-MM-DD') = to_char(#endDate#,'YYYY-MM-DD')
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="startDate"> 
+		<![CDATA[ 
+		to_char(startDate,'YYYY-MM-DD') = to_char(#startDate#,'YYYY-MM-DD')
+		]]>
+		</isNotEmpty>
+	</select>
+
+</sqlMap>

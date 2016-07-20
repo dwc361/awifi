@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Message_exp">
+	<select id="Message_exp_select_message_list" parameterClass="com.zjhcsoft.uac.message.entity.Message"
+		resultClass="com.zjhcsoft.uac.message.entity.Message">
+		<![CDATA[ 
+		from Message WHERE 1=1
+		]]>
+		<isNotEmpty prepend="and" property="content"> 
+		<![CDATA[ 
+		content like '%' || #content# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fromStaff.id"> 
+		<![CDATA[ 
+		fromStaff.id = #fromStaff.id#
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fromStaff.name"> 
+		<![CDATA[ 
+		fromStaff.name like '%' || #fromStaff.name# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="send_date"> 
+		<![CDATA[ 
+		to_char(send_date,'YYYY-MM-DD') = to_char(#send_date#,'YYYY-MM-DD')
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="send_type"> 
+		<![CDATA[ 
+		send_type like '%' || #send_type# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sts"> 
+		<![CDATA[ 
+		sts like '%' || #sts# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="title"> 
+		<![CDATA[ 
+		title like '%' || #title# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="toStaff.id"> 
+		<![CDATA[ 
+		toStaff.id = #toStaff.id#
+		]]> 
+		</isNotEmpty>
+		<![CDATA[
+		order by id desc 
+		]]>
+	</select>
+	
+	<select id="Message_exp_select_message_count" parameterClass="com.zjhcsoft.uac.message.entity.Message"
+		resultClass="java.lang.Long">
+		<![CDATA[ 
+		select count(*) from Message WHERE 1 = 1
+		]]> 
+		<isNotEmpty prepend="and" property="content"> 
+		<![CDATA[ 
+		content like '%' || #content# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fromStaff.id"> 
+		<![CDATA[ 
+		fromStaff.id = #fromStaff.id#
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="fromStaff.name"> 
+		<![CDATA[ 
+		fromStaff.name like '%' || #fromStaff.name# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="send_date"> 
+		<![CDATA[ 
+		to_char(send_date,'YYYY-MM-DD') = to_char(#send_date#,'YYYY-MM-DD')
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="send_type"> 
+		<![CDATA[ 
+		send_type like '%' || #send_type# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="sts"> 
+		<![CDATA[ 
+		sts like '%' || #sts# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="title"> 
+		<![CDATA[ 
+		title like '%' || #title# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="toStaff.id"> 
+		<![CDATA[ 
+		toStaff.id = #toStaff.id#
+		]]> 
+		</isNotEmpty>
+	</select>
+
+</sqlMap>

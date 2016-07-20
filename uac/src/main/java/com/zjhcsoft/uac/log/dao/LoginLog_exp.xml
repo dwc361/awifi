@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="LoginLog_exp">
+	<select id="LoginLog_exp_select_loginLog_list" parameterClass="com.zjhcsoft.uac.log.entity.LoginLog"
+		resultClass="com.zjhcsoft.uac.log.entity.LoginLog">
+		<![CDATA[ 
+		from LoginLog WHERE 1=1
+		]]>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ip"> 
+		<![CDATA[ 
+		ip like '%' || #ip# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginFailReason.id"> 
+		<![CDATA[ 
+		loginFailReason.id = #loginFailReason.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginResult.id"> 
+		<![CDATA[ 
+		loginResult.id = #loginResult.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="login_time"> 
+		<![CDATA[ 
+		login_time > #login_time#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="login_time_end"> 
+		<![CDATA[ 
+		login_time < #login_time_end#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginType.id"> 
+		<![CDATA[ 
+		loginType.id = #loginType.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="user.id"> 
+		<![CDATA[ 
+		user.id = #user.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="user.name"> 
+		<![CDATA[ 
+		user.name like '%' || #user.name# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="user.username"> 
+		<![CDATA[ 
+		user.username like '%' || #user.username# || '%'
+		]]>
+		</isNotEmpty>
+		<![CDATA[
+		order by login_time desc 
+		]]>
+	</select>
+
+	<select id="LoginLog_exp_select_loginLog_count" parameterClass="com.zjhcsoft.uac.log.entity.LoginLog"
+		resultClass="java.lang.Long">
+		<![CDATA[ 
+		select count(*) from LoginLog WHERE 1 = 1
+		]]>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="ip"> 
+		<![CDATA[ 
+		ip like '%' || #ip# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginFailReason.id"> 
+		<![CDATA[ 
+		loginFailReason.id = #loginFailReason.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginResult.id"> 
+		<![CDATA[ 
+		loginResult.id = #loginResult.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="login_time"> 
+		<![CDATA[ 
+		login_time > #login_time#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="login_time_end"> 
+		<![CDATA[ 
+		login_time < #login_time_end#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginType.id"> 
+		<![CDATA[ 
+		loginType.id = #loginType.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="user.id"> 
+		<![CDATA[ 
+		user.id = #user.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="user.name"> 
+		<![CDATA[ 
+		user.name like '%' || #user.name# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="user.username"> 
+		<![CDATA[ 
+		user.username like '%' || #user.username# || '%'
+		]]>
+		</isNotEmpty>
+	</select>
+
+	<select id="loginlog_excel_export" resultClass="java.util.HashMap"
+		parameterClass="com.zjhcsoft.uac.log.entity.LoginLog">
+		SELECT * FROM
+		(
+		SELECT M.*, ROWNUM RN_
+		FROM (
+		select a.id,
+		a.ip,
+		b.text loginResult,
+		to_char(a.login_time, 'YYYY-MM-DD HH24:MI:SS')
+		as
+		login_time,
+		c.text loginType,
+		d.staff_code
+		from U_LOGIN_LOG a
+		left join
+		s_dictionary
+		b on
+		a.login_result_id = b.id
+		left join s_dictionary c on
+		a.login_type_id =
+		c.id
+		left join staff d on a.user_id = d.staff_id
+		where 1=1
+		<isNotEmpty prepend="and" property="ip"> 
+		<![CDATA[ 
+		a.ip like '%' || #ip# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="user.username"> 
+		<![CDATA[ 
+		d.staff_code like '%' || #user.username# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginType.id"> 
+		<![CDATA[ 
+		a.login_type_id = #loginType.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginResult.id"> 
+		<![CDATA[ 
+		a.login_result_id = #loginResult.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="login_time"> 
+		<![CDATA[ 
+		a.login_time > #login_time#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="login_time_end"> 
+		<![CDATA[ 
+		a.login_time < #login_time_end#
+		]]>
+		</isNotEmpty>
+		order by a.login_time desc
+		) M
+		<![CDATA[ 
+		WHERE ROWNUM <= $lastrownum$
+		]]>
+		)
+		WHERE RN_ > $firstrownum$
+	</select>
+	<select id="loginlog_excel_export_count" resultClass="java.lang.Long"
+		parameterClass="com.zjhcsoft.uac.log.entity.LoginLog">
+		select count(1)
+		from U_LOGIN_LOG a
+		left join
+		s_dictionary
+		b on
+		a.login_result_id = b.id
+		left join s_dictionary c on
+		a.login_type_id =
+		c.id
+		left join staff d on a.user_id = d.staff_id
+		where
+		1=1
+		<isNotEmpty prepend="and" property="ip"> 
+		<![CDATA[ 
+		a.ip like '%' || #ip# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="user.username"> 
+		<![CDATA[ 
+		d.staff_code like '%' || #user.username# || '%'
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginType.id"> 
+		<![CDATA[ 
+		a.login_type_id = #loginType.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="loginResult.id"> 
+		<![CDATA[ 
+		a.login_result_id = #loginResult.id#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="login_time"> 
+		<![CDATA[ 
+		a.login_time > #login_time#
+		]]>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="login_time_end"> 
+		<![CDATA[ 
+		a.login_time < #login_time_end#
+		]]>
+		</isNotEmpty>
+	</select>
+</sqlMap>

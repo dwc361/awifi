@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap>
+	<select id="com.zjhcsoft.uac.account.user.dao.UserDao.findForPage"
+		parameterClass="com.zjhcsoft.uac.account.user.entity.User">
+		from User where 1=1 and enabled = true
+		<isNotEmpty prepend="and" property="id">
+			id = #id#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="password">
+			password = #password#
+		</isNotEmpty>
+		<!-- <isNotEmpty prepend="and" property="org.org_id">
+			org.org_id =
+			#org.org_id#
+		</isNotEmpty> -->
+		<isNotEmpty prepend="and" property="orgIds"> 
+		<![CDATA[ 
+		org.org_id in 
+		]]>
+			<iterate property="orgIds" open="(" close=")" conjunction=",">
+				<![CDATA[ #orgIds[]# ]]>
+			</iterate>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="name">
+			name like '%' || #name#
+			|| '%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="username">
+			username like '%' ||
+			#username# || '%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="mail">
+			mail like '%' ||
+			#mail#
+			|| '%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="idNumber">
+			idNumber like '%' ||
+			#idNumber# || '%'
+		</isNotEmpty>
+	</select>
+
+	<select id="com.zjhcsoft.uac.account.user.dao.UserDao.findForPage_count"
+		parameterClass="com.zjhcsoft.uac.account.user.entity.User">
+		select count(*) from User where 1=1 and enabled = true
+		<isNotEmpty prepend="and" property="id">
+			id = #id#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="password">
+			password = #password#
+		</isNotEmpty>
+		<!-- <isNotEmpty prepend="and" property="org.org_id">
+			org.org_id =
+			#org.org_id#
+		</isNotEmpty> -->
+		<isNotEmpty prepend="and" property="orgIds"> 
+		<![CDATA[ 
+		org.org_id in 
+		]]>
+			<iterate property="orgIds" open="(" close=")" conjunction=",">
+				<![CDATA[ #orgIds[]# ]]>
+			</iterate>
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="name">
+			name like '%' || #name#
+			|| '%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="username">
+			username like '%' ||
+			#username# || '%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="mail">
+			mail like '%' ||
+			#mail#
+			|| '%'
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="idNumber">
+			idNumber like '%' ||
+			#idNumber# || '%'
+		</isNotEmpty>
+	</select>
+
+	<select id="com.zjhcsoft.uac.account.user.dao.UserDao.findUserCount"
+		parameterClass="com.zjhcsoft.uac.account.user.entity.User">
+		select count(*) from User where 1=1 and enabled = true
+		<isNotEmpty prepend="and" property="id">
+			id = #id#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="username">
+			username =
+			#username#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="idNumber">
+			idNumber =
+			#idNumber#
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="name">
+			name =
+			#name#
+		</isNotEmpty>
+	</select>
+
+	<select id="com.zjhcsoft.uac.account.user.dao.UserDao.findByUsername"
+		parameterClass="com.zjhcsoft.uac.account.user.entity.User"
+		resultClass="com.zjhcsoft.uac.account.user.entity.User">
+		from User where username=#username#
+	</select>
+
+	<select id="com.zjhcsoft.uac.account.user.dao.UserDao.findByIdNumber"
+		parameterClass="com.zjhcsoft.uac.account.user.entity.User"
+		resultClass="com.zjhcsoft.uac.account.user.entity.User">
+		from User where idNumber=#idNumber#
+	</select>
+
+	<select id="com.zjhcsoft.uac.account.user.dao.UserDao.findOrgByName"
+		parameterClass="java.util.Map" resultClass="org.roof.web.org.entity.Organization">
+		from Organization where
+		org_name like '%' ||
+		#org_name# ||
+		'%'
+	</select>
+	
+	<select id="selectOrganizationIdsByParentId" parameterClass="java.util.Map" resultClass="java.lang.Long">
+	 	select org_id from organization start with org_id = #org_id# connect by parent_id = prior org_id
+	</select>
+</sqlMap>

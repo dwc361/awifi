@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://www.ibatis.com/dtd/sql-map-2.dtd">
+<sqlMap namespace="Bulletin_exp">
+	<select id="Bulletin_exp_select_bulletin_list" parameterClass="com.zjhcsoft.uac.bulletin.entity.Bulletin"
+		resultClass="com.zjhcsoft.uac.bulletin.entity.Bulletin">
+		<![CDATA[ 
+		from Bulletin WHERE 1=1
+		]]>
+		<isNotEmpty prepend="and" property="content"> 
+		<![CDATA[ 
+		content like '%' || #content# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="title"> 
+		<![CDATA[ 
+		title like '%' || #title# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="visitors"> 
+		<![CDATA[ 
+		visitors = #visitors#
+		]]> 
+		</isNotEmpty>
+		<![CDATA[
+		order by id desc 
+		]]>
+	</select>
+	
+	<select id="Bulletin_exp_select_bulletin_count" parameterClass="com.zjhcsoft.uac.bulletin.entity.Bulletin"
+		resultClass="java.lang.Long">
+		<![CDATA[ 
+		select count(*) from Bulletin WHERE 1 = 1
+		]]> 
+		<isNotEmpty prepend="and" property="content"> 
+		<![CDATA[ 
+		content like '%' || #content# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="id"> 
+		<![CDATA[ 
+		id = #id#
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="title"> 
+		<![CDATA[ 
+		title like '%' || #title# || '%'
+		]]> 
+		</isNotEmpty>
+		<isNotEmpty prepend="and" property="visitors"> 
+		<![CDATA[ 
+		visitors = #visitors#
+		]]> 
+		</isNotEmpty>
+	</select>
+
+</sqlMap>
