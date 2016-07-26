@@ -169,7 +169,7 @@
 	<body>
 		<form id="areaspline_chart_form" method="post" action="">
 			<div id="div1">
-				<img src="../proscenium/chart/image/watch_chart.png" />
+				<img src="../chart/image/watch_chart.png" />
 				<div id="container"></div>
 			</div>
 		</form>

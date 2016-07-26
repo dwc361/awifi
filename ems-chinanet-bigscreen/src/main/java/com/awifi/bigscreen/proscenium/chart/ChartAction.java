@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("ems/bigscreen/chartAction")
+@RequestMapping("ems/bigscreen/proscenium/chartAction")
 public class ChartAction {
 	private IDictionaryService dictionaryService;
 
