@@ -1,4 +1,4 @@
-package com.awifi.bigscreen;
+package com.awifi.bigscreen.proscenium.chart;
 
 import java.util.List;
 
@@ -23,17 +23,17 @@ public class ChartAction {
 
 	@RequestMapping("/areaspline_chart")
 	public String areaspline_chart() {
-		return "/ems/bigscreen/chart/areaspline_chart.jsp";
+		return "/ems/bigscreen/proscenium/chart/areaspline_chart.jsp";
 	}
 	
 	@RequestMapping("/spline_chart")
 	public String spline_chart() {
-		return "/ems/bigscreen/chart/spline_chart.jsp";
+		return "/ems/bigscreen/proscenium/chart/spline_chart.jsp";
 	}
 	
 	@RequestMapping("/watch_chart")
 	public String watch_chart() {
-		return "/ems/bigscreen/chart/watch_chart.jsp";
+		return "/ems/bigscreen/proscenium/chart/watch_chart.jsp";
 	}
 
 	@Autowired(required = true)

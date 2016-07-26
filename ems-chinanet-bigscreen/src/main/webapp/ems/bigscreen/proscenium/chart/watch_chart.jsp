@@ -10,8 +10,8 @@
 		<meta content="telephone=no,email=no" name="format-detection">
 		<title>Watch统计图</title>
 		<script type="text/javascript" src="${basePath}/common/js/jquery/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="${basePath}/ems/bigscreen/chart/js/highcharts.js"></script>
-		<script type="text/javascript" src="${basePath}/ems/bigscreen/chart/js/highcharts-more.js"></script>
+		<script type="text/javascript" src="${basePath}/ems/bigscreen/proscenium/chart/js/highcharts.js"></script>
+		<script type="text/javascript" src="${basePath}/ems/bigscreen/proscenium/chart/js/highcharts-more.js"></script>
 		<script type="text/javascript">
 			$(function () {
 			    $('#container').highcharts({
@@ -169,7 +169,7 @@
 	<body>
 		<form id="areaspline_chart_form" method="post" action="">
 			<div id="div1">
-				<img src="../chart/image/watch_chart.png" />
+				<img src="../proscenium/chart/image/watch_chart.png" />
 				<div id="container"></div>
 			</div>
 		</form>
