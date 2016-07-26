@@ -14,7 +14,7 @@
 	<!-- AOP配置 -->
 	<aop:aspectj-autoproxy />
 	<!-- 扫描组件 -->
-	<context:component-scan base-package="org.roof.*,org.roof.web.*,com.zjhcsoft.*,com.awifi.*,com.ems.*" />
+	<context:component-scan base-package="org.roof.*,org.roof.web.*,com.awifi.*,com.ems.*" />
 	<bean id="defaultWebInvocationPrivilegeEvaluator"
 		class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
 		<constructor-arg ref="filterSecurityInterceptor" />
