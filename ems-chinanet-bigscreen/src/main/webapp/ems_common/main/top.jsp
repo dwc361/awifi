@@ -42,5 +42,5 @@
 </div>
 <input type="hidden" id="no_need_close_tabs" value="Drafts,我的草稿箱">
 <!--引入属于此页面的js -->
-<script type="text/javascript" src="${basePath}/letv_common/main/js/top.js"></script>
-<script type="text/javascript" src="${basePath}/letv_common/main/js/logout.js"></script>
+<script type="text/javascript" src="${basePath}/ems_common/main/js/top.js"></script>
+<script type="text/javascript" src="${basePath}/ems_common/main/js/logout.js"></script>

@@ -66,16 +66,16 @@
 
 	<!-- basic scripts -->
 	<!-- 引入 -->
-	<script type="text/javascript">window.jQuery || document.write("<script src='letv_common/static/js/jquery-1.9.1.min.js'>\x3C/script>");</script>
-	<script src="${basePath}/letv_common/static/js/bootstrap.min.js"></script>
-	<script src="${basePath}/letv_common/static/js/ace-elements.min.js"></script>
-	<script src="${basePath}/letv_common/static/js/ace.min.js"></script>
+	<script type="text/javascript">window.jQuery || document.write("<script src='ems_common/static/js/jquery-1.9.1.min.js'>\x3C/script>");</script>
+	<script src="${basePath}/ems_common/static/js/bootstrap.min.js"></script>
+	<script src="${basePath}/ems_common/static/js/ace-elements.min.js"></script>
+	<script src="${basePath}/ems_common/static/js/ace.min.js"></script>
 	<!-- 引入 -->
 
-	<script type="text/javascript" src="${basePath}/letv_common/static/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="${basePath}/ems_common/static/js/jquery.cookie.js"></script>
 
 	<!--引入属于此页面的js -->
-	<script type="text/javascript" src="${basePath}/letv_common/main/js/menusf.js"></script>
-	<script type="text/javascript" src="${basePath}/letv_common/main/js/index.js"></script>
+	<script type="text/javascript" src="${basePath}/ems_common/main/js/menusf.js"></script>
+	<script type="text/javascript" src="${basePath}/ems_common/main/js/index.js"></script>
 </body>
 </html>

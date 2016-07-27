@@ -6,37 +6,27 @@
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+	String m_tk = (String)request.getSession().getAttribute("m_tk");
 %>
 <!DOCTYPE html>
 <html lang="en">
 	<head>
 		<base href="<%=basePath%>">
-		<script type="text/javascript" src="${basePath}/letv_common/static/js/jquery-1.7.2.js"></script>
-		<script type="text/javascript" src="${basePath}/letv_common/static/js/jquery.cookie.js"></script>
-		<script type="text/javascript" src="${basePath}/letv_common/plugins/tab/js/framework.js"></script>
-		<link href="${basePath}/letv_common/plugins/tab/css/import_basic.css" rel="stylesheet" type="text/css" />
-		<link rel="stylesheet" type="text/css" id="skin" prePath="${basePath}/letv_common/plugins/tab/" />
+		<script type="text/javascript" src="${basePath}/ems_common/static/js/jquery-1.7.2.js"></script>
+		<script type="text/javascript" src="${basePath}/ems_common/static/js/jquery.cookie.js"></script>
+		<script type="text/javascript" src="${basePath}/ems_common/plugins/tab/js/framework.js"></script>
+		<link href="${basePath}/ems_common/plugins/tab/css/import_basic.css" rel="stylesheet" type="text/css" />
+		<link rel="stylesheet" type="text/css" id="skin" prePath="${basePath}/ems_common/plugins/tab/" />
 		<!--默认相对于根目录路径为../，可添加prePath属性自定义相对路径，如prePath="<%=request.getContextPath()%>"-->
-		<script type="text/javascript" charset="utf-8" src="${basePath}/letv_common/main/js/tab.js"></script>
-		<%@include file="/letv_common/messages.jsp"%>
+		<script type="text/javascript" charset="utf-8" src="${basePath}/ems_common/main/js/tab.js"></script>
 	</head>
 	<body>
-		<div id="tab_menu" style="height: auto;"></div>
+		<div id="tab_menu" style="height: 30px;"></div>
 		<div style="width: 100%;">
 			<div id="page" style="width: 100%; height: 100%;"></div>
-			<input type="hidden" id=index_en name=index_en_name value="<spring:message code="Index" />">
-
-			<!-- ROI高级管理层 -->
-			<sec:authorize url="${roi_gjglc_url }">
-				<input type="hidden"  id="poi_gjglc" value="poi_gjglc">
+			<sec:authorize url="${basePath }/letv/gcr/copyright_hold_selectAction/list">
+				<input type="hidden" id=index_en name=index_en_name value="<spring:message code="Index" />">
 			</sec:authorize>
-			<!-- ROI内容线层 -->
-			<sec:authorize url="${roi_nrxc_url }">
-				<input type="hidden"  id="poi_nrxc" value="poi_nrxc">
-			</sec:authorize>
-
-			<%-- <sec:authorize url="${basePath }/letv/gcr/copyright_hold_selectAction/list">
-			</sec:authorize> --%>
 		</div>
 	</body>
 	<script type="text/javascript">
@@ -44,7 +34,7 @@
 		function tabAddHandler(mid,mtitle,murl){
 			var path = "<%=path%>";
 			var end_ = ".action"
-			if(murl.indexOf("http://")!=-1 || murl.indexOf("{0}")!=-1){
+			if(murl.indexOf("http://")!=-1){
 				path = "";
 				end_ = "";
 			}
@@ -88,6 +78,16 @@
 			if (url!=null && url.indexOf('{0}')!=-1) {
 				url = url.replace('{0}', '${flow_base_url}');
 			}
+			if (url!=null && url.slice(0, 4)=='<%=request.getScheme()%>' && url.indexOf('<%=path%>')==-1) {
+				var m_tk = '<%=m_tk%>';
+				if (m_tk!=null && m_tk!='null' && m_tk!='') {
+					if (url.indexOf('?') != -1) {
+						url = url + '&m_tk=' + m_tk;
+					} else {
+						url = url + '?m_tk=' + m_tk;
+					}
+				}
+			}
 			return url;
 		}
 
@@ -98,8 +98,7 @@
 				cid : 'tab1',
 				position : "top"
 			});
-
-			if (document.getElementById("index_en")) {
+			//if (document.getElementById("index_en")) {
 				var url = buildUrl('${flow_base_url}${flow_index_url}');
 				var index_en_name = document.getElementById("index_en").value;
 				tab.add({
@@ -108,44 +107,26 @@
 					url : url,
 					isClosed : false
 				});
-			}
-			
-			var poi_gjglc = $("#poi_gjglc").val();
-			var poi_nrxc = $("#poi_nrxc").val();
-			var poi_title=roi_senior_management,poi_url;
-			if(poi_gjglc == "poi_gjglc"){
-				poi_url = "${roi_gjglc_url}";
-			}
-			if(poi_nrxc=="poi_nrxc"){
-				poi_title = roi_business_lines;//Business Lines
-				poi_url = "${roi_nrxc_url}";
-			}
-			if(poi_gjglc == "poi_gjglc" && poi_nrxc=="poi_nrxc"){
-				poi_title = roi_senior_management;//Senior Management
-				poi_url = "${roi_gjglc_url}";
-			}
-			if(poi_gjglc == "poi_gjglc" || poi_nrxc=="poi_nrxc"){
-				tab.add( {
-					id :'roi_id',
-					title :poi_title,
-					url :poi_url,
-					isClosed :true
-				});
-			}
-
-			$("#tab1").css("height","auto");
+			//}
+			/**tab.add( {
+				id :'tab1_index1',
+				title :"主页",
+				url :"/per/undoTask!gettwo",
+				isClosed :false
+			});**/
 		});
 
-		window.onresize = function() {
-			cmainFrameT();
-			$("#mainFrame", parent.document).css("height", "800px");
-		};
-		cmainFrameT();
 		function cmainFrameT() {
 			var hmainT = document.getElementById("page");
 			var bheightT = document.documentElement.clientHeight;
 			hmainT.style.width = '100%';
 			hmainT.style.height = (bheightT - 51) + 'px';
 		}
+		cmainFrameT();
+		window.onresize = function() {
+			cmainFrameT();
+
+			$("#mainFrame", parent.document).css("height", "800px");
+		};
 	</script>
 </html>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aiwifi.bigscreen.chart.dao">
+	<sql id="columnsAs">
+		t1.id, t1.icon, t1.name, t1.enabled, t1.re_times, t1.configure, t1.path, t1.create_time, t1.create_by, t1.update_time, t1.update_by
+	</sql>
+	
+	<select id="selectChartPage" resultType="org.aiwifi.bigscreen.chart.entity.ChartVo">
+		select
+		<include refid="columnsAs"/>
+		from
+		e_chart t1
+		join
+		(SELECT
+		id
+		from
+		e_chart
+		where 1=1
+		<include refid="conds" />
+		order by id desc
+		limit #{firstrownum}, #{limit}) t2
+		where t1.id = t2.id
+	</select>
+	
+	<select id="selectChartCount" resultType="java.lang.Long">
+		select
+		count(id)
+		from e_chart
+		where 1=1
+		<include refid="conds" />
+	</select>
+</mapper>

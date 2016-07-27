@@ -36,7 +36,17 @@ public class MainAction {
 		Menu menu = menuFilter.doFilter(1L, new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
 				authentication.getCredentials(), authentication.getAuthorities()));
 		model.addAttribute("menus", menu.getChildren());
-		return "/ems_common/user_main_auto.jsp";
+		//return "/ems_common/user_main_auto.jsp";
+		return "/ems_common/main/index.jsp";
+	}
+	
+	/**
+	 * 进入tab标签
+	 * @return
+	 */
+	@RequestMapping("/tab")
+	public String tab(Model model){
+		return "/ems_common/main/tab.jsp";
 	}
 
 	@Autowired(required = true)

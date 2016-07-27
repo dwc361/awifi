@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aiwifi.bigscreen.chart.dao">
+
+	<sql id="columns">
+		id, icon, name, enabled, re_times, configure, path, create_time, create_by, update_time, update_by
+	</sql>
+	<sql id="vals">
+		#{id}, #{icon}, #{name}, #{enabled}, #{re_times}, #{configure}, #{path}, #{create_time}, #{create_by}, #{update_time}, #{update_by}
+	</sql>
+	<sql id="conds">
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="icon != null and icon != ''">
+			and icon = #{icon}
+		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="enabled != null and enabled != ''">
+			and enabled = #{enabled}
+		</if>
+		<if test="re_times != null and re_times != ''">
+			and re_times = #{re_times}
+		</if>
+		<if test="configure != null and configure != ''">
+			and configure = #{configure}
+		</if>
+		<if test="path != null and path != ''">
+			and path = #{path}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="create_by != null and create_by != ''">
+			and create_by = #{create_by}
+		</if>
+		<if test="update_time != null">
+			and update_time = #{update_time}
+		</if>
+		<if test="update_by != null and update_by != ''">
+			and update_by = #{update_by}
+		</if>
+	</sql>
+
+	<insert id="saveChart" parameterType="org.aiwifi.bigscreen.chart.entity.Chart" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" resultType="Long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into e_chart (<include refid="columns" />) 
+		values (<include refid="vals" />)
+	</insert>
+
+	<delete id="deleteChart">
+		delete from e_chart
+		where id=#{id} 
+	</delete>
+
+	<delete id="deleteByExampleChart">
+		delete from e_chart
+		where 1=1
+		<include refid="conds" />
+	</delete>
+
+	<update id="updateChart">
+		update e_chart
+		<set>
+			id=#{id}, 
+			icon=#{icon}, 
+			name=#{name}, 
+			enabled=#{enabled}, 
+			re_times=#{re_times}, 
+			configure=#{configure}, 
+			path=#{path}, 
+			create_time=#{create_time}, 
+			create_by=#{create_by}, 
+			update_time=#{update_time}, 
+			update_by=#{update_by}
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateIgnoreNullChart">
+		update e_chart
+		<set>
+		<if test="id != null and id != ''">
+			id=#{id}, 
+		</if>
+		<if test="icon != null and icon != ''">
+			icon=#{icon}, 
+		</if>
+		<if test="name != null and name != ''">
+			name=#{name}, 
+		</if>
+		<if test="enabled != null and enabled != ''">
+			enabled=#{enabled}, 
+		</if>
+		<if test="re_times != null and re_times != ''">
+			re_times=#{re_times}, 
+		</if>
+		<if test="configure != null and configure != ''">
+			configure=#{configure}, 
+		</if>
+		<if test="path != null and path != ''">
+			path=#{path}, 
+		</if>
+		<if test="create_time != null">
+			create_time=#{create_time}, 
+		</if>
+		<if test="create_by != null and create_by != ''">
+			create_by=#{create_by}, 
+		</if>
+		<if test="update_time != null">
+			update_time=#{update_time}, 
+		</if>
+		<if test="update_by != null and update_by != ''">
+			update_by=#{update_by}
+		</if>
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateByExampleChart">
+		update e_chart
+		<set>
+			<if test="id != null and id != ''">
+			id=#{id}, 
+			</if>
+			<if test="icon != null and icon != ''">
+			icon=#{icon}, 
+			</if>
+			<if test="name != null and name != ''">
+			name=#{name}, 
+			</if>
+			<if test="enabled != null and enabled != ''">
+			enabled=#{enabled}, 
+			</if>
+			<if test="re_times != null and re_times != ''">
+			re_times=#{re_times}, 
+			</if>
+			<if test="configure != null and configure != ''">
+			configure=#{configure}, 
+			</if>
+			<if test="path != null and path != ''">
+			path=#{path}, 
+			</if>
+			<if test="create_time != null">
+			create_time=#{create_time}, 
+			</if>
+			<if test="create_by != null and create_by != ''">
+			create_by=#{create_by}, 
+			</if>
+			<if test="update_time != null">
+			update_time=#{update_time}, 
+			</if>
+			<if test="update_by != null and update_by != ''">
+			update_by=#{update_by}
+			</if>
+		</set>
+		where 1=1
+		<include refid="conds" />
+	</update>
+	
+	<select id="loadChart" resultType="org.aiwifi.bigscreen.chart.entity.ChartVo">
+		select 
+		<include refid="columns"/>
+		from e_chart
+		where id=#{id} 
+	</select>
+	
+	<select id="selectChart" resultType="org.aiwifi.bigscreen.chart.entity.ChartVo">
+		select 
+		<include refid="columns"/>
+		from e_chart
+		where 1=1
+		<include refid="conds" />
+	</select>
+</mapper>
