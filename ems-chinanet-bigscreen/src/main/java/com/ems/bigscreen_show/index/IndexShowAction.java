@@ -1,4 +1,4 @@
-package com.awifi.bigscreen_show.index;
+package com.ems.bigscreen_show.index;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("awifi/bigscreen_show/indexShowAction")
+@RequestMapping("ems/bigscreen_show/indexShowAction")
 public class IndexShowAction {
 	private IDictionaryService dictionaryService;
 
@@ -23,7 +23,7 @@ public class IndexShowAction {
 
 	@RequestMapping("/index_page")
 	public String index_page() {
-		return "/awifi/bigscreen_show/index/index_page.jsp";
+		return "/ems/bigscreen_show/index/index_page.jsp";
 	}
 
 	@Autowired(required = true)

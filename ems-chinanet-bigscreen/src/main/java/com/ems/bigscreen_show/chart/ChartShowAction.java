@@ -1,4 +1,4 @@
-package com.awifi.bigscreen_show.chart;
+package com.ems.bigscreen_show.chart;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("awifi/bigscreen_show/chartShowAction")
+@RequestMapping("ems/bigscreen_show/chartShowAction")
 public class ChartShowAction {
 	private IDictionaryService dictionaryService;
 
@@ -23,17 +23,17 @@ public class ChartShowAction {
 
 	@RequestMapping("/areaspline_chart")
 	public String areaspline_chart() {
-		return "/awifi/bigscreen_show/chart/areaspline_chart.jsp";
+		return "/ems/bigscreen_show/chart/areaspline_chart.jsp";
 	}
 	
 	@RequestMapping("/spline_chart")
 	public String spline_chart() {
-		return "/awifi/bigscreen_show/chart/spline_chart.jsp";
+		return "/ems/bigscreen_show/chart/spline_chart.jsp";
 	}
 	
 	@RequestMapping("/watch_chart")
 	public String watch_chart() {
-		return "/awifi/bigscreen_show/chart/watch_chart.jsp";
+		return "/ems/bigscreen_show/chart/watch_chart.jsp";
 	}
 
 	@Autowired(required = true)
