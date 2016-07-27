@@ -10,8 +10,8 @@
 		<meta content="telephone=no,email=no" name="format-detection">
 		<title>Watch统计图</title>
 		<script type="text/javascript" src="${basePath}/common/js/jquery/jquery-1.7.2.min.js"></script>
-		<script type="text/javascript" src="${basePath}/awifi/bigscreen_show/chart/js/highcharts.js"></script>
-		<script type="text/javascript" src="${basePath}/awifi/bigscreen_show/chart/js/highcharts-more.js"></script>
+		<script type="text/javascript" src="${basePath}/ems/bigscreen_show/chart/js/highcharts.js"></script>
+		<script type="text/javascript" src="${basePath}/ems/bigscreen_show/chart/js/highcharts-more.js"></script>
 		<script type="text/javascript">
 			$(function () {
 			    $('#container').highcharts({
