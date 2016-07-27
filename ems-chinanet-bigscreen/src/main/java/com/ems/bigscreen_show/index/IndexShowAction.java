@@ -21,9 +21,9 @@ public class IndexShowAction {
 		model.addAttribute("dicList", dicList);
 	}
 
-	@RequestMapping("/index_page")
-	public String index_page() {
-		return "/ems/bigscreen_show/index/index_page.jsp";
+	@RequestMapping("/index")
+	public String index() {
+		return "/ems/bigscreen_show/index/index.jsp";
 	}
 
 	@Autowired(required = true)
