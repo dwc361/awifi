@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awifi.bigscreen.bigscreen.dao">
+
+	<sql id="columns">
+		id, name, template_id, theme_id, publish, re_time, re_type, create_time, create_by, update_time, update_by
+	</sql>
+	<sql id="vals">
+		#{id}, #{name}, #{template_id}, #{theme_id}, #{publish}, #{re_time}, #{re_type}, #{create_time}, #{create_by}, #{update_time}, #{update_by}
+	</sql>
+	<sql id="conds">
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="template_id != null and template_id != ''">
+			and template_id = #{template_id}
+		</if>
+		<if test="theme_id != null and theme_id != ''">
+			and theme_id = #{theme_id}
+		</if>
+		<if test="publish != null and publish != ''">
+			and publish = #{publish}
+		</if>
+		<if test="re_time != null and re_time != ''">
+			and re_time = #{re_time}
+		</if>
+		<if test="re_type != null and re_type != ''">
+			and re_type = #{re_type}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="create_by != null and create_by != ''">
+			and create_by = #{create_by}
+		</if>
+		<if test="update_time != null">
+			and update_time = #{update_time}
+		</if>
+		<if test="update_by != null and update_by != ''">
+			and update_by = #{update_by}
+		</if>
+	</sql>
+
+	<insert id="saveBigscreen" parameterType="com.awifi.bigscreen.bigscreen.entity.Bigscreen" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" resultType="Long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into e_bigscreen (<include refid="columns" />) 
+		values (<include refid="vals" />)
+	</insert>
+
+	<delete id="deleteBigscreen">
+		delete from e_bigscreen
+		where id=#{id} 
+	</delete>
+
+	<delete id="deleteByExampleBigscreen">
+		delete from e_bigscreen
+		where 1=1
+		<include refid="conds" />
+	</delete>
+
+	<update id="updateBigscreen">
+		update e_bigscreen
+		<set>
+			id=#{id}, 
+			name=#{name}, 
+			template_id=#{template_id}, 
+			theme_id=#{theme_id}, 
+			publish=#{publish}, 
+			re_time=#{re_time}, 
+			re_type=#{re_type}, 
+			create_time=#{create_time}, 
+			create_by=#{create_by}, 
+			update_time=#{update_time}, 
+			update_by=#{update_by}
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateIgnoreNullBigscreen">
+		update e_bigscreen
+		<set>
+		<if test="id != null and id != ''">
+			id=#{id}, 
+		</if>
+		<if test="name != null and name != ''">
+			name=#{name}, 
+		</if>
+		<if test="template_id != null and template_id != ''">
+			template_id=#{template_id}, 
+		</if>
+		<if test="theme_id != null and theme_id != ''">
+			theme_id=#{theme_id}, 
+		</if>
+		<if test="publish != null and publish != ''">
+			publish=#{publish}, 
+		</if>
+		<if test="re_time != null and re_time != ''">
+			re_time=#{re_time}, 
+		</if>
+		<if test="re_type != null and re_type != ''">
+			re_type=#{re_type}, 
+		</if>
+		<if test="create_time != null">
+			create_time=#{create_time}, 
+		</if>
+		<if test="create_by != null and create_by != ''">
+			create_by=#{create_by}, 
+		</if>
+		<if test="update_time != null">
+			update_time=#{update_time}, 
+		</if>
+		<if test="update_by != null and update_by != ''">
+			update_by=#{update_by}
+		</if>
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateByExampleBigscreen">
+		update e_bigscreen
+		<set>
+			<if test="id != null and id != ''">
+			id=#{id}, 
+			</if>
+			<if test="name != null and name != ''">
+			name=#{name}, 
+			</if>
+			<if test="template_id != null and template_id != ''">
+			template_id=#{template_id}, 
+			</if>
+			<if test="theme_id != null and theme_id != ''">
+			theme_id=#{theme_id}, 
+			</if>
+			<if test="publish != null and publish != ''">
+			publish=#{publish}, 
+			</if>
+			<if test="re_time != null and re_time != ''">
+			re_time=#{re_time}, 
+			</if>
+			<if test="re_type != null and re_type != ''">
+			re_type=#{re_type}, 
+			</if>
+			<if test="create_time != null">
+			create_time=#{create_time}, 
+			</if>
+			<if test="create_by != null and create_by != ''">
+			create_by=#{create_by}, 
+			</if>
+			<if test="update_time != null">
+			update_time=#{update_time}, 
+			</if>
+			<if test="update_by != null and update_by != ''">
+			update_by=#{update_by}
+			</if>
+		</set>
+		where 1=1
+		<include refid="conds" />
+	</update>
+	
+	<select id="loadBigscreen" resultType="com.awifi.bigscreen.bigscreen.entity.BigscreenVo">
+		select 
+		<include refid="columns"/>
+		from e_bigscreen
+		where id=#{id} 
+	</select>
+	
+	<select id="selectBigscreen" resultType="com.awifi.bigscreen.bigscreen.entity.BigscreenVo">
+		select 
+		<include refid="columns"/>
+		from e_bigscreen
+		where 1=1
+		<include refid="conds" />
+	</select>
+</mapper>

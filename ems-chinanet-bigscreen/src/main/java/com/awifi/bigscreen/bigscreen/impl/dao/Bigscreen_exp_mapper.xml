@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awifi.bigscreen.bigscreen.dao">
+	<sql id="columnsAs">
+		t1.id, t1.name, t1.template_id, t1.theme_id, t1.publish, t1.re_time, t1.re_type, t1.create_time, t1.create_by, t1.update_time, t1.update_by
+	</sql>
+	
+	<select id="selectBigscreenPage" resultType="com.awifi.bigscreen.bigscreen.entity.BigscreenVo">
+		select
+		<include refid="columnsAs"/>
+		from
+		e_bigscreen t1
+		join
+		(SELECT
+		id
+		from
+		e_bigscreen
+		where 1=1
+		<include refid="conds" />
+		order by id desc
+		limit #{firstrownum}, #{limit}) t2
+		where t1.id = t2.id
+	</select>
+	
+	<select id="selectBigscreenCount" resultType="java.lang.Long">
+		select
+		count(id)
+		from e_bigscreen
+		where 1=1
+		<include refid="conds" />
+	</select>
+</mapper>
