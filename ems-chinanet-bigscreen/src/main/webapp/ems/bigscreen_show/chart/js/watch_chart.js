@@ -63,11 +63,11 @@ $(function () {
                 rotation: 'auto',
                 style: {
                 	//fontWeight: 'bold',
-                    color: 'blue'
+                    color: 'white'
                 }
             },
             title: {
-                text: '实时数据' 
+                text: '' 
             },
             plotBands: [{ // 仪表盘刻度背景
                 from: 0,
@@ -86,7 +86,7 @@ $(function () {
             data: [80],
             dataLabels: {
                 formatter: function () {
-                    return '<span style="color:blue; font-size:20px;">' + this.y + '%</span>';
+                    return '<span style="color:blue; font-size:12px;">' + this.y + '%</span>';
                 },
                 borderWidth: 0
             },

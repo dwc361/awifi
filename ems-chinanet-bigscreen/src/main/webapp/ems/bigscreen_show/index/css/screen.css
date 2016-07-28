@@ -198,7 +198,7 @@ border-left: 0.5rem solid #fff;
 .floater {
 	width: 20%;
 	height: 33.333%;
-	background: #aaa;
+	background: transparent;
 }
 
 .topLeft{

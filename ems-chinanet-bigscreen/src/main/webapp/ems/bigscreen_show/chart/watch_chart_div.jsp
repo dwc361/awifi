@@ -3,8 +3,8 @@
 	div#div1 {
 		position: fixed;
 		z-index: 1000;
-		width:250px; 
-		height:250px;
+		width:150px; 
+		height:150px;
 		margin:0 0 0 0;
 	}
 	
@@ -14,10 +14,10 @@
 		height: 100%;
 	}
 	
-	div#container {
-		width:250px; 
-		height:250px; 
-		margin:-240px auto 0;
+	div#watch_div {
+		width:150px; 
+		height:150px; 
+		margin:-140px auto 0;
 	}
 </style>
 <div id="div1">
