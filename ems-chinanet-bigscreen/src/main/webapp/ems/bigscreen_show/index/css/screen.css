@@ -178,6 +178,7 @@ transform: rotateX(56deg);
 -webkit-transform: rotateX(50deg); /* Safari and Chrome */
 	}
 
+<<<<<<< HEAD
 /*.bgImg {
 	width: 100%;
 	height: 20%;
@@ -188,6 +189,18 @@ transform: rotateX(56deg);
 	bottom: 0;
 	perspective:150;
 	-webkit-perspective:150; /* Safari and Chrome */
+=======
+/*.bgImg {
+	width: 100%;
+	height: 20%;
+	background-image: url(../img/mapbackground.png);
+	background-repeat: round no-repeat;
+	/*background-size: 100% 30%*/
+	/*position: fixed;
+	bottom: 0;
+	perspective:150;
+	-webkit-perspective:150; /* Safari and Chrome */
+>>>>>>> ba01c0baad3d9bb3cfc159c646af7fed8ba04542
 /*}*/
 
 .container .right {
