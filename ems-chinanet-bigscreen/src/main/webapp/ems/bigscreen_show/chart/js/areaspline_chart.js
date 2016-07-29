@@ -124,6 +124,10 @@ $(function () {
 			})()
         }]
     });
+    
+    // 图标div宽度和高度定义
+    //$("#areaspline_div").css("width", $(window).width() / 2 + 'px');
+    //$("#areaspline_div").css("height", $(window).height() / 2 + 'px');
 
  	// 图表本身的背景设置成透明
     var rect = $("#areaspline_div").find("rect");
