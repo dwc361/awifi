@@ -134,12 +134,11 @@ body {
 	background-size: 100%;
 }
 
-
-
 .container {
 	width: 100vw;
 	height: 100vh;
 	padding: 0;
+	/*position: relative;*/
 	/*background-image: url(../img/floor.svg);*/
 }
 
@@ -150,6 +149,7 @@ body {
 
 .container .left {
 	height: 50%;
+	padding: 0;
 }
 
 .media-middle {
@@ -157,38 +157,59 @@ body {
 	border-right: 1px solid # eee;
 	height: 80%;
 	padding: 0;
-	
 }
-.bgImg{
+.toushi{
+position: fixed;
+height:30%;
+width: 100%;
+bottom:0;
+perspective:130;
+-webkit-perspective:172; /* Safari and Chrome */
+/*background:red;*/
+	}
+	.toushi img{
+		display: inline-block;
+		/*opacity:1;*/
+position: absolute;
+width:100%;
+height:100%;
+border: 1px solid #fff;
+transform: rotateX(56deg);
+-webkit-transform: rotateX(50deg); /* Safari and Chrome */
+	}
+
+/*.bgImg {
 	width: 100%;
 	height: 20%;
-	background-image: url(../img/mapbackground.png) ;
+	background-image: url(../img/mapbackground.png);
 	background-repeat: round no-repeat;
-	/*background-size: 100% 30%*/ 
-	position: fixed;
-	
+	/*background-size: 100% 30%*/
+	/*position: fixed;
 	bottom: 0;
-}
+	perspective:150;
+	-webkit-perspective:150; /* Safari and Chrome */
+/*}*/
+
 .container .right {
 	height: 33.333%;
-}
-header{
-	height:12% ;
+	padding: 0;
 }
 
+header {
+	height: 12%;
+}
 
 header div {
- background-image: -moz-linear-gradient( 90deg, rgb(19,13,15) 0%, rgb(48,58,122) 10%, rgb(77,102,229) 18%, rgb(17,13,48) 100%);
-  background-image: -webkit-linear-gradient( 90deg, rgb(19,13,15) 0%, rgb(48,58,122) 10%, rgb(77,102,229) 18%, rgb(17,13,48) 100%);
-  background-image: -ms-linear-gradient( 90deg, rgb(19,13,15) 0%, rgb(48,58,122) 10%, rgb(77,102,229) 18%, rgb(17,13,48) 100%);
-  
-	padding: 30px ;
-	height:100%;
+	background-image: -moz-linear-gradient( 90deg, rgb(19, 13, 15) 0%, rgb(48, 58, 122) 10%, rgb(77, 102, 229) 18%, rgb(17, 13, 48) 100%);
+	background-image: -webkit-linear-gradient( 90deg, rgb(19, 13, 15) 0%, rgb(48, 58, 122) 10%, rgb(77, 102, 229) 18%, rgb(17, 13, 48) 100%);
+	background-image: -ms-linear-gradient( 90deg, rgb(19, 13, 15) 0%, rgb(48, 58, 122) 10%, rgb(77, 102, 229) 18%, rgb(17, 13, 48) 100%);
+	padding: 30px;
+	height: 100%;
 	border: 2px solid #222;
 }
 
 .content {
-border-left: 0.5rem solid #fff;
+	border-left: 0.5rem solid #fff;
 	border-right: 0.5rem solid #fff;
 	border-image: url(../img/border.png) 0 20 0 20 stretch repeat;
 	height: 88%;
@@ -198,26 +219,28 @@ border-left: 0.5rem solid #fff;
 .floater {
 	width: 20%;
 	height: 33.333%;
-	background: transparent;
+	/*background: #aaa;*/
 }
 
-.topLeft{
+.topLeft {}
 
+.topRight {
+	position: absolute;
+	top: 0;
+	right: 0;
 }
-.topRight{
-		    position: absolute;
-    top: 0;
-    right: 0;
+
+.bottomLeft {
+	position: absolute;
+	bottom: 0;
 }
-.bottomLeft{
-	    position: absolute;
-    bottom: 0;
+
+.bottomRight {
+	position: absolute;
+	bottom: 0;
+	right: 0;
 }
-.bottomRight{
-	    position: absolute;
-    bottom: 0;
-    right: 0;
-}
+
 .stnFont {
 	height: 100%;
 	display: inline-block;
@@ -225,49 +248,109 @@ border-left: 0.5rem solid #fff;
 	font-size: 2.2rem;
 	text-align: center;
 }
-.stnHr{
-	
-}
-.stnP{
+
+.stnHr {}
+
+.stnP {
 	padding: 0;
 	padding-left: 1.2rem;
 }
-.stnP-span{
+
+.stnP-span {
 	font-size: 1.6rem;
 	color: #fff;
 	line-height: 1rem;
-	display:inline-block;
+	display: inline-block;
 	margin-top: 0.5rem;
 }
-.stnP-i{
+
+.stnP-i {
 	display: inline;
-		font-size:1rem;
+	font-size: 1rem;
 	color: #92a2e8;
 	line-height: 0;
 }
-.stnFont-mid{
+
+.stnFont-mid {
 	display: inline-block;
-	color: #fff;text-align: center;text-indent: 2.6rem;
+	color: #fff;
+	text-align: center;
+	text-indent: 2.6rem;
 	font-size: 2rem;
 }
-.blueFont{
-		display: inline;
-		font-size: 1.8rem;
+
+.blueFont {
+	display: inline;
+	font-size: 1.8rem;
 	color: #46efff;
 	text-indent: 2rem;
 	font-style: normal;
 }
-.blueFont-right{
-			display:inline-block;
-		font-size: 1.8rem;
-		padding: 0;
-	color: #46efff;
 
+.blueFont-right {
+	display: inline-block;
+	font-size: 1.8rem;
+	padding: 0;
+	color: #46efff;
 	font-style: normal;
 }
-.stnFont-right{
-		display: inline-block;
+
+.stnFont-right {
+	display: inline-block;
 	color: #fff;
 	font-size: 1.8rem;
 	padding: 0;
+}
+
+.topH {
+	width: 100%;
+	height: 18%;
+	/*background: red;*/
+	position: relative;
+}
+
+h1 {
+	display: inline-block;
+	width: 100%;
+	height:4.2rem;
+	position: absolute;
+	bottom: 0;
+	background-image: -moz-linear-gradient( 0deg, rgb(32, 32, 32) 0%, rgb(41, 41, 41) 11%, rgb(48, 48, 49) 18%, rgb(55, 55, 56) 30%, rgb(57, 57, 59) 75%, rgb(49, 49, 51) 93%, rgb(40, 40, 42) 100%);
+	background-image: -webkit-linear-gradient( 0deg, rgb(32, 32, 32) 0%, rgb(41, 41, 41) 11%, rgb(48, 48, 49) 18%, rgb(55, 55, 56) 30%, rgb(57, 57, 59) 75%, rgb(49, 49, 51) 93%, rgb(40, 40, 42) 100%);
+	background-image: -ms-linear-gradient( 0deg, rgb(32, 32, 32) 0%, rgb(41, 41, 41) 11%, rgb(48, 48, 49) 18%, rgb(55, 55, 56) 30%, rgb(57, 57, 59) 75%, rgb(49, 49, 51) 93%, rgb(40, 40, 42) 100%);
+	color: #fff;
+	line-height: 4.2rem;
+	font-size: 1.6rem;
+	text-indent: 3rem;
+}
+.topH_right{
+		width: 100%;
+	height: 27%;
+	/*background: red;*/
+	position: relative;
+}
+.topH_right h1{
+		display: inline-block;
+	width: 100%;
+	height:4.2rem;
+	position: absolute;
+	bottom: 0;
+	background-image: -moz-linear-gradient( 0deg, rgb(32, 32, 32) 0%, rgb(41, 41, 41) 11%, rgb(48, 48, 49) 18%, rgb(55, 55, 56) 30%, rgb(57, 57, 59) 75%, rgb(49, 49, 51) 93%, rgb(40, 40, 42) 100%);
+	background-image: -webkit-linear-gradient( 0deg, rgb(32, 32, 32) 0%, rgb(41, 41, 41) 11%, rgb(48, 48, 49) 18%, rgb(55, 55, 56) 30%, rgb(57, 57, 59) 75%, rgb(49, 49, 51) 93%, rgb(40, 40, 42) 100%);
+	background-image: -ms-linear-gradient( 0deg, rgb(32, 32, 32) 0%, rgb(41, 41, 41) 11%, rgb(48, 48, 49) 18%, rgb(55, 55, 56) 30%, rgb(57, 57, 59) 75%, rgb(49, 49, 51) 93%, rgb(40, 40, 42) 100%);
+	color: #fff;
+	line-height: 4.2rem;
+	font-size: 1.6rem;
+	text-indent: 3rem;
+}
+.news{
+	position: fixed;
+	bottom:0;
+	width: 100%;
+	height: 4.8rem;
+	color: #fff;
+	font-size: 2rem;
+	text-align: center;
+	font-weight: normal;
+	
 }

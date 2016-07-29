@@ -40,7 +40,7 @@ $(function () {
 			} 
         },
         title: {
-            text: '[设备状态统计]',
+            text: '',
             style: {
                 color: 'white', // 标题白色字体
                 fontWeight: 'bold' // 标题加粗
