@@ -79,7 +79,7 @@ $(function () {
         	enabled: false
         },
         legend: { // 图例
-        	enabled: true
+        	enabled: false
         },
         series: [{
             name: '已激活设备',
