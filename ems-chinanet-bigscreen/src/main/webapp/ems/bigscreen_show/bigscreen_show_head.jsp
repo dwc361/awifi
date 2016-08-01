@@ -2,6 +2,7 @@
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <script type="text/javascript" src="${basePath}/common/js/jquery/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" src="${basePath}/common/js/jquery/jquery.json.js"></script>
 
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Class.js"></script>

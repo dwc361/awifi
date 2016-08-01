@@ -1,4 +1,4 @@
-package com.ems.bigscreen_show.index;
+package com.ems.bigscreen_show.index.action;
 
 import java.util.List;
 

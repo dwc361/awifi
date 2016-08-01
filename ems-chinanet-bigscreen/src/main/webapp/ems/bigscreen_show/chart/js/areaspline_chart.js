@@ -3,38 +3,92 @@ y = now.getFullYear(); //获取完整的年份(4位,1970-????)
 m = now.getMonth(); //获取当前月份(0-11,0代表1月)
 d = now.getDate(); //获取当前日(1-31)
 $(function () {
+	var data = [],                                                  
+	time = (new Date()).getTime();                                                          
+
+	var x_arr = new Array();
+	for (var i = 0; i < 12; i++) {
+		x_arr.push(time + i * 1000);
+	}
+	
+	$.ajax({ 
+	    type: 'post', 
+	    dataType : "json", 
+	    url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
+	    data: {'x_json':$.toJSON(x_arr)},
+	    success: function(d) {
+	    	if(d.data != null) {
+	    		var data = [];
+	    		$.each(d.data, function(i, n) {
+	    			data.push({
+						x: n.x,
+						y: n.y
+					});
+	    	    });
+	    	}
+	    	show_chart(data);
+	    }, 
+	    error:function(d) {
+	    	alert(d.statusText);
+	    }
+	});
+});
+
+function show_chart(data) {     
 	Highcharts.getOptions().colors = "#007799,#434348,#90ed7d,#f7a35c,#8085e9,#f15c80,#e4d354,#2b908f,#f45b5b,#91e8e1".split(",");
     $('#areaspline_div').highcharts({
         chart: {
             type: 'areaspline',
             events: {                                                           
-				load: function() {            
+				load: function() {
 					var series = this.series[0];                                
 					setInterval(function() {
-						var x = (new Date()).getTime(), // current time
-							y = Math.random();
-						series.addPoint([x, y], true, true);
+						var x = (new Date()).getTime();
+						var x_arr = new Array();
+						x_arr.push(x);
+						
+						$.ajax({ 
+						    type: 'post', 
+						    dataType : "json", 
+						    url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
+						    data: {'x_json':$.toJSON(x_arr)},
+						    success: function(d) {
+						    	if(d.data != null) {
+						    		$.each(d.data, function(i, n) {
+						    			var x = n.x;
+							    		var y = n.y;
+							    		var a = n.a;
+							    		var b = n.b;
+							    		var c = n.c;
+							    		
+							    		series.addPoint([x, y], true, true);
 
-						var now = getDateTime(new Date());
-						var a = Math.floor(Math.random()*10000+1);
-						var b = Math.floor(Math.random()*10000+1);
-						var c = Math.floor(Math.random()*10000+1);
-						var chart = $('#areaspline_div').highcharts();
-	    		        if (chart.lbl) {
-	    		            chart.lbl.destroy();
-	    		        }
-	    		        var label = '时间:'+now+'<br>正常:'+a+'<br>故障:'+b+'<br>离线:'+c;
-	    		        chart.lbl = chart.renderer.label(label, 15, 0)
-	    	            .attr({
-	    	                padding: 5,
-	    	                r: 5,
-	    	                fill: 'transparent',
-	    	                zIndex: 5
-	    	            })
-	    	            .css({
-	    	                color: 'white'
-	    	            })
-	    	            .add();
+										var now_time = getDateTime(new Date());
+										var chart = $('#areaspline_div').highcharts();
+					    		        if (chart.lbl) {
+					    		            chart.lbl.destroy();
+					    		        }
+					    		        var label = '时间:'+now_time+'<br>正常:'+a+'<br>故障:'+b+'<br>离线:'+c;
+					    		        chart.lbl = chart.renderer.label(label, 15, 0)
+					    	            .attr({
+					    	                padding: 5,
+					    	                r: 5,
+					    	                fill: 'transparent',
+					    	                zIndex: 5
+					    	            })
+					    	            .css({
+					    	                color: 'white'
+					    	            })
+					    	            .add();
+						    	    });
+						    	}
+						    }, 
+						    error:function(d) {
+						    	alert(d.statusText);
+						    }
+						});
+						
+						
 					}, 1000);
 				}                                                               
 			} 
@@ -110,17 +164,7 @@ $(function () {
             pointStart: Date.UTC(y, m, d, 0), // 开始时间：y年m月d日0时
             pointInterval: 3600 * 1000, // 每隔1小时
             data: (function() {
-				var data = [],                                                  
-					time = (new Date()).getTime(),                              
-					i;                                                          
-																				
-				for (i = -11; i <= 0; i++) {                                    
-					data.push({
-						x: time + i * 1000,
-						y: Math.random()
-					});                                                         
-				}                                                               
-				return data;                                                    
+				return data;
 			})(),
 			marker: {
                 lineWidth: 1,
@@ -141,7 +185,7 @@ $(function () {
 
  	// body背景颜色设置成透明
     document.body.style.backgroundColor="transparent";
-});
+}
 
 function getDateTime(now) {     
 	var year=now.getFullYear(); //年

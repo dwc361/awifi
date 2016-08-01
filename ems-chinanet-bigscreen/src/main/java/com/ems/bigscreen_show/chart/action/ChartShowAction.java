@@ -1,4 +1,4 @@
-package com.ems.bigscreen_show.chart;
+package com.ems.bigscreen_show.chart.action;
 
 import java.util.List;
 
