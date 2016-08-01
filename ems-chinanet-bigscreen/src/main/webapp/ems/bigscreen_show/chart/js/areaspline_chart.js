@@ -71,11 +71,11 @@ $(function () {
                     return '';
                 }
             },
-            max:2,
+            max:3,
             gridLineColor: ''
         },
         legend: { // 图例
-        	enabled: true
+        	enabled: false
         },
         tooltip: {
         	enabled: false
