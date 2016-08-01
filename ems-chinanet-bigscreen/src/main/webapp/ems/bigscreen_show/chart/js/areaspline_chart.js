@@ -115,13 +115,18 @@ $(function () {
 					i;                                                          
 																				
 				for (i = -11; i <= 0; i++) {                                    
-					data.push({                                                 
-						x: time + i * 1000,                                     
-						y: Math.random()                                        
+					data.push({
+						x: time + i * 1000,
+						y: Math.random()
 					});                                                         
 				}                                                               
 				return data;                                                    
-			})()
+			})(),
+			marker: {
+                lineWidth: 1,
+                lineColor: 'red',
+                fillColor: 'white'
+            }
         }]
     });
     
