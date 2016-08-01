@@ -41,7 +41,9 @@
 				<div class="left col-md-12 col-lg-12 col-sm-12">
 					<div class="topH">
 						<h1 style="	position: absolute;top: 0;">[ 设备类型分布 ]</h1></div>
-					<div class="Hchart"></div>
+					<div id="device_chart" class="Hchart">
+						<%@include file="/ems/bigscreen_show/chart/device_char_div.jsp"%>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-6 col-lg-6 col-sm-6">
@@ -70,7 +72,7 @@
 					<div class="content">
 						<div class="floater topLeft"></div>
 						<div class="floater topRight"></div>
-						<div class="floater bottomLeft">
+						<div id="watch_chart" class="floater bottomLeft">
 <%-- 							<iframe src="${basePath}/ems/bigscreen_show/chartShowAction/watch_chart.action" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" ></iframe> --%>
 							<%@include file="/ems/bigscreen_show/chart/watch_chart_div.jsp"%>
 						</div>
@@ -84,7 +86,7 @@
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div id="spline_chart" class="topH_right">
 						<h1>[ 胖ap激活率统计 ]</h1></div>
-					<div id="watch_chart" class="Hchart">
+					<div id="spline_chart" class="Hchart">
 <%-- 						<iframe src="${basePath}/ems/bigscreen_show/chartShowAction/spline_chart.action" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" ></iframe> --%>
 						<%@include file="/ems/bigscreen_show/chart/spline_chart_div.jsp"%>
 					</div>
@@ -97,7 +99,9 @@
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
 						<h1>[ 爱wifi热点类型分布 ]</h1></div>
-					<div class="Hchart"></div>
+					   <div id="awifi_chart" class="Hchart">
+						 <%@include file="/ems/bigscreen_show/chart/awifi_char_div.jsp"%>
+					   </div>
 				</div>
 			</div>
 			
