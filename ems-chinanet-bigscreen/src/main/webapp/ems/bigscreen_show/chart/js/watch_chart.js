@@ -52,7 +52,7 @@ $(function () {
             minorTickWidth: 1,
             minorTickLength: 10,
             minorTickPosition: 'inside',
-            minorTickColor: 'white',
+            minorTickColor: '',
             tickPixelInterval: 30,
             tickWidth: 2,
             tickPosition: 'inside',

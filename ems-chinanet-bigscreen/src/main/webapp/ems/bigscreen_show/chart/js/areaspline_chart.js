@@ -24,7 +24,7 @@ $(function () {
 	    		            chart.lbl.destroy();
 	    		        }
 	    		        var label = '时间:'+now+'<br>正常:'+a+'<br>故障:'+b+'<br>离线:'+c;
-	    		        chart.lbl = chart.renderer.label(label, 15, 40)
+	    		        chart.lbl = chart.renderer.label(label, 15, 0)
 	    	            .attr({
 	    	                padding: 5,
 	    	                r: 5,

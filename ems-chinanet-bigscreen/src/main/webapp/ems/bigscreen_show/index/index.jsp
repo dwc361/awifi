@@ -70,7 +70,7 @@
 					<div class="content">
 						<div class="floater topLeft"></div>
 						<div class="floater topRight"></div>
-						<div class="floater bottomLeft">
+						<div id="watch_chart" class="floater bottomLeft">
 <%-- 							<iframe src="${basePath}/ems/bigscreen_show/chartShowAction/watch_chart.action" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" ></iframe> --%>
 							<%@include file="/ems/bigscreen_show/chart/watch_chart_div.jsp"%>
 						</div>
@@ -84,7 +84,7 @@
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div id="spline_chart" class="topH_right">
 						<h1>[ 胖ap激活率统计 ]</h1></div>
-					<div id="watch_chart" class="Hchart">
+					<div id="spline_chart" class="Hchart">
 <%-- 						<iframe src="${basePath}/ems/bigscreen_show/chartShowAction/spline_chart.action" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" ></iframe> --%>
 						<%@include file="/ems/bigscreen_show/chart/spline_chart_div.jsp"%>
 					</div>

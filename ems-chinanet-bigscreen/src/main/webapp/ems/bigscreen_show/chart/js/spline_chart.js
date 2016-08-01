@@ -15,12 +15,33 @@ $(function () {
 							y = Math.random();
 						series.addPoint([x, y], true, true);
 						series1.addPoint([x, y], true, true);
+						
+						var now = getDateTime(new Date());
+						var a = Math.floor(Math.random()*10000+1);
+						var b = Math.floor(Math.random()*10000+1);
+						var c = Math.floor(Math.random()*10000+1);
+						var chart = $('#spline_div').highcharts();
+	    		        if (chart.lbl) {
+	    		            chart.lbl.destroy();
+	    		        }
+	    		        var label = '时间:'+now+'<br>已激活设备:'+a+'<br>已激活率:'+b+'%';
+	    		        chart.lbl = chart.renderer.label(label, 15, 0)
+	    	            .attr({
+	    	                padding: 5,
+	    	                r: 5,
+	    	                fill: 'transparent',
+	    	                zIndex: 5
+	    	            })
+	    	            .css({
+	    	                color: 'white'
+	    	            })
+	    	            .add();
 					}, 1000);
 				}                                                               
 			}
         },
         title: {
-            text: '胖AP激活率统计图'
+            text: ''
         },
         subtitle: {
             text: ''
@@ -40,60 +61,25 @@ $(function () {
         }],
         yAxis: [{ // Primary yAxis
         	title: {
-                text: '已激活设备'
+                text: ''
             },
             min: 0,
-            max: 1,
+            max: 2,
             labels: {
                 formatter: function () {
-                	return this.value;
+                	return '';
                 }
             },
-            gridLineColor: '',
-            lineWidth: 1,
-        }, { // Secondary yAxis
-        	title: {
-                text: '已激活率'
-            },
-            min: 0,
-            max: 1,
-            labels: {
-                formatter: function () {
-                    return this.value;
-                }
-            },
-            gridLineColor: '',
-            lineWidth: 1,
-            opposite: true
+            gridLineColor: ''
         }],
         credits: { // 版权信息
             enabled: false
         },
         tooltip: {
-        	formatter: function () {
-                var s = '<b>' + this.x + '</b>';
-                $.each(this.points, function () {
-	                //console.log(this);
-                    s += '<br/>' + this.series.name + ': ' + this.y + this.series.tooltipOptions.valueSuffix;
-                });
-                return s;
-            },
-            positioner: function () {
-                return { x: 100, y: 120 };
-            },
-            shared: true,
-            shadow: false,
-            borderWidth: 0,
-            backgroundColor: 'transparent'
+        	enabled: false
         },
         legend: { // 图例
-            layout: 'vertical',
-            align: 'left',
-            x: 80,
-            verticalAlign: 'top',
-            y: 55,
-            floating: true,
-            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'
+        	enabled: true
         },
         series: [{
             name: '已激活设备',
@@ -127,7 +113,7 @@ $(function () {
         }, {
             name: '已激活率',
             type: 'spline',
-            yAxis: 1,
+            yAxis: 0,
             pointStart: Date.UTC(y, m, d, 0), // 开始时间：y年m月d日0时
             pointInterval: 3600 * 1000, // 每隔1小时
             data: (function() {
