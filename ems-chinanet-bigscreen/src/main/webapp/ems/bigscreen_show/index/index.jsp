@@ -41,7 +41,9 @@
 				<div class="left col-md-12 col-lg-12 col-sm-12">
 					<div class="topH">
 						<h1 style="	position: absolute;top: 0;">[ 设备类型分布 ]</h1></div>
-					<div class="Hchart"></div>
+					<div id="device_chart" class="Hchart">
+						<%@include file="/ems/bigscreen_show/chart/device_char_div.jsp"%>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-6 col-lg-6 col-sm-6">
@@ -97,7 +99,9 @@
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
 						<h1>[ 爱wifi热点类型分布 ]</h1></div>
-					<div class="Hchart"></div>
+					<div id="awifi_chart" class="Hchart">
+						<%@include file="/ems/bigscreen_show/chart/awifi_char_div.jsp"%>
+					</div>
 				</div>
 			</div>
 			
