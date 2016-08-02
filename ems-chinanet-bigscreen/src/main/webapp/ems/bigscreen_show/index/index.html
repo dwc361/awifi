@@ -11,36 +11,67 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/screen.css" />
 		<!--以下是js-->
-		<script src="js/jquery.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/highcharts.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/highcharts-more.js" type="text/javascript" charset="utf-8"></script>
 
 	</head>
 
 	<body scrolling="no">
 
-		<!--<svg style="width: 100%;height: 100%;" xmlns="http://www.w3.org/2000/svg" version="1.1">
-			<path d="m640,0 L0,1792 L2560,1600 L640,1792 Z" fill="red" />
-			<path d="m640,1792 L1920,1792 L2560,2560 L0,2560 L640,1792 Z" fill="red" />
-
-		</svg>
-		<svg id="svgFloor">
-			<path id="path_id" fill="red"></path>
-		</svg>-->
-		<!--<svg class="bgImg"></svg>-->
-
 		<div class="toushi"><img src="img/floor.png" alt="" /></div>
 
-		<div class="container">
+		<div class="container" ng-app="myApp">
 			<div class="col-md-3 col-lg-3 col-sm-3">
 				<div class="left col-md-12 col-lg-12 col-sm-12">
 					<div class="topH">
 						<h1>[ 设备状态统计 ]</h1></div>
-					<div class="Hchart"></div>
+					<div class="Hchart">
+						<!--<script type="text/javascript" src="${basePath}/ems/bigscreen_show/chart/js/areaspline_chart.js"></script>-->
+						<div id="areaspline_div" style="width:100%; height:100%;"></div>
+					</div>
 				</div>
 				<div class="left col-md-12 col-lg-12 col-sm-12">
 					<div class="topH">
 						<h1 style="	position: absolute;top: 0;">[ 设备类型分布 ]</h1></div>
-					<div class="Hchart"></div>
+					<div class="Hchart" ui-view="chart_2">
+						<div id="textname">
+							<p>设备类型数为当前地区的当前在线数,..</p>
+							<ul style="font-size: 1.4rem;">
+								<li> <i style="background: #367bdb;"></i>胖AP：32425438 <span></span></li>
+								<li><i style="background: #d9a831;"></i>瘦AP：783924734 <span></span></li>
+								<li><i style="background: #42aeb8;"></i>ac ：7837483p <span></span></li>
+								<li><i style="background: #df5964;"></i>热点 ：3743473 <span></span></li>
+							</ul>
+
+						</div>
+						<!-- 柱状图 -->
+						<div id="deviceDistributeChart"></div>
+						<!-- 前 -->
+						<div id="chartTwo">
+							<svg width="100%" height="100%">
+								<g transform="translate(100,100)">
+									<polygon points="8,6 46,42 46,54.4 8,36" style="fill:#367bdb;stroke:#000000;stroke-width:0" />
+									<polygon points="8,46 46,62 46,74 8,70" style="fill:#d9a831;stroke:#000000;stroke-width:0" />
+									<polygon points="8,78 46,81 46,93 8,100" style="fill:#42aeb8;stroke:#000000;stroke-width:0" />
+									<polygon points="8,108 46,101 46,113 8,138" style="fill:#df5964;stroke:#000000;stroke-width:0" />
+								</g>
+							</svg>
+							<div id="deviceDistributeChart1" style="position:absolute;left:-120px;top:0px;padding:0px;margin:0px;width:800px;height: 400px;">
+								<svg width="100%" height="100%">
+									<g transform="translate(100,100)">
+										<polygon points="8,5 600,5 1000,140 8,140" style="fill:#050507;stroke:#000000;stroke-width:0">
+											<animateMotion path="M 0 0 L 1000 0" dur="5s" fill="freeze" />
+											<animate attributeType="CSS" attributeName="opacity" from="1" to="1" dur="5s" repeatCount="1" />
+											<animateTransform attributeName="transform" attributeType="XML" type="translate" from="1" to="100" additive="sum" begin="2s" dur="2s" fill="freeze" />
+										</polygon>
+									</g>
+								</svg>
+							</div>
+						</div>
+						<div style="position:absolute;left:162px;top:205.9px;padding:0px;margin:0px;width:12px;height:2px; background:#000; color:#FFF;"></div>
+					</div>
 				</div>
 			</div>
 			<div class="col-md-6 col-lg-6 col-sm-6">
@@ -67,13 +98,25 @@
 						</div>
 					</header>
 					<div class="content">
-						<div class="floater topLeft"></div>
-						<div class="floater topRight"></div>
-						<div class="floater bottomLeft"></div>
-						<div class="floater bottomRight"></div>
+						<div class="floater topLeft" ui-view="chart_3"></div>
+						<div class="floater topRight" ui-view="chart_4"></div>
+						<div class="floater bottomLeft" ui-view="chart_5">
+							<div id="dashboard">
+								<img src="../chart/image/watch_chart.png" />
+								<div id="watch_div"></div>
+							</div>
+						</div>
+						<div class="floater bottomRight" ui-view="chart_6"></div>
 
 						<div id="map">
-							<incloud></incloud>
+							<div class="items" id="Item1">
+								<a href="javascript:;" class="fold"></a>
+								<div class="itemCon mymap">
+									<div class="map-bg" id="ChinaMapBg"></div>
+									<div class="map-grand"></div>
+									<div class="map-d" id="ChinaMap1"></div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -81,27 +124,83 @@
 			<div class="col-md-3 col-lg-3 col-sm-3">
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
-						<h1 >[ 胖ap激活率统计 ]</h1></div>
-					<div class="Hchart"></div>
+						<h1>[ 胖ap激活率统计 ]</h1></div>
+					<div class="Hchart" ui-view="chart_7"></div>
 				</div>
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
 						<h1 style="position:absolute;top: 0;">[ 爱wifi热点类型排名 ]</h1></div>
-					<div class="Hchart"></div>
+					<div class="Hchart" ui-view="chart_8"></div>
 				</div>
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
 						<h1 style="position:absolute;top: 0;">[ 爱wifi热点类型分布 ]</h1></div>
-					<div class="Hchart"></div>
+					<div class="Hchart" ui-view="chart_9"></div>
 				</div>
 			</div>
-			
-			 <footer class="news">
-			 	<span>［2015-09-23 06:41:28］互联网作为20世纪最伟大的发明之一，把世界变成了“地球村”。但是，这块“新疆域”</span>
-			 </footer>
+
+			<footer class="news">
+				<span>［2015-09-23 06:41:28］互联网作为20世纪最伟大的发明之一，把世界变成了“地球村”。但是，这块“新疆域”</span>
+			</footer>
 		</div>
 
 		<script src="js/screen.js" type="text/javascript" charset="utf-8"></script>
+		<!--以下是map-->
+		<script type="text/javascript" src="moduel/moduel_map/js/lib/raphael-min.js"></script>
+		<script type="text/javascript" src="moduel/moduel_map/js/res/chinaMapConfig.js"></script>
+		<script type="text/javascript" src="moduel/moduel_map/js/res/worldMapConfig.js"></script>
+		<script type="text/javascript" src="moduel/moduel_map/js/map.js"></script>
+
+		<!--以下map-->
+		<script type="text/javascript" src="js/map/Datas.js"></script>
+		<script type="text/javascript" src="js/map/Colors.js"></script>
+		<script type="text/javascript" src="js/map/Wave.js"></script>
+		<script type="text/javascript" src="js/map/waveController.js"></script>
+
+		<!--以下是<chart_1></chart_1>-->
+		<script src="js/chart_1/areaspline_chart.js" type="text/javascript" charset="utf-8"></script>
+
+		<!--以下是chart_2-->
+		<script src="js/chart_2/device_char_div.js" type="text/javascript" charset="utf-8"></script>
+		
+		<!--以下是仪表盘-->
+		<script src="js/dashboard/watch_chart.js" type="text/javascript" charset="utf-8"></script>
+		
+		
+		
+
+		<script type="text/javascript">
+			$(function() {
+				// 自定义宽高
+				var mapWidth = 1000;
+				var mapHeight = mapWidth * 0.8;
+
+				$('#ChinaMap1').SVGMap({
+					mapName: 'china',
+					mapWidth: mapWidth,
+					mapHeight: mapHeight,
+					stateInitColor: "",
+					strokeColor: "#6F6BD7",
+					strokeWidth: 1,
+					//  hoverCallback:function(stateData,obj){
+					//  	console.log(stateData);
+					//  	console.log(obj);
+					//  },
+					stateHoverColor: "#d62a37"
+						// showTip:0
+				});
+				$('#ChinaMapBg').SVGMap({
+					mapName: 'china',
+					mapWidth: mapWidth,
+					mapHeight: mapHeight,
+					strokeColor: "#2A0A6D",
+					stateInitColor: "#2A0A6D",
+					stateHoverColor: "#2A0A6D",
+					showTip: 0
+				});
+				$('#ChinaMapBg,#ChinaMap1').css('position', "absolute");
+			});
+		</script>
 	</body>
 
 </html>

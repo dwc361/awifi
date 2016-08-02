@@ -3,6 +3,15 @@ html {
 	font-family: "微软雅黑";
 }
 
+a {
+	color: #0e4279;
+	-moz-transition: color 0.3s ease 0s;
+}
+
+a:hover {
+	color: #5B636A;
+}
+
 
 /*初始码*/
 
@@ -158,28 +167,33 @@ body {
 	height: 80%;
 	padding: 0;
 }
-.toushi{
-position: fixed;
-height:30%;
-width: 100%;
-bottom:0;
-padding: 0;
-perspective:130;
--webkit-perspective:76; /* Safari and Chrome */
-/*background:red;*/
-overflow: hidden;
-	}
-	.toushi img{
-		display: inline-block;
-		/*opacity:1;*/
-		overflow: hidden;
-position: absolute;
-width:100%;
-height:200%;
-border: 1px solid #fff;
-transform: rotateX(56deg);
--webkit-transform: rotateX(10deg); /* Safari and Chrome */
-	}
+
+.toushi {
+	position: fixed;
+	height: 30%;
+	width: 100%;
+	bottom: 0;
+	padding: 0;
+	perspective: 130;
+	-webkit-perspective: 76;
+	/* Safari and Chrome */
+	/*background:red;*/
+	overflow: hidden;
+}
+
+.toushi img {
+	display: inline-block;
+	/*opacity:1;*/
+	overflow: hidden;
+	position: absolute;
+	width: 100%;
+	height: 200%;
+	border: 1px solid #fff;
+	transform: rotateX(56deg);
+	-webkit-transform: rotateX(10deg);
+	/* Safari and Chrome */
+}
+
 
 /*.bgImg {
 	width: 100%;
@@ -187,11 +201,24 @@ transform: rotateX(56deg);
 	background-image: url(../img/mapbackground.png);
 	background-repeat: round no-repeat;
 	/*background-size: 100% 30%*/
-	/*position: fixed;
+
+
+/*position: fixed;
 	bottom: 0;
 	perspective:150;
 	-webkit-perspective:150; /* Safari and Chrome */
+
+
 /*}*/
+
+#map {
+	width: 100%;
+	height: 100%;
+	padding: 3rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+}
 
 .container .right {
 	height: 30%;
@@ -315,44 +342,47 @@ header div {
 h1 {
 	display: inline-block;
 	width: 100%;
-	height:4.2rem;
+	height: 4.2rem;
 	position: absolute;
 	bottom: 0;
-  background-image: -moz-linear-gradient( 0deg, rgba(255,255,255,0.2) 0%, rgba(172,172,173,0.23) 2%, rgb(89,89,90) 50%, rgba(172,172,173,0.06) 97%, rgba(255,255,255,0) 100%);
-  background-image: -webkit-linear-gradient( 0deg, rgba(255,255,255,0.2) 0%, rgba(172,172,173,0.23) 2%, rgb(89,89,90) 50%, rgba(172,172,173,0.06) 97%, rgba(255,255,255,0) 100%);
-  background-image: -ms-linear-gradient( 0deg, rgba(255,255,255,0.2) 0%, rgba(172,172,173,0.23) 2%, rgb(89,89,90) 50%, rgba(172,172,173,0.06) 97%, rgba(255,255,255,0) 100%);
-color: #fff;
+	background-image: -moz-linear-gradient( 0deg, rgba(255, 255, 255, 0.2) 0%, rgba(172, 172, 173, 0.23) 2%, rgb(89, 89, 90) 50%, rgba(172, 172, 173, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	background-image: -webkit-linear-gradient( 0deg, rgba(255, 255, 255, 0.2) 0%, rgba(172, 172, 173, 0.23) 2%, rgb(89, 89, 90) 50%, rgba(172, 172, 173, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	background-image: -ms-linear-gradient( 0deg, rgba(255, 255, 255, 0.2) 0%, rgba(172, 172, 173, 0.23) 2%, rgb(89, 89, 90) 50%, rgba(172, 172, 173, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	color: #fff;
 	line-height: 4.2rem;
 	font-size: 1.6rem;
 	text-indent: 3rem;
 }
-.Hchart{
-	padding: 1rem;
+
+.Hchart {
+	padding: 3rem;
 }
-.topH_right{
-		width: 100%;
+
+.topH_right {
+	width: 100%;
 	height: 27%;
 	/*background: red;*/
 	position: relative;
 }
-.topH_right h1{
-		display: inline-block;
+
+.topH_right h1 {
+	display: inline-block;
 	width: 100%;
-	height:4.2rem;
+	height: 4.2rem;
 	position: absolute;
 	bottom: 0;
-  background-image: -moz-linear-gradient( 0deg, rgba(255,255,255,0.2) 0%, rgba(172,172,173,0.23) 2%, rgb(89,89,90) 50%, rgba(172,172,173,0.06) 97%, rgba(255,255,255,0) 100%);
-  background-image: -webkit-linear-gradient( 0deg, rgba(255,255,255,0.2) 0%, rgba(172,172,173,0.23) 2%, rgb(89,89,90) 50%, rgba(172,172,173,0.06) 97%, rgba(255,255,255,0) 100%);
-  background-image: -ms-linear-gradient( 0deg, rgba(255,255,255,0.2) 0%, rgba(172,172,173,0.23) 2%, rgb(89,89,90) 50%, rgba(172,172,173,0.06) 97%, rgba(255,255,255,0) 100%);
-
-color: #fff;
+	background-image: -moz-linear-gradient( 0deg, rgba(255, 255, 255, 0.2) 0%, rgba(172, 172, 173, 0.23) 2%, rgb(89, 89, 90) 50%, rgba(172, 172, 173, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	background-image: -webkit-linear-gradient( 0deg, rgba(255, 255, 255, 0.2) 0%, rgba(172, 172, 173, 0.23) 2%, rgb(89, 89, 90) 50%, rgba(172, 172, 173, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	background-image: -ms-linear-gradient( 0deg, rgba(255, 255, 255, 0.2) 0%, rgba(172, 172, 173, 0.23) 2%, rgb(89, 89, 90) 50%, rgba(172, 172, 173, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	color: #fff;
 	line-height: 4.2rem;
 	font-size: 1.6rem;
 	text-indent: 3rem;
 }
-.news{
+
+.news {
 	position: fixed;
-	bottom:0;
+	bottom: 0;
 	width: 100%;
 	height: 6.2rem;
 	color: #fff;
@@ -360,27 +390,205 @@ color: #fff;
 	text-align: center;
 	font-weight: normal;
 }
-.news span{
+
+.news span {
 	display: inline-block;
-		width: 100%;
-	height:4.8rem;
+	width: 100%;
+	height: 4.8rem;
 	line-height: 4.8rem;
-  background-image: -moz-linear-gradient( 0deg, rgba(255,255,255,0) 0%, rgba(159,175,222,0.04) 2%, rgb(62,94,189) 50%, rgba(159,175,222,0.06) 97%, rgba(255,255,255,0) 100%);
-  background-image: -webkit-linear-gradient( 0deg, rgba(255,255,255,0) 0%, rgba(159,175,222,0.04) 2%, rgb(62,94,189) 50%, rgba(159,175,222,0.06) 97%, rgba(255,255,255,0) 100%);
-  background-image: -ms-linear-gradient( 0deg, rgba(255,255,255,0) 0%, rgba(159,175,222,0.04) 2%, rgb(62,94,189) 50%, rgba(159,175,222,0.06) 97%, rgba(255,255,255,0) 100%);
-vertical-align:middle;
+	background-image: -moz-linear-gradient( 0deg, rgba(255, 255, 255, 0) 0%, rgba(159, 175, 222, 0.04) 2%, rgb(62, 94, 189) 50%, rgba(159, 175, 222, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	background-image: -webkit-linear-gradient( 0deg, rgba(255, 255, 255, 0) 0%, rgba(159, 175, 222, 0.04) 2%, rgb(62, 94, 189) 50%, rgba(159, 175, 222, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	background-image: -ms-linear-gradient( 0deg, rgba(255, 255, 255, 0) 0%, rgba(159, 175, 222, 0.04) 2%, rgb(62, 94, 189) 50%, rgba(159, 175, 222, 0.06) 97%, rgba(255, 255, 255, 0) 100%);
+	vertical-align: middle;
 }
+
 .news span:after {
 	content: "";
-	display:inline-block;
-    width: 0;
-    height:0;
-    border-left: 15px solid transparent;
-    border-right: 15px solid transparent;
-    border-top: 20px solid #3e5ebd;
-    position: absolute;
-    bottom: 0;
-    left: -webkit-calc(50%);
-   overflow:hidden;
-   text-align: center;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-left: 15px solid transparent;
+	border-right: 15px solid transparent;
+	border-top: 20px solid #3e5ebd;
+	position: absolute;
+	bottom: 0;
+	left: -webkit-calc(50%);
+	overflow: hidden;
+	text-align: center;
+}
+
+
+/* 提示自定义 */
+
+.mapTip {
+	display: none;
+	position: absolute;
+	padding: 8px;
+	background: #fff;
+	border: 1px solid #aaa;
+	-moz-border-radius: 4px;
+	-webkit-border-radius: 4px;
+	border-radius: 4px;
+	-webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
+	box-shadow: 0 5px 10px rgba(0, 0, 0, .3);
+	font-size: 12px;
+	font-family: Tahoma;
+	color: #333;
+}
+
+.mapTip .arrow,
+.mapTip .arrowMask {
+	position: absolute;
+	width: 0;
+	height: 0;
+	border-color: transparent;
+	border-style: solid;
+}
+
+.mapTip .arrow {
+	bottom: -7px;
+	left: 50%;
+	margin-left: -7px;
+	border-width: 7px;
+	border-top-color: #999;
+	border-top-color: rgba(0, 0, 0, .25);
+	border-bottom-width: 0;
+}
+
+.mapTip .arrowMask {
+	bottom: 1px;
+	border-width: 6px;
+	margin-left: -6px;
+	border-top-color: #fff;
+	border-bottom-width: 0;
+}
+
+.mapInfo i {
+	display: inline-block;
+	width: 15px;
+	height: 15px;
+	margin-top: 5px;
+	line-height: 15px;
+	font-style: normal;
+	background: #aeaeae;
+	color: #fff;
+	font-size: 11px;
+	font-family: Tahoma;
+	-webkit-border-radius: 15px;
+	border-radius: 15px;
+	text-align: center
+}
+
+.mapInfo i.active {
+	background: #E27F21;
+}
+
+.mapInfo span {
+	padding: 0 5px 0 3px;
+}
+
+.mapInfo b {
+	font-weight: normal;
+	color: #2770B5
+}
+
+.mymap {
+	position: relative;
+}
+
+.map-bg {
+	position: absolute;
+	margin: 0 auto;
+	position: absolute;
+	margin: 0 auto;
+	left: 30px;
+	right: 0px;
+	top: 20px;
+	bottom: 0px;
+}
+
+.map-d {
+	background-image: url(../img/map.png);
+	background-size: cover;
+	/*cover*/
+	background-position: -2px 2px;
+	position: absolute;
+	margin: 0 auto;
+	left: 0px;
+	right: 0px;
+	top: 0px;
+	bottom: 0px;
+}
+
+#textname {
+	position: absolute;
+	left: 49px;
+	top: 100px;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 175px;
+	color: #fff;
+}
+
+#textname li {
+	line-height: 2.8rem;
+}
+
+#textname i {
+	display: inline-block;
+	margin-right: 1rem;
+	width: 1rem;
+	height: 1rem;
+	border-radius: 50%;
+}
+
+#textname span {
+	width: 26rem;
+	height: 1px;
+	display: block;
+	background-image: -moz-linear-gradient( 0deg, rgb(59, 116, 197) 0%, rgba(30, 58, 99, 0.61) 65%, rgba(14, 27, 45, 0.5) 84%, rgba(0, 0, 0, 0) 100%);
+	background-image: -webkit-linear-gradient( 0deg, rgb(59, 116, 197) 0%, rgba(30, 58, 99, 0.61) 65%, rgba(14, 27, 45, 0.5) 84%, rgba(0, 0, 0, 0) 100%);
+	background-image: -ms-linear-gradient( 0deg, rgb(59, 116, 197) 0%, rgba(30, 58, 99, 0.61) 65%, rgba(14, 27, 45, 0.5) 84%, rgba(0, 0, 0, 0) 100%);
+}
+
+#deviceDistributeChart {
+	position: absolute;
+	left: 4.78rem;
+	top: 21.68rem;
+	padding: 0px;
+	margin: 0px;
+	width: 80%;
+	height: 7.2rem;
+	margin-top: 2rem;
+}
+
+#chartTwo {
+	position: absolute;
+	left: -4.2rem;
+	top: 202px;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	height: 245px;
+}
+
+#dashboard {
+	position: fixed;
+	z-index: 1000;
+	width: 9%;
+	height: 18%;
+	margin: 0 0 0 0;
+}
+
+#dashboard img {
+	border: 0;
+	width: 100%;
+	height: 100%;
+}
+
+#watch_div {
+	width: 130%;
+	height: 130%;
+	margin: -105% 0 0 -15%;
 }
