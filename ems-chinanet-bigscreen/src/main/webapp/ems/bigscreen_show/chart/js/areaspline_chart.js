@@ -2,12 +2,11 @@ now = new Date(); //定义一个时间对象
 y = now.getFullYear(); //获取完整的年份(4位,1970-????)
 m = now.getMonth(); //获取当前月份(0-11,0代表1月)
 d = now.getDate(); //获取当前日(1-31)
+h = now.getHours(); //时  
 $(function () {
-	var time = (new Date()).getTime();                                                          
-
 	var x_arr = new Array();
-	for (i = -11; i <= 0; i++) {
-		x_arr.push(time + i * 1000);
+	for (i = 0; i <= h; i++) {
+		x_arr.push(Date.UTC(y, m, d, i));
 	}
 	
 	$.ajax({ 
@@ -42,7 +41,8 @@ function show_chart(data) {
 				load: function() {
 					var series = this.series[0];                                
 					setInterval(function() {
-						var x = (new Date()).getTime();
+						h++;
+						var x = Date.UTC(y, m, d, h);
 						var x_arr = new Array();
 						x_arr.push(x);
 						
@@ -88,7 +88,7 @@ function show_chart(data) {
 						});
 						
 						
-					}, 1000);
+					}, 3000);
 				}                                                               
 			} 
         },
@@ -109,7 +109,7 @@ function show_chart(data) {
             	second: '%H:%M:%S',
             	minute: '%H:%M',
             	hour: '%H:%M',
-            	day: '%e. %b',
+            	day: '%Y.%m.%d %H:%M',
             	week: '%e. %b',
             	month: '%b \'%y',
             	year: '%Y'
