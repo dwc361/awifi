@@ -3,11 +3,10 @@ y = now.getFullYear(); //获取完整的年份(4位,1970-????)
 m = now.getMonth(); //获取当前月份(0-11,0代表1月)
 d = now.getDate(); //获取当前日(1-31)
 $(function () {
-	var data = [],                                                  
-	time = (new Date()).getTime();                                                          
+	var time = (new Date()).getTime();                                                          
 
 	var x_arr = new Array();
-	for (var i = 0; i < 12; i++) {
+	for (i = -11; i <= 0; i++) {
 		x_arr.push(time + i * 1000);
 	}
 	
