@@ -38,7 +38,7 @@ $(function () {
             }, {
 				backgroundColor: 'transparent'
             }, {
-                backgroundColor: '#DDD',
+                backgroundColor: 'transparent',
                 borderWidth: 0,
                 outerRadius: '105%',
                 innerRadius: '103%'
@@ -54,16 +54,17 @@ $(function () {
             minorTickPosition: 'inside',
             minorTickColor: '',
             tickPixelInterval: 30,
-            tickWidth: 2,
+            tickWidth: 0,
             tickPosition: 'inside',
             tickLength: 10,
             tickColor: 'red',
+            lineWidth: 0,
             labels: { // 仪表盘刻度值
                 step: 2,
                 rotation: 'auto',
                 style: {
                 	//fontWeight: 'bold',
-                    color: 'white'
+                    color: 'transparent'
                 }
             },
             title: {
@@ -116,14 +117,30 @@ $(function () {
     rect.attr("fill", "transparent");
     //console.log(rect);
     
+    // 图表中心设置成红色
+    var pointer_circle = $("#watch_div").find("g .highcharts-series").find("circle");
+    pointer_circle.attr("fill", "red");
+    
+    $("#highcharts-7").find("path").attr("fill", "transparent")
+    
     // 指针设置成红色
     var pointer_path = $("#watch_div").find("g .highcharts-series").find("path");
     pointer_path.attr("fill", "red");
     
-    // 图表中心设置成红色
-    var pointer_circle = $("#watch_div").find("g .highcharts-series").find("circle");
-    pointer_circle.attr("fill", "red");
-	
+
+	   
     // body背景颜色设置成透明
     document.body.style.backgroundColor="transparent";
+    
+	$("#highcharts-7").css({
+		"position": "relative",
+		"overflow": "hidden",
+		"width": "229px", 
+		"height": "191px",
+		"top":"7.2rem",
+		"left":"1.2rem",
+		"text-align": "left", 
+		"line-height": "normal" 
+  
+ })
 });

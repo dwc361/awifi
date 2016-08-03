@@ -99,6 +99,7 @@
                     }, 150), opt.showTip) {
                         opt.timeTimer = 1, 0 == $("#MapTip").length && $(document.body).append('<div id="MapTip" class="mapTip"><div class="con"></div><div class="arrow"><div class="arrowMask"></div></div></div'), $("#MapTip .con").html(opt.mapTipHtml(stateData, b));
                         var c = new offsetXY(a);
+                        console.log(c);
                         $("#MapTip").css({
                             width: opt.mapTipWidth || "auto",
                             height: opt.mapTipHeight || "auto",

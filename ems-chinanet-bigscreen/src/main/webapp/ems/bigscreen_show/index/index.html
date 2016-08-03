@@ -11,7 +11,8 @@
 		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
 		<link rel="stylesheet" type="text/css" href="css/screen.css" />
 		<!--以下是js-->
-		<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>
+		<!--<script src="js/jquery-1.7.2.min.js" type="text/javascript" charset="utf-8"></script>-->
+		<script src="js/jquery.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/highcharts.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/highcharts-more.js" type="text/javascript" charset="utf-8"></script>
@@ -20,7 +21,10 @@
 
 	<body scrolling="no">
 
-		<div class="toushi"><img src="img/floor.png" alt="" /></div>
+		<div class="toushi"><img src="img/floor.png" alt="" />
+		<!--<img id="logo" src="img/logo.png" alt="" />-->
+		</div>
+		
 
 		<div class="container" ng-app="myApp">
 			<div class="col-md-3 col-lg-3 col-sm-3">
@@ -29,6 +33,14 @@
 						<h1>[ 设备状态统计 ]</h1></div>
 					<div class="Hchart">
 						<!--<script type="text/javascript" src="${basePath}/ems/bigscreen_show/chart/js/areaspline_chart.js"></script>-->
+						<div id="textname" style="top: 12rem;">
+							<ul style="font-size: 1.4rem;">
+								<li> <i style="background: #367bdb;"></i>正常：<i id="areaspline1">343242424</i> <span></span></li>
+								<li><i style="background: #d9a831;"></i>故障：<i id="areaspline2">54654645654</i><span></span></li>
+								<li><i style="background: #42aeb8;"></i>离线：<i id="areaspline3">3242435</i><span></span></li>
+							</ul>
+
+						</div>
 						<div id="areaspline_div" style="width:100%; height:100%;"></div>
 					</div>
 				</div>
@@ -37,12 +49,12 @@
 						<h1 style="	position: absolute;top: 0;">[ 设备类型分布 ]</h1></div>
 					<div class="Hchart" ui-view="chart_2">
 						<div id="textname">
-							<p>设备类型数为当前地区的当前在线数,..</p>
+							<p style="color: #586881">设备类型数为当前地区的当前在线数,..</p>
 							<ul style="font-size: 1.4rem;">
-								<li> <i style="background: #367bdb;"></i>胖AP：32425438 <span></span></li>
-								<li><i style="background: #d9a831;"></i>瘦AP：783924734 <span></span></li>
-								<li><i style="background: #42aeb8;"></i>ac ：7837483p <span></span></li>
-								<li><i style="background: #df5964;"></i>热点 ：3743473 <span></span></li>
+								<li> <i style="background: #367bdb;"></i>胖AP：423432432432 <span></span></li>
+								<li><i style="background: #d9a831;"></i>瘦AP：324324324 <span></span></li>
+								<li><i style="background: #42aeb8;"></i>ac ：42345454 <span></span></li>
+								<li><i style="background: #df5964;"></i>热点 ：645634435<span></span></li>
 							</ul>
 
 						</div>
@@ -102,8 +114,9 @@
 						<div class="floater topRight" ui-view="chart_4"></div>
 						<div class="floater bottomLeft" ui-view="chart_5">
 							<div id="dashboard">
-								<img src="../chart/image/watch_chart.png" />
+								
 								<div id="watch_div"></div>
+								<img src="img/yibiao.png" />
 							</div>
 						</div>
 						<div class="floater bottomRight" ui-view="chart_6"></div>
@@ -124,8 +137,10 @@
 			<div class="col-md-3 col-lg-3 col-sm-3">
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
-						<h1>[ 胖ap激活率统计 ]</h1></div>
-					<div class="Hchart" ui-view="chart_7"></div>
+						<h1 style="bottom: -5rem;">[ 胖ap激活率统计 ]</h1></div>
+					<div class="Hchart" ui-view="chart_7">
+						<div id="round_div"></div>
+					</div>
 				</div>
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
@@ -135,7 +150,36 @@
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
 						<h1 style="position:absolute;top: 0;">[ 爱wifi热点类型分布 ]</h1></div>
-					<div class="Hchart" ui-view="chart_9"></div>
+					<div class="Hchart" ui-view="chart_9">
+						<div id="spread">
+							<div class="skillbar clearfix testbar" data-percent="0%">
+								<div class="skillbar-title" style="background: #49b6c0;"><span>学校</span></div>
+								<div class="skillbar-bar" style="background: #49b6c0;"></div>
+								<div id="skill-bar-percenta" class="skill-bar-percent"></div>
+							</div>
+							<div class="skillbar clearfix testbar" data-percent="0%">
+								<div class="skillbar-title" style="background: #00d9bc;"><span>医院</span></div>
+								<div class="skillbar-bar" style="background: #00d9bc;"></div>
+								<div id="skill-bar-percenta" class="skill-bar-percent"></div>
+							</div>
+							<div class="skillbar clearfix testbar" data-percent="0%">
+								<div class="skillbar-title" style="background: #367bdb;"><span>机场</span></div>
+								<div class="skillbar-bar" style="background: #367bdb;"></div>
+								<div id="skill-bar-percenta" class="skill-bar-percent"></div>
+							</div>
+							<div class="skillbar clearfix testbar" data-percent="0%">
+								<div class="skillbar-title" style="background: #d9a831;"><span>酒店</span></div>
+								<div class="skillbar-bar" style="background: #d9a831;"></div>
+								<div id="skill-bar-percenta" class="skill-bar-percent"></div>
+							</div>
+							<div class="skillbar clearfix testbar" data-percent="0%">
+								<div class="skillbar-title" style="background: #ff5f5f;"><span>码头</span></div>
+								<div class="skillbar-bar" style="background: #ff5f5f;"></div>
+								<div id="skill-bar-percenta" class="skill-bar-percent"></div>
+							</div>
+
+						</div>
+					</div>
 				</div>
 			</div>
 
@@ -148,7 +192,6 @@
 		<!--以下是map-->
 		<script type="text/javascript" src="moduel/moduel_map/js/lib/raphael-min.js"></script>
 		<script type="text/javascript" src="moduel/moduel_map/js/res/chinaMapConfig.js"></script>
-		<script type="text/javascript" src="moduel/moduel_map/js/res/worldMapConfig.js"></script>
 		<script type="text/javascript" src="moduel/moduel_map/js/map.js"></script>
 
 		<!--以下map-->
@@ -162,12 +205,18 @@
 
 		<!--以下是chart_2-->
 		<script src="js/chart_2/device_char_div.js" type="text/javascript" charset="utf-8"></script>
-		
+
 		<!--以下是仪表盘-->
 		<script src="js/dashboard/watch_chart.js" type="text/javascript" charset="utf-8"></script>
+
+
+
+		<!--以下是chart_7-->
+		<script src="js/chart_7/round_char_div.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chart_7/highcharts-3d.js" type="text/javascript" charset="utf-8"></script>
 		
-		
-		
+		<!--以下是chart_9-->
+		<script src="js/chart_9/chart_9.js" type="text/javascript" charset="utf-8"></script>
 
 		<script type="text/javascript">
 			$(function() {
@@ -199,8 +248,50 @@
 					showTip: 0
 				});
 				$('#ChinaMapBg,#ChinaMap1').css('position', "absolute");
+				
+				// 每隔1秒钟，滚播中国地图
+				var num = 0;
+				var china_province = [];
+				for (var name in eval("china"+"MapConfig").names) {
+					china_province.push(name);
+				}
+//				var points = [];
+//				var points = [
+//					[1704, 176, "黑龙江"],
+//					[1676, 321 , "吉林"],
+//					[200 , 100 , "点ID：5；注释：园支1"],
+//					[119.480156538 , 28.471343304 , "点ID：5；注释：园支1"],
+//					[119.480156538 , 28.471343304 , "点ID：5；注释：园支1"],
+//					[119.480156538 , 28.471343304 , "点ID：5；注释：园支1"],
+//				]
+//				points.push({
+//					left:1000,
+//					top:400
+//				});
+				setInterval(function () {
+					mapShow(num, china_province);
+					num = num+1;
+					if(num==34) num=0;
+				}, 3000);
 			});
+			
+			function mapShow(i, provinces) {
+				var map_svg = $(".map-d").find(".svggroup").find("svg");
+				var map_path = map_svg.find("path");
+				map_path.attr("fill", "none");
+				$(map_path[i]).attr("fill", "red");
+				$("#MapTipDiv").find(".con").html(eval("china"+"MapConfig").names[provinces[i]]);
+				//$("#MapTipDiv").css("left", points[i][0]+"px");
+				//$("#MapTipDiv").css("top", points[i][1]+"px");
+				$("#MapTipDiv").css("display", "block");
+			}
 		</script>
+		<div id="MapTipDiv" class="mapTip" style="left: 1250px; top: 380px; width: 100px; height: auto; display: none;">
+			<div class="con"></div>
+			<div class="arrow">
+				<div class="arrowMask"></div>
+			</div>
+		</div>
 	</body>
 
 </html>

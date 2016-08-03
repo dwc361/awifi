@@ -69,22 +69,22 @@ function showDeviceDis(dataArray){
             enabled: false
         },
         series: [{
-            name: '<span style="color:white;font-family:simsun;">胖AP</span>',
+            name: '<span style="color:white;font-family:Helvetica;">胖AP</span>',
             color:'#367bdb',
             data: [30]
         },
          {
-             name: '<span style="color:white;font-family:simsun;">瘦AP</span>',
+             name: '<span style="color:white;font-family:Helvetica;">瘦AP</span>',
              color:'#d9a831',
              data: [60]
          },
          {
-             name: '<span style="color:white;font-family:simsun;">AC</span>',
+             name: '<span style="color:white;font-family:Helvetica;">AC</span>',
              color:'#42aeb8',
-             data: [100]
+             data: [80]
          },
          {
-             name: '<span style="color:white;font-family:simsun;">热点</span>',
+             name: '<span style="color:white;font-family:Helvetica;">热点</span>',
              color:'#df5964',
              data: [40]
          }]                              
@@ -180,24 +180,73 @@ function showDeviceDis(dataArray){
             enabled: false
         },
         series: [{
-            name: '<span style="font-size:0px;">胖AP</span>',
-            color:'rgba(0,0,0,0)',
+            name: '<span style="color:white;font-family: Helvetica;">胖AP</span>',
+            color:'#367bdb',
             data: [10]
         },
          {
-             name: '<span style="font-size:0px;">瘦AP</span>',
-             color:'rgba(0,0,0,0)',
+             name: '<span style="color:white;font-family: Helvetica;">瘦AP</span>',
+             color:'#d9a831',
              data: [20]
          },
          {
-             name: '<span style="font-size:0px;">AC</span>',
-             color:'rgba(0,0,0,0)',
+             name: '<span style="color:white;font-family: Helvetica";>AC</span>',
+             color:'#42aeb8',
              data: [20]
          },
          {
-             name: '<span style="font-size:0px;">热点</span>',
-             color:'rgba(0,0,0,0)',
+             name: '<span style="color:white;font-family: Helvetica;">热点</span>',
+             color:'#df5964',
              data: [20]
          }]                              
     }); 
+	 setInterval(function () {
+	        // 胖AP
+	        var chart = $('#deviceDistributeChart').highcharts(),
+	            point,
+	            newVal,
+	            inc;
+	        if (chart) {
+	            point = chart.series[0].points[0];
+	            inc = Math.round((Math.random() - 0.5) * 50);
+	            newVal = point.y + inc;
+	            if (newVal < 0 || newVal > 99) {
+	                newVal = point.y - inc;
+	            }
+	            point.update(newVal);
+	        }
+	        // 瘦AP
+	        chart = $('#deviceDistributeChart').highcharts();
+	        if (chart) {
+	            point = chart.series[1].points[0];
+	            inc = Math.random() - 0.5;
+	            newVal = point.y + inc;
+	            if (newVal < 0 || newVal > 5) {
+	                newVal = point.y - inc;
+	            }
+	            point.update(newVal);
+	        }
+	        //AC
+	         chart = $('#deviceDistributeChart').highcharts();
+	        if (chart) {
+	            point = chart.series[2].points[0];
+	            inc = Math.random() - 0.5;
+	            newVal = point.y + inc;
+	            if (newVal < 0 || newVal > 5) {
+	                newVal = point.y - inc;
+	            }
+	            point.update(newVal);
+	        }
+	        //热点
+	        chart = $('#deviceDistributeChart').highcharts();
+	        if (chart) {
+	            point = chart.series[3].points[0];
+	            inc = Math.random() - 0.5;
+	            newVal = point.y + inc;
+	            if (newVal < 0 || newVal > 5) {
+	                newVal = point.y - inc;
+	            }
+	            point.update(newVal);
+	        }
+	    }, 1000);
 }
