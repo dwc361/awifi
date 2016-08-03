@@ -128,6 +128,7 @@
 									<div class="map-bg" id="ChinaMapBg"></div>
 									<div class="map-grand"></div>
 									<div class="map-d" id="ChinaMap1"></div>
+									<div class="map-d" id="ChinaMap2"></div>
 								</div>
 							</div>
 						</div>
@@ -255,24 +256,13 @@
 				for (var name in eval("china"+"MapConfig").names) {
 					china_province.push(name);
 				}
-//				var points = [];
-//				var points = [
-//					[1704, 176, "黑龙江"],
-//					[1676, 321 , "吉林"],
-//					[200 , 100 , "点ID：5；注释：园支1"],
-//					[119.480156538 , 28.471343304 , "点ID：5；注释：园支1"],
-//					[119.480156538 , 28.471343304 , "点ID：5；注释：园支1"],
-//					[119.480156538 , 28.471343304 , "点ID：5；注释：园支1"],
-//				]
-//				points.push({
-//					left:1000,
-//					top:400
-//				});
+				var R=Raphael("ChinaMap2", 1000+888, 800);
 				setInterval(function () {
 					mapShow(num, china_province);
+					showRect(R, pathPointArr[num], null);
 					num = num+1;
 					if(num==34) num=0;
-				}, 3000);
+				}, 1000);
 			});
 			
 			function mapShow(i, provinces) {
@@ -280,18 +270,58 @@
 				var map_path = map_svg.find("path");
 				map_path.attr("fill", "none");
 				$(map_path[i]).attr("fill", "red");
-				$("#MapTipDiv").find(".con").html(eval("china"+"MapConfig").names[provinces[i]]);
-				//$("#MapTipDiv").css("left", points[i][0]+"px");
-				//$("#MapTipDiv").css("top", points[i][1]+"px");
-				$("#MapTipDiv").css("display", "block");
+			}
+			
+			/**
+	         * 显示(绘制)信息展示框
+	         * @param {Object} R 画布
+	         * @param {Object} point 区域中心点对象 x y name
+	         * @param {Object} val 区域值or值的集合对象
+	         * By Shown: offset should included in configuration items, an object about 'config'
+	         */
+			function showRect(R, point, val) {
+				R.clear();
+				
+				var xx = point.x*2.4+230;
+				var yy = point.y*1.65+35;
+				var name=point.name;
+				var leftRect = {
+					x: xx - 70,
+					y: yy - 50,
+					w: 70,
+					h: 40
+				};
+				var rightRect = {
+					x: xx,
+					y: yy - 50,
+					w: 100,
+					h: 40
+				}
+				var textAttr = {
+					"fill": "#fff",
+					"font-size": "16px",
+					"cursor": "pointer"
+				};
+				left = R.rect(leftRect.x, leftRect.y, leftRect.w, leftRect.h).attr({
+					fill: "#FA3F4D",
+					stroke: "red",
+					"stroke-width": 1,
+					"stroke-opacity": 0.5
+				})
+				ltext = R.text((xx - 40), (yy - 30), name).attr(textAttr);
+				right = R.rect(rightRect.x, rightRect.y, rightRect.w, rightRect.h).attr({
+					fill: "white",
+					stroke: "wihte",
+					"stroke-width": 1,
+					"stroke-opacity": 0.5
+				})
+				rtext = R.text((xx + 50), (yy - 30), Math.floor(1000000*Math.random())).attr({
+					"fill": "#FA3F4D",
+					"font-size": "16px",
+					"cursor": "pointer"
+				});
 			}
 		</script>
-		<div id="MapTipDiv" class="mapTip" style="left: 1250px; top: 380px; width: 100px; height: auto; display: none;">
-			<div class="con"></div>
-			<div class="arrow">
-				<div class="arrowMask"></div>
-			</div>
-		</div>
 	</body>
 
 </html>

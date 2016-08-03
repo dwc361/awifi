@@ -8,6 +8,7 @@
  * This is licensed under the GNU LGPL, version 2.1 or later.
  * For details, see: http://creativecommons.org/licenses/LGPL/2.1/
  */
+var pathPointArr=[]; //每个省份hint框的位置
 !function (window, $, undefined) {
     Array.prototype.indexOf = function (a) {
         var b, c;
@@ -174,6 +175,12 @@
                         disabledColor = thisStateData && thisStateData.stateDisabledColor || opt.stateDisabledColor;
                     stateColor[state] = {}, stateColor[state].initColor = initColor, stateColor[state].hoverColor = hoverColor, stateColor[state].selectedColor = selectedColor;
                     var obj = r.path(mapConfig.shapes[state]);
+						var that=obj;//每一块
+						var st=that[0]
+						var xx = st.getBBox().x + (st.getBBox().width / 2);
+						var yy = st.getBBox().y + (st.getBBox().height / 2);
+						var pobj={x:xx,y:yy,name:mapConfig.names[state]};
+						pathPointArr[pathPointArr.length]=pobj;
                     obj.id = state, obj.name = mapConfig.names[state], obj.timer = "", obj.attr(attributes), opt.external && (self.externalData[obj.id] = obj), stateData[state] && stateData[state].diabled ? obj.attr({
                         fill: disabledColor,
                         cursor: "default"

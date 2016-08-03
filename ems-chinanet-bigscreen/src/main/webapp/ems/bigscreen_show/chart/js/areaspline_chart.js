@@ -156,6 +156,9 @@ function show_chart(data) {
                     }
                 },
                 threshold: null
+            },
+            series: {
+                lineColor: '#FF0000'
             }
         },
         series: [{ // 数据列
