@@ -35,6 +35,16 @@ public class ChartShowAction {
 	public String watch_chart() {
 		return "/ems/bigscreen_show/chart/watch_chart.jsp";
 	}
+	
+	@RequestMapping("/column_chart")
+	public String column_chart() {
+		return "/ems/bigscreen_show/chart/column_chart.jsp";
+	}
+	
+	@RequestMapping("/mixture_chart")
+	public String mixture_chart() {
+		return "/ems/bigscreen_show/chart/mixture_chart.jsp";
+	}
 
 	@Autowired(required = true)
 	public void setDictionaryService(@Qualifier("dictionaryService") IDictionaryService dictionaryService) {
