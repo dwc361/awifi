@@ -13,6 +13,6 @@
 		<script type="text/javascript" src="${basePath}/ems/bigscreen_show/chart/js/mixture_chart.js"></script>
 	</head>
 	<body>
-		<div id="column_div" style="width:100%; height:100%;"></div>
+		<div id="mixture_div" style="width:100%; height:100%;"></div>
 	</body>
 </html>

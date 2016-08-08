@@ -5,7 +5,7 @@ d = now.getDate(); //获取当前日(1-31)
 h = now.getHours(); //时  
 $(function () {
 	var x_arr = new Array();
-	for (i = 0; i <= h; i++) {
+	for (i = h-11; i <= h; i++) {
 		x_arr.push(Date.UTC(y, m, d, i));
 	}
 	

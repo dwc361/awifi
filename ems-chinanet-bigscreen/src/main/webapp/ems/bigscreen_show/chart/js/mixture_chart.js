@@ -1,13 +1,13 @@
 var colorArr = ['#7cb5ec', '#434348', '#90ed7d', '#f7a35c', '#8085e9','#f15c80', '#e4d354', '#8085e8', '#8d4653', '#91e8e1','#000000','#560f23'];
 
 $(function () {
-    $('#column_div').highcharts({
+    $('#mixture_div').highcharts({
     	chart: {
             zoomType: 'xy',
-            events: {                                                         
-				load: function() {            
+            events: {
+				load: function() {
 					
-				}                                                               
+				}
 			}
         },
         title: {
@@ -34,6 +34,7 @@ $(function () {
         },
         yAxis: {
             min: 0,
+            gridLineColor: '',
             title: {
                 text: '数量 (个)'
             }
@@ -62,10 +63,6 @@ $(function () {
             type: 'column',
             data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
         },{
-            name: 'Tokyo',
-            type: 'column',
-            data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-        },{
             name: 'NewYork',
             type: 'column',
             data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
@@ -83,6 +80,17 @@ $(function () {
             data: [66, 77, 55, 33, 22, 66, 77, 155, 33, 88, 66, 77],
             color: 'black',
             dashStyle: 'shortdot',
+            marker: {
+                lineWidth: 2,
+                lineColor: 'red',
+                fillColor: 'white'
+            }
+        },{
+            type: 'spline',
+            name: 'Average',
+            data: [56, 67, 45, 23, 12, 56, 67, 145, 23, 78, 56, 67],
+            color: 'black',
+            dashStyle: 'shortdash',
             marker: {
                 lineWidth: 2,
                 lineColor: 'red',
