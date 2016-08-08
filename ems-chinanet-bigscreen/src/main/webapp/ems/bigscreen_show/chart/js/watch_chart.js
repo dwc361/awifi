@@ -88,6 +88,10 @@ $(function () {
                 formatter: function () {
                     return '<span style="color:blue; font-size:12px;">' + this.y + '%</span>';
                 },
+                color: '#fff',
+                style: {
+                    fontWeight: 'bold'
+                },
                 borderWidth: 0
             },
             tooltip: {

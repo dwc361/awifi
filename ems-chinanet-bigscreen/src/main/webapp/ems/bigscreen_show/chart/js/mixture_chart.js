@@ -30,13 +30,26 @@ $(function () {
                 '十月',
                 '十一月',
                 '十二月'
-            ]
+            ],
+            labels: {
+            	style: {
+            		color: 'black',
+            		fontWeight: 'bold'
+            	}
+            }
         },
         yAxis: {
             min: 0,
-            gridLineColor: '',
             title: {
                 text: '数量 (个)'
+            },
+            //gridLineColor: '',
+            minorTickInterval: 50,
+            labels: {
+            	style: {
+            		color: 'black',
+            		fontWeight: 'bold'
+            	}
             }
         },
         tooltip: {
@@ -110,6 +123,13 @@ $(function () {
     }, function (chart) {
     	SetEverySeriesColor(chart);
     });
+    
+    // 图表本身的背景设置成透明
+    var rect = $("#mixture_div").find("rect");
+    rect.attr("fill", "transparent");
+
+    // body背景颜色设置成透明
+    document.body.style.backgroundColor="transparent";
 });
 
 //设置每一块series的颜色值
