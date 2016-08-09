@@ -11,7 +11,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "U_APP")
+@Table(name = "u_app")
 public class App extends SysResource {
 	private static final long serialVersionUID = -8133284335795701861L;
 	public static final Long SELF_ID = 50L;

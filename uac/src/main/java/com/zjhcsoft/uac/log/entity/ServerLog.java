@@ -17,7 +17,7 @@ import javax.persistence.Table;
  *
  */
 @Entity
-@Table(name = "U_SERVER_LOG")
+@Table(name = "u_server_log")
 public class ServerLog {
 	private Long id;
 	private Date log_date;// 日志时间

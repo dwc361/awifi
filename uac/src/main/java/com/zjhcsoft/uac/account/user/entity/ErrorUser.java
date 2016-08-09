@@ -24,7 +24,7 @@ import org.roof.web.user.entity.Staff;
  */
 
 @Entity
-@Table(name = "U_USER_ERROR")
+@Table(name = "u_user_error")
 public class ErrorUser {
 
 	private Long id;

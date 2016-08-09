@@ -15,7 +15,7 @@ import org.roof.web.dictionary.entity.Dictionary;
  * 
  */
 @Entity
-@Table(name = "U_SYSTEM")
+@Table(name = "u_system")
 public class System extends SysResource {
 
 	private App app;// 所属应用@app_id

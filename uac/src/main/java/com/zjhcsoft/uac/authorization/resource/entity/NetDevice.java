@@ -14,7 +14,7 @@ import org.roof.web.dictionary.entity.Dictionary;
  * 
  */
 @Entity
-@Table(name = "U_NET_DEVICE")
+@Table(name = "u_net_device")
 public class NetDevice extends System {
 	private String serve_name;
 	private Dictionary serve_type;// 账号状态@serve_type_id

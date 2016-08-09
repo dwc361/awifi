@@ -19,7 +19,7 @@ import com.zjhcsoft.uac.authorization.resource.entity.App;
  * 
  */
 @Entity
-@Table(name = "U_FAVORITES")
+@Table(name = "u_favorites")
 public class Favorites {
 	private Long id;
 	private App app;// 系统名称@app_id

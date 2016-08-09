@@ -24,7 +24,7 @@ import org.roof.web.user.entity.Staff;
  * 
  */
 @Entity
-@Table(name = "U_ACCOUNT_LOG")
+@Table(name = "u_account_log")
 public class AccountLog implements Serializable {
 
 	private static final long serialVersionUID = 26857113716474920L;

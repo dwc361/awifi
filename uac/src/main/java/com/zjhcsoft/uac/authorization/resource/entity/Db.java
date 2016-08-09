@@ -14,7 +14,7 @@ import org.roof.web.dictionary.entity.Dictionary;
  * 
  */
 @Entity
-@Table(name = "U_DB")
+@Table(name = "u_db")
 public class Db extends System {
 
 	private Dictionary dbType;// 数据库类型@db_type_id

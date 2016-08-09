@@ -34,7 +34,7 @@ import javax.validation.constraints.NotNull;
  * 
  */
 @Entity
-@Table(name = "U_PASSWORD_POLICY", uniqueConstraints = { @UniqueConstraint(columnNames = "NAME") })
+@Table(name = "u_password_policy", uniqueConstraints = { @UniqueConstraint(columnNames = "NAME") })
 public class PasswordPolicy {
 
 	private Long id;

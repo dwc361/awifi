@@ -17,7 +17,7 @@ import org.roof.web.dictionary.entity.Dictionary;
 import com.zjhcsoft.uac.authorization.resource.entity.App;
 
 @Entity
-@Table(name = "U_SUBUSER_TEMP")
+@Table(name = "u_subuser_temp")
 public class SubUserTemp {
 	private Long id;
 	private App app; // 系统

@@ -19,7 +19,7 @@ import org.roof.web.user.entity.Staff;
  * 
  */
 @Entity
-@Table(name = "U_MESSAGE")
+@Table(name = "u_message")
 public class Message {
 	private Long id;
 	private String title;// 标题

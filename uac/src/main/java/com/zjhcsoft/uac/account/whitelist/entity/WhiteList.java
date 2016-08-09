@@ -15,7 +15,7 @@ import javax.persistence.Table;
 import com.zjhcsoft.uac.account.user.entity.User;
 
 @Entity
-@Table(name = "U_WHITE_LIST")
+@Table(name = "u_white_list")
 public class WhiteList {
 	private Long id;
 	private User user;// 主账号

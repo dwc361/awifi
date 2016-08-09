@@ -27,7 +27,7 @@ import com.zjhcsoft.uac.authorization.resource.entity.SysResource;
  * 
  */
 @Entity
-@Table(name = "U_AUTH_LOG")
+@Table(name = "u_auth_log")
 public class AuthLog implements Serializable {
 	private static final long serialVersionUID = 4782979478041634495L;
 	private Long id;

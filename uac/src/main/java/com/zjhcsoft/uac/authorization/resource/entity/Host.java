@@ -12,7 +12,7 @@ import org.roof.web.dictionary.entity.Dictionary;
  *
  */
 @Entity
-@Table(name = "U_HOST")
+@Table(name = "u_host")
 public class Host extends System {
 	private String host_name;
 	private String host_type;

@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "U_OS")
+@Table(name = "u_os")
 public class Os extends System {
 
 }

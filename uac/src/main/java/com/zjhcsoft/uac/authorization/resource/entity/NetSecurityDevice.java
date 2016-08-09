@@ -10,7 +10,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "U_NET_SECURITY_DEVICE")
+@Table(name = "u_net_security_device")
 public class NetSecurityDevice extends System {
 
 }

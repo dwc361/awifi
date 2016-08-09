@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "U_SMS_LOG")
+@Table(name = "u_sms_log")
 public class SmsLog {
 
 	private Long id;

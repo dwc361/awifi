@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "U_BULLETIN")
+@Table(name = "u_bulletin")
 public class Bulletin {
 	private Long id;
 	private String title;// 标题

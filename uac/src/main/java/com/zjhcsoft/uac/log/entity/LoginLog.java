@@ -26,7 +26,7 @@ import com.zjhcsoft.uac.ldap.util.Person;
  * 
  */
 @Entity
-@Table(name = "U_LOGIN_LOG")
+@Table(name = "u_login_log")
 public class LoginLog implements Serializable {
 
 	private static final long serialVersionUID = 3810665296380292513L;

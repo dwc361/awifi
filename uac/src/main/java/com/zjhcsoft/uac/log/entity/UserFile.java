@@ -21,7 +21,7 @@ import org.roof.web.user.entity.Staff;
  *
  */
 @Entity
-@Table(name = "U_USER_FILE")
+@Table(name = "u_user_file")
 public class UserFile {
 	private Long id;
 	private FileInfo fileInfo;

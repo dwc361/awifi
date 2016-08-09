@@ -29,7 +29,7 @@ import com.zjhcsoft.uac.account.user.entity.SubUser;
  * 
  */
 @Entity
-@Table(name = "U_SYSRESOURCE")
+@Table(name = "u_sysresource")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class SysResource implements Serializable {
 	private static final long serialVersionUID = -5801764298560033266L;
@@ -114,7 +114,7 @@ public class SysResource implements Serializable {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "SUB_USER_SYS_RESOURCE", joinColumns = {
+	@JoinTable(name = "sub_user_sys_resource", joinColumns = {
 			@JoinColumn(name = "SUB_USER_ID") }, inverseJoinColumns = { @JoinColumn(name = "SYSRESOURCE_ID") })
 	public List<SubUser> getSubUsers() {
 		return subUsers;
