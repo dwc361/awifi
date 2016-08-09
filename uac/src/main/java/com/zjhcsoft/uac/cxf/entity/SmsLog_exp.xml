@@ -5,7 +5,7 @@
 	<select id="SmsLog_exp_select_sms_code_by_staff" parameterClass="java.util.Map"
 		resultClass="com.zjhcsoft.uac.cxf.entity.SmsLog">
 		<![CDATA[ 
-		select * from U_SMS_LOG WHERE 1 = 1 and sts = 1 and used = 0 and (sysdate - log_time)*24*60 <= 5
+		select * from u_sms_log WHERE 1 = 1 and sts = 1 and used = 0 and (sysdate - log_time)*24*60 <= 5
 		]]>
 		<isNotEmpty prepend="and" property="staff_id"> 
 		<![CDATA[ 
@@ -81,7 +81,7 @@
 	<select id="SmsLog_exp_select_sms_code_by_staff_1_count" parameterClass="java.util.Map"
 		resultClass="java.lang.Long">
 		<![CDATA[ 
-		select count(*) from U_SMS_LOG WHERE 1 = 1 and sts = 1 and used = 0 and (sysdate - log_time)*24*60 <= 1
+		select count(*) from u_sms_log WHERE 1 = 1 and sts = 1 and used = 0 and (sysdate - log_time)*24*60 <= 1
 		]]>
 		<isNotEmpty prepend="and" property="staff_id"> 
 		<![CDATA[ 

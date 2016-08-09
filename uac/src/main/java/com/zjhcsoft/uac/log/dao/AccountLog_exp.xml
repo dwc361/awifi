@@ -116,7 +116,7 @@
 
 		select a.id, a.op_result, to_char(a.op_time, 'YYYY-MM-DD HH24:MI:SS') as op_time, s.staff_code as op_staff_code, d.text, b.staff_code
 		from
-		U_ACCOUNT_LOG
+		u_account_log
 		a
 		left join staff s
 		on a.op_staff_id = s.staff_id
@@ -163,7 +163,7 @@
 		resultClass="java.lang.Long">
 		select count(1)
 		from
-		U_ACCOUNT_LOG a
+		u_account_log a
 		left join staff s
 		on a.op_staff_id =
 		s.staff_id

@@ -133,7 +133,7 @@
 		c.text as login_result,
 		d.staff_code,
 		e.name
-		from U_AUTH_LOG a
+		from u_auth_log a
 		left join s_dictionary b
 		on
 		a.login_fail_reason_id = b.id
@@ -192,7 +192,7 @@
 	<select id="authlog_excel_export_count" parameterClass="com.zjhcsoft.uac.log.entity.AuthLog"
 		resultClass="java.lang.Long">
 		select count(1)
-		from U_AUTH_LOG a
+		from u_auth_log a
 		left join
 		s_dictionary b
 		on
