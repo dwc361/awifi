@@ -54,7 +54,7 @@ public class SysResource implements Serializable {
 	}
 
 	@Id
-	@TableGenerator(name = "inventory", table = "U_SEQUENCES", pkColumnName = "S_ID", valueColumnName = "S_NEXTNUM", pkColumnValue = "inventory", allocationSize = 1000)
+	@TableGenerator(name = "inventory", table = "u_sequences", pkColumnName = "S_ID", valueColumnName = "S_NEXTNUM", pkColumnValue = "inventory", allocationSize = 1000)
 	@GeneratedValue(strategy = GenerationType.TABLE, generator = "inventory")
 	public Long getId() {
 		return id;
