@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @version 1.0 SysPerformance.java liuxin 2011-9-19
  */
 @Entity
-@Table(name = "SYS_PERFORMANCE")
+@Table(name = "sys_performance")
 public class SysPerformance {
 	private Long id;
 	private Date log_time;

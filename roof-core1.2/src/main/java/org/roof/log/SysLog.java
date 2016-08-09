@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * @version 1.0 SysLog.java liuxin 2011-9-15
  */
 @Entity
-@Table(name = "SYS_LOG")
+@Table(name = "sys_log")
 public class SysLog {
 
 	private Long id;

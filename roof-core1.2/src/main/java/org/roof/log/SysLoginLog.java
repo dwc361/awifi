@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * 系统登录日志
  */
 @Entity
-@Table(name = "SYS_LOGIN_LOG")
+@Table(name = "sys_login_log")
 public class SysLoginLog implements Serializable {
 
 	private static final long serialVersionUID = -5576983729862601318L;
