@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "U_BLJ_LOG")
+@Table(name = "u_blj_log")
 public class BljLog {
 
 	private Long id;
