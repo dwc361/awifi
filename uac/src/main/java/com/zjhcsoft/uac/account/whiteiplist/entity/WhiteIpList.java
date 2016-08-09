@@ -11,7 +11,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "U_WHITEIP_LIST")
+@Table(name = "u_whiteip_list")
 public class WhiteIpList {
 	private Long id;
 	private String nameIP;// ip名称
