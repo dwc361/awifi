@@ -27,7 +27,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @version 1.0 RoofUser.java 2012-7-5
  */
 @Entity
-@Table(name = "STAFF")
+@Table(name = "staff")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class BaseUser implements UserDetails {
 
@@ -98,7 +98,7 @@ public class BaseUser implements UserDetails {
 	}
 
 	@ManyToMany
-	@JoinTable(name = "STAFF_ROLE", joinColumns = { @JoinColumn(name = "STAFF_ID") }, inverseJoinColumns = {
+	@JoinTable(name = "staff_role", joinColumns = { @JoinColumn(name = "STAFF_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "ROLE_ID") })
 	public List<BaseRole> getRoles() {
 		return roles;

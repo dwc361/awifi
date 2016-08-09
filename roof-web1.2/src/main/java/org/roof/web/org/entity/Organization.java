@@ -21,7 +21,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "ORGANIZATION")
+@Table(name = "organization")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class Organization implements Serializable {
 	private static final long serialVersionUID = -6499305660200043952L;

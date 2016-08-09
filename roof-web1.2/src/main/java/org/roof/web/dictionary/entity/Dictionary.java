@@ -21,7 +21,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  */
 @Entity
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-@Table(name = "S_DICTIONARY")
+@Table(name = "s_dictionary")
 public class Dictionary implements Serializable {
 
 	private static final long serialVersionUID = 8373619199358728370L;

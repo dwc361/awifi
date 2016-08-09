@@ -20,7 +20,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.roof.web.resources.entity.Module;
 
 @Entity
-@Table(name = "S_MENU")
+@Table(name = "s_menu")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Menu {
 	private Long id;

@@ -73,7 +73,7 @@
 		parameterClass="java.lang.String" resultClass="java.lang.Long">
 		<![CDATA[ 
 			SELECT COUNT(1)
-			  FROM SYS_LOGIN_LOG t
+			  FROM sys_login_log t
 			 where (sysdate - t.log_time) * 24 * 60 <= 30
 			   AND t.username = #username#
 			   AND t.sts = 0
@@ -83,7 +83,7 @@
 	<select id="staff_exp_select_resource_by_staff"
 		parameterClass="java.lang.Long" resultClass="org.roof.security.entity.Resource">
 		<![CDATA[ 
-		select t3.* from STAFF_ROLE t1,ROLE_AUTH_REL t2,PRIVILEGE t3 where 1=1 
+		select t3.* from staff_role t1,role_auth_rel t2,privilege t3 where 1=1 
 		and t1.role_id = t2.role_id and t2.privilege_id = t3.privilege_id and t1.staff_id = #staff_id#
 		]]>
 	</select>
@@ -91,7 +91,7 @@
 	<select id="staff_exp_select_user_login_data"
 		parameterClass="org.roof.web.user.entity.Staff" resultClass="org.roof.web.user.entity.Staff">
 		<![CDATA[ 
-		SELECT * FROM STAFF t where 1=1
+		SELECT * FROM staff t where 1=1
 		]]>
 		<isNotEmpty property="accountNonExpired" prepend="and">
 			ACCOUNTNONEXPIRED = #accountNonExpired#

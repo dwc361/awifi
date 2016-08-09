@@ -50,13 +50,13 @@ public class Privilege extends Module {
 	}
 
 	@OneToMany
-	@JoinTable(name = "PRIVILEGE_PARAMETERS_REL", joinColumns = { @JoinColumn(name = "PRIVILEGE_ID") }, inverseJoinColumns = { @JoinColumn(name = "PARAMETER_ID") })
+	@JoinTable(name = "privilege_parameters_rel", joinColumns = { @JoinColumn(name = "PRIVILEGE_ID") }, inverseJoinColumns = { @JoinColumn(name = "PARAMETER_ID") })
 	public List<Parameter> getParameters() {
 		return parameters;
 	}
 
 	@OneToMany
-	@JoinTable(name = "PRIVILEGE_RETURNFIELDS_REL", joinColumns = { @JoinColumn(name = "PRIVILEGE_ID") }, inverseJoinColumns = { @JoinColumn(name = "PARAMETER_ID") })
+	@JoinTable(name = "privilege_returnfields_rel", joinColumns = { @JoinColumn(name = "PRIVILEGE_ID") }, inverseJoinColumns = { @JoinColumn(name = "PARAMETER_ID") })
 	public List<Parameter> getReturnFields() {
 		return returnFields;
 	}

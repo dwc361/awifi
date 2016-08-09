@@ -23,7 +23,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
  * @version 1.0 Resource.java 2011-11-9
  */
 @Entity
-@Table(name = "PRIVILEGE")
+@Table(name = "privilege")
 @DiscriminatorValue("resource")
 @Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 public class Resource {

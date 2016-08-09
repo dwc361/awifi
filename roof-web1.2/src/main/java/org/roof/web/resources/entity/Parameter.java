@@ -15,7 +15,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "S_PARAMETER")
+@Table(name = "s_parameter")
 public class Parameter {
 	protected Long id;
 	protected String name;

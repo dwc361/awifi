@@ -16,7 +16,7 @@ import javax.persistence.Table;
  * 
  */
 @Entity
-@Table(name = "sys_fileInfo")
+@Table(name = "sys_fileinfo")
 public class FileInfo implements Serializable {
 	private static final long serialVersionUID = 4803351739523633666L;
 	private Long id;

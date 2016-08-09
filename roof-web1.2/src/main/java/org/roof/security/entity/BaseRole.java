@@ -26,7 +26,7 @@ import org.springframework.security.core.GrantedAuthority;
  * @version 1.0 RoofRole.java 2012-7-5
  */
 @Entity
-@Table(name = "ROLES")
+@Table(name = "roles")
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 public class BaseRole implements GrantedAuthority {
 
@@ -62,7 +62,7 @@ public class BaseRole implements GrantedAuthority {
 	}
 
 	@ManyToMany(cascade = CascadeType.ALL)
-	@JoinTable(name = "ROLE_AUTH_REL", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = {
+	@JoinTable(name = "role_auth_rel", joinColumns = { @JoinColumn(name = "ROLE_ID") }, inverseJoinColumns = {
 			@JoinColumn(name = "PRIVILEGE_ID") })
 	public List<Resource> getResources() {
 		return resources;
