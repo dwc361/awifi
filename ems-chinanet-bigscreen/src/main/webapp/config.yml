@@ -1,0 +1,83 @@
+paths:
+  # public: "public"
+  public: "ems-dest"
+groups:
+  # scripts:
+  #   paths:
+  #     - ems
+  #   concat:
+  #     "/scripts/app.js": "app/{scripts,views}/**/*.{js,coffee}"
+  #     "/scripts/vendor.js": "vendor/**/*.{js,coffee}"
+  #   order:
+  #     - vendor/jquery.js
+  #     - vendor/lodash.js
+  #     - ...
+  #     - app/scripts/app.coffee
+  # styles:
+  #   paths:
+  #     - app/styles
+  #     - app/views
+  #   concat:
+  #     "/styles/app.css": "app/{styles,views}/**/[a-z]*.{css,scss,sass}"
+  #     "/styles/vendor.css": "vendor/**/*.{css,scss,sass}"
+  #   order:
+  #     - app/styles/reset.scss
+  #     - app/styles/app.scss
+  #     - ...
+  # images:
+  #   paths:
+  #     - app/images
+  #     - app/sprite
+  #   sprite:
+  #     "../app/styles/icons.scss": "app/sprite/**/*.png"
+  #   copy:
+  #     "/images": "app/images/**/*.{png,gif,jpg,jpeg}"
+  #     "/scripts/": "app/images/FusionCharts/**/*.*"
+  # fonts:
+  #   paths:
+  #     - vendor/fonts
+  #   copy:
+  #     "/styles": "vendor/fonts/**/*.{eot,svg,ttf,woff,otf}"
+  # views:
+  #   paths:
+  #     - app/views
+  #   copy:
+  #     "/views": "app/views/**/*.hbs"
+  templates:
+    paths:
+      - app/templates
+    precompile:
+      "/scripts/templates.js": "{app/templates/**/*.hbs}"
+# modules:
+#   wrapper: cmd
+#   ignored: vendor/**/*
+#   definition: /scripts/app.js
+# sprites:
+#   path: /images/
+#   selector: .icon-
+# revision:
+#   prefix: ""
+#   manifest: "manifest.yml"
+#   files:
+#     - views/layout.hbs
+#     - views/to-sso-system/view.hbs
+notification: true
+# bundles:
+#   jquery.js:
+#     version: 1.10.2
+#     url: http://code.jquery.com/jquery-1.10.2.js
+#   handlebars.js:
+#     version: 1.3.0
+#     url: http://builds.handlebarsjs.com.s3.amazonaws.com/handlebars.runtime-v1.3.0.js
+#   lodash.js:
+#     version: 2.2.1
+#     url: https://raw.github.com/lodash/lodash/2.2.1/dist/lodash.underscore.js
+  # normalize.css:
+  #   version: 1.1.3
+  #   url: https://raw.github.com/necolas/normalize.css/v1.1.3/normalize.css
+
+
+
+
+#  public: "../pc-bundle/src/main/webapp/resources"
+# 
