@@ -88,7 +88,7 @@
 						<h1>[ 胖ap激活率统计 ]</h1></div>
 					<div id="spline_chart" class="Hchart">
 <%-- 						<iframe src="${basePath}/ems/bigscreen_show/chartShowAction/spline_chart.action" width="100%" height="100%" frameborder="no" border="0" marginwidth="0" marginheight="0" scrolling="no" allowtransparency="yes" ></iframe> --%>
-						<%@include file="/ems/bigscreen_show/chart/spline_chart_div.jsp"%>
+						<%@include file="/ems/bigscreen_show/chart/many_spline_chart_div.jsp"%>
 					</div>
 				</div>
 				<div class="right col-md-12 col-lg-12 col-sm-12">

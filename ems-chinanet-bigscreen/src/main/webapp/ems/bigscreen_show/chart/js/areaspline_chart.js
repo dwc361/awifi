@@ -24,7 +24,7 @@ $(function () {
 					});
 	    	    });
 	    	}
-	    	show_chart(data);
+	    	show_areaspline_chart(data);
 	    }, 
 	    error:function(d) {
 	    	alert(d.statusText);
@@ -32,21 +32,22 @@ $(function () {
 	});
 });
 
-function show_chart(data) {     
+function show_areaspline_chart(data) {     
 	Highcharts.getOptions().colors = "#007799,#434348,#90ed7d,#f7a35c,#8085e9,#f15c80,#e4d354,#2b908f,#f45b5b,#91e8e1".split(",");
     $('#areaspline_div').highcharts({
         chart: {
             type: 'areaspline',
             events: {                                                           
 				load: function() {
-					var series = this.series[0];                                
+					var series = this.series[0];
+					series.points[series.points.length-1].setState('hover');
 					setInterval(function() {
 						h++;
 						var x = Date.UTC(y, m, d, h);
 						var x_arr = new Array();
 						x_arr.push(x);
 						
-						$.ajax({ 
+						$.ajax({
 						    type: 'post', 
 						    dataType : "json", 
 						    url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
@@ -60,7 +61,9 @@ function show_chart(data) {
 							    		var b = n.b;
 							    		var c = n.c;
 							    		
+							    		series.points[series.points.length-1].setState();
 							    		series.addPoint([x, y], true, true);
+							    		series.points[series.points.length-1].setState('hover');
 
 										var now_time = getDateTime(new Date());
 										var chart = $('#areaspline_div').highcharts();
@@ -87,7 +90,6 @@ function show_chart(data) {
 						    }
 						});
 						
-						
 					}, 3000);
 				}                                                               
 			} 
@@ -109,7 +111,7 @@ function show_chart(data) {
             	second: '%H:%M:%S',
             	minute: '%H:%M',
             	hour: '%H:%M',
-            	day: '%Y.%m.%d %H:%M',
+            	day: '%e. %b %H:%M',
             	week: '%e. %b',
             	month: '%b \'%y',
             	year: '%Y'
@@ -146,7 +148,8 @@ function show_chart(data) {
                     ]
                 },
                 marker: {
-                    radius: 2
+                	enabled: false,
+                    radius: 4
                 },
                 lineWidth: 1,
                 states: {

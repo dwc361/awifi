@@ -10,6 +10,8 @@
 <script type="text/javascript" src="${basePath}/ems_common/highcharts/js/highcharts.js"></script>
 <script type="text/javascript" src="${basePath}/ems_common/highcharts/js/highcharts-more.js"></script>
 
+<script type="text/javascript" src="${basePath}/ems_common/echarts/js/echarts.js"></script>
+
 <script type="text/javascript">
 	var basePathConst = "${basePath }";
 </script>
