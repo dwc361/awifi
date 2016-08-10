@@ -31,6 +31,11 @@ public class ChartShowAction {
 		return "/ems/bigscreen_show/chart/spline_chart.jsp";
 	}
 	
+	@RequestMapping("/many_spline_chart")
+	public String many_spline_chart() {
+		return "/ems/bigscreen_show/chart/many_spline_chart.jsp";
+	}
+	
 	@RequestMapping("/watch_chart")
 	public String watch_chart() {
 		return "/ems/bigscreen_show/chart/watch_chart.jsp";
@@ -45,7 +50,16 @@ public class ChartShowAction {
 	public String mixture_chart() {
 		return "/ems/bigscreen_show/chart/mixture_chart.jsp";
 	}
-
+	
+	
+	
+	@RequestMapping("/e_chart_one")
+	public String e_chart_one() {
+		return "/ems/bigscreen_show/chart/e_chart_one.jsp";
+	}
+	
+	
+	
 	@Autowired(required = true)
 	public void setDictionaryService(@Qualifier("dictionaryService") IDictionaryService dictionaryService) {
 		this.dictionaryService = dictionaryService;

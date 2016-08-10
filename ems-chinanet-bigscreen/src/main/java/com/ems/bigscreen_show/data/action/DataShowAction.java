@@ -6,6 +6,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.roof.spring.Result;
 import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
@@ -28,7 +31,9 @@ public class DataShowAction {
 	}
 	
 	@RequestMapping("/areaspline_chart_data")
-	public @ResponseBody Result areaspline_chart_data(String x_json) {
+	public @ResponseBody Result areaspline_chart_data(String x_json, HttpServletRequest request, HttpServletResponse response) {
+		response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
+		
 		if (x_json != null) {
 			Random generator = new Random();
 			
@@ -39,9 +44,12 @@ public class DataShowAction {
 				Map map = new HashMap();
 				map.put('x', object);
 				map.put('y', generator.nextDouble());
-				map.put('a', generator.nextInt(10000));
-				map.put('b', generator.nextInt(10000));
-				map.put('c', generator.nextInt(10000));
+				map.put('a', generator.nextDouble());
+				map.put('b', generator.nextDouble());
+				map.put('c', generator.nextDouble());
+//				map.put('a', generator.nextInt(10000));
+//				map.put('b', generator.nextInt(10000));
+//				map.put('c', generator.nextInt(10000));
 				
 				dataList.add(map);
 			}
