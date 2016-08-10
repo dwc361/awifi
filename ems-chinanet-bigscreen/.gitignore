@@ -9,3 +9,5 @@ target/
 *.log
 *.iml
 /.idea
+/bin/
+bin/
