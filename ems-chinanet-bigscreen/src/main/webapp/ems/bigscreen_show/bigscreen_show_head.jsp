@@ -7,7 +7,9 @@
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Class.js"></script>
 
-<script type="text/javascript" src="${basePath}/ems_common/highcharts/js/highcharts.js"></script>
+<script type="text/javascript" src="${basePath}/ems_common/highstock/js/highstock.src.js"></script>
+
+<script type="text/javascript" src="${basePath}/ems_common/highcharts/js/highcharts.src.js"></script>
 <script type="text/javascript" src="${basePath}/ems_common/highcharts/js/highcharts-more.js"></script>
 
 <script type="text/javascript" src="${basePath}/ems_common/echarts/js/echarts.js"></script>

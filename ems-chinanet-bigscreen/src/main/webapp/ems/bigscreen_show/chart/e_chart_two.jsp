@@ -45,5 +45,5 @@
 			<div id="main" style="width: 100%;height: 500px;"></div>
 		</div>
 	</body>
-	<script type="text/javascript" src="${basePath}/ems/bigscreen_show/chart/js/e_chart_one.js"></script>
+	<script type="text/javascript" src="${basePath}/ems/bigscreen_show/chart/js/e_chart_two.js"></script>
 </html>

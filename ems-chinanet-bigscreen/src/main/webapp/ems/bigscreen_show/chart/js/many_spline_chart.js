@@ -166,9 +166,11 @@ function show_many_spline_chart(data_a, data_b, data_c) {
             data: (function() {
 				return data_a;
 			})(),
-            color: 'white',
+            color: 'green',
+            lineWidth: 4,
             dashStyle: 'shortdot',
             marker: {
+            	symbol: 'circle',
                 lineWidth: 2,
                 lineColor: 'red',
                 fillColor: 'white'
@@ -180,8 +182,10 @@ function show_many_spline_chart(data_a, data_b, data_c) {
 				return data_b;
 			})(),
             color: 'red',
+            lineWidth: 4,
             dashStyle: 'shortdash',
             marker: {
+            	symbol: 'circle',
                 lineWidth: 2,
                 lineColor: 'red',
                 fillColor: 'white'
@@ -193,7 +197,9 @@ function show_many_spline_chart(data_a, data_b, data_c) {
 				return data_c;
 			})(),
             color: 'blue',
+            lineWidth: 4,
             marker: {
+            	symbol: 'circle',
                 lineWidth: 2,
                 lineColor: 'red',
                 fillColor: 'white'

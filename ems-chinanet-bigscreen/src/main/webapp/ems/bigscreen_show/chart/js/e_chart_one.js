@@ -1,153 +1,81 @@
-// 基于准备好的dom，初始化echarts实例
-var myChart = echarts.init(document.getElementById('main'));
+var chart = echarts.init(document.getElementById('main'), 'macarons');
 
-// 指定图表的配置项和数据
-option = {
-	//  backgroundColor: '#2c343c',
-	color: [
-		'#d9a831', '#367bdb', '#df5964'
-	],
-	title: {
-		text: '',
-		subtext: ''
-	},
-	tooltip: {
-		trigger: 'axis',
-		itemGap: '20'
-	},
-	legend: {
-		data: ['', '']
-	},
-	toolbox: {
-		show: false,
-		feature: {
-			dataView: {
-				show: true,
-				readOnly: false
-			},
-			magicType: {
-				show: true,
-				type: ['line', 'bar']
-			},
-			restore: {
-				show: true
-			},
-			saveAsImage: {
-				show: true
-			}
-		}
-	},
-	calculable: true,
-	xAxis: [{
-		type: 'category',
-		data: ['星期一', '星期二', '星期三', '星期四', '星期五', '星期六', '星期七'],
-		nameTextStyle: {
-			color: "fff",
-			fontStyle: 'normal',
-			fontFamily: 'sans-serif',
-			fontSize: 12
-		},
-		axisLine: {
-			show: true,
-			onZero: true,
-			lineStyle: {
-				color: '#aaa',
-				width: 1,
-				type: 'solid',
-				opacity:1,
-			},
-		},
-	}],
-	yAxis: [{
-		type: 'value',
-		nameTextStyle: {
-			color: '#fff',
-			fontStyle: 'normal',
-			fontFamily: 'sans-serif',
-			fontSize: 16
-		},
-		axisLine: {
-			show: true,
-			onZero: true,
-			lineStyle: {
-				color: '#aaa',
-				width: 1,
-				type: 'solid',
-				opacity: 1,
-			},
-		},
-		splitLine: {
-			show: false,
-			interval: 'auto',
-			lineStyle: {
-				color: ['#ccc'],
-				width: 0,
-				type: 'solid',
-			},
-		},
-	}],
-	series: [{
-		name: '手机',
-		type: 'bar',
-		data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6],
-		markPoint: {
-			data: [{
-				type: 'max',
-				name: '最大值'
-			}, {
-				type: 'min',
-				name: '最小值'
-			}]
-		},
-		markLine: {
-			data: [{
-				type: 'average',
-				name: '平均值'
-			}]
-		}
-	}, {
-		name: 'PC',
-		type: 'bar',
-		data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6],
-		markPoint: {
-			data: [{
-				type: 'max',
-				name: '最大值'
-			}, {
-				type: 'min',
-				name: '最小值'
-			}]
-		},
-		markLine: {
-			data: [{
-				type: 'average',
-				name: '平均值'
-			}]
-		}
-	}, {
-		name: 'PAD',
-		type: 'bar',
-		data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6],
-		markPoint: {
-			data: [{
-				name: '年最高',
-				value: 182.2,
-				xAxis: 7,
-				yAxis: 183
-			}, {
-				name: '年最低',
-				value: 2.3,
-				xAxis: 11,
-				yAxis: 3
-			}]
-		},
-		markLine: {
-			data: [{
-				type: 'average',
-				name: '平均值'
-			}]
-		}
-	}]
+var opt = {
+    title: {
+        text: '访问来源',
+        x: 'center'
+    },
+    tooltip: {
+        trigger: 'item',
+        formatter: "{a} <br/>{b} : {c} ({d}%)"
+    },
+    legend: {
+        orient: 'vertical',
+        left: 'left',
+        data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
+    },
+    series: [{
+        name: '访问来源',
+        type: 'pie',
+        radius: '55%',
+        center: ['50%', '60%'],
+        data: [{
+            value: 335,
+            name: '直接访问'
+        }, {
+            value: 310,
+            name: '邮件营销'
+        }, {
+            value: 234,
+            name: '联盟广告'
+        }, {
+            value: 135,
+            name: '视频广告'
+        }, {
+            value: 1548,
+            name: '搜索引擎'
+        }],
+        itemStyle: {
+            emphasis: {
+                shadowBlur: 10,
+                shadowOffsetX: 0,
+                shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+        }
+    }]
 };
-// 使用刚指定的配置项和数据显示图表。
-myChart.setOption(option);
+
+var app = {};
+app.currentIndex = -1;
+app.timeTicket = setInterval(function() {
+    var dataLen = opt.series[0].data.length;
+    // 取消之前高亮的图形
+    chart.dispatchAction({
+        type: 'downplay',
+        seriesIndex: 0,
+        dataIndex: app.currentIndex
+    });
+    app.currentIndex = (app.currentIndex + 1) % dataLen;
+    // 高亮当前图形
+    chart.dispatchAction({
+        type: 'highlight',
+        seriesIndex: 0,
+        dataIndex: app.currentIndex
+    });
+    // 显示 tooltip
+    chart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: app.currentIndex
+    });
+}, 1000);
+
+chart.setOption(opt);
+
+if (opt && typeof opt === "object") {
+    var startTime = +new Date();
+    chart.setOption(opt, true);
+    var endTime = +new Date();
+    var updateTime = endTime - startTime;
+    console.log("Time used:", updateTime);
+}
