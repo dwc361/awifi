@@ -45,8 +45,8 @@ public class DataShowAction {
 				map.put('x', object);
 				map.put('y', generator.nextDouble());
 				map.put('a', generator.nextDouble());
-				map.put('b', generator.nextDouble());
-				map.put('c', generator.nextDouble());
+				map.put('b', generator.nextDouble()+1);
+				map.put('c', generator.nextDouble()+2);
 //				map.put('a', generator.nextInt(10000));
 //				map.put('b', generator.nextInt(10000));
 //				map.put('c', generator.nextInt(10000));

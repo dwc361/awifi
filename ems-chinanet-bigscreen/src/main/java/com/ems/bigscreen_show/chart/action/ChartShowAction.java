@@ -26,6 +26,11 @@ public class ChartShowAction {
 		return "/ems/bigscreen_show/chart/areaspline_chart.jsp";
 	}
 	
+	@RequestMapping("/many_areaspline_chart")
+	public String many_areaspline_chart() {
+		return "/ems/bigscreen_show/chart/many_areaspline_chart.jsp";
+	}
+	
 	@RequestMapping("/spline_chart")
 	public String spline_chart() {
 		return "/ems/bigscreen_show/chart/spline_chart.jsp";
@@ -53,9 +58,21 @@ public class ChartShowAction {
 	
 	
 	
+	@RequestMapping("/highstock_one")
+	public String highstock_one() {
+		return "/ems/bigscreen_show/chart/highstock_one.jsp";
+	}
+	
+	
+	
 	@RequestMapping("/e_chart_one")
 	public String e_chart_one() {
 		return "/ems/bigscreen_show/chart/e_chart_one.jsp";
+	}
+	
+	@RequestMapping("/e_chart_two")
+	public String e_chart_two() {
+		return "/ems/bigscreen_show/chart/e_chart_two.jsp";
 	}
 	
 	
