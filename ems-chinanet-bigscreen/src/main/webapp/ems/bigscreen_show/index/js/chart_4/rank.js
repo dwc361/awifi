@@ -1,9 +1,46 @@
+var typeNameArray0 = [
+	'浙江', '河北', '陜西', '河南', '山东', '甘肃'
+];
+var typeNameArray1 = [
+	'山西', '辽宁', '吉林', '黑龙江', '云南', '贵州'
+];
+var typeNameArray2 = [
+	'福建', '广东', '海南', '台湾', '四川', '湖北'
+];
+var typeNameArray3 = [
+	'湖南', '江西', '安徽', '江苏', '青海', '新疆'
+];
+var typeNameArray4 = [
+	'内蒙古', '宁夏', '西藏', '广西', '北京', '天津'
+];
+var typeNameArray5 = [
+	'重庆', '上海'
+];
+
+var numberArray0 = [
+	1000, 899, 890, 880, 870, 850
+];
+var numberArray1 = [
+	812, 809, 779, 760, 710, 670
+];
+var numberArray2 = [
+	660, 600, 520, 570, 490, 460
+];
+var numberArray3 = [
+	410, 390, 360, 230, 200, 190
+];
+var numberArray4 = [
+	160, 150, 130, 120, 100, 99
+];
+var numberArray5 = [
+	80, 70
+];
+
 // 基于准备好的dom，初始化echarts实例
-var myChart = echarts.init(document.getElementById('rank'));
+var rankChart = echarts.init(document.getElementById('rank'));
 
 // 指定图表的配置项和数据
-
-option = {
+rank_option = {
 //	color: [
 //		'#21c6a5', '#65c7f7', '#096dc5'
 //	],
@@ -71,5 +108,41 @@ option = {
 	}]
 };
 
+var app = {};
+var index = 0;
+var typeNameArray;
+var numberArray;
+app.timeTicket = setInterval(function() {
+	if(index == 0) index = 1;
+	else if(index == 1) index = 2;
+	else if(index == 2) index = 3;
+	else if(index == 3) index = 4;
+	else if(index == 4) index = 5;
+	else if(index == 5) index = 0;
+	if(index == 0) {
+		typeNameArray = typeNameArray0;
+		numberArray = numberArray0;
+	} else if(index == 1) {
+		typeNameArray = typeNameArray1;
+		numberArray = numberArray1;
+	}else if(index == 2) {
+		typeNameArray = typeNameArray2;
+		numberArray = numberArray2;
+	}else if(index == 3) {
+		typeNameArray = typeNameArray3;
+		numberArray = numberArray3;
+	}else if(index == 4) {
+		typeNameArray = typeNameArray4;
+		numberArray = numberArray4;
+	}else if(index == 5) {
+		typeNameArray = typeNameArray5;
+		numberArray = numberArray5;
+	}
+	
+	rank_option.yAxis.data = typeNameArray;
+	rank_option.series[0].data = numberArray;
+    rankChart.setOption(rank_option, true);
+}, 1000);
+
 // 使用刚指定的配置项和数据显示图表。
-myChart.setOption(option);
+rankChart.setOption(rank_option);
