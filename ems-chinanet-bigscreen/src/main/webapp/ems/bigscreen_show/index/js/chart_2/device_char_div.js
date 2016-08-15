@@ -1,7 +1,6 @@
 $(document).ready(function(){
 	//左下角的设备类型分布的临时数据
-	showDeviceDis(null);
-//	deviceTopName();
+	showDeviceDis(null)
 });  
 
 function showDeviceDis(dataArray){
@@ -40,9 +39,13 @@ function showDeviceDis(dataArray){
             }
         },
         tooltip: {
-            headerFormat: '<span style="color:white;">{series.name}</span><br>',
-            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b style="color:white;">{point.y:.0f}%</b><br/>',
-            backgroundColor: 'black'
+            headerFormat: '<span style="color:white;font-size:16px;">{series.name}</span><br>',
+            pointFormat: '<span style="color:{series.color};font-size:16px;">{series.name}</span>: <b style="color:white;">{point.y:.0f}%</b><br/>',
+            backgroundColor: 'black',
+            style: {
+                    	fontFamily: '微软雅黑',
+                    	fontSize: '16px'
+                    }
         },
         plotOptions: {
         	bar: { 
@@ -58,7 +61,14 @@ function showDeviceDis(dataArray){
                 pointWidth:12, //柱子宽度
                 dataLabels: {
                     enabled: true,
-                    format: '<span style="color:white;">{series.name}</span>: <b style="color:white;">{point.y:.0f}%</b><br/>'
+                    format: '<span style="color:white;font-size:16px;">{series.name}</span>: <b style="color:white;">{point.y:.0f}%</b><br/>',
+                    style: {
+                    	fontFamily: '微软雅黑',
+                    	fontSize: '16px',
+                    	color:"#fff",
+                    
+                    	
+                    }
                 }
             }
         },
@@ -69,137 +79,29 @@ function showDeviceDis(dataArray){
             enabled: false
         },
         series: [{
-            name: '<span style="color:white;font-family:Helvetica;">胖AP</span>',
-            color:'#367bdb',
-            data: [30]
+            name: '<span style="color:white;font-size:16px;fontWeight:bold;">胖AP</span>',
+            color:'#21c6a5',
+            data: [30],
+            
         },
          {
-             name: '<span style="color:white;font-family:Helvetica;">瘦AP</span>',
-             color:'#d9a831',
+             name: '<span style="color:white;font-size:16px;">瘦AP</span>',
+             color:'#65c7f7',
              data: [60]
          },
          {
-             name: '<span style="color:white;font-family:Helvetica;">AC</span>',
-             color:'#42aeb8',
+             name: '<span style="color:white;font-size:16px;">AC</span>',
+             color:'#096dc5',
              data: [80]
          },
          {
-             name: '<span style="color:white;font-family:Helvetica;">热点</span>',
-             color:'#df5964',
+             name: '<span style="color:white;font-size:16px;">热点</span>',
+             color:'#5434de',
              data: [40]
          }]                              
     }); 
 
-//function deviceTopName(){
-	$('#topname').highcharts({                                           
-		chart: {
-            type: 'bar',
-            animation: false,
-            backgroundColor: 'rgba(0,0,0,0)',
-            events: {                                                           
-				load: function() {            
-					setInterval(function() {
-						var a = Math.floor(Math.random()*10000+1);
-						var b = Math.floor(Math.random()*10000+1);
-						var c = Math.floor(Math.random()*10000+1);
-						var d = Math.floor(Math.random()*10000+1);
-						var chart = $('#topname').highcharts();
-	    		        if (chart.lbl) {
-	    		            chart.lbl.destroy();
-	    		        }
-//	    		        var label = '胖AP:'+a+'<br>瘦AP:'+b+'<br>AC:'+c+'<br>热点:'+d;
-	    		        
-	    		        chart.lbl = chart.renderer.label(label, 15, 40)
-	    	            .attr({
-	    	                padding: 5,
-	    	                r: 5,
-	    	                fill: 'transparent',
-	    	                zIndex: 5
-	    	            })
-	    	            .css({
-	    	                color: 'white'
-	    	            })
-	    	            .add();
-					}, 1000);
-				}                                                               
-			}
-        },
-        title: {
-            text: null
-        },
-        xAxis: {
-        	min:0,
-        	lineColor: 'rgba(0,0,0,0)',//设置X轴颜色
-            labels: {
-                formatter: function () {
-                    return '';
-                }
-            },
-            title: {
-                text: null
-            }
-        },
-        yAxis: {
-        	min:0,
-        	max: 100,
-        	gridLineColor: 'rgba(0,0,0,0)',//设置y轴颜色
-            labels: {
-                formatter: function () {
-                    return '';
-                }
-            },
-            title: {
-                text: null
-            }
-        },
-        tooltip: {
-        	enabled:false
-        },
-        plotOptions: {
-        	bar: { 
-                dataLabels: {                                              
-                    enabled: true                                          
-                }                                                          
-            },
-            series:{
-            	pointPadding: 0,
-            	groupPadding: 0,
-                borderWidth: 0,
-                shadow: false,
-                pointWidth:12, //柱子宽度
-                dataLabels: {
-                    enabled: true,
-                    format: '<span style="font-size:0px;">胖AP</span>'
-                }
-            }
-        },
-        legend: {
-            enabled: false
-        },
-        credits: {
-            enabled: false
-        },
-        series: [{
-            name: '<span style="color:white;font-family: Helvetica;">胖AP</span>',
-            color:'#367bdb',
-            data: [10]
-        },
-         {
-             name: '<span style="color:white;font-family: Helvetica;">瘦AP</span>',
-             color:'#d9a831',
-             data: [20]
-         },
-         {
-             name: '<span style="color:white;font-family: Helvetica";>AC</span>',
-             color:'#42aeb8',
-             data: [20]
-         },
-         {
-             name: '<span style="color:white;font-family: Helvetica;">热点</span>',
-             color:'#df5964',
-             data: [20]
-         }]                              
-    }); 
+
 	 setInterval(function () {
 	        // 胖AP
 	        var chart = $('#deviceDistributeChart').highcharts(),

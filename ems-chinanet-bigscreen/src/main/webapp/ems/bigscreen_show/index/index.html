@@ -20,12 +20,6 @@
 	</head>
 
 	<body scrolling="no">
-
-		<div class="toushi"><img src="img/floor.png" alt="" />
-		<!--<img id="logo" src="img/logo.png" alt="" />-->
-		</div>
-		
-
 		<div class="container" ng-app="myApp">
 			<div class="col-md-3 col-lg-3 col-sm-3">
 				<div class="left col-md-12 col-lg-12 col-sm-12">
@@ -139,20 +133,22 @@
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
 						<h1 style="bottom: -5rem;">[ 胖ap激活率统计 ]</h1></div>
-					<div class="Hchart" ui-view="chart_7">
-						<div id="round_div"></div>
+					<div class="Echart" ui-view="chart_7">
+						<div id="deviceContainer" ></div>
 					</div>
 				</div>
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
 						<h1 style="position:absolute;top: 0;">[ 爱wifi热点类型排名 ]</h1></div>
-					<div class="Hchart" ui-view="chart_8"></div>
+					<div class="Echart" ui-view="chart_8">
+						
+					</div>
 				</div>
 				<div class="right col-md-12 col-lg-12 col-sm-12">
 					<div class="topH_right">
 						<h1 style="position:absolute;top: 0;">[ 爱wifi热点类型分布 ]</h1></div>
-					<div class="Hchart" ui-view="chart_9">
-						<div id="spread">
+					<div class="Echart" ui-view="chart_9">
+						<!--<div id="spread">
 							<div class="skillbar clearfix testbar" data-percent="0%">
 								<div class="skillbar-title" style="background: #49b6c0;"><span>学校</span></div>
 								<div class="skillbar-bar" style="background: #49b6c0;"></div>
@@ -179,7 +175,7 @@
 								<div id="skill-bar-percenta" class="skill-bar-percent"></div>
 							</div>
 
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
@@ -210,11 +206,13 @@
 		<!--以下是仪表盘-->
 		<script src="js/dashboard/watch_chart.js" type="text/javascript" charset="utf-8"></script>
 
-
-
+		<!--以下是chart_6-->
+		<script src="js/chart_6/device_mixture_div.js" type="text/javascript" charset="utf-8"></script>
+		
 		<!--以下是chart_7-->
 		<script src="js/chart_7/round_char_div.js" type="text/javascript" charset="utf-8"></script>
 		<script src="js/chart_7/highcharts-3d.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/chart_7/hotspot.js" type="text/javascript" charset="utf-8"></script>
 		
 		<!--以下是chart_9-->
 		<script src="js/chart_9/chart_9.js" type="text/javascript" charset="utf-8"></script>
