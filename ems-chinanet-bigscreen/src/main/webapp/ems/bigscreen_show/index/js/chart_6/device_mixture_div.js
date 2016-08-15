@@ -85,7 +85,7 @@ function EcharTest(){
 		                return res;
 		            })(),
 		            itemStyle:{normal:{
-	                    color:'#42aeb8'
+	                    color:'#21c6a5'
 	                }}
 		        },
 		        {
@@ -102,7 +102,7 @@ function EcharTest(){
 		                return res;
 		            })(),
 		            itemStyle:{normal:{
-	                    color:'#367bdb'
+	                    color:'#65c7f7'
 	                }}
 		        },
 		        {
@@ -119,7 +119,7 @@ function EcharTest(){
 		                return res;
 		            })(),
 		            itemStyle:{normal:{
-	                    color:'#d9a831'
+	                    color:'#096dc5'
 	                }}
 		        },
 		        {
@@ -151,7 +151,7 @@ function EcharTest(){
 		                        length : 20
 		                    },
 		                    color:function(params){
-		                        var colorList=['#42aeb8','#367bdb','#d9a831'];
+		                        var colorList=['#21c6a5', '#65c7f7', '#096dc5'];
 		                        return colorList[params.dataIndex];
 		                    }
 		                }},

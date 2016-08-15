@@ -2,139 +2,144 @@
 var hotspotChart = echarts.init(document.getElementById('hotspot'));
 
 // 指定图表的配置项和数据
+var data = [
+	[
+		[38604, 57, 127096869, '学校'],
+		[41163, 77.4, 227662440, '医院'],
+		[20516, 68, 1154605773, '码头'],
+		[13670, 74.7, 185289082, ' 酒店'],
+		[28599, 55, 432986705, '公园'],
+		[29476, 67.1, 576943299, '机场'],
+		[31476, 25.4, 78958237, '浴室'],
+		[28666, 78.1, 256854830, '商场'],
+		[3777, 19.8, 870601340, '游乐场'],
+		[29550, 29.1, 122249285, '文化厅'],
+		[2076, 67.9, 201934354, '车站'],
+		[12087, 72, 483972254, '饭馆'],
+		[24021, 75.4, 128397534, '图书馆'],
+		[43296, 76.8, 4240375, '展览馆'],
+		[10088, 40.8, 88195258, '美容店'],
+		[19349, 49.6, 147568552, '体育场'],
+		[10670, 37.3, 293994605, '招待所']
+	]
+];
 
 opt_hotspot = {
+	tooltip: {
+		trigger: 'axis',
+		itemGap: '	0',
+		axisPointer: {
+			type: 'shadow'
+		}
+	},
+	//  backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
+	//      offset: 0,
+	//      color: '#333'
+	//  }, {
+	//      offset: 1,
+	//      color: '#333'
+	//  }]),
 
-    tooltip : {
-        trigger: 'item',
-        formatter: '{a} : {b}'
-    },
-    toolbox: {
-        show : true,
-        feature : {
-            restore : {show: true},
-            magicType: {show: true, type: ['force', 'chord']},
-            saveAsImage : {show: true}
-        }
-    },
-    legend: {
-        x: 'left',
-        data:['家人','朋友']
-    },
-    series : [
-        {
-            type:'force',
-            name : "人物关系",
-            ribbonType: false,
-            categories : [
-                {
-                    name: '人物'
-                },
-                {
-                    name: '家人'
-                },
-                {
-                    name:'朋友'
-                }
-            ],
-            itemStyle: {
-                normal: {
-                    label: {
-                        show: true,
-                        textStyle: {
-                            color: '#333'
-                        }
-                    },
-                    nodeStyle : {
-                        brushType : 'both',
-                        borderColor : 'rgba(255,215,0,0.4)',
-                        borderWidth : 1
-                    },
-                    linkStyle: {
-                        type: 'curve'
-                    }
-                },
-                emphasis: {
-                    label: {
-                        show: false
-                        // textStyle: null      // 默认使用全局文本样式，详见TEXTSTYLE
-                    },
-                    nodeStyle : {
-                        //r: 30
-                    },
-                    linkStyle : {}
-                }
-            },
-            useWorker: false,
-            minRadius : 15,
-            maxRadius : 25,
-            gravity: 1.1,
-            scaling: 1.1,
-            roam: 'move',
-            nodes:[
-                {category:0, name: '乔布斯', value : 10, label: '乔布斯\n（主要）'},
-                {category:2, name: '丽乔布斯',value : 2},
-                {category:3, name: '保罗-乔斯',value : 3},
-                {category:4, name: '克拉乔布斯',value : 10},
-                {category:5, name: '劳伦-鲍尔',value : 7},
-                {category:6, name: '史蒂夫-沃兹尼艾克',value : 5},
-                {category:7, name: '奥马',value : 8},
-                {category:8, name: '比尔-盖茨',value : 9},
-                {category:9, name: '乔纳-艾夫',value : 4},
-                {category:10, name: '蒂-库克',value : 4},
-                {category:11, name: '龙-恩',value : 1},
-                 {category:12, name: '史蒂-沃兹尼艾克',value : 5},
-                {category:13, name: '奥巴马',value : 8},
-                {category:14, name: '比-盖茨',value : 9},
-                {category:15, name: '乔纳森艾夫',value : 4},
-                {category:16, name: '蒂姆-克',value : 4},
-                {category:17, name: '恩',value : 1},
-            ],
-            links : [
-                {source : '丽萨-乔布斯', target : '乔布斯', weight : 1, name: '女儿'},
-                {source : '保罗-乔布斯', target : '乔布斯', weight : 2, name: '父亲'},
-                {source : '克拉拉-乔布斯', target : '乔布斯', weight : 1, name: '母亲'},
-                {source : '劳伦-鲍威尔', target : '乔布斯', weight : 2},
-                {source : '史蒂夫-沃兹尼艾克', target : '乔布斯', weight : 3, name: '合伙人'},
-                {source : '奥巴马', target : '乔布斯', weight : 1},
-                {source : '比尔-盖茨', target : '乔布斯', weight : 6, name: '竞争对手'},
-                {source : '乔纳森-艾夫', target : '乔布斯', weight : 1, name: '爱将'},
-                {source : '蒂姆-库克', target : '乔布斯', weight : 1},
-                {source : '韦恩', target : '乔布斯', weight : 1},
-                {source : '克拉拉-乔布斯', target : '乔布斯', weight : 1},
-                {source : '奥巴马', target : '乔布斯', weight : 1},
-                {source : '奥巴马', target : '乔布斯', weight : 1},
-                {source : '奥巴马', target : '乔布斯', weight : 1},
-                {source : '奥巴马', target : '乔布斯', weight : 1},
-                {source : '比尔-盖茨', target : '乔布斯', weight : 6},
-                {source : '比尔-盖茨', target : '乔布斯', weight : 1},
-                {source : '蒂姆-库克', target : '乔布斯', weight : 1}
-            ]
-        }
-    ]
+	xAxis: {
+
+		axisLine: {
+			show: true,
+			onZero: true,
+			lineStyle: {
+				color: '#aaa',
+				width: 1,
+				type: 'solid',
+				opacity: 1,
+			},
+		},
+		splitLine: {
+			lineStyle: {
+				type: 'dashed'
+			}
+		}
+	},
+	yAxis: {
+		axisLine: {
+			show: true,
+			onZero: true,
+			lineStyle: {
+				color: '#aaa',
+				width: 1,
+				type: 'solid',
+				opacity: 1,
+			},
+		},
+		splitLine: {
+			lineStyle: {
+				type: 'dashed'
+			}
+		},
+		scale: true
+	},
+	series: [{
+		name: '',
+		data: data[0],
+		type: 'scatter',
+		symbolSize: function(data) {
+			return Math.sqrt(data[2]) / 5e2;
+		},
+		label: {
+			emphasis: {
+				show: true,
+				formatter: function(param) {
+					return param.data[3];
+				},
+				position: 'top'
+			}
+		},
+
+		itemStyle: {
+			normal: {
+				shadowBlur: 10,
+				shadowColor: 'rgba(120, 36, 50, 0.5)',
+				shadowOffsetY: 5,
+				color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
+					     offset: 0,
+                    color: 'rgb(129, 227, 238)'
+                }, {
+                    offset: 1,
+                    color: 'rgb(25, 183, 207)'
+				}])
+			}
+		}
+
+	}]
 };
-var ecConfig = require('echarts/config');
-function focus(param) {
-    var data = param.data;
-    var links = option.series[0].links;
-    var nodes = option.series[0].nodes;
-    if (
-        data.source !== undefined
-        && data.target !== undefined
-    ) { //点击的是边
-        var sourceNode = nodes.filter(function (n) {return n.name == data.source})[0];
-        var targetNode = nodes.filter(function (n) {return n.name == data.target})[0];
-        console.log("选中了边 " + sourceNode.name + ' -> ' + targetNode.name + ' (' + data.weight + ')');
-    } else { // 点击的是点
-        console.log("选中了" + data.name + '(' + data.value + ')');
-    }
-}
-hotspotChart.on(ecConfig.EVENT.CLICK, focus)
 
-hotspotChart.on(ecConfig.EVENT.FORCE_LAYOUT_END, function () {
-    console.log(hotspotChart.chart.force.getPosition());
-});
-// 使用刚指定的配置项和数据显示图表。
+var app_hotspot = {};
+
+app_hotspot.currentIndex = -1;
+
+app_hotspot.timeTicket = setInterval(function() {
+	
+	var dataLen = opt_hotspot.series[0].data.length;
+
+	// 取消之前高亮的图形
+	hotspotChart.dispatchAction({
+		type: 'downplay',
+		seriesIndex: 0,
+		dataIndex: app_hotspot.currentIndex
+	});
+	
+	app_hotspot.currentIndex = (app_hotspot.currentIndex + 1) % dataLen;
+	console.log(opt_hotspot.currentIndex);
+	// 高亮当前图形
+	hotspotChart.dispatchAction({
+		type: 'highlight',
+		seriesIndex: 0,
+		dataIndex: app_hotspot.currentIndex
+	});
+	// 显示 tooltip
+	hotspotChart.dispatchAction({
+		type: 'showTip',
+		seriesIndex: 0,
+		dataIndex: app_hotspot.currentIndex
+	});
+}, 1000);
+//用刚指定的配置项和数据显示图表。
 hotspotChart.setOption(opt_hotspot);
-
-                    
