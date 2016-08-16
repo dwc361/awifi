@@ -165,7 +165,7 @@ function show_areaspline_chart(data) {
 		},
 		series: [{ // 数据列
 			type: 'areaspline',
-			name: '故障',
+			name: '业务受理量',
 			pointStart: Date.UTC(y, m, d, 0), // 开始时间：y年m月d日0时
 			pointInterval: 3600 * 1000, // 每隔1小时
 			data: (function() {

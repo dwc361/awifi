@@ -161,20 +161,20 @@ app_end.timeTicket = setInterval(function() {
 	endChart.dispatchAction({
 		type: 'downplay',
 		seriesIndex: 0,
-		dataIndex: app.currentIndex
+		dataIndex: app_end.currentIndex
 	});
 	app_end.currentIndex = (app_end.currentIndex + 1) % dataLen;
 	// 高亮当前图形
 	endChart.dispatchAction({
 		type: 'highlight',
 		seriesIndex: 0,
-		dataIndex: app.currentIndex
+		dataIndex: app_end.currentIndex
 	});
 	// 显示 tooltip
 	endChart.dispatchAction({
 		type: 'showTip',
 		seriesIndex: 0,
-		dataIndex: app.currentIndex
+		dataIndex: app_end.currentIndex
 	});
 }, 5000);
 // 使用刚指定的配置项和数据显示图表。

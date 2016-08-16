@@ -378,9 +378,9 @@ h1 {
 }
 
 #textname {
-	float: top;
-	left: 49px;
-	top: 100px;
+	position: absolute;
+    left: 2rem;
+    top: 1rem;
 	padding: 0px;
 	margin: 0px;
 	width: 100%;

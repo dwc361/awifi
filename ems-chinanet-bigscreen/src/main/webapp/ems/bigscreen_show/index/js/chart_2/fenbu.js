@@ -53,30 +53,30 @@ opt_spread = {
 };
                     
 
-var app = {};
+var spread_app = {};
 
-app.currentIndex = -1;
+spread_app.currentIndex = -1;
 
-app.timeTicket = setInterval(function() {
+spread_app.timeTicket = setInterval(function() {
 	var dataLen = opt_spread.series[0].data.length;
 	// 取消之前高亮的图形
 	spreadChart.dispatchAction({
 		type: 'downplay',
 		seriesIndex: 0,
-		dataIndex: app.currentIndex
+		dataIndex: spread_app.currentIndex
 	});
-	app.currentIndex = (app.currentIndex + 1) % dataLen;
+	spread_app.currentIndex = (spread_app.currentIndex + 1) % dataLen;
 	// 高亮当前图形
 	spreadChart.dispatchAction({
 		type: 'highlight',
 		seriesIndex: 0,
-		dataIndex: app.currentIndex
+		dataIndex: spread_app.currentIndex
 	});
 	// 显示 tooltip
 	spreadChart.dispatchAction({
 		type: 'showTip',
 		seriesIndex: 0,
-		dataIndex: app.currentIndex
+		dataIndex: spread_app.currentIndex
 	});
 }, 5000);
 

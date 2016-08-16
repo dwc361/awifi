@@ -1,11 +1,11 @@
 // 基于准备好的dom，初始化echarts实例
-var myChart = echarts.init(document.getElementById('jihuolv'));
+var jihuolvChart = echarts.init(document.getElementById('jihuolv'));
 
 // 指定图表的配置项和数据
 
 //app.title = '折柱混合';
 
-option = {
+opt_jihuolv = {
 	//  backgroundColor:'#333',
 	color: [
 		'#21c6a5', '#65c7f7'
@@ -59,18 +59,49 @@ show:false
 		}
 	}],
 	series: [{
-			name: '蒸发量',
+			name: '激活率',
 			type: 'bar',
 			data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
 		},
 
 		{
-			name: '平均温度',
+			name: '激活量',
 			type: 'line',
 			yAxisIndex: 1,
 			data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
 		}
 	]
 };
+
+var app_jihuolv = {};
+
+app_jihuolv.currentIndex = -1;
+
+app_jihuolv.timeTicket = setInterval(function() {
+	
+	var dataLen = opt_jihuolv.series[0].data.length;
+
+	// 取消之前高亮的图形
+	jihuolvChart.dispatchAction({
+		type: 'downplay',
+		seriesIndex: 0,
+		dataIndex: app_hotspot.currentIndex
+	});
+	
+	app_hotspot.currentIndex = (app_hotspot.currentIndex + 1) % dataLen;
+	console.log(opt_jihuolv.currentIndex);
+	// 高亮当前图形
+	jihuolvChart.dispatchAction({
+		type: 'highlight',
+		seriesIndex: 0,
+		dataIndex: app_hotspot.currentIndex
+	});
+	// 显示 tooltip
+	jihuolvChart.dispatchAction({
+		type: 'showTip',
+		seriesIndex: 0,
+		dataIndex: app_hotspot.currentIndex
+	});
+}, 3000);
 // 使用刚指定的配置项和数据显示图表。
-myChart.setOption(option);
+jihuolvChart.setOption(opt_jihuolv);

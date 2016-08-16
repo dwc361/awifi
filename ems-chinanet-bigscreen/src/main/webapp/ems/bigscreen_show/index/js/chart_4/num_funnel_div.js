@@ -22,22 +22,22 @@ $(document).ready(function() {
 		'重庆', '上海'
 	];
 
-	var numberArray = [
+	var numberArray[0] = [
 		1000, 899, 890, 880, 870, 850
 	];
-	var numberArray1 = [
+	var numberArray[1] = [
 		812, 809, 779, 760, 710, 670
 	];
-	var numberArray2 = [
+	var numberArray[2] = [
 		660, 600, 520, 570, 490, 460
 	];
-	var numberArray3 = [
+	var numberArray[3] = [
 		410, 390, 360, 230, 200, 190
 	];
-	var numberArray4 = [
+	var numberArray[4] = [
 		160, 150, 130, 120, 100, 99
 	];
-	var numberArray5 = [
+	var numberArray[5] = [
 		80, 70
 	];
 
@@ -50,18 +50,19 @@ $(document).ready(function() {
 		else if(index == 3) index = 4;
 		else if(index == 4) index = 5;
 		else if(index == 5) index = 0;
+		
 		if(index == 0) {
-			showHotareaDistribution(typeNameArray, numberArray);
+			showHotareaDistribution(typeNameArray[0], numberArray[0]);
 		} else if(index == 1) {
-			showHotareaDistribution(typeNameArray1, numberArray1);
+			showHotareaDistribution(typeNameArray[1], numberArray[1]);
 		}else if(index == 2) {
-			showHotareaDistribution(typeNameArray2, numberArray2);
+			showHotareaDistribution(typeNameArray[2], numberArray[2]);
 		}else if(index == 3) {
-			showHotareaDistribution(typeNameArray3, numberArray3);
+			showHotareaDistribution(typeNameArray[3], numberArray[3]);
 		}else if(index == 4) {
-			showHotareaDistribution(typeNameArray4, numberArray4);
+			showHotareaDistribution(typeNameArray[4], numberArray[4]);
 		}else if(index == 5) {
-			showHotareaDistribution(typeNameArray5, numberArray5);
+			showHotareaDistribution(typeNameArray[5], numberArray[5]);
 		}
 	}, 3000);
 });

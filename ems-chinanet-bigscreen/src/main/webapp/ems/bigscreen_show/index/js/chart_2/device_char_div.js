@@ -150,5 +150,5 @@ function showDeviceDis(dataArray){
 	            }
 	            point.update(newVal);
 	        }
-	    }, 1000);
+	    }, 3000);
 }

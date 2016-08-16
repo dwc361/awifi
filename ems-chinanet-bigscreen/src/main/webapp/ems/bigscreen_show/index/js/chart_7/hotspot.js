@@ -127,7 +127,7 @@ app_hotspot.timeTicket = setInterval(function() {
 	});
 	
 	app_hotspot.currentIndex = (app_hotspot.currentIndex + 1) % dataLen;
-	
+	console.log(opt_hotspot.currentIndex);
 	// 高亮当前图形
 	hotspotChart.dispatchAction({
 		type: 'highlight',
@@ -140,6 +140,6 @@ app_hotspot.timeTicket = setInterval(function() {
 		seriesIndex: 0,
 		dataIndex: app_hotspot.currentIndex
 	});
-}, 1000);
+}, 3000);
 //用刚指定的配置项和数据显示图表。
 hotspotChart.setOption(opt_hotspot);

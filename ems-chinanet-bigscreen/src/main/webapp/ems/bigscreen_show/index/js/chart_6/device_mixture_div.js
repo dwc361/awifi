@@ -185,7 +185,7 @@ function EcharTest(){
 		    opt_state.xAxis[0].data.push(axisData);
 
 		    stateChart.setOption(opt_state);
-		}, 1000);
+		}, 3000);
 }
 var deviceTheme = {
         // 全图默认背景
