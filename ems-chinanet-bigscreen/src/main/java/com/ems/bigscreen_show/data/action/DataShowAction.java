@@ -43,7 +43,7 @@ public class DataShowAction {
 			for(Object object : objects) {
 				Map map = new HashMap();
 				map.put('x', object);
-				map.put('y', generator.nextDouble());
+				map.put('y', generator.nextInt(10000));
 				map.put('a', generator.nextDouble());
 				map.put('b', generator.nextDouble()+1);
 				map.put('c', generator.nextDouble()+2);

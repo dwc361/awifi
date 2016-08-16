@@ -39,6 +39,11 @@ public class Chart implements Serializable {
 		this.id = id;
 	}
 
+	public Chart(String enabled) {
+		super();
+		this.enabled = enabled;
+	}
+
 	@Id // 主键
 	public Long getId() {
 		return id;
