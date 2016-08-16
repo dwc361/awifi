@@ -89,7 +89,7 @@ app_jihuolv.timeTicket = setInterval(function() {
 	});
 	
 	app_hotspot.currentIndex = (app_hotspot.currentIndex + 1) % dataLen;
-	console.log(opt_jihuolv.currentIndex);
+	
 	// 高亮当前图形
 	jihuolvChart.dispatchAction({
 		type: 'highlight',

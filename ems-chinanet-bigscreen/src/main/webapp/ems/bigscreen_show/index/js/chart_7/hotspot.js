@@ -127,7 +127,7 @@ app_hotspot.timeTicket = setInterval(function() {
 	});
 	
 	app_hotspot.currentIndex = (app_hotspot.currentIndex + 1) % dataLen;
-	console.log(opt_hotspot.currentIndex);
+	
 	// 高亮当前图形
 	hotspotChart.dispatchAction({
 		type: 'highlight',
