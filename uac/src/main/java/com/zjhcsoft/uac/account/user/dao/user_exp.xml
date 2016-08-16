@@ -121,7 +121,11 @@
 		'%'
 	</select>
 	
+<!-- 	<select id="selectOrganizationIdsByParentId" parameterClass="java.util.Map" resultClass="java.lang.Long"> -->
+<!-- 	 	select org_id from organization start with org_id = #org_id# connect by parent_id = prior org_id -->
+<!-- 	</select> -->
+	
 	<select id="selectOrganizationIdsByParentId" parameterClass="java.util.Map" resultClass="java.lang.Long">
-	 	select org_id from organization start with org_id = #org_id# connect by parent_id = prior org_id
+	 	select org_id from organization where parent_id = #org_id#
 	</select>
 </sqlMap>
