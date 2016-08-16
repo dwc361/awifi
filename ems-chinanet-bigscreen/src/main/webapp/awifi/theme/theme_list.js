@@ -18,7 +18,7 @@ $(function() {
 	var table = new ROOF.SelectableTable($('#bigscreen_theme_table'));
 	var page = new com.letv.PageBar($('#bigscreen_theme_search_form'));
 	$("#bigscreen_theme_create_btn").click(function() {
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/themeAction/create_page.action", "e_theme管理", width, height, true, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/themeAction/create_page.action", "主题管理", width, height, true, true);
 		return false;
 	});
 	$("#bigscreen_theme_detail_btn").click(function() {
@@ -28,7 +28,7 @@ $(function() {
 			return false;
 		}
 		var id = trs[0].find(":input[name='id']").val();
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/themeAction/detail_page.action?id=" + id  , "e_theme管理", width, height, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/themeAction/detail_page.action?id=" + id  , "主题管理", width, height, true);
 		return false;
 	});
 	$("#bigscreen_theme_update_btn").click(function() {
@@ -38,7 +38,7 @@ $(function() {
 			return false;
 		}
 		var id = trs[0].find(":input[name='id']").val();
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/themeAction/update_page.action?id=" + id  , "e_theme管理", width, height, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/themeAction/update_page.action?id=" + id  , "主题管理", width, height, true);
 		return false;
 	});
 	$("#bigscreen_theme_delete_btn").click(function() {

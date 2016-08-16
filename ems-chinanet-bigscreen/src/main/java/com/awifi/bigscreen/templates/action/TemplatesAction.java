@@ -8,9 +8,13 @@ import org.roof.roof.dataaccess.api.PageUtils;
 import org.roof.spring.Result;
 import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
+import org.roof.web.user.entity.User;
+import org.roof.web.user.service.api.BaseUserContext;
+
 import com.awifi.bigscreen.templates.entity.Templates;
 import com.awifi.bigscreen.templates.entity.TemplatesVo;
 import com.awifi.bigscreen.templates.service.api.ITemplatesService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -25,9 +29,11 @@ public class TemplatesAction {
 	private IDictionaryService dictionaryService;
 
 	// 加载页面的通用数据
-	private void loadCommon(Model model){
-		List<Dictionary> dicList =  dictionaryService.findByType("TEST");
+	private void loadCommon(Model model) {
+		List<Dictionary> dicList = dictionaryService.findByType("TEST");
 		model.addAttribute("dicList", dicList);
+		List<Dictionary> enableds = dictionaryService.findByType("enabled");
+		model.addAttribute("enableds", enableds);
 	}
 
 	@RequestMapping("/index")
@@ -44,8 +50,7 @@ public class TemplatesAction {
 		this.loadCommon(model);
 		return "/awifi/templates/templates_list.jsp";
 	}
-	
-	
+
 	@RequestMapping("/create_page")
 	public String create_page(Model model) {
 		Templates templates = new Templates();
@@ -53,7 +58,7 @@ public class TemplatesAction {
 		this.loadCommon(model);
 		return "/awifi/templates/templates_create.jsp";
 	}
-	
+
 	@RequestMapping("/update_page")
 	public String update_page(Templates templates, Model model) {
 		templates = templatesService.load(templates);
@@ -71,35 +76,38 @@ public class TemplatesAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(Templates templates) {
+	public @ResponseBody Result create(HttpServletRequest request, Templates templates) {
 		if (templates != null) {
+			User user = (User) BaseUserContext.getCurrentUser(request);
+			templates.setCreate_by(user.getUsername());
 			templatesService.save(templates);
 			return new Result("保存成功!");
 		} else {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+
 	@RequestMapping("/update")
-	public @ResponseBody Result update(Templates templates) {
+	public @ResponseBody Result update(HttpServletRequest request,Templates templates) {
 		if (templates != null) {
+			User user = (User) BaseUserContext.getCurrentUser(request);
+			templates.setUpdate_by(user.getUsername());
 			templatesService.updateIgnoreNull(templates);
 			return new Result("保存成功!");
 		} else {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+
 	@RequestMapping("/delete")
 	public @ResponseBody Result delete(Templates templates) {
-		// TODO 有些关键数据是不能物理删除的，需要改为逻辑删除
-		templatesService.delete(templates);
-		return new Result("删除成功!");
+		templates.setEnabled("0");
+		templatesService.updateIgnoreNull(templates);
+		return new Result("禁用成功!");
 	}
 
 	@Autowired(required = true)
-	public void setTemplatesService(
-			@Qualifier("templatesService") ITemplatesService templatesService) {
+	public void setTemplatesService(@Qualifier("templatesService") ITemplatesService templatesService) {
 		this.templatesService = templatesService;
 	}
 

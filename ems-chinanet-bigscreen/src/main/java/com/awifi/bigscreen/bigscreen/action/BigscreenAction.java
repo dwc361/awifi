@@ -8,6 +8,9 @@ import org.roof.roof.dataaccess.api.PageUtils;
 import org.roof.spring.Result;
 import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
+import org.roof.web.user.entity.User;
+import org.roof.web.user.service.api.BaseUserContext;
+
 import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
 import com.awifi.bigscreen.bigscreen.entity.BigscreenVo;
 import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
@@ -25,8 +28,8 @@ public class BigscreenAction {
 	private IDictionaryService dictionaryService;
 
 	// 加载页面的通用数据
-	private void loadCommon(Model model){
-		List<Dictionary> dicList =  dictionaryService.findByType("TEST");
+	private void loadCommon(Model model) {
+		List<Dictionary> dicList = dictionaryService.findByType("TEST");
 		model.addAttribute("dicList", dicList);
 	}
 
@@ -44,8 +47,7 @@ public class BigscreenAction {
 		this.loadCommon(model);
 		return "/awifi/bigscreen/bigscreen_list.jsp";
 	}
-	
-	
+
 	@RequestMapping("/create_page")
 	public String create_page(Model model) {
 		Bigscreen bigscreen = new Bigscreen();
@@ -53,13 +55,21 @@ public class BigscreenAction {
 		this.loadCommon(model);
 		return "/awifi/bigscreen/bigscreen_create.jsp";
 	}
-	
+
 	@RequestMapping("/update_page")
 	public String update_page(Bigscreen bigscreen, Model model) {
 		bigscreen = bigscreenService.load(bigscreen);
 		model.addAttribute("bigscreen", bigscreen);
 		this.loadCommon(model);
 		return "/awifi/bigscreen/bigscreen_update.jsp";
+	}
+
+	@RequestMapping("/bigscreen_update_easyui")
+	public String bigscreen_update_easyui(Bigscreen bigscreen, Model model) {
+		bigscreen = bigscreenService.load(bigscreen);
+		model.addAttribute("bigscreen", bigscreen);
+		this.loadCommon(model);
+		return "/awifi/bigscreen/bigscreen_update_easyui.jsp";
 	}
 
 	@RequestMapping("/detail_page")
@@ -71,35 +81,38 @@ public class BigscreenAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(Bigscreen bigscreen) {
+	public @ResponseBody Result create(HttpServletRequest request, Bigscreen bigscreen) {
 		if (bigscreen != null) {
+			User user = (User) BaseUserContext.getCurrentUser(request);
+			bigscreen.setUpdate_by(user.getUsername());
 			bigscreenService.save(bigscreen);
 			return new Result("保存成功!");
 		} else {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+
 	@RequestMapping("/update")
-	public @ResponseBody Result update(Bigscreen bigscreen) {
+	public @ResponseBody Result update(HttpServletRequest request, Bigscreen bigscreen) {
 		if (bigscreen != null) {
+			User user = (User) BaseUserContext.getCurrentUser(request);
+			bigscreen.setUpdate_by(user.getUsername());
 			bigscreenService.updateIgnoreNull(bigscreen);
 			return new Result("保存成功!");
 		} else {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+
 	@RequestMapping("/delete")
 	public @ResponseBody Result delete(Bigscreen bigscreen) {
-		// TODO 有些关键数据是不能物理删除的，需要改为逻辑删除
-		bigscreenService.delete(bigscreen);
+		// bigscreen.setEnabled("0");
+		bigscreenService.updateIgnoreNull(bigscreen);
 		return new Result("删除成功!");
 	}
 
 	@Autowired(required = true)
-	public void setBigscreenService(
-			@Qualifier("bigscreenService") IBigscreenService bigscreenService) {
+	public void setBigscreenService(@Qualifier("bigscreenService") IBigscreenService bigscreenService) {
 		this.bigscreenService = bigscreenService;
 	}
 

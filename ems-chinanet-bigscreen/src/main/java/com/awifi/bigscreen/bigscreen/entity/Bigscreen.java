@@ -29,6 +29,7 @@ public class Bigscreen implements Serializable {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date update_time;// 更新时间
 	protected String update_by;// 更新用户
+	protected String enabled;// 是否可用
 
 	public Bigscreen() {
 		super();
@@ -126,5 +127,13 @@ public class Bigscreen implements Serializable {
 
 	public void setUpdate_by(String update_by) {
 		this.update_by = update_by;
+	}
+
+	public String getEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(String enabled) {
+		this.enabled = enabled;
 	}
 }
