@@ -40,6 +40,8 @@
 
 	<import resource="classpath:spring-db-mybatis.xml" />
 	<import resource="classpath:spring-cache-concurrentMap.xml" />
+	<import resource="classpath:spring-redis.xml" />
+	<import resource="classpath:spring-service-aop.xml" />
 
 
 	<bean id="injectionApplicationContextListener" class="org.roof.spring.InjectionApplicationContextListener" />

@@ -18,7 +18,7 @@ $(function() {
 	var table = new ROOF.SelectableTable($('#bigscreen_templates_table'));
 	var page = new com.letv.PageBar($('#bigscreen_templates_search_form'));
 	$("#bigscreen_templates_create_btn").click(function() {
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/templatesAction/create_page.action", "e_templates管理", width, height, true, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/templatesAction/create_page.action", "模板管理", width, height, true, true);
 		return false;
 	});
 	$("#bigscreen_templates_detail_btn").click(function() {
@@ -28,7 +28,7 @@ $(function() {
 			return false;
 		}
 		var id = trs[0].find(":input[name='id']").val();
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/templatesAction/detail_page.action?id=" + id  , "e_templates管理", width, height, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/templatesAction/detail_page.action?id=" + id  , "模板管理", width, height, true);
 		return false;
 	});
 	$("#bigscreen_templates_update_btn").click(function() {
@@ -38,7 +38,7 @@ $(function() {
 			return false;
 		}
 		var id = trs[0].find(":input[name='id']").val();
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/templatesAction/update_page.action?id=" + id  , "e_templates管理", width, height, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/templatesAction/update_page.action?id=" + id  , "模板管理", width, height, true);
 		return false;
 	});
 	$("#bigscreen_templates_delete_btn").click(function() {

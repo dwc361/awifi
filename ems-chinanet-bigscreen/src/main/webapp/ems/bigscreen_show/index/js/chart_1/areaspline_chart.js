@@ -2,40 +2,84 @@ now = new Date(); //定义一个时间对象
 y = now.getFullYear(); //获取完整的年份(4位,1970-????)
 m = now.getMonth(); //获取当前月份(0-11,0代表1月)
 d = now.getDate(); //获取当前日(1-31)
+h = now.getHours(); //时  
 $(function() {
-	Highcharts.getOptions().colors = "#1a94a0,#434348,#90ed7d,#f7a35c,#8085e9,#f15c80,#e4d354,#2b908f,#f45b5b,#91e8e1".split(",");
+	var x_arr = new Array();
+	for(i = h - 11; i <= h; i++) {
+		x_arr.push(Date.UTC(y, m, d, i));
+	}
+
+	$.ajax({
+		type: 'post',
+		dataType: "json",
+		url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
+		data: {
+			'x_json': $.toJSON(x_arr)
+		},
+		success: function(d) {
+			if(d.data != null) {
+				var data = [];
+				$.each(d.data, function(i, n) {
+					data.push({
+						x: n.x,
+						y: n.y
+					});
+					$("#areaspline1").html(n.y);
+				});
+			}
+			show_areaspline_chart(data);
+		},
+		error: function(d) {
+//			alert(d.statusText);
+		}
+	});
+});
+
+function show_areaspline_chart(data) {
+	Highcharts.getOptions().colors = "#18909c,#156871,#0e3236,#090b0b".split(",");
 	$('#areaspline_div').highcharts({
 		chart: {
 			type: 'areaspline',
 			events: {
 				load: function() {
 					var series = this.series[0];
+					series.points[series.points.length - 1].setState('hover');
 					setInterval(function() {
-						var x = (new Date()).getTime(), // current time
-							y = Math.random();
-						series.addPoint([x, y], true, true);
+						h++;
+						var x = Date.UTC(y, m, d, h);
+						var x_arr = new Array();
+						x_arr.push(x);
 
-						var now = getDateTime(new Date());
-						var a = Math.floor(Math.random() * 10000 + 1);
-						var b = Math.floor(Math.random() * 10000 + 1);
-						var c = Math.floor(Math.random() * 10000 + 1);
-						var chart = $('#areaspline_div').highcharts();
-						if(chart.lbl) {
-							chart.lbl.destroy();
-						}
+						$.ajax({
+							type: 'post',
+							dataType: "json",
+							url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
+							data: {
+								'x_json': $.toJSON(x_arr)
+							},
+							success: function(d) {
+								if(d.data != null) {
+									$.each(d.data, function(i, n) {
+										var x = n.x;
+										var y = n.y;
+										var a = n.a;
+										var b = n.b;
+										var c = n.c;
 
-						chart.lbl = chart.renderer.label("", 15, 0)
-							.attr({
-								padding: 5,
-								r: 5,
-								fill: 'transparent',
-								zIndex: 5
-							})
-							.css({
-								color: 'white'
-							})
-							.add();
-					}, 1000);
+										series.points[series.points.length - 1].setState();
+										series.addPoint([x, y], true, true);
+										series.points[series.points.length - 1].setState('hover');
+										
+										$("#areaspline1").html(y);
+									});
+								}
+							},
+							error: function(d) {
+//								alert(d.statusText);
+							}
+						});
+
+					}, 3000);
 				}
 			}
 		},
@@ -50,13 +94,22 @@ $(function() {
 			text: ''
 		},
 		xAxis: {
+			lineColor: '#4debf9',
+			tickColor: '#4debf9',
+			labels: {
+				style: {
+					color: '#aaa',
+					  fontSize:'1.2rem',
+//					fontWeight: 'bold'
+				}
+			},
 			type: 'datetime',
 			dateTimeLabelFormats: {
 				millisecond: '%H:%M:%S.%L',
 				second: '%H:%M:%S',
 				minute: '%H:%M',
 				hour: '%H:%M',
-				day: '%e. %b',
+				day: '%e. %b %H:%M',
 				week: '%e. %b',
 				month: '%b \'%y',
 				year: '%Y'
@@ -71,7 +124,6 @@ $(function() {
 					return '';
 				}
 			},
-			max: 2,
 			gridLineColor: ''
 		},
 		legend: { // 图例
@@ -98,42 +150,34 @@ $(function() {
 					]
 				},
 				marker: {
-					radius: 2
+					enabled: false,
+					radius: 6
 				},
-				lineWidth: 2,
+				lineWidth: 1,
 				states: {
 					hover: {
-						lineWidth: 1
+						lineWidth: 2
 					}
 				},
 				threshold: null
 			},
 			series: {
+				lineWidth: 2,
 				lineColor: '#57ebf8'
 			}
 		},
 		series: [{ // 数据列
 			type: 'areaspline',
-			name: '故障',
+			name: '业务受理量',
 			pointStart: Date.UTC(y, m, d, 0), // 开始时间：y年m月d日0时
 			pointInterval: 3600 * 1000, // 每隔1小时
 			data: (function() {
-				var data = [],
-					time = (new Date()).getTime(),
-					i;
-
-				for(i = -11; i <= 0; i++) {
-					data.push({
-						x: time + i * 1000,
-						y: Math.random()
-					});
-				}
 				return data;
 			})(),
 			marker: {
 				lineWidth: 1,
-				lineColor: 'red',
-				fillColor: 'white'
+				lineColor: '#fff',
+				fillColor: '#d62a37'
 			}
 		}]
 	});
@@ -149,7 +193,7 @@ $(function() {
 
 	// body背景颜色设置成透明
 	document.body.style.backgroundColor = "transparent";
-});
+}
 
 function getDateTime(now) {
 	var year = now.getFullYear(); //年

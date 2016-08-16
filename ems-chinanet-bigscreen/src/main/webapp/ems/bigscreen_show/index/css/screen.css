@@ -129,7 +129,18 @@ html {
 .clearfix {
 	*zoom: 1;
 }
-
+.leftPart{
+	width: 20%;
+	position: relative;
+}
+.centerPart{
+	width: 60%;
+		position: relative;
+}
+.rightPart{
+	width: 20%;
+		position: relative;
+}
 body {
 	height: 100vh;
 	width: 100vw;
@@ -601,7 +612,7 @@ h1 {
 	/*margin: -105% 0 0 -15%;*/
 }
 
-#spread{
+#hotspot{
 	width: 100%;
 	height: 90%;
 	padding-top: 1.2rem;
@@ -691,4 +702,14 @@ width:110px;
 	position: relative;
 	top:-3rem;
 	left: 2rem;
+}
+#spread{
+	width: 100%;
+	height: 100%;
+	margin-top: -10rem;
+	margin-left: -2rem;
+}
+#deviceContainer{
+		width: 100%;
+	height: 100%;
 }

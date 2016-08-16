@@ -8,6 +8,9 @@ import org.roof.roof.dataaccess.api.PageUtils;
 import org.roof.spring.Result;
 import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
+import org.roof.web.user.entity.User;
+import org.roof.web.user.service.api.BaseUserContext;
+
 import com.awifi.bigscreen.theme.entity.Theme;
 import com.awifi.bigscreen.theme.entity.ThemeVo;
 import com.awifi.bigscreen.theme.service.api.IThemeService;
@@ -25,9 +28,11 @@ public class ThemeAction {
 	private IDictionaryService dictionaryService;
 
 	// 加载页面的通用数据
-	private void loadCommon(Model model){
-		List<Dictionary> dicList =  dictionaryService.findByType("TEST");
+	private void loadCommon(Model model) {
+		List<Dictionary> dicList = dictionaryService.findByType("TEST");
 		model.addAttribute("dicList", dicList);
+		List<Dictionary> enableds = dictionaryService.findByType("enabled");
+		model.addAttribute("enableds", enableds);
 	}
 
 	@RequestMapping("/index")
@@ -44,8 +49,7 @@ public class ThemeAction {
 		this.loadCommon(model);
 		return "/awifi/theme/theme_list.jsp";
 	}
-	
-	
+
 	@RequestMapping("/create_page")
 	public String create_page(Model model) {
 		Theme theme = new Theme();
@@ -53,7 +57,7 @@ public class ThemeAction {
 		this.loadCommon(model);
 		return "/awifi/theme/theme_create.jsp";
 	}
-	
+
 	@RequestMapping("/update_page")
 	public String update_page(Theme theme, Model model) {
 		theme = themeService.load(theme);
@@ -71,35 +75,38 @@ public class ThemeAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(Theme theme) {
+	public @ResponseBody Result create(HttpServletRequest request, Theme theme) {
 		if (theme != null) {
+			User user = (User) BaseUserContext.getCurrentUser(request);
+			theme.setCreate_by(user.getUsername());
 			themeService.save(theme);
 			return new Result("保存成功!");
 		} else {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+
 	@RequestMapping("/update")
-	public @ResponseBody Result update(Theme theme) {
+	public @ResponseBody Result update(HttpServletRequest request, Theme theme) {
 		if (theme != null) {
+			User user = (User) BaseUserContext.getCurrentUser(request);
+			theme.setUpdate_by(user.getUsername());
 			themeService.updateIgnoreNull(theme);
 			return new Result("保存成功!");
 		} else {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+
 	@RequestMapping("/delete")
 	public @ResponseBody Result delete(Theme theme) {
-		// TODO 有些关键数据是不能物理删除的，需要改为逻辑删除
-		themeService.delete(theme);
+		theme.setEnabled("0");
+		themeService.updateIgnoreNull(theme);
 		return new Result("删除成功!");
 	}
 
 	@Autowired(required = true)
-	public void setThemeService(
-			@Qualifier("themeService") IThemeService themeService) {
+	public void setThemeService(@Qualifier("themeService") IThemeService themeService) {
 		this.themeService = themeService;
 	}
 

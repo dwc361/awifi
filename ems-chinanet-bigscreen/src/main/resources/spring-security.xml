@@ -19,6 +19,7 @@
 	<http pattern="/**/*.css" request-matcher="ant" security="none" />
 	<http pattern="/**/*.js" request-matcher="ant" security="none" />
 	<http pattern=".+[.](ico$|png$|jpg$|gif$|PNG$|JPG$|GIF$|xml$|xls$)" request-matcher="regex" security="none" />
+	<http pattern="/ems/bigscreen_show/**/*" security="none" />
 
 	<!-- 权限名称必须以 ROLE_ 开头 -->
 	<http auto-config="true" use-expressions="true" pattern="/**"

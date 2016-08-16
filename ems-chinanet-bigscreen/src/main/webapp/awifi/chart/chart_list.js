@@ -18,7 +18,7 @@ $(function() {
 	var table = new ROOF.SelectableTable($('#bigscreen_chart_table'));
 	var page = new com.letv.PageBar($('#bigscreen_chart_search_form'));
 	$("#bigscreen_chart_create_btn").click(function() {
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/chartAction/create_page.action", "e_chart管理", width, height, true, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/chartAction/create_page.action", "图表管理", width, height, true, true);
 		return false;
 	});
 	$("#bigscreen_chart_detail_btn").click(function() {
@@ -28,7 +28,7 @@ $(function() {
 			return false;
 		}
 		var id = trs[0].find(":input[name='id']").val();
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/chartAction/detail_page.action?id=" + id  , "e_chart管理", width, height, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/chartAction/detail_page.action?id=" + id  , "图表管理", width, height, true);
 		return false;
 	});
 	$("#bigscreen_chart_update_btn").click(function() {
@@ -38,7 +38,7 @@ $(function() {
 			return false;
 		}
 		var id = trs[0].find(":input[name='id']").val();
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/chartAction/update_page.action?id=" + id  , "e_chart管理", width, height, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/chartAction/update_page.action?id=" + id  , "图表管理", width, height, true);
 		return false;
 	});
 	$("#bigscreen_chart_delete_btn").click(function() {

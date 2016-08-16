@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>e_templates管理</title>
+<title>模板管理</title>
 
 <%@include file="/ems_common/ems_head_boot.jsp"%>
 <script type="text/javascript" src="${basePath}/awifi/templates/templates_list.js"></script>
@@ -16,51 +16,27 @@
 <body>
 	<!-- 增删改成模块 start -->
 	<div class="panel panel-default" style="background-color: #f8f8f8; overflow: hidden;">
-		<div class="panel-heading">e_templates列表</div>
+		<div class="panel-heading">模板列表</div>
 		<div class="panel-body">
 			<form id="bigscreen_templates_search_form" class="form-inline" method="post" action="${basePath}/awifi/templatesAction/list.action">
 				<%@include file="/ems_common/ems_page_bar_cond_default.jsp"%>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">主键:</label> 
-					<input id="templates_id" name="id" type="text" class="form-control input-sm"
-					value="${templates.id }"  >
-				</div>
 				<div class="form-group">
 					<label class="" for="exampleInputName2">名称:</label> 
 					<input id="templates_name" maxlength="255" name="name" type="text" class="form-control input-sm"
 					value="${templates.name }"  >
 				</div>
 				<div class="form-group">
-					<label class="" for="exampleInputName2">模板路径:</label> 
-					<input id="templates_path" maxlength="255" name="path" type="text" class="form-control input-sm"
-					value="${templates.path }"  >
-				</div>
-				<div class="form-group">
 					<label class="" for="exampleInputName2">是否可用:</label> 
-					<input id="templates_enabled" maxlength="1" name="enabled" type="text" class="form-control input-sm"
-					value="${templates.enabled }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">新建时间:</label> 
-					<input id="templates_create_time" name="create_time" type="text" class="form-control input-sm"
-					readonly value="<fmt:formatDate value="${templates.create_time }" pattern="yyyy-MM-dd" />"
-					 >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">所属用户:</label> 
-					<input id="templates_create_by" maxlength="255" name="create_by" type="text" class="form-control input-sm"
-					value="${templates.create_by }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">更新时间:</label> 
-					<input id="templates_update_time" name="update_time" type="text" class="form-control input-sm"
-					readonly value="<fmt:formatDate value="${templates.update_time }" pattern="yyyy-MM-dd" />"
-					 >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">更新用户:</label> 
-					<input id="templates_update_by" maxlength="255" name="update_by" type="text" class="form-control input-sm"
-					value="${templates.update_by }"  >
+					<select id="templates_enabled" name="enabled" class="form-control input-sm">
+						<option>全部</option>
+						<c:forEach  items="${enableds }" var="dic" >
+							<option value="${dic.val }" 
+							<c:if test="${ templates.enabled == dic.val}">
+							selected="selected"</c:if>>${dic.text }</option>
+						</c:forEach >
+					</select>
+<!-- 					<input id="templates_enabled" maxlength="1" name="enabled" type="text" class="form-control input-sm" -->
+<%-- 					value="${templates.enabled }"  > --%>
 				</div>
 				<button id="serchBtn" type="button" class="btn btn-default">查询</button>
 				<button id="reset" type="button" class="btn btn-default">重置</button>
@@ -98,7 +74,11 @@
 							<td><input type="checkbox" name="id" class="ck" value="${templates.id }"> </td> 
 							<td>${templates.name}</td> 
 							<td>${templates.path}</td> 
-							<td>${templates.enabled}</td> 
+							<td>
+								<c:forEach  items="${enableds }" var="dic" >
+									<c:if test="${ templates.enabled == dic.val}">${dic.text }</c:if>
+								</c:forEach >
+							</td> 
 							<td><fmt:formatDate value="${templates.create_time }" pattern="yyyy-MM-dd HH:mm:ss" /></td> 
 							<td>${templates.create_by}</td> 
 							<td><fmt:formatDate value="${templates.update_time }" pattern="yyyy-MM-dd HH:mm:ss" /></td> 
