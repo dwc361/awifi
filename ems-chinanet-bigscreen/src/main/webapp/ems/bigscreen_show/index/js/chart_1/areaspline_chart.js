@@ -12,7 +12,7 @@ $(function() {
 	$.ajax({
 		type: 'post',
 		dataType: "json",
-		url: "http://192.168.191.1:8080/ems-chinanet-bigscreen/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
+		url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
 		data: {
 			'x_json': $.toJSON(x_arr)
 		},
@@ -24,6 +24,7 @@ $(function() {
 						x: n.x,
 						y: n.y
 					});
+					$("#areaspline1").html(n.y);
 				});
 			}
 			show_areaspline_chart(data);
@@ -52,7 +53,7 @@ function show_areaspline_chart(data) {
 						$.ajax({
 							type: 'post',
 							dataType: "json",
-							url: "http://192.168.191.1:8080/ems-chinanet-bigscreen/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
+							url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
 							data: {
 								'x_json': $.toJSON(x_arr)
 							},
@@ -68,6 +69,8 @@ function show_areaspline_chart(data) {
 										series.points[series.points.length - 1].setState();
 										series.addPoint([x, y], true, true);
 										series.points[series.points.length - 1].setState('hover');
+										
+										$("#areaspline1").html(y);
 									});
 								}
 							},
