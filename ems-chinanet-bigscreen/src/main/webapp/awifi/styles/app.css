@@ -1,0 +1,39 @@
+.fl{
+  float: left;
+}
+.fr{
+  float: right;
+}
+.wrapper{
+  width: 100%;
+  padding: 20px;
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  overflow: hidden;
+}
+.cl{
+  clear: both;
+}
+.box-group{
+  margin-left: 20px;
+  width: calc(100% - 220px);
+  box-sizing:border-box;
+  -moz-box-sizing:border-box;
+  -webkit-box-sizing:border-box;
+  overflow: hidden;
+}
+.box{
+  float: left;
+  width: 20%;
+  height: 150px;
+  border: 1px solid #ccc;
+  overflow: hidden;
+}
+.min-img .col-xs-12 p.title{
+  font-size: 12px;
+  text-align: center;
+}
+
+
+

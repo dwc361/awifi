@@ -3,6 +3,7 @@ package com.awifi.bigscreen.bigscreen.action;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.roof.roof.dataaccess.api.Page;
 import org.roof.roof.dataaccess.api.PageUtils;
 import org.roof.spring.Result;
@@ -10,10 +11,6 @@ import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
 import org.roof.web.user.entity.User;
 import org.roof.web.user.service.api.BaseUserContext;
-
-import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
-import com.awifi.bigscreen.bigscreen.entity.BigscreenVo;
-import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -21,11 +18,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
+import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
+import com.awifi.bigscreen.chart.entity.Chart;
+import com.awifi.bigscreen.chart.entity.ChartVo;
+import com.awifi.bigscreen.chart.service.api.IChartService;
+
 @Controller
 @RequestMapping("awifi/bigscreenAction")
 public class BigscreenAction {
 	private IBigscreenService bigscreenService;
 	private IDictionaryService dictionaryService;
+	private IChartService chartService;
 
 	// 加载页面的通用数据
 	private void loadCommon(Model model) {
@@ -54,6 +58,26 @@ public class BigscreenAction {
 		model.addAttribute("bigscreen", bigscreen);
 		this.loadCommon(model);
 		return "/awifi/bigscreen/bigscreen_create.jsp";
+	}
+
+	@RequestMapping("/create_page_easyui")
+	public String create_page_easyui(Model model) {
+		List<ChartVo> charts = chartService.selectForList(new Chart("1"));// 所有可用的图表
+		model.addAttribute("charts", charts);
+		Bigscreen bigscreen = new Bigscreen();
+		model.addAttribute("bigscreen", bigscreen);
+		this.loadCommon(model);
+		return "/awifi/bigscreen/bigscreen_update_easyui.jsp";
+	}
+	
+	@RequestMapping("/create_page_easyui1")
+	public String create_page_easyui1(Model model) {
+		List<ChartVo> charts = chartService.selectForList(new Chart("1"));// 所有可用的图表
+		model.addAttribute("charts", charts);
+		Bigscreen bigscreen = new Bigscreen();
+		model.addAttribute("bigscreen", bigscreen);
+		this.loadCommon(model);
+		return "/awifi/bigscreen/bigscreen_update_easyui1.jsp";
 	}
 
 	@RequestMapping("/update_page")
@@ -119,5 +143,10 @@ public class BigscreenAction {
 	@Autowired(required = true)
 	public void setDictionaryService(@Qualifier("dictionaryService") IDictionaryService dictionaryService) {
 		this.dictionaryService = dictionaryService;
+	}
+
+	@Autowired
+	public void setChartService(IChartService chartService) {
+		this.chartService = chartService;
 	}
 }
