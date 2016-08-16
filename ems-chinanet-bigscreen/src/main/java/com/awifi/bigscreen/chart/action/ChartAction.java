@@ -8,6 +8,9 @@ import org.roof.roof.dataaccess.api.PageUtils;
 import org.roof.spring.Result;
 import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
+import org.roof.web.user.entity.User;
+import org.roof.web.user.service.api.BaseUserContext;
+
 import com.awifi.bigscreen.chart.entity.Chart;
 import com.awifi.bigscreen.chart.entity.ChartVo;
 import com.awifi.bigscreen.chart.service.api.IChartService;
@@ -25,9 +28,11 @@ public class ChartAction {
 	private IDictionaryService dictionaryService;
 
 	// 加载页面的通用数据
-	private void loadCommon(Model model){
-		List<Dictionary> dicList =  dictionaryService.findByType("TEST");
+	private void loadCommon(Model model) {
+		List<Dictionary> dicList = dictionaryService.findByType("TEST");
 		model.addAttribute("dicList", dicList);
+		List<Dictionary> enableds = dictionaryService.findByType("enabled");
+		model.addAttribute("enableds", enableds);
 	}
 
 	@RequestMapping("/index")
@@ -44,8 +49,7 @@ public class ChartAction {
 		this.loadCommon(model);
 		return "/awifi/chart/chart_list.jsp";
 	}
-	
-	
+
 	@RequestMapping("/create_page")
 	public String create_page(Model model) {
 		Chart chart = new Chart();
@@ -53,7 +57,7 @@ public class ChartAction {
 		this.loadCommon(model);
 		return "/awifi/chart/chart_create.jsp";
 	}
-	
+
 	@RequestMapping("/update_page")
 	public String update_page(Chart chart, Model model) {
 		chart = chartService.load(chart);
@@ -71,35 +75,38 @@ public class ChartAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(Chart chart) {
+	public @ResponseBody Result create(HttpServletRequest request, Chart chart) {
 		if (chart != null) {
+			User user = (User) BaseUserContext.getCurrentUser(request);
+			chart.setUpdate_by(user.getUsername());
 			chartService.save(chart);
 			return new Result("保存成功!");
 		} else {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+
 	@RequestMapping("/update")
-	public @ResponseBody Result update(Chart chart) {
+	public @ResponseBody Result update(HttpServletRequest request, Chart chart) {
 		if (chart != null) {
+			User user = (User) BaseUserContext.getCurrentUser(request);
+			chart.setUpdate_by(user.getUsername());
 			chartService.updateIgnoreNull(chart);
 			return new Result("保存成功!");
 		} else {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+
 	@RequestMapping("/delete")
 	public @ResponseBody Result delete(Chart chart) {
-		// TODO 有些关键数据是不能物理删除的，需要改为逻辑删除
-		chartService.delete(chart);
+		chart.setEnabled("0");
+		chartService.updateIgnoreNull(chart);
 		return new Result("删除成功!");
 	}
 
 	@Autowired(required = true)
-	public void setChartService(
-			@Qualifier("chartService") IChartService chartService) {
+	public void setChartService(@Qualifier("chartService") IChartService chartService) {
 		this.chartService = chartService;
 	}
 

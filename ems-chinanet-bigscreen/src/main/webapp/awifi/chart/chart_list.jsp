@@ -21,61 +21,22 @@
 			<form id="bigscreen_chart_search_form" class="form-inline" method="post" action="${basePath}/awifi/chartAction/list.action">
 				<%@include file="/ems_common/ems_page_bar_cond_default.jsp"%>
 				<div class="form-group">
-					<label class="" for="exampleInputName2">主键:</label> 
-					<input id="chart_id" name="id" type="text" class="form-control input-sm"
-					value="${chart.id }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">图标:</label> 
-					<input id="chart_icon" maxlength="255" name="icon" type="text" class="form-control input-sm"
-					value="${chart.icon }"  >
-				</div>
-				<div class="form-group">
 					<label class="" for="exampleInputName2">图表名称:</label> 
 					<input id="chart_name" maxlength="255" name="name" type="text" class="form-control input-sm"
 					value="${chart.name }"  >
 				</div>
 				<div class="form-group">
-					<label class="" for="exampleInputName2">是否可用:</label> 
-					<input id="chart_enabled" maxlength="1" name="enabled" type="text" class="form-control input-sm"
-					value="${chart.enabled }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">刷新时间:</label> 
-					<input id="chart_re_times" name="re_times" type="text" class="form-control input-sm"
-					value="${chart.re_times }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">配置json:</label> 
-					<input id="chart_configure" maxlength="255" name="configure" type="text" class="form-control input-sm"
-					value="${chart.configure }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">代码路径:</label> 
-					<input id="chart_path" maxlength="255" name="path" type="text" class="form-control input-sm"
-					value="${chart.path }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">新建时间:</label> 
-					<input id="chart_create_time" name="create_time" type="text" class="form-control input-sm"
-					readonly value="<fmt:formatDate value="${chart.create_time }" pattern="yyyy-MM-dd" />"
-					 >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">所属用户:</label> 
-					<input id="chart_create_by" maxlength="255" name="create_by" type="text" class="form-control input-sm"
-					value="${chart.create_by }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">更新时间:</label> 
-					<input id="chart_update_time" name="update_time" type="text" class="form-control input-sm"
-					readonly value="<fmt:formatDate value="${chart.update_time }" pattern="yyyy-MM-dd" />"
-					 >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">更新用户:</label> 
-					<input id="chart_update_by" maxlength="255" name="update_by" type="text" class="form-control input-sm"
-					value="${chart.update_by }"  >
+					<label class="" for="exampleInputName2">是否可用:</label>
+					<select id="chart_enabled" name="enabled" class="form-control input-sm">
+						<option>全部</option>
+						<c:forEach  items="${enableds }" var="dic" >
+							<option value="${dic.val }" 
+							<c:if test="${ chart.enabled == dic.val}">
+							selected="selected"</c:if>>${dic.text }</option>
+						</c:forEach >
+					</select>
+<!-- 					<input id="chart_enabled" maxlength="1" name="enabled" type="text" class="form-control input-sm" -->
+<%-- 					value="${chart.enabled }"  > --%>
 				</div>
 				<button id="serchBtn" type="button" class="btn btn-default">查询</button>
 				<button id="reset" type="button" class="btn btn-default">重置</button>
@@ -116,7 +77,9 @@
 							<td><input type="checkbox" name="id" class="ck" value="${chart.id }"> </td> 
 							<td>${chart.icon}</td> 
 							<td>${chart.name}</td> 
-							<td>${chart.enabled}</td> 
+							<td><c:forEach  items="${enableds }" var="dic" >
+									<c:if test="${ chart.enabled == dic.val}">${dic.text }</c:if>
+								</c:forEach ></td> 
 							<td>${chart.re_times}</td> 
 							<td>${chart.configure}</td> 
 							<td>${chart.path}</td> 

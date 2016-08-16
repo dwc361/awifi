@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>e_theme管理</title>
+<title>主题管理</title>
 
 <%@include file="/ems_common/ems_head_boot.jsp"%>
 <script type="text/javascript" src="${basePath}/awifi/theme/theme_list.js"></script>
@@ -16,56 +16,27 @@
 <body>
 	<!-- 增删改成模块 start -->
 	<div class="panel panel-default" style="background-color: #f8f8f8; overflow: hidden;">
-		<div class="panel-heading">e_theme列表</div>
+		<div class="panel-heading">主题列表</div>
 		<div class="panel-body">
 			<form id="bigscreen_theme_search_form" class="form-inline" method="post" action="${basePath}/awifi/themeAction/list.action">
 				<%@include file="/ems_common/ems_page_bar_cond_default.jsp"%>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">主键:</label> 
-					<input id="theme_id" name="id" type="text" class="form-control input-sm"
-					value="${theme.id }"  >
-				</div>
 				<div class="form-group">
 					<label class="" for="exampleInputName2">名称:</label> 
 					<input id="theme_name" maxlength="255" name="name" type="text" class="form-control input-sm"
 					value="${theme.name }"  >
 				</div>
 				<div class="form-group">
-					<label class="" for="exampleInputName2">背景图片:</label> 
-					<input id="theme_picture" maxlength="255" name="picture" type="text" class="form-control input-sm"
-					value="${theme.picture }"  >
-				</div>
-				<div class="form-group">
 					<label class="" for="exampleInputName2">是否可用:</label> 
-					<input id="theme_enabled" maxlength="1" name="enabled" type="text" class="form-control input-sm"
-					value="${theme.enabled }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">备注:</label> 
-					<input id="theme_remark" maxlength="255" name="remark" type="text" class="form-control input-sm"
-					value="${theme.remark }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">新建时间:</label> 
-					<input id="theme_create_time" name="create_time" type="text" class="form-control input-sm"
-					readonly value="<fmt:formatDate value="${theme.create_time }" pattern="yyyy-MM-dd" />"
-					 >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">所属用户:</label> 
-					<input id="theme_create_by" maxlength="255" name="create_by" type="text" class="form-control input-sm"
-					value="${theme.create_by }"  >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">更新时间:</label> 
-					<input id="theme_update_time" name="update_time" type="text" class="form-control input-sm"
-					readonly value="<fmt:formatDate value="${theme.update_time }" pattern="yyyy-MM-dd" />"
-					 >
-				</div>
-				<div class="form-group">
-					<label class="" for="exampleInputName2">更新用户:</label> 
-					<input id="theme_update_by" maxlength="255" name="update_by" type="text" class="form-control input-sm"
-					value="${theme.update_by }"  >
+					<select id="theme_enabled" name="enabled" class="form-control input-sm">
+						<option>全部</option>
+						<c:forEach  items="${enableds }" var="dic" >
+							<option value="${dic.val }" 
+							<c:if test="${ theme.enabled == dic.val}">
+							selected="selected"</c:if>>${dic.text }</option>
+						</c:forEach >
+					</select>
+<!-- 					<input id="theme_enabled" maxlength="1" name="enabled" type="text" class="form-control input-sm" -->
+<%-- 					value="${theme.enabled }"  > --%>
 				</div>
 				<button id="serchBtn" type="button" class="btn btn-default">查询</button>
 				<button id="reset" type="button" class="btn btn-default">重置</button>
@@ -104,7 +75,9 @@
 							<td><input type="checkbox" name="id" class="ck" value="${theme.id }"> </td> 
 							<td>${theme.name}</td> 
 							<td>${theme.picture}</td> 
-							<td>${theme.enabled}</td> 
+							<td><c:forEach  items="${enableds }" var="dic" >
+									<c:if test="${ theme.enabled == dic.val}">${dic.text }</c:if>
+								</c:forEach ></td> 
 							<td>${theme.remark}</td> 
 							<td><fmt:formatDate value="${theme.create_time }" pattern="yyyy-MM-dd HH:mm:ss" /></td> 
 							<td>${theme.create_by}</td> 
