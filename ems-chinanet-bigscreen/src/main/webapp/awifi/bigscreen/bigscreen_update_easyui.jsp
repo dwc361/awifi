@@ -45,35 +45,81 @@
 				return n;
 			}
 		});
+		
+		$("#preview").click(function(){
+			$("#bigscreen").attr("action","${basePath}/awifi/bigscreenAction/preview.action");	
+			$("#bigscreen").attr("target","_blank");	
+			$("#bigscreen").submit();
+			$("#bigscreen").attr("action","");	
+			$("#bigscreen").attr("target","_self");
+			return false;
+		})
+		
 	});
 </script>
 </head>
 <body>
-	<div class="wrapper">
-		<h4 class="fl">
-			<input type="text" value="标题标题标题标题标题标题标题标题" name="name"
-				class="form-control input-sm" style="width: 300px;" />
-		</h4>
-		<div class="btn-group fr" role="group"
-			aria-label="Default button group">
-			<button type="button" class="btn btn-default">保存</button>
-			<button type="button" class="btn btn-default">预览</button>
-			<button type="button" class="btn btn-default">返回</button>
-		</div>
-		<div class="cl" style="height: 20px"></div>
-		<div class="row fl min-img" style="width: 120px;">
-			<c:forEach var="chart" items="${charts}">
-				<div class="col-xs-12">
-					<p class="title">${chart.name }</p>
-					<a href="#" class="thumbnail"> <img
-						src="${basePath}/${chart.icon}" alt="" width="100%" />
-					</a>
+	
+		<div class="wrapper">
+			<h4 class="fl">
+				<input type="text" value="标题标题标题标题标题标题标题标题" name="name"
+					class="form-control input-sm" style="width: 300px;" />
+			</h4>
+			<div class="btn-group fr" role="group"
+				aria-label="Default button group">
+				<button type="button" class="btn btn-default">保存</button>
+				<button type="button" class="btn btn-default" id="preview">预览</button>
+				<button type="button" class="btn btn-default">返回</button>
+			</div>
+			<div class="cl" style="height: 20px"></div>
+			<div class="row fl min-img" style="width: 120px;">
+				<c:forEach var="chart" items="${charts}">
+					<div class="col-xs-12">
+						<p class="title">${chart.name }</p>
+						<a href="#" class="thumbnail"> <img
+							src="${basePath}/${chart.icon}" alt="" width="100%" />
+							<input type="hidden" value="${chart.id }" name="chart_id" />
+							<input type="hidden" value="${chart.path }" name="chart_path" />
+						</a>
+					</div>
+				</c:forEach>
+			</div>
+		<form id="bigscreen" class="form-inline" method="post" action="" target="_self">
+			<div id="target_div" class="row box-group fl">
+				<div class="box easyui-droppable targetarea"
+					data-options="
+    					accept: '.thumbnail',
+    					onDragEnter:function(e,source){
+    						console.log('onDragEnter');
+    					},
+    					onDragLeave: function(e,source){
+    						console.log('onDragLeave');
+    					},
+    					onDrop: function(e,source){
+    						var local = '1_1';
+    						var target = $(source).clone();
+    						$(target).children('img').attr('height','100%');
+    						$(target).children('img').attr('width','100%');
+     						$(this).html($(target).html()); 
+     						$(this).append('<input type='hidden' value='part_1_1' name='target_name'  />');
+    					}
+    				">
+					
 				</div>
-			</c:forEach>
-		</div>
-		<div id="target_div" class="row box-group fl">
-			<div class="box easyui-droppable targetarea"
-				data-options="
+				<div class="box">
+<!-- 					<input type="hidden" value="part_1_2" name="vos.target_name" id="part_1_2" /> -->
+<!-- 					<input type="hidden" value="part_1_2" name="vos.templete_name" id="templete_1_2" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_1_3" name="vos.target_name" id="part_1_3" /> -->
+<!-- 					<input type="hidden" value="part_1_3" name="vos.templete_name" id="templete_1_3" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_1_4" name="target_name" id="part_1_4" /> -->
+<!-- 					<input type="hidden" value="part_1_4" name="templete_name" id="templete_1_4" /> -->
+				</div>
+				<div class="box easyui-droppable targetarea"
+					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
     						console.log('onDragEnter');
@@ -89,19 +135,11 @@
      						$(this).html($(target).html()); 
     					}
     				">
-				<input type="hidden" value="" name="part_1_1" id="part_1_1" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_1_2" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_1_3" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_1_4" />
-			</div>
-			<div class="box easyui-droppable targetarea"
-				data-options="
+					<input type="hidden" value="part_1_5" name="target_name" id="part_1_5" />
+<!-- 					<input type="hidden" value="part_1_5" name="templete_name" id="templete_1_5" /> -->
+				</div>
+				<div class="box easyui-droppable targetarea"
+					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
     						console.log('onDragEnter');
@@ -117,10 +155,23 @@
      						$(this).html($(target).html()); 
     					}
     				">
-				<input type="hidden" value="" name="part_1_1" id="part_1_5" />
-			</div>
-			<div class="box easyui-droppable targetarea"
-				data-options="
+					<input type="hidden" value="part_2_1" name="target_name" id="part_2_1" />
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_2_1" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_2_2" name="target_name" id="part_2_2" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_2_2" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_2_3" name="target_name" id="part_2_3" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_2_3" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_2_4" name="target_name" id="part_2_4" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_2_4" /> -->
+				</div>
+				<div class="box easyui-droppable targetarea"
+					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
     						console.log('onDragEnter');
@@ -136,19 +187,11 @@
      						$(this).html($(target).html()); 
     					}
     				">
-				<input type="hidden" value="" name="part_1_1" id="part_2_1" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_2_2" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_2_3" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_2_4" />
-			</div>
-			<div class="box easyui-droppable targetarea"
-				data-options="
+					<input type="hidden" value="part_2_5" name="target_name" id="part_2_5" />
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_2_5" /> -->
+				</div>
+				<div class="box easyui-droppable targetarea"
+					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
     						console.log('onDragEnter');
@@ -164,10 +207,23 @@
      						$(this).html($(target).html()); 
     					}
     				">
-				<input type="hidden" value="" name="part_1_1" id="part_2_5" />
-			</div>
-			<div class="box easyui-droppable targetarea"
-				data-options="
+<!-- 					<input type="hidden" value="part_3_1" name="target_name" id="part_3_1" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_3_1" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_3_2" name="target_name" id="part_3_2" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_3_2" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_3_3" name="target_name" id="part_3_3" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_3_3" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_3_4" name="target_name" id="part_3_4" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_3_4" /> -->
+				</div>
+				<div class="box easyui-droppable targetarea"
+					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
     						console.log('onDragEnter');
@@ -183,19 +239,11 @@
      						$(this).html($(target).html()); 
     					}
     				">
-				<input type="hidden" value="" name="part_1_1" id="part_3_1" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_3_2" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_3_3" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_3_4" />
-			</div>
-			<div class="box easyui-droppable targetarea"
-				data-options="
+					<input type="hidden" value="part_3_5" name="target_name" id="part_3_5" />
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_3_5" /> -->
+				</div>
+				<div class="box easyui-droppable targetarea"
+					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
     						console.log('onDragEnter');
@@ -211,10 +259,23 @@
      						$(this).html($(target).html()); 
     					}
     				">
-				<input type="hidden" value="" name="part_1_1" id="part_3_5" />
-			</div>
-			<div class="box easyui-droppable targetarea"
-				data-options="
+					<input type="hidden" value="part_4_1" name="target_name" id="part_4_1" />
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_4_1" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_4_2" name="target_name" id="part_4_2" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_4_2" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_4_3" name="target_name" id="part_4_3" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_4_3" /> -->
+				</div>
+				<div class="box">
+<!-- 					<input type="hidden" value="part_4_4" name="target_name" id="part_4_4" /> -->
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_4_4" /> -->
+				</div>
+				<div class="box easyui-droppable targetarea"
+					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
     						console.log('onDragEnter');
@@ -230,37 +291,12 @@
      						$(this).html($(target).html()); 
     					}
     				">
-				<input type="hidden" value="" name="part_1_1" id="part_4_1" />
+					<input type="hidden" value="part_4_5" name="target_name" id="part_4_5" />
+<!-- 					<input type="hidden" value="" name="templete_name" id="templete_4_5" /> -->
+				</div>
 			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_4_2" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_4_3" />
-			</div>
-			<div class="box">
-				<input type="hidden" value="" name="part_1_1" id="part_4_4" />
-			</div>
-			<div class="box easyui-droppable targetarea"
-				data-options="
-    					accept: '.thumbnail',
-    					onDragEnter:function(e,source){
-    						console.log('onDragEnter');
-    					},
-    					onDragLeave: function(e,source){
-    						console.log('onDragLeave');
-    					},
-    					onDrop: function(e,source){
-    						console.log($(this));
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
-    					}
-    				">
-				<input type="hidden" value="" name="part_1_1" id="part_4_5" />
-			</div>
-		</div>
+		</form>
 	</div>
+	
 </body>
 </html>
