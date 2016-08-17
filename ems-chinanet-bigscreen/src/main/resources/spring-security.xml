@@ -9,6 +9,8 @@
 	<!-- 拦截排除列表 -->
 	<!-- <http pattern="/**/*" security="none" /> -->
 <!-- 	<http pattern="/codeAction/image.action*" security="none" /> -->
+ 	<http pattern="/webSocketServer/**" security="none" /> 
+
  	<http pattern="/userAction/goLogin.action*" security="none" /> 
  	<http pattern="/userAction/login.json*" security="none" /> 
 	<http pattern="/tokenAction/accessToken.*" security="none" />
@@ -26,7 +28,7 @@
 		access-denied-page="/ems_common/access-denied-page.jsp">
 		<custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
 		<logout logout-success-url="/logout_to_sso.jsp"
-			logout-url="/systemAction/j_spring_security_logout" delete-cookies="JSESSIONID,m_tk" />
+			logout-url="/systemAction/j_spring_security_logout" delete-cookies="JSESSIONID" />
 		<form-login login-page="/userAction/goLogin.action"
 			authentication-failure-handler-ref="authenticationFailureHandler"
 			authentication-success-handler-ref="authenticationSuccessHandler" />

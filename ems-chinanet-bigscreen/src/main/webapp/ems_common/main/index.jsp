@@ -1,81 +1,169 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
-<%
-	String path = request.getContextPath();
-	String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<base href="<%=basePath%>">
-
-	<!-- jsp文件头和头部 -->
-	<%@ include file="head.jsp"%>
-	<script type="text/javascript">
-	$(document).ready(function() {
-		$('iframe').height(jQuery(window).height() - 100);
-	});
-</script>
-</head>
-<body>
-	<!-- 页面顶部¨ -->
-	<%@ include file="top.jsp"%>
-	<div id="websocket_button"></div>
-	<div class="container-fluid" id="main-container">
-		<a href="#" id="menu-toggler"><span></span></a>
-		<!-- menu toggler -->
-
-		<!-- 左侧菜单 -->
-		<%@ include file="left.jsp"%>
-
-		<div id="main-content" class="clearfix">
-			<div>
-				<iframe name="mainFrame" id="mainFrame" frameborder="0" src="<%=basePath%>mainAction/tab.action" style="margin:0 auto;width:100%;height:100%;"></iframe>
-			</div>
-
-			<!-- 换肤 -->
-			<div id="ace-settings-container">
-				<div class="btn btn-app btn-mini btn-warning" id="ace-settings-btn">
-					<i class="icon-cog"></i>
-				</div>
-				<div id="ace-settings-box">
-					<div>
-						<div class="pull-left">
-							<select id="skin-colorpicker" class="hidden">
-								<option data-class="default" value="#438EB9">#438EB9</option>
-								<option data-class="skin-1" value="#222A2D">#222A2D</option>
-								<option data-class="skin-2" value="#C6487E">#C6487E</option>
-								<option data-class="skin-3" value="#D0D0D0">#D0D0D0</option>
-							</select>
-						</div>
-						<span>&nbsp; <!-- 选择皮肤 --><spring:message code="Select_skin" /></span>
-					</div>
-					<div>
-						<label><input type='checkbox' name='menusf' id="menusf" onclick="menusf();" /><span class="lbl" style="padding-top: 5px;"><spring:message code="Menu_zoom" /><!-- 菜单缩放 --></span></label>
-					</div>
-				</div>
-			</div>
-			<!--/#ace-settings-container-->
-
-		</div>
-		<!-- #main-content -->
-	</div>
-	<!--/.fluid-container#main-container-->
-
-	<!-- basic scripts -->
-	<!-- 引入 -->
-	<script type="text/javascript">window.jQuery || document.write("<script src='ems_common/static/js/jquery-1.9.1.min.js'>\x3C/script>");</script>
-	<script src="${basePath}/ems_common/static/js/bootstrap.min.js"></script>
-	<script src="${basePath}/ems_common/static/js/ace-elements.min.js"></script>
-	<script src="${basePath}/ems_common/static/js/ace.min.js"></script>
-	<!-- 引入 -->
-
-	<script type="text/javascript" src="${basePath}/ems_common/static/js/jquery.cookie.js"></script>
-
-	<!--引入属于此页面的js -->
-	<script type="text/javascript" src="${basePath}/ems_common/main/js/menusf.js"></script>
-	<script type="text/javascript" src="${basePath}/ems_common/main/js/index.js"></script>
-</body>
-</html>
+    <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">  
+    <html>  
+    <head>  
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">  
+    <title>WebSocket/SockJS Echo Sample (Adapted from Tomcat's echo sample)</title>  
+        <style type="text/css">  
+            #connect-container {  
+                float: left;  
+                width: 400px  
+            }  
+      
+            #connect-container div {  
+                padding: 5px;  
+            }  
+      
+            #console-container {  
+                float: left;  
+                margin-left: 15px;  
+                width: 400px;  
+            }  
+      
+            #console {  
+                border: 1px solid #CCCCCC;  
+                border-right-color: #999999;  
+                border-bottom-color: #999999;  
+                height: 170px;  
+                overflow-y: scroll;  
+                padding: 5px;  
+                width: 100%;  
+            }  
+      
+            #console p {  
+                padding: 0;  
+                margin: 0;  
+            }  
+        </style>  
+      
+        <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>  
+      <script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
+      
+        <script type="text/javascript">  
+            var ws = null;  
+            var url = null;  
+            var transports = [];  
+      
+            function setConnected(connected) {  
+                document.getElementById('connect').disabled = connected;  
+                document.getElementById('disconnect').disabled = !connected;  
+                document.getElementById('echo').disabled = !connected;  
+            }  
+      
+            function connect() {  
+                if (!url) {  
+                    alert('Select whether to use W3C WebSocket or SockJS');  
+                    return;  
+                }  
+                  
+                  
+                //ws = new WebSocket('ws://192.168.10.107:8080/mspjapi/webSocketServer');/* (url.indexOf('sockjs') != -1) ?   
+                    //new SockJS(url, undefined, {protocols_whitelist: transports}) :  */  
+                    ws = new SockJS(ROOF.Utils.projectName()+"/webSocketServer/webSocketServer/sockjs");  
+                    //console.log("http://192.168.10.107:8080/mspjapi/webSocketServer/sockjs");  
+                      
+                ws.onopen = function () {  
+                    setConnected(true);  
+                    log('Info: connection opened.');  
+                };  
+                  
+                ws.onmessage = function (event) {  
+                    log('Received: ' + event.data);  
+                };  
+                  
+                ws.onclose = function (event) {  
+                    setConnected(false);  
+                    log('Info: connection closed.');  
+                    log(event);  
+                };  
+            }  
+      
+            function disconnect() {  
+                if (ws != null) {  
+                    ws.close();  
+                    ws = null;  
+                }  
+                setConnected(false);  
+            }  
+      
+            function echo() {  
+                if (ws != null) {  
+                    var message = document.getElementById('message').value;  
+                    log('Sent: ' + message);  
+                    ws.send(message);  
+                } else {  
+                    alert('connection not established, please connect.');  
+                }  
+            }  
+      
+            function updateUrl(urlPath) {  
+                if (urlPath.indexOf('sockjs') != -1) {  
+                    url = urlPath;  
+                    document.getElementById('sockJsTransportSelect').style.visibility = 'visible';  
+                }  
+                else {  
+                  if (window.location.protocol == 'http:') {  
+                      url = 'ws://' + window.location.host + urlPath;  
+                  } else {  
+                      url = 'wss://' + window.location.host + urlPath;  
+                  }  
+                  document.getElementById('sockJsTransportSelect').style.visibility = 'hidden';  
+                }  
+            }  
+      
+            function updateTransport(transport) {  
+              transports = (transport == 'all') ?  [] : [transport];  
+            }  
+              
+            function log(message) {  
+                var console = document.getElementById('console');  
+                var p = document.createElement('p');  
+                p.style.wordWrap = 'break-word';  
+                p.appendChild(document.createTextNode(message));  
+                console.appendChild(p);  
+                while (console.childNodes.length > 25) {  
+                    console.removeChild(console.firstChild);  
+                }  
+                console.scrollTop = console.scrollHeight;  
+            }  
+        </script>  
+    </head>  
+    <body>  
+    <noscript><h2 style="color: #ff0000">Seems your browser doesn't support Javascript! Websockets   
+        rely on Javascript being enabled. Please enable  
+        Javascript and reload this page!</h2></noscript>  
+    <div>  
+        <div id="connect-container">  
+            <input id="radio1" type="radio" name="group1" onclick="updateUrl('/mspjapi');">  
+                <label for="radio1">W3C WebSocket</label>  
+            <br>  
+            <input id="radio2" type="radio" name="group1" onclick="updateUrl('/spring-websocket-test/sockjs/echo');">  
+                <label for="radio2">SockJS</label>  
+            <div id="sockJsTransportSelect" style="visibility:hidden;">  
+                <span>SockJS transport:</span>  
+                <select onchange="updateTransport(this.value)">  
+                  <option value="all">all</option>  
+                  <option value="websocket">websocket</option>  
+                  <option value="xhr-polling">xhr-polling</option>  
+                  <option value="jsonp-polling">jsonp-polling</option>  
+                  <option value="xhr-streaming">xhr-streaming</option>  
+                  <option value="iframe-eventsource">iframe-eventsource</option>  
+                  <option value="iframe-htmlfile">iframe-htmlfile</option>  
+                </select>  
+            </div>  
+            <div>  
+                <button id="connect" onclick="connect();">Connect</button>  
+                <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>  
+            </div>  
+            <div>  
+                <textarea id="message" style="width: 350px">Here is a message!</textarea>  
+            </div>  
+            <div>  
+                <button id="echo" onclick="echo();" disabled="disabled">Echo message</button>  
+            </div>  
+        </div>  
+        <div id="console-container">  
+            <div id="console"></div>  
+        </div>  
+    </div>  
+    </body>  
+    </html>  

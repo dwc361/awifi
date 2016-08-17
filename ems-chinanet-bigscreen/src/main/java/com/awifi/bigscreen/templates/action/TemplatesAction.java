@@ -1,5 +1,6 @@
 package com.awifi.bigscreen.templates.action;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -76,10 +77,11 @@ public class TemplatesAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(HttpServletRequest request, Templates templates) {
+	public @ResponseBody Result create(Templates templates,HttpServletRequest request) {
 		if (templates != null) {
-			User user = (User) BaseUserContext.getCurrentUser(request);
+			User user = (User)BaseUserContext.getCurrentUser(request);
 			templates.setCreate_by(user.getUsername());
+			templates.setCreate_time(new Date());
 			templatesService.save(templates);
 			return new Result("保存成功!");
 		} else {
@@ -88,10 +90,11 @@ public class TemplatesAction {
 	}
 
 	@RequestMapping("/update")
-	public @ResponseBody Result update(HttpServletRequest request,Templates templates) {
+	public @ResponseBody Result update(Templates templates,HttpServletRequest request) {
 		if (templates != null) {
-			User user = (User) BaseUserContext.getCurrentUser(request);
+			User user = (User)BaseUserContext.getCurrentUser(request);
 			templates.setUpdate_by(user.getUsername());
+			templates.setUpdate_time(new Date());
 			templatesService.updateIgnoreNull(templates);
 			return new Result("保存成功!");
 		} else {

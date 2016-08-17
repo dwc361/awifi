@@ -47,6 +47,7 @@ public class BigscreenService implements IBigscreenService {
 		return (BigscreenVo)bigscreenDao.selectForObject("selectBigscreen",bigscreen);
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<BigscreenVo> selectForList(Bigscreen bigscreen){
 		return (List<BigscreenVo>)bigscreenDao.selectForList("selectBigscreen",bigscreen);
 	}

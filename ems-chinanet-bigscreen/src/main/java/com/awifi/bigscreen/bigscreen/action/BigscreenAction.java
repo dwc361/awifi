@@ -1,8 +1,10 @@
 package com.awifi.bigscreen.bigscreen.action;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+
 import org.roof.roof.dataaccess.api.Page;
 import org.roof.roof.dataaccess.api.PageUtils;
 import org.roof.spring.Result;
@@ -10,16 +12,17 @@ import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
 import org.roof.web.user.entity.User;
 import org.roof.web.user.service.api.BaseUserContext;
-
-import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
-import com.awifi.bigscreen.bigscreen.entity.BigscreenVo;
-import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
+
+import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
+import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
+import com.awifi.bigscreen.websocket.SystemWebSocketHandler;
 
 @Controller
 @RequestMapping("awifi/bigscreenAction")
@@ -40,6 +43,8 @@ public class BigscreenAction {
 
 	@RequestMapping("/list")
 	public String list(Bigscreen bigscreen, HttpServletRequest request, Model model) {
+		SystemWebSocketHandler hander = new SystemWebSocketHandler();
+		hander.sendMessageToUsers(new TextMessage("ssss"));
 		Page page = PageUtils.createPage(request);
 		page = bigscreenService.page(page, bigscreen);
 		model.addAttribute("page", page);
@@ -81,10 +86,11 @@ public class BigscreenAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(HttpServletRequest request, Bigscreen bigscreen) {
+	public @ResponseBody Result create(Bigscreen bigscreen,HttpServletRequest request) {
 		if (bigscreen != null) {
-			User user = (User) BaseUserContext.getCurrentUser(request);
-			bigscreen.setUpdate_by(user.getUsername());
+			User user = (User)BaseUserContext.getCurrentUser(request);
+			bigscreen.setCreate_by(user.getUsername());
+			bigscreen.setCreate_time(new Date());
 			bigscreenService.save(bigscreen);
 			return new Result("保存成功!");
 		} else {
@@ -97,6 +103,7 @@ public class BigscreenAction {
 		if (bigscreen != null) {
 			User user = (User) BaseUserContext.getCurrentUser(request);
 			bigscreen.setUpdate_by(user.getUsername());
+			bigscreen.setUpdate_time(new Date());
 			bigscreenService.updateIgnoreNull(bigscreen);
 			return new Result("保存成功!");
 		} else {

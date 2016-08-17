@@ -5,6 +5,8 @@ import javax.servlet.http.HttpSession;
 
 import org.roof.web.menu.entity.Menu;
 import org.roof.web.menu.service.api.IMenuFilter;
+import org.roof.web.user.entity.User;
+import org.roof.web.user.service.api.BaseUserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -36,8 +38,10 @@ public class MainAction {
 		Menu menu = menuFilter.doFilter(1L, new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
 				authentication.getCredentials(), authentication.getAuthorities()));
 		model.addAttribute("menus", menu.getChildren());
+		User user = (User) BaseUserContext.getCurrentUser(request);
+		model.addAttribute("user", user);
 		//return "/ems_common/user_main_auto.jsp";
-		return "/ems_common/main/index.jsp";
+		return "/ems_common/main/index_bak.jsp";
 	}
 	
 	/**

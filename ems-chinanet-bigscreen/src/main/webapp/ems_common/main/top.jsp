@@ -31,10 +31,10 @@
 		<div class="col-md-12">
 			<div class="icon-logo">
 				<c:if test="${locale.language eq 'zh' }">
-					<h2 style="margin: 10px 0 0 30px;"><spring:message code="Letv_Gcr_Name" /></h2>
+					<h2 style="margin: 10px 0 0 30px;"><spring:message code="AWifi" /></h2>
 				</c:if>
 				<c:if test="${locale.language eq 'en' }">
-					<h2 style="margin: 10px 0 0 30px;width: 400px;"><spring:message code="Letv_Gcr_Name" /></h2>
+					<h2 style="margin: 10px 0 0 30px;width: 400px;"><spring:message code="AWifi" /></h2>
 				</c:if>
 			</div>
 		</div>

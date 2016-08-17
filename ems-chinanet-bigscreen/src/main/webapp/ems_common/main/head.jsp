@@ -33,6 +33,6 @@
 <!--乐视TV样式-->
 <link rel="stylesheet" href="${basePath }/ems_common/css/app.css">
 <script type="text/javascript">
-document.title = '<spring:message code="Letv_Gcr_Name_Title" />';
+document.title = '<spring:message code="AWifi" />';
 
 </script>

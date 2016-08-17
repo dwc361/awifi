@@ -5,12 +5,12 @@
 		<New class="org.eclipse.jetty.util.resource.ResourceCollection">
 			<Arg>
 				<Array type="java.lang.String">
-					<Item>\Users\xuqiying\Desktop\ems-chinanet-bigscreen\src\main\webapp</Item>
-					<Item>\Users\xuqiying\Desktop\roof-web-menu-webapp\src\main\webapp</Item>
-					<Item>\Users\xuqiying\Desktop\roof-web-user-webapp\src\main\webapp</Item>s
-					<Item>\Users\xuqiying\Desktop\roof-web-dictionary-webapp\src\main\webapp</Item>
-					<Item>\Users\xuqiying\Desktop\roof-web-org-webapp\src\main\webapp</Item>
-					<Item>\Users\xuqiying\Desktop\webc</Item>
+					<Item>src\main\webapp</Item>
+					<Item>E:\Users\hc_workspace_2016\roof-web-menu-webapp\src\main\webapp</Item>
+					<Item>E:\Users\hc_workspace_2016\roof-web-user-webapp\src\main\webapp</Item>
+					<Item>E:\Users\hc_workspace_2016\roof-web-dictionary-webapp\src\main\webapp</Item>
+					<Item>E:\Users\hc_workspace_2016\roof-web-org-webapp\src\main\webapp</Item>
+					<Item>E:\Users\hc_workspace_2016\webc</Item>
 				</Array>
 			</Arg>
 		</New>

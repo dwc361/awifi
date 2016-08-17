@@ -1,5 +1,6 @@
 package com.awifi.bigscreen.theme.action;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,10 +76,11 @@ public class ThemeAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(HttpServletRequest request, Theme theme) {
+	public @ResponseBody Result create(Theme theme,HttpServletRequest request) {
 		if (theme != null) {
-			User user = (User) BaseUserContext.getCurrentUser(request);
+			User user = (User)BaseUserContext.getCurrentUser(request);
 			theme.setCreate_by(user.getUsername());
+			theme.setCreate_time(new Date());
 			themeService.save(theme);
 			return new Result("保存成功!");
 		} else {
@@ -87,10 +89,11 @@ public class ThemeAction {
 	}
 
 	@RequestMapping("/update")
-	public @ResponseBody Result update(HttpServletRequest request, Theme theme) {
+	public @ResponseBody Result update(Theme theme,HttpServletRequest request) {
 		if (theme != null) {
-			User user = (User) BaseUserContext.getCurrentUser(request);
-			theme.setUpdate_by(user.getUsername());
+			User user = (User)BaseUserContext.getCurrentUser(request);
+			theme.setCreate_by(user.getUsername());
+			theme.setCreate_time(new Date());
 			themeService.updateIgnoreNull(theme);
 			return new Result("保存成功!");
 		} else {

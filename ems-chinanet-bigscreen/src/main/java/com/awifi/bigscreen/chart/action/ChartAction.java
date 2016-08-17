@@ -1,5 +1,6 @@
 package com.awifi.bigscreen.chart.action;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -75,10 +76,11 @@ public class ChartAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(HttpServletRequest request, Chart chart) {
+	public @ResponseBody Result create(Chart chart,HttpServletRequest request) {
 		if (chart != null) {
-			User user = (User) BaseUserContext.getCurrentUser(request);
-			chart.setUpdate_by(user.getUsername());
+			User user = (User)BaseUserContext.getCurrentUser(request);
+			chart.setCreate_by(user.getUsername());
+			chart.setCreate_time(new Date());
 			chartService.save(chart);
 			return new Result("保存成功!");
 		} else {
@@ -87,10 +89,11 @@ public class ChartAction {
 	}
 
 	@RequestMapping("/update")
-	public @ResponseBody Result update(HttpServletRequest request, Chart chart) {
+	public @ResponseBody Result update(Chart chart,HttpServletRequest request) {
 		if (chart != null) {
-			User user = (User) BaseUserContext.getCurrentUser(request);
+			User user = (User)BaseUserContext.getCurrentUser(request);
 			chart.setUpdate_by(user.getUsername());
+			chart.setUpdate_time(new Date());
 			chartService.updateIgnoreNull(chart);
 			return new Result("保存成功!");
 		} else {

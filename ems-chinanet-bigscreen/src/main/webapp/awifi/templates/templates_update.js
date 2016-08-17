@@ -1,7 +1,7 @@
 $(function() {
-		ROOF.Utils.datepicker("templates_create_time");
+/*		ROOF.Utils.datepicker("templates_create_time");
 	ROOF.Utils.datepicker("templates_update_time");
-
+*/
 	$('#bigscreen_templates_form').validate({
 		rules : {
 			'id' : {
@@ -16,7 +16,7 @@ $(function() {
 			}, 
 			'enabled' : {
 				required : true
-			}, 
+			}/*, 
 			'create_time' : {
 				required : true
 			}, 
@@ -28,7 +28,7 @@ $(function() {
 			}, 
 			'update_by' : {
 				required : true
-			}
+			}*/
 		},
 		messages : {
 			'id' : {
