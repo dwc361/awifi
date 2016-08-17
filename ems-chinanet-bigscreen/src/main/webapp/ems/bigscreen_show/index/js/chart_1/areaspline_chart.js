@@ -12,8 +12,7 @@ $(function() {
 	$.ajax({
 		type: 'post',
 		dataType: "json",
-		url: "http://192.168.191.1:8080/ems-chinanet-bigscreen/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
-		
+		url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
 		data: {
 			'x_json': $.toJSON(x_arr)
 		},
@@ -54,8 +53,7 @@ function show_areaspline_chart(data) {
 						$.ajax({
 							type: 'post',
 							dataType: "json",
-							url: "http://192.168.191.1:8080/ems-chinanet-bigscreen/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
-		
+							url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
 							data: {
 								'x_json': $.toJSON(x_arr)
 							},
@@ -191,7 +189,6 @@ function show_areaspline_chart(data) {
 	// 图表本身的背景设置成透明
 	var rect = $("#areaspline_div").find("rect");
 	rect.attr("fill", "transparent");
-	//console.log(rect);
 
 	// body背景颜色设置成透明
 	document.body.style.backgroundColor = "transparent";
