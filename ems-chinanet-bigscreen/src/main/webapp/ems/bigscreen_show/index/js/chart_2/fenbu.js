@@ -9,6 +9,16 @@ opt_spread = {
 	//	backgroundColor: '#2c343c',
 	tooltip: {
 		trigger: 'item',
+		textStyle: {
+			color: '#fff',
+			fontSize: 18
+		},
+		axisPointer: {
+			lineStyle: {
+				color: '#fff',
+				width: 1
+			}
+		},
 		formatter: "{b} : {c}"
 	},
 	series: [{
@@ -34,13 +44,13 @@ opt_spread = {
 			name: '胖ap'
 		}, {
 			value: 310,
-			name: 'AC'
+			name: '光猫'
 		}, {
 			value: 234,
 			name: '瘦AP'
 		}, {
 			value: 135,
-			name: '热点'
+			name: '融合终端'
 		}],
 		itemStyle: {
 			emphasis: {
@@ -51,7 +61,6 @@ opt_spread = {
 		}
 	}]
 };
-                    
 
 var spread_app = {};
 

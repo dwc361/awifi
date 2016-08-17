@@ -13,7 +13,17 @@ opt_end = {
 	},
 	tooltip: {
 		trigger: 'axis',
-		itemGap: '	0'
+		itemGap: '	0',
+		textStyle: {
+			color: '#fff',
+			fontSize: 18
+		},
+		axisPointer: {
+			lineStyle: {
+				color: '#fff',
+				width: 1
+			}
+		}
 	},
 	legend: {
 		data: ['', '']

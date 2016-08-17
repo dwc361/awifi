@@ -7,7 +7,17 @@ opt_zhongduan = {
 		'#21c6a5', '#65c7f7', '#096dc5'
 	],
 	tooltip: {
-		trigger: 'axis'
+		trigger: 'axis',
+		textStyle: {
+			color: '#fff',
+			fontSize: 18
+		},
+		axisPointer: {
+			lineStyle: {
+				color: '#fff',
+				width: 1
+			}
+		}
 	},
 	calculable: true,
 	xAxis: [{
