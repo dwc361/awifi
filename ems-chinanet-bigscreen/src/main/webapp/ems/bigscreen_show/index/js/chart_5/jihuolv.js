@@ -85,22 +85,22 @@ app_jihuolv.timeTicket = setInterval(function() {
 	jihuolvChart.dispatchAction({
 		type: 'downplay',
 		seriesIndex: 0,
-		dataIndex: app_hotspot.currentIndex
+		dataIndex: app_jihuolv.currentIndex
 	});
 	
-	app_hotspot.currentIndex = (app_hotspot.currentIndex + 1) % dataLen;
+	app_jihuolv.currentIndex = (app_jihuolv.currentIndex + 1) % dataLen;
 	
 	// 高亮当前图形
 	jihuolvChart.dispatchAction({
 		type: 'highlight',
 		seriesIndex: 0,
-		dataIndex: app_hotspot.currentIndex
+		dataIndex: app_jihuolv.currentIndex
 	});
 	// 显示 tooltip
 	jihuolvChart.dispatchAction({
 		type: 'showTip',
 		seriesIndex: 0,
-		dataIndex: app_hotspot.currentIndex
+		dataIndex: app_jihuolv.currentIndex
 	});
 }, 3000);
 // 使用刚指定的配置项和数据显示图表。

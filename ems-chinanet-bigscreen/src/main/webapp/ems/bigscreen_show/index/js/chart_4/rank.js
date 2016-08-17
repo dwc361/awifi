@@ -118,28 +118,24 @@ rank_option = {
 };
 
 var rank_app = {};
-var index = 0;
+var rank_index = 0;
 var typeNameArray;
 var numberArray;
 rank_app.timeTicket = setInterval(function() {
-	if(index == 0) index = 1;
-	else if(index == 1) index = 2;
-	else if(index == 2) index = 3;
-	else if(index == 3) index = 4;
-	else if(index == 4) index = 0;
-	if(index == 0) {
+	rank_index = (rank_index + 1) % 5;
+	if(rank_index == 0) {
 		typeNameArray = typeNameArray0;
 		numberArray = numberArray0;
-	} else if(index == 1) {
+	} else if(rank_index == 1) {
 		typeNameArray = typeNameArray1;
 		numberArray = numberArray1;
-	} else if(index == 2) {
+	} else if(rank_index == 2) {
 		typeNameArray = typeNameArray2;
 		numberArray = numberArray2;
-	} else if(index == 3) {
+	} else if(rank_index == 3) {
 		typeNameArray = typeNameArray3;
 		numberArray = numberArray3;
-	} else if(index == 4) {
+	} else if(rank_index == 4) {
 		typeNameArray = typeNameArray4;
 		numberArray = numberArray4;
 	}
