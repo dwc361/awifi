@@ -23,27 +23,28 @@
 		<footer class="news">
 			<span>［2015-09-23 06:41:28］互联网作为20世纪最伟大的发明之一，把世界变成了“地球村”。但是，这块“新疆域”</span>
 		</footer>
-		
 		<!--以下是左侧4栏-->
 		<div class="leftPart">
 			<div class="left col-md-12 col-lg-12 col-sm-12">
 				<div class="topH">
-					<h1>[ IT支撑业务受理表 ]</h1>
-				</div>
+					<h1>[ 平台用户总量 ]</h1></div>
 				<div class="Hchart" style="position: relative;">
+					<!--<script type="text/javascript" src="${basePath}/ems/bigscreen_show/chart/js/areaspline_chart.js"></script>-->
+
 					<div id="areaspline_div"></div>
 					<div id="textname">
 						<ul style="font-size: 1.4rem;">
-							<li> <i style="background: #367bdb;"></i>业务受理量：<i id="areaspline1"></i> <span></span></li>
-						</ul>
+							<li> <i style="background: #367bdb;"></i>用户数量：<i id="areaspline1">343242424</i> <span></span></li>
+							</ul>
 					</div>
 				</div>
 			</div>
+
 			<div class="left col-md-12 col-lg-12 col-sm-12">
 				<div class="topH">
-					<h1 style="	position: absolute;top: 0;">[ 用户终端信息 ]</h1></div>
+					<h1 style="	position: absolute;top: 0;">[ 定制终端设备状态统计 ]</h1></div>
 				<div class="Echart" ui-view="chart_2">
-					<div id="end" style="width: 100%;height: 90%;"></div>
+					<div id="state_1" class="state"></div>
 				</div>
 			</div>
 			<div class="left col-md-12 col-lg-12 col-sm-12">
@@ -90,6 +91,7 @@
 				<div class="floater bottomLeft" ui-view="chart_5">
 					<div id="dashboard"></div>
 				</div>
+
 				<div id="map">
 					<div class="items" id="Item1">
 						<a href="javascript:;" class="fold"></a>
@@ -108,8 +110,7 @@
 		<div class="rightPart">
 			<div class="right col-md-12 col-lg-12 col-sm-12">
 				<div class="topH">
-					<h1>[ 定制终端 ]</h1>
-				</div>
+					<h1>[ 用户认证状态 ]</h1></div>
 				<div class="Echart">
 					<!--<div id="textname" style="top: 4.8rem;">
 						<ul style="font-size: 1.4rem;">
@@ -121,29 +122,28 @@
 					<!--<div id="many_spline_div"></div>-->
 					<div id="zhongduan"></div>
 				</div>
+
 			</div>
 			<div class="right col-md-12 col-lg-12 col-sm-12">
 				<div class="topH">
-					<h1>[ 设备状态统计 ]</h1>
-				</div>
+					<h1>[ NAS设备状态统计 ]</h1></div>
 				<div class="Echart">
 					<!--<div id="round_div"></div>-->
 					<!--<div id="rate" style="width: 100%;height: 90%;"></div>-->
-					<div id="state" ></div>
+					<div id="state_2" class="state"></div>
 				</div>
+
 			</div>
 			<div class="right col-md-12 col-lg-12 col-sm-12">
 				<div class="topH">
-					<h1>[ 爱wifi热点类型分布 ]</h1>
-				</div>
+					<h1>[ 爱wifi热点类型分布 ]</h1></div>
 				<div class="Echart" >
 					<div id="hotspot"></div>
 				</div>
 			</div>
 			<div class="right col-md-12 col-lg-12 col-sm-12">
 				<div class="topH">
-					<h1>[ 胖ap激活率统计 ]</h1>
-				</div>
+					<h1>[ 胖ap激活率统计 ]</h1></div>
 				<div class="Hchart">
 					<div id="jihuolv"></div>
 				</div>
@@ -155,7 +155,7 @@
 	<script type="text/javascript" src="${basePath}/ems/bigscreen_show/index/moduel/moduel_map/js/lib/raphael-min.js"></script>
 	<script type="text/javascript" src="${basePath}/ems/bigscreen_show/index/moduel/moduel_map/js/res/chinaMapConfig.js"></script>
 	<script type="text/javascript" src="${basePath}/ems/bigscreen_show/index/moduel/moduel_map/js/map.js"></script>
-
+	
 	<!--以下是<chart_1></chart_1>-->
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_1/areaspline_chart.js" type="text/javascript" charset="utf-8"></script>
 
@@ -164,13 +164,12 @@
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_2/fenbu.js" type="text/javascript" charset="utf-8"></script>
 
 	<!--以下是chart_3-->
-	<script src="${basePath}/ems/bigscreen_show/index/js/e_chart/e_chart.js" type="text/javascript" charset="utf-8"></script>
+	<!--<script src="${basePath}/ems/bigscreen_show/index/js/e_chart/e_chart.js" type="text/javascript" charset="utf-8"></script>-->
+	<script src="${basePath}/ems/bigscreen_show/index/js/chart_2/state_1.js" type="text/javascript" charset="utf-8"></script>
 
 	<!--以下是chart_4-->
 	<!--<script src="${basePath}/ems/bigscreen_show/index/js/chart_4/num_funnel_div.js" type="text/javascript" charset="utf-8"></script>-->
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_4/rank.js" type="text/javascript" charset="utf-8"></script>
-	
-	<!--以下是chart_8-->
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_5/jihuolv.js" type="text/javascript" charset="utf-8"></script>
 
 	<!--以下是仪表盘-->
@@ -186,7 +185,7 @@
 	<!--以下是chart_6-->
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_6/chart_6.js" type="text/javascript" charset="utf-8"></script>
 	<!--<script src="${basePath}/ems/bigscreen_show/index/js/chart_6/rate.js" type="text/javascript" charset="utf-8"></script>-->
-	<script src="${basePath}/ems/bigscreen_show/index/js/chart_6/device_mixture_div.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${basePath}/ems/bigscreen_show/index/js/chart_6/state_2.js" type="text/javascript" charset="utf-8"></script>
 
 	<!--以下是chart_7-->
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_7/many_spline_chart.js" type="text/javascript" charset="utf-8"></script>
