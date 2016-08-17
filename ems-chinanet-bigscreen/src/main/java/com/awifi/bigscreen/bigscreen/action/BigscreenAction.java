@@ -24,11 +24,18 @@ import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
 import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
 import com.awifi.bigscreen.websocket.SystemWebSocketHandler;
 
+import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
+import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
+import com.awifi.bigscreen.chart.entity.Chart;
+import com.awifi.bigscreen.chart.entity.ChartVo;
+import com.awifi.bigscreen.chart.service.api.IChartService;
+
 @Controller
 @RequestMapping("awifi/bigscreenAction")
 public class BigscreenAction {
 	private IBigscreenService bigscreenService;
 	private IDictionaryService dictionaryService;
+	private IChartService chartService;
 
 	// 加载页面的通用数据
 	private void loadCommon(Model model) {
@@ -59,6 +66,26 @@ public class BigscreenAction {
 		model.addAttribute("bigscreen", bigscreen);
 		this.loadCommon(model);
 		return "/awifi/bigscreen/bigscreen_create.jsp";
+	}
+
+	@RequestMapping("/create_page_easyui")
+	public String create_page_easyui(Model model) {
+		List<ChartVo> charts = chartService.selectForList(new Chart("1"));// 所有可用的图表
+		model.addAttribute("charts", charts);
+		Bigscreen bigscreen = new Bigscreen();
+		model.addAttribute("bigscreen", bigscreen);
+		this.loadCommon(model);
+		return "/awifi/bigscreen/bigscreen_update_easyui.jsp";
+	}
+	
+	@RequestMapping("/create_page_easyui1")
+	public String create_page_easyui1(Model model) {
+		List<ChartVo> charts = chartService.selectForList(new Chart("1"));// 所有可用的图表
+		model.addAttribute("charts", charts);
+		Bigscreen bigscreen = new Bigscreen();
+		model.addAttribute("bigscreen", bigscreen);
+		this.loadCommon(model);
+		return "/awifi/bigscreen/bigscreen_update_easyui1.jsp";
 	}
 
 	@RequestMapping("/update_page")
@@ -126,5 +153,10 @@ public class BigscreenAction {
 	@Autowired(required = true)
 	public void setDictionaryService(@Qualifier("dictionaryService") IDictionaryService dictionaryService) {
 		this.dictionaryService = dictionaryService;
+	}
+
+	@Autowired
+	public void setChartService(IChartService chartService) {
+		this.chartService = chartService;
 	}
 }

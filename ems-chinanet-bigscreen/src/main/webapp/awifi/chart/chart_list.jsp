@@ -8,7 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="description" content="">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>e_chart管理</title>
+<title>图表管理</title>
 
 <%@include file="/ems_common/ems_head_boot.jsp"%>
 <script type="text/javascript" src="${basePath}/awifi/chart/chart_list.js"></script>
@@ -16,7 +16,7 @@
 <body>
 	<!-- 增删改成模块 start -->
 	<div class="panel panel-default" style="background-color: #f8f8f8; overflow: hidden;">
-		<div class="panel-heading">e_chart列表</div>
+		<div class="panel-heading">图表列表</div>
 		<div class="panel-body">
 			<form id="bigscreen_chart_search_form" class="form-inline" method="post" action="${basePath}/awifi/chartAction/list.action">
 				<%@include file="/ems_common/ems_page_bar_cond_default.jsp"%>
