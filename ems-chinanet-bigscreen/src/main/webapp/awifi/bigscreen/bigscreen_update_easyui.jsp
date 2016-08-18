@@ -26,6 +26,17 @@
 	href="${basePath}/awifi/styles/bootstrap-theme.css">
 <link rel="stylesheet" href="${basePath}/awifi/styles/bootstrap.css">
 <link rel="stylesheet" href="${basePath}/awifi/styles/app.css">
+<script type="text/javascript"
+	src="${basePath}/common/js/ROOF.Utils.js"></script>
+<script type="text/javascript"
+	src="${basePath}/common/js/ROOF.Class.js"></script>
+<script type="text/javascript"
+	src="${basePath}/awifi/bigscreen/js/bigscreen.Control.js"></script>
+<script type="text/javascript"
+	src="${basePath}/awifi/bigscreen/js/bigscreen.Input.js"></script>
+<script type="text/javascript"
+	src="${basePath}/awifi/bigscreen/js/bigscreen.InputList.js"></script>
+
 <style type="text/css">
 .proxy {
 	border: 1px solid #ccc;
@@ -78,30 +89,38 @@
 						<p class="title">${chart.name }</p>
 						<a href="#" class="thumbnail"> <img
 							src="${basePath}/${chart.icon}" alt="" width="100%" />
-							<input type="hidden" value="${chart.id }" name="chart_id" />
-							<input type="hidden" value="${chart.path }" name="chart_path" />
+							<input type="hidden" value="${chart.id}" name="chart_id"/>
+							<input type="hidden" value="${chart.path}" name="chart_path"/>
 						</a>
 					</div>
 				</c:forEach>
 			</div>
 		<form id="bigscreen" class="form-inline" method="post" action="" target="_self">
+			<input type="hidden" value="${templates.id }" name="templates.id"/>
+			<input type="hidden" value="${templates.path }" name="templates.path"/>
+			<input type="hidden" value="${theme.picture}" name="theme.picture"/>
+			<input type="hidden" value="${theme.id}" name="theme.id"/>
+			<div id="bigscreen_chart"></div>
 			<div id="target_div" class="row box-group fl">
 				<div class="box easyui-droppable targetarea"
 					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
-    						console.log('onDragEnter');
+    						var local = '1_1';
     					},
     					onDragLeave: function(e,source){
-    						console.log('onDragLeave');
+    						var local = '1_1';
     					},
     					onDrop: function(e,source){
     						var local = '1_1';
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
-     						$(this).append('<input type='hidden' value='part_1_1' name='target_name'  />');
+    						inputList.delChartInput(local); 
+   							var target = $(source).clone(); 
+   							$(target).children('img').attr('height','100%'); 
+     						$(target).children('img').attr('width','100%'); 
+      						$(this).html($(target).children('img'));
+      						var input1 = $(target).children('input')[0];
+      						var input2 = $(target).children('input')[1];
+    						inputList.addChartInput($(input1).val(),$(input2).val(),local); 
     					}
     				">
 					
@@ -122,17 +141,20 @@
 					data-options="
     					accept: '.thumbnail',
     					onDragEnter:function(e,source){
-    						console.log('onDragEnter');
+    						var local = '1_5';
     					},
     					onDragLeave: function(e,source){
-    						console.log('onDragLeave');
     					},
     					onDrop: function(e,source){
-    						console.log($(this));
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
+    						var local = '1_5';
+    						inputList.delChartInput(local); 
+   							var target = $(source).clone(); 
+   							$(target).children('img').attr('height','100%'); 
+     						$(target).children('img').attr('width','100%'); 
+      						$(this).html($(target).children('img'));
+      						var input1 = $(target).children('input')[0];
+      						var input2 = $(target).children('input')[1];
+    						inputList.addChartInput($(input1).val(),$(input2).val(),local); 
     					}
     				">
 					<input type="hidden" value="part_1_5" name="target_name" id="part_1_5" />
@@ -148,11 +170,15 @@
     						console.log('onDragLeave');
     					},
     					onDrop: function(e,source){
-    						console.log($(this));
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
+    						var local = '2_1';
+    						inputList.delChartInput(local); 
+   							var target = $(source).clone(); 
+   							$(target).children('img').attr('height','100%'); 
+     						$(target).children('img').attr('width','100%'); 
+      						$(this).html($(target).children('img'));
+      						var input1 = $(target).children('input')[0];
+      						var input2 = $(target).children('input')[1];
+    						inputList.addChartInput($(input1).val(),$(input2).val(),local);  
     					}
     				">
 					<input type="hidden" value="part_2_1" name="target_name" id="part_2_1" />
@@ -180,11 +206,15 @@
     						console.log('onDragLeave');
     					},
     					onDrop: function(e,source){
-    						console.log($(this));
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
+    						var local = '2_5';
+    						inputList.delChartInput(local); 
+   							var target = $(source).clone(); 
+   							$(target).children('img').attr('height','100%'); 
+     						$(target).children('img').attr('width','100%'); 
+      						$(this).html($(target).children('img'));
+      						var input1 = $(target).children('input')[0];
+      						var input2 = $(target).children('input')[1];
+    						inputList.addChartInput($(input1).val(),$(input2).val(),local); 
     					}
     				">
 					<input type="hidden" value="part_2_5" name="target_name" id="part_2_5" />
@@ -200,11 +230,15 @@
     						console.log('onDragLeave');
     					},
     					onDrop: function(e,source){
-    						console.log($(this));
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
+    						var local = '3_1';
+    						inputList.delChartInput(local); 
+   							var target = $(source).clone(); 
+   							$(target).children('img').attr('height','100%'); 
+     						$(target).children('img').attr('width','100%'); 
+      						$(this).html($(target).children('img'));
+      						var input1 = $(target).children('input')[0];
+      						var input2 = $(target).children('input')[1];
+    						inputList.addChartInput($(input1).val(),$(input2).val(),local); 
     					}
     				">
 <!-- 					<input type="hidden" value="part_3_1" name="target_name" id="part_3_1" /> -->
@@ -232,11 +266,15 @@
     						console.log('onDragLeave');
     					},
     					onDrop: function(e,source){
-    						console.log($(this));
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
+    						var local = '3_5';
+    						inputList.delChartInput(local); 
+   							var target = $(source).clone(); 
+   							$(target).children('img').attr('height','100%'); 
+     						$(target).children('img').attr('width','100%'); 
+      						$(this).html($(target).children('img'));
+      						var input1 = $(target).children('input')[0];
+      						var input2 = $(target).children('input')[1];
+    						inputList.addChartInput($(input1).val(),$(input2).val(),local); 
     					}
     				">
 					<input type="hidden" value="part_3_5" name="target_name" id="part_3_5" />
@@ -252,11 +290,15 @@
     						console.log('onDragLeave');
     					},
     					onDrop: function(e,source){
-    						console.log($(this));
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
+    						var local = '4_1';
+    						inputList.delChartInput(local); 
+   							var target = $(source).clone(); 
+   							$(target).children('img').attr('height','100%'); 
+     						$(target).children('img').attr('width','100%'); 
+      						$(this).html($(target).children('img'));
+      						var input1 = $(target).children('input')[0];
+      						var input2 = $(target).children('input')[1];
+    						inputList.addChartInput($(input1).val(),$(input2).val(),local); 
     					}
     				">
 					<input type="hidden" value="part_4_1" name="target_name" id="part_4_1" />
@@ -284,11 +326,15 @@
     						console.log('onDragLeave');
     					},
     					onDrop: function(e,source){
-    						console.log($(this));
-    						var target = $(source).clone();
-    						$(target).children('img').attr('height','100%');
-    						$(target).children('img').attr('width','100%');
-     						$(this).html($(target).html()); 
+    						var local = '4_5';
+    						inputList.delChartInput(local); 
+   							var target = $(source).clone(); 
+   							$(target).children('img').attr('height','100%'); 
+     						$(target).children('img').attr('width','100%'); 
+      						$(this).html($(target).children('img'));
+      						var input1 = $(target).children('input')[0];
+      						var input2 = $(target).children('input')[1];
+    						inputList.addChartInput($(input1).val(),$(input2).val(),local); 
     					}
     				">
 					<input type="hidden" value="part_4_5" name="target_name" id="part_4_5" />
@@ -297,6 +343,8 @@
 			</div>
 		</form>
 	</div>
-	
+<script type="text/javascript">
+var inputList = new bigscreen.InputList($("#bigscreen_chart"));
+</script>	
 </body>
 </html>
