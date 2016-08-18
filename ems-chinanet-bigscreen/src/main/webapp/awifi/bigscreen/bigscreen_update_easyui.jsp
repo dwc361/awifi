@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title></title>
+<title>大屏配置</title>
 <link rel="stylesheet" type="text/css"
 	href="${basePath}/ems_common/easyui/themes/default/easyui.css">
 <link rel="stylesheet" type="text/css"
@@ -36,6 +36,11 @@
 	src="${basePath}/awifi/bigscreen/js/bigscreen.Input.js"></script>
 <script type="text/javascript"
 	src="${basePath}/awifi/bigscreen/js/bigscreen.InputList.js"></script>
+<script type="text/javascript" src="${basePath}/common/js/jquery/jquery.form.js"></script>
+<script type="text/javascript" src="${basePath}/common/js/jquery/jquery.validate.js"></script>
+<script type="text/javascript" src="${basePath}/common/js/jquery/jquery.validate.message_cn.js"></script>
+<script type="text/javascript" src="${basePath}/common/js/jquery/jquery.validate.rules.js"></script>
+<script type="text/javascript" src="${basePath }/ems_common/js/com.letv.errorpacement.js"></script>
 
 <style type="text/css">
 .proxy {
@@ -46,6 +51,32 @@
 </style>
 <script>
 	$(function() {
+		$('#bigscreen').validate({
+			rules : {
+				'name' : {
+					required : true
+				}
+			},
+			messages : {
+				'name' : {
+					required : "名称必填"
+				}
+			},
+			errorPlacement : com.letv.errorpacement
+		});
+		
+		var ajaxFormOption = {
+			 url: "${basePath}/awifi/bigscreenAction/create.action", //请求url  
+			type : 'post',
+			cache : false,
+			dataType : 'json',
+			clearForm : true,
+			success : function(d) {
+				alert(d.message);
+				window.location.href="${basePath}/awifi/bigscreenAction/list.action";
+			}
+		}
+		
 		$('.thumbnail').draggable({
 			revert : true,
 			deltaX : 10,
@@ -66,21 +97,34 @@
 			return false;
 		})
 		
+		$("#back").click(function(){
+// 			window.location.href="${basePath}/awifi/bigscreenAction/list.action";
+			$("#bigscreen").attr("action","${basePath}/awifi/bigscreenAction/list.action");	
+			$("#bigscreen").submit();
+			$("#bigscreen").attr("action","");	
+			return false;
+		})
+		
+		$("#create").click(function(){
+			$("#bigscreen").ajaxSubmit(ajaxFormOption);
+			return false;
+		})
+		
 	});
 </script>
 </head>
 <body>
-	
+	<form id="bigscreen" class="form-inline" method="post" action="" target="_self">
 		<div class="wrapper">
 			<h4 class="fl">
-				<input type="text" value="标题标题标题标题标题标题标题标题" name="name"
+				<input type="text" value="${bigscreen.name }" name="name"
 					class="form-control input-sm" style="width: 300px;" />
 			</h4>
 			<div class="btn-group fr" role="group"
 				aria-label="Default button group">
-				<button type="button" class="btn btn-default">保存</button>
+				<button type="button" class="btn btn-default" id="create">保存</button>
 				<button type="button" class="btn btn-default" id="preview">预览</button>
-				<button type="button" class="btn btn-default">返回</button>
+				<button type="button" class="btn btn-default" id="back">返回</button>
 			</div>
 			<div class="cl" style="height: 20px"></div>
 			<div class="row fl min-img" style="width: 120px;">
@@ -89,13 +133,14 @@
 						<p class="title">${chart.name }</p>
 						<a href="#" class="thumbnail"> <img
 							src="${basePath}/${chart.icon}" alt="" width="100%" />
-							<input type="hidden" value="${chart.id}" name="chart_id"/>
-							<input type="hidden" value="${chart.path}" name="chart_path"/>
+							<input type="hidden" value="${chart.id}" =/>
+							<input type="hidden" value="${chart.path}" />
 						</a>
 					</div>
 				</c:forEach>
 			</div>
-		<form id="bigscreen" class="form-inline" method="post" action="" target="_self">
+		
+			<input type="hidden" value="${bigscreen.id }" name="bigscreen.id"/>
 			<input type="hidden" value="${templates.id }" name="templates.id"/>
 			<input type="hidden" value="${templates.path }" name="templates.path"/>
 			<input type="hidden" value="${theme.picture}" name="theme.picture"/>
@@ -341,8 +386,9 @@
 <!-- 					<input type="hidden" value="" name="templete_name" id="templete_4_5" /> -->
 				</div>
 			</div>
-		</form>
+		
 	</div>
+</form>
 <script type="text/javascript">
 var inputList = new bigscreen.InputList($("#bigscreen_chart"));
 </script>	

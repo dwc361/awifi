@@ -10,7 +10,7 @@ bigscreen.Input = ROOF.Class(bigscreen.Control, {
 		this.text = text;
 		this.sign = sign;
 		this.index = index;
-		this.dom = $('<input type="text" sign="' + sign + '" value="' + text
+		this.dom = $('<input type="hidden" sign="' + sign + '" value="' + text
 				+ '" name="' + name + '" />');
 	},
 	getText : function() {

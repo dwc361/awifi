@@ -12,6 +12,40 @@
 
 <%@include file="/ems_common/ems_head_boot.jsp"%>
 <script type="text/javascript" src="${basePath}/awifi/bigscreen/bigscreen_list.js"></script>
+<script type="text/javascript">
+	$(document).ready(function() {
+		$("#select_dialog").dialog({
+			autoOpen : false,
+			width : 800,
+			height : 500,
+			modal : true,
+			resizable : false,
+			buttons : {
+				"关闭" : function() {
+					$(this).dialog("close");
+				}
+			}
+		});
+		$("#bigscreen_bigscreen_create_btn").click(function() {
+			$("#select_dialog").dialog("open");
+		});
+		
+		$("#choose").click(function(){
+			var theme_id = $("select[name='theme_id']").find("option:selected").val();
+			var templates_id = $("select[name='templates_id']").find("option:selected").val();
+			if(theme_id == null || theme_id == ''){
+				Roof.Utils.alert("请选择主题");
+				return false;
+			}
+			if(templates_id == null || templates_id ==''){
+				Roof.Utils.alert("请选择大屏模板");
+				return false;
+			}
+			window.location.href=ROOF.Utils.projectName() +"/awifi/bigscreenAction/create_page_easyui.action?theme_id="+theme_id+"&templates_id="+templates_id;
+		});
+	})
+</script>
+
 </head>
 <body>
 	<!-- 增删改成模块 start -->
@@ -83,6 +117,41 @@
 			</table>
 		</div>
 		<%@include file="/ems_common/ems_page_bar_boot.jsp"%>
+	</div>
+	<div id="select_dialog" title="新建大屏">
+		<div class="container layout-wraper" style="width: 100%;">
+			<div class="row">
+				<div class="col-xs-12 layout-header">
+					<button id="choose" class="btn btn-default">选择</button>
+					<button id="bigscreen_bigscreen_update_close_btn"
+						class="btn btn-default">取消</button>
+				</div>
+			</div>
+			<div class="row text-center form-wrapper">
+				<div class="row">
+					<div class="col-xs-2">
+						<b>主题</b><span class='red'>*</span> :
+					</div>
+					<div class="col-xs-2">
+						<select name="theme_id">
+							<c:forEach var="theme" items="${themes }">
+								<option value="${theme.id }">${theme.name }</option>							
+							</c:forEach>
+						</select>
+					</div>
+					<div class="col-xs-2">
+						<b>模板</b><span class='red'>*</span> :
+					</div>
+					<div class="col-xs-2">
+						<select name="templates_id">
+							<c:forEach var="template" items="${templatesVos }">
+								<option value="${template.id }">${template.name }</option>							
+							</c:forEach>
+						</select>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 	<!-- 增删改成模块 end -->
 </body>

@@ -16,7 +16,6 @@
 			<b>是否可用</b><span class='red'>*</span> :
 		</div>
 		<div class="col-xs-2">
-<<<<<<< Updated upstream
 			<select id="templates_enabled" name="enabled" class="form-control input-sm">
 				<option></option>
 				<c:forEach  items="${enableds }" var="dic" >
@@ -26,41 +25,15 @@
 				</c:forEach >
 			</select>
 <%-- 			<input type="text" id="templates_enabled" maxlength="1" name="enabled" value="${templates.enabled }" class="form-control input-sm"> --%>
-=======
-			<input type="text" id="templates_enabled" maxlength="1" name="enabled"  value="${templates.enabled }" class="form-control input-sm">
-		</div>
-		<div class="col-xs-2">
-			<b>新建时间</b><span class='red'>*</span> :
-		</div>
-		<div class="col-xs-2">
-			<input type="text" id="templates_create_time" readonly name="create_time" value="<fmt:formatDate value="${templates.create_time }" pattern="yyyy-MM-dd HH:mm:ss" />" class="form-control input-sm">
-		</div>
-		<div class="col-xs-2">
-			<b>所属用户</b><span class='red'>*</span> :
-		</div>
-		<div class="col-xs-2">
-			<input type="text" id="templates_create_by" maxlength="255" readonly name="create_by" value="${templates.create_by }" class="form-control input-sm">
-		</div>
-		<div class="col-xs-2">
-			<b>更新时间</b><span class='red'>*</span> :
-		</div>
-		<div class="col-xs-2">
-			<input type="text" id="templates_update_time" readonly name="update_time" value="<fmt:formatDate value="${templates.update_time }" pattern="yyyy-MM-dd HH:mm:ss" />" class="form-control input-sm">
->>>>>>> Stashed changes
 		</div>
 	</div>
 	<div class="row">
 		<div class="col-xs-2">
 			<b>模板路径</b><span class='red'>*</span> :
 		</div>
-<<<<<<< Updated upstream
 		<div class="col-xs-9">
 			<input type="text" id="templates_path" maxlength="255" name="path" value="${templates.path }" class="form-control input-sm">
-			<span class='red' >格式：全部模板都在webapp\app\templates\路径下，只需要配置模板名字即可</span> 
-=======
-		<div class="col-xs-2">
-			<input type="text" id="templates_update_by" readonly maxlength="255" name="update_by" value="${templates.update_by }" class="form-control input-sm">
->>>>>>> Stashed changes
+			<span class='red' ></span> 
 		</div>
 	</div>
 </div>
