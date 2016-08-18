@@ -2,9 +2,7 @@ package com.awifi.bigscreen.bigscreen.action;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -25,6 +23,7 @@ import org.springframework.web.socket.TextMessage;
 
 import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.bigscreen.entity.BigScreenHandlebarsVo;
+import com.awifi.bigscreen.bigscreen.entity.BigScreenModel;
 import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
 import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
 import com.awifi.bigscreen.chart.entity.Chart;
@@ -45,60 +44,25 @@ public class BigscreenAction {
 		model.addAttribute("dicList", dicList);
 	}
 
-	@RequestMapping("/test")
-	public String test(Model model,List<BigScreenHandlebarsVo> vos) {
-		System.out.println(vos.size());
-		BigScreenHandlebarsVo vo = new BigScreenHandlebarsVo("part_1_1", "areaspline_chart", "");
-		BigScreenHandlebarsVo vo1 = new BigScreenHandlebarsVo("part_2_1", "e_chart", "");
-		BigScreenHandlebarsVo vo2 = new BigScreenHandlebarsVo("part_3_1", "fenbu", "");
-		BigScreenHandlebarsVo vo3 = new BigScreenHandlebarsVo("part_4_1", "rank", "");
-		BigScreenHandlebarsVo vo4 = new BigScreenHandlebarsVo("part_1_5", "dingshizhongduan", "");
-		BigScreenHandlebarsVo vo5 = new BigScreenHandlebarsVo("part_2_5", "device_mixture", "");
-		BigScreenHandlebarsVo vo6 = new BigScreenHandlebarsVo("part_3_5", "hotspot", "");
-		BigScreenHandlebarsVo vo7 = new BigScreenHandlebarsVo("part_4_5", "jihuolv", "");
-
-		List<BigScreenHandlebarsVo> list = new ArrayList<BigScreenHandlebarsVo>();
-		list.add(vo7);
-		list.add(vo6);
-		list.add(vo5);
-		list.add(vo4);
-		list.add(vo3);
-		list.add(vo2);
-		list.add(vo1);
-		list.add(vo);
-		model.addAttribute("list", JSON.toJSONString(list));
-		return "/awifi/bigscreen/bigscreen_lvl_2.jsp";
-	}
-
 	@RequestMapping("/index")
 	public String index() {
 		return "/awifi/bigscreen/bigscreen_index.jsp";
 	}
 
 	@RequestMapping("/preview")
-	public String preview(Model model,BigScreenHandlebarsVo b) {
-		System.out.println(b);
-		String templete_src = "/awifi/bigscreen/bigscreen_lvl_2.jsp";
-		BigScreenHandlebarsVo vo = new BigScreenHandlebarsVo("part_1_1", "areaspline_chart", "");
-		BigScreenHandlebarsVo vo1 = new BigScreenHandlebarsVo("part_2_1", "e_chart", "");
-		BigScreenHandlebarsVo vo2 = new BigScreenHandlebarsVo("part_3_1", "fenbu", "");
-		BigScreenHandlebarsVo vo3 = new BigScreenHandlebarsVo("part_4_1", "rank", "");
-		BigScreenHandlebarsVo vo4 = new BigScreenHandlebarsVo("part_1_5", "dingshizhongduan", "");
-		BigScreenHandlebarsVo vo5 = new BigScreenHandlebarsVo("part_2_5", "device_mixture", "");
-		BigScreenHandlebarsVo vo6 = new BigScreenHandlebarsVo("part_3_5", "hotspot", "");
-		BigScreenHandlebarsVo vo7 = new BigScreenHandlebarsVo("part_4_5", "jihuolv", "");
-
+	public String preview(Model model, BigScreenModel big_model) {
+		List<BigScreenHandlebarsVo> vos = big_model.getVos();
 		List<BigScreenHandlebarsVo> list = new ArrayList<BigScreenHandlebarsVo>();
-		list.add(vo7);
-		list.add(vo6);
-		list.add(vo5);
-		list.add(vo4);
-		list.add(vo3);
-		list.add(vo2);
-		list.add(vo1);
-		list.add(vo);
+		for (BigScreenHandlebarsVo bigScreenHandlebarsVo : vos) {
+			if (bigScreenHandlebarsVo.getTarget_name() == null) {
+				continue;
+			}
+			BigScreenHandlebarsVo vo = new BigScreenHandlebarsVo(bigScreenHandlebarsVo.getTarget_name(),
+					bigScreenHandlebarsVo.getChart_path(), "");
+			list.add(vo);
+		}
 		model.addAttribute("list", JSON.toJSONString(list));
-		return templete_src;
+		return big_model.getTemplates().getPath();
 	}
 
 	@RequestMapping("/list")
@@ -131,16 +95,6 @@ public class BigscreenAction {
 		return "/awifi/bigscreen/bigscreen_update_easyui.jsp";
 	}
 
-	@RequestMapping("/create_page_easyui1")
-	public String create_page_easyui1(Model model) {
-		List<ChartVo> charts = chartService.selectForList(new Chart("1"));// 所有可用的图表
-		model.addAttribute("charts", charts);
-		Bigscreen bigscreen = new Bigscreen();
-		model.addAttribute("bigscreen", bigscreen);
-		this.loadCommon(model);
-		return "/awifi/bigscreen/bigscreen_update_easyui1.jsp";
-	}
-
 	@RequestMapping("/update_page")
 	public String update_page(Bigscreen bigscreen, Model model) {
 		bigscreen = bigscreenService.load(bigscreen);
@@ -166,16 +120,34 @@ public class BigscreenAction {
 	}
 
 	@RequestMapping("/create")
-	public @ResponseBody Result create(Bigscreen bigscreen, HttpServletRequest request) {
-		if (bigscreen != null) {
-			User user = (User) BaseUserContext.getCurrentUser(request);
-			bigscreen.setCreate_by(user.getUsername());
-			bigscreen.setCreate_time(new Date());
-			bigscreenService.save(bigscreen);
-			return new Result("保存成功!");
-		} else {
-			return new Result("数据传输失败!");
+	public @ResponseBody Result create(Bigscreen bigscreen, HttpServletRequest request, Model model,
+			BigScreenModel big_model) {
+		if(bigscreen == null){
+			bigscreen = new Bigscreen();
 		}
+		List<BigScreenHandlebarsVo> vos = big_model.getVos();
+		List<BigScreenHandlebarsVo> list = new ArrayList<BigScreenHandlebarsVo>();
+		for (BigScreenHandlebarsVo bigScreenHandlebarsVo : vos) {
+			if (bigScreenHandlebarsVo.getTarget_name() == null) {
+				continue;
+			}
+			BigScreenHandlebarsVo vo = new BigScreenHandlebarsVo(bigScreenHandlebarsVo.getTarget_name(),
+					bigScreenHandlebarsVo.getChart_path(), "");
+			list.add(vo);
+//			model.addAttribute("list", JSON.toJSONString(list));
+
+		}
+//		model.addAttribute("list", JSON.toJSONString(list));
+		return new Result("保存成功!");
+//		if (bigscreen != null) {
+//			User user = (User) BaseUserContext.getCurrentUser(request);
+//			bigscreen.setCreate_by(user.getUsername());
+//			bigscreen.setCreate_time(new Date());
+//			bigscreenService.save(bigscreen);
+//			return new Result("保存成功!");
+//		} else {
+//			return new Result("数据传输失败!");
+//		}
 	}
 
 	@RequestMapping("/update")

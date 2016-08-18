@@ -2,11 +2,9 @@ package com.awifi.bigscreen.bigscreen.entity;
 
 public class BigScreenHandlebarsVo {
 	private String target_name;
-	private String templete_name;
 	private String json_param;
 	private String chart_path;
 	private Long chart_id;
-	private Long theme_id;
 
 	public BigScreenHandlebarsVo() {
 	}
@@ -25,14 +23,6 @@ public class BigScreenHandlebarsVo {
 		this.target_name = target_name;
 	}
 
-	public String getTemplete_name() {
-		return templete_name;
-	}
-
-	public void setTemplete_name(String templete_name) {
-		this.templete_name = templete_name;
-	}
-
 	public String getJson_param() {
 		return json_param;
 	}
@@ -47,14 +37,6 @@ public class BigScreenHandlebarsVo {
 
 	public void setChart_id(Long chart_id) {
 		this.chart_id = chart_id;
-	}
-
-	public Long getTheme_id() {
-		return theme_id;
-	}
-
-	public void setTheme_id(Long theme_id) {
-		this.theme_id = theme_id;
 	}
 
 	public String getChart_path() {
