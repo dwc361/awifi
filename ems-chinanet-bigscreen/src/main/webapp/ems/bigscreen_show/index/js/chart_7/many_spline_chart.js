@@ -14,7 +14,7 @@ $(function () {
 	$.ajax({ 
 	    type: 'post', 
 	    dataType : "json", 
-	    url: "http://192.168.191.1:8080/ems-chinanet-bigscreen/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
+	    url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
 	    data: {'x_json':$.toJSON(x_arr)},
 	    success: function(d) {
 	    	if(d.data != null) {
@@ -68,7 +68,7 @@ function show_many_spline_chart(data_a, data_b, data_c) {
 						$.ajax({
 						    type: 'post', 
 						    dataType : "json", 
-						    url:"http://192.168.191.1:8080/ems-chinanet-bigscreen/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
+						    url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
 						    data: {'x_json':$.toJSON(x_arr)},
 						    success: function(d) {
 						    	if(d.data != null) {
