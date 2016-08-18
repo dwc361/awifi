@@ -9,18 +9,8 @@ var y_data = [[37, 77.4, 58, 14.7, 25],
               [67.1, 25.4, 78.1, 19.8, 29.1, 67.9],
               [72, 75.4, 6.8, 40.8, 19.6, 37.3]];
 
-var x_data0 = ['学校','医院','码头','酒店','公园'];
-var y_data0 = [37, 77.4, 58, 14.7, 25];
-
-var x_data1 = ['机场','浴室','商场','游乐场','文化厅','车站'];
-var y_data1 = [67.1, 25.4, 78.1, 19.8, 29.1, 67.9];
-
-var x_data2 = ['饭馆','图书馆','展览馆','美容店','体育场','招待所'];
-var y_data2 = [72, 75.4, 6.8, 40.8, 19.6, 37.3];
-
-opt_hotspot = {
+hotspot_option = {
 	tooltip: {
-		trigger: 'axis',
 		itemGap: '	0',
 		axisPointer: {
 			type: 'shadow'
@@ -75,7 +65,7 @@ opt_hotspot = {
 		data: y_data[0],
 		type: 'scatter',
 		symbolSize: function(data) {
-			return 32;
+			return data;
 		},
 		label: {
 			emphasis: {
@@ -103,21 +93,20 @@ opt_hotspot = {
 	}]
 };
 
-var hot_spot_index = 0;
+var hotspot_index = 0;
 var app_hotspot = {};
 app_hotspot.currentIndex = -1;
 app_hotspot.timeTicket = setInterval(function() {
-	var dataLen = opt_hotspot.series[0].data.length;
-	
+	var dataLen = hotspot_option.series[0].data.length;
 	app_hotspot.currentIndex++;
 	if(app_hotspot.currentIndex == dataLen) {
 		app_hotspot.currentIndex = -1;
-		hot_spot_index = (hot_spot_index + 1) % x_data.length;
+		hotspot_index = (hotspot_index + 1) % x_data.length;
 		
 		// 重新加载图表内容
-		opt_hotspot.xAxis.data = x_data[hot_spot_index];
-		opt_hotspot.series[0].data = y_data[hot_spot_index];
-		hotspotChart.setOption(opt_hotspot, true);
+		hotspot_option.xAxis.data = x_data[hotspot_index];
+		hotspot_option.series[0].data = y_data[hotspot_index];
+		hotspotChart.setOption(hotspot_option, true);
 		
 		// 取消之前高亮的图形
 		hotspotChart.dispatchAction({
@@ -148,5 +137,6 @@ app_hotspot.timeTicket = setInterval(function() {
 		});
 	}
 }, 1000);
+
 //用刚指定的配置项和数据显示图表。
-hotspotChart.setOption(opt_hotspot);
+hotspotChart.setOption(hotspot_option);

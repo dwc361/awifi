@@ -200,8 +200,6 @@ function EcharTest_2(){
 		    stateChart_2.setOption(opt_state_2,true);
 		}, 5000);
 		stateChart_2.setOption(opt_state_2);
-		
-		console.log(opt_state_2);
 }
 var deviceTheme = {
         // 全图默认背景

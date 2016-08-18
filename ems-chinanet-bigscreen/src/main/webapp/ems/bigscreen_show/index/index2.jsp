@@ -69,7 +69,7 @@
 			<header>
 				<div class="col-md-4 col-lg-4 col-sm-4">
 					<section class="stnFont col-md-6 col-lg-6 col-sm-6">3500080</section>
-					<section class="stnHr col-md-1 col-lg-1 col-sm-1"><img src="img/xiaojiange.png" alt="" /></section>
+					<section class="stnHr col-md-1 col-lg-1 col-sm-1"><img src="${basePath}/ems/bigscreen_show/index/img/xiaojiange.png" alt="" /></section>
 					<section class="stnP col-md-4 col-lg-4 col-sm-4">
 						<span class="stnP-span">用户总数</span><br />
 						<i class="stnP-i">2016.02.14</i>
@@ -82,7 +82,7 @@
 				<div class="col-md-4 col-lg-4 col-sm-4" style="padding-right: 12px;padding-left: 12px;line-height: 3rem;text-align: center;">
 					<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">PV- <i class="blueFont-right">125658</i></section>
 					<section class="stnHr col-md-1 col-lg-1 col-sm-1" style="width: 6%;">
-						<img src="img/xiaojiange.png" alt="" />
+						<img src="${basePath}/ems/bigscreen_show/index/img/xiaojiange.png" alt="" />
 					</section>
 					<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">UV- <i class="blueFont-right">125658</i></section>
 				</div>
