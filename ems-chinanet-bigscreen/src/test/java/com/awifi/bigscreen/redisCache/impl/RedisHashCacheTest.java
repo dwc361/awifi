@@ -39,6 +39,6 @@ public class RedisHashCacheTest extends AbstractJUnit4SpringContextTests {
 	@Autowired
 	public void setChart1DataTransform(Chart1DataTransform chart1DataTransform) {
 		this.chart1DataTransform = chart1DataTransform;
-	}
+}
 
 }

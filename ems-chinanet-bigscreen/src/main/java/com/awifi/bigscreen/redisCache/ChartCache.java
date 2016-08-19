@@ -10,6 +10,10 @@ public interface ChartCache {
 	 * @return chart json
 	 */
 	public String readCacheByKey(String key, DataTransform dataTransform);
+	
+	public String readCacheByKey(String key,int count, DataTransform dataTransform);
+	
+	public String readCacheByKey(String key,double min,double max, DataTransform dataTransform);
 
 	/**
 	 * 缓存写
