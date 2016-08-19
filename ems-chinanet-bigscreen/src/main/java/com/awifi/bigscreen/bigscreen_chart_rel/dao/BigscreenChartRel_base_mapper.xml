@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.aiwifi.manage.bigscreen_chart_rel.dao">
+
+	<sql id="columns">
+		id, chart_id, screen_id, target
+	</sql>
+	<sql id="vals">
+		#{id}, #{chart_id}, #{screen_id}, #{target}
+	</sql>
+	<sql id="conds">
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="chart_id != null and chart_id != ''">
+			and chart_id = #{chart_id}
+		</if>
+		<if test="screen_id != null and screen_id != ''">
+			and screen_id = #{screen_id}
+		</if>
+		<if test="target != null and target != ''">
+			and target = #{target}
+		</if>
+	</sql>
+
+	<insert id="saveBigscreenChartRel" parameterType="com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRel" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" resultType="Long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into e_bigscreen_chart_rel (<include refid="columns" />) 
+		values (<include refid="vals" />)
+	</insert>
+
+	<delete id="deleteBigscreenChartRel">
+		delete from e_bigscreen_chart_rel
+		where id=#{id} 
+	</delete>
+
+	<delete id="deleteByExampleBigscreenChartRel">
+		delete from e_bigscreen_chart_rel
+		where 1=1
+		<include refid="conds" />
+	</delete>
+
+	<update id="updateBigscreenChartRel">
+		update e_bigscreen_chart_rel
+		<set>
+			id=#{id}, 
+			chart_id=#{chart_id}, 
+			screen_id=#{screen_id}, 
+			target=#{target}
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateIgnoreNullBigscreenChartRel">
+		update e_bigscreen_chart_rel
+		<set>
+		<if test="id != null and id != ''">
+			id=#{id}, 
+		</if>
+		<if test="chart_id != null and chart_id != ''">
+			chart_id=#{chart_id}, 
+		</if>
+		<if test="screen_id != null and screen_id != ''">
+			screen_id=#{screen_id}, 
+		</if>
+		<if test="target != null and target != ''">
+			target=#{target}
+		</if>
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateByExampleBigscreenChartRel">
+		update e_bigscreen_chart_rel
+		<set>
+			<if test="id != null and id != ''">
+			id=#{id}, 
+			</if>
+			<if test="chart_id != null and chart_id != ''">
+			chart_id=#{chart_id}, 
+			</if>
+			<if test="screen_id != null and screen_id != ''">
+			screen_id=#{screen_id}, 
+			</if>
+			<if test="target != null and target != ''">
+			target=#{target}
+			</if>
+		</set>
+		where 1=1
+		<include refid="conds" />
+	</update>
+	
+	<select id="loadBigscreenChartRel" resultType="com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRelVo">
+		select 
+		<include refid="columns"/>
+		from e_bigscreen_chart_rel
+		where id=#{id} 
+	</select>
+	
+	<select id="selectBigscreenChartRel" resultType="com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRelVo">
+		select 
+		a.id, a.chart_id, a.screen_id, a.target,b.path as chart_path ,b.icon as chart_icon
+		from e_bigscreen_chart_rel a left join e_chart b on a.chart_id = b.id
+		where 1=1
+		<if test="id != null and id != ''">
+			and a.id = #{id}
+		</if>
+		<if test="chart_id != null and chart_id != ''">
+			and a.chart_id = #{chart_id}
+		</if>
+		<if test="screen_id != null and screen_id != ''">
+			and a.screen_id = #{screen_id}
+		</if>
+		<if test="target != null and target != ''">
+			and a.target = #{target}
+		</if>
+	</select>
+</mapper>

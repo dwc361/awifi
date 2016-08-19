@@ -189,7 +189,6 @@ function show_areaspline_chart(data) {
 	// 图表本身的背景设置成透明
 	var rect = $("#areaspline_div").find("rect");
 	rect.attr("fill", "transparent");
-	//console.log(rect);
 
 	// body背景颜色设置成透明
 	document.body.style.backgroundColor = "transparent";

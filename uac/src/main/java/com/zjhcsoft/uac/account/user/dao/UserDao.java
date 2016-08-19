@@ -1,5 +1,6 @@
 package com.zjhcsoft.uac.account.user.dao;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,8 @@ import org.roof.dataaccess.RoofDaoSupport;
 import org.roof.exceptions.DaoException;
 import org.roof.web.org.entity.Organization;
 import org.springframework.stereotype.Component;
+
+import antlr.StringUtils;
 
 import com.zjhcsoft.uac.account.user.entity.User;
 
@@ -87,10 +90,17 @@ public class UserDao extends RoofDaoSupport {
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Long> selectOrganizationIdsByParentId(Long org_id) {
+		List<Long> list=new ArrayList<Long>();
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("org_id", org_id);
 		params.put("usable", true);
-		return (List<Long>) this.selectForList("selectOrganizationIdsByParentId",
+		//进行递归查询每个子节点
+		List<Long> listf=(List<Long>) this.selectForList("selectOrganizationIdsByParentId",
 				params);
+		list.addAll(listf);
+		for (Long long1 : listf) {
+			list.addAll(selectOrganizationIdsByParentId(long1));
+		}
+		return list; 
 	}
 }

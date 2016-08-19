@@ -1,3 +1,4 @@
+<script type="text/javascript">
 // 基于准备好的dom，初始化echarts实例
 var zhongduanChart = echarts.init(document.getElementById('zhongduan'));
 
@@ -7,17 +8,7 @@ opt_zhongduan = {
 		'#21c6a5', '#65c7f7', '#096dc5'
 	],
 	tooltip: {
-		trigger: 'axis',
-		textStyle: {
-			color: '#fff',
-			fontSize: 18
-		},
-		axisPointer: {
-			lineStyle: {
-				color: '#fff',
-				width: 1
-			}
-		}
+		trigger: 'axis'
 	},
 	calculable: true,
 	xAxis: [{
@@ -121,3 +112,10 @@ app_zhongduan.timeTicket = setInterval(function() {
 }, 5000);
 // 使用刚指定的配置项和数据显示图表。
 zhongduanChart.setOption(opt_zhongduan);
+</script>
+<div class="topH">
+	<h1>[ 定制终端 ]</h1>
+</div>
+<div class="Echart">
+	<div id="zhongduan"></div>
+</div>

@@ -1,12 +1,10 @@
 $(function() {
-		ROOF.Utils.datepicker("bigscreen_create_time");
-		ROOF.Utils.datepicker("bigscreen_update_time");
 	
 	var height = 380;// 高度按元素需要变更
 	var width = 925;
 	
 	$("#reset").click(function() {
-		ROOF.Utils.emptyForm($('#bigscreen_bigscreen_search_form'));
+		ROOF.Utils.emptyForm($('#manage_bigscreenChartRel_search_form'));
 		return false;
 	});
 	
@@ -15,35 +13,33 @@ $(function() {
 		return false;
 	});
 
-	var table = new ROOF.SelectableTable($('#bigscreen_bigscreen_table'));
-	var page = new com.letv.PageBar($('#bigscreen_bigscreen_search_form'));
-//	$("#bigscreen_bigscreen_create_btn").click(function() {
-//		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/bigscreenAction/choose.action"  , "新建大屏", width, height, true);
-//		return false;
-//	});
-//	window.location.href=ROOF.Utils.projectName() +"/awifi/bigscreenAction/create_page_easyui.action";
-	$("#bigscreen_bigscreen_detail_btn").click(function() {
+	var table = new ROOF.SelectableTable($('#manage_bigscreenChartRel_table'));
+	var page = new com.letv.PageBar($('#manage_bigscreenChartRel_search_form'));
+	$("#manage_bigscreenChartRel_create_btn").click(function() {
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/bigscreen_chart_relAction/create_page.action", "e_bigscreen_chart_rel管理", width, height, true, true);
+		return false;
+	});
+	$("#manage_bigscreenChartRel_detail_btn").click(function() {
 		var trs = table.getSelectedTrNoClone();
 		if (trs.length == 0 || trs.length > 1) {
 			alert("请选择一行记录");
 			return false;
 		}
 		var id = trs[0].find(":input[name='id']").val();
-		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/bigscreenAction/detail_page.action?id=" + id  , "大屏管理", width, height, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/bigscreen_chart_relAction/detail_page.action?id=" + id  , "e_bigscreen_chart_rel管理", width, height, true);
 		return false;
 	});
-	$("#bigscreen_bigscreen_update_btn").click(function() {
+	$("#manage_bigscreenChartRel_update_btn").click(function() {
 		var trs = table.getSelectedTrNoClone();
 		if (trs.length == 0 || trs.length > 1) {
 			alert("请选择一行记录");
 			return false;
 		}
 		var id = trs[0].find(":input[name='id']").val();
-		window.location.href=ROOF.Utils.projectName() + "/awifi/bigscreenAction/update_page_easyui.action?id=" + id;
-//		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/bigscreenAction/update_page_easyui.action?id=" + id  , "大屏管理", width, height, true);
+		var ref = ROOF.Utils.openwindow(ROOF.Utils.projectName() + "/awifi/bigscreen_chart_relAction/update_page.action?id=" + id  , "e_bigscreen_chart_rel管理", width, height, true);
 		return false;
 	});
-	$("#bigscreen_bigscreen_delete_btn").click(function() {
+	$("#manage_bigscreenChartRel_delete_btn").click(function() {
 		var trs = table.getSelectedTrNoClone();
 		if (trs.length == 0 || trs.length > 1) {
 			alert("请选择一行记录");
@@ -55,7 +51,7 @@ $(function() {
 		var id = trs[0].find(":input[name='id']").val();
 		$.ajax({
 		    async: false,
-		    url : basePathConst+"/awifi/bigscreenAction/delete.action",
+		    url : basePathConst+"/awifi/bigscreen_chart_relAction/delete.action",
 			data: {"id":id},
 			    type: 'post',
 			    dataType: 'json',

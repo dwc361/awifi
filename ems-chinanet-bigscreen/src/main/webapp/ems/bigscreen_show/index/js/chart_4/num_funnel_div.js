@@ -50,18 +50,18 @@ $(document).ready(function() {
 		else if(index == 3) index = 4;
 		else if(index == 4) index = 5;
 		else if(index == 5) index = 0;
-		
+
 		if(index == 0) {
 			showHotareaDistribution(typeNameArray[0], numberArray[0]);
 		} else if(index == 1) {
 			showHotareaDistribution(typeNameArray[1], numberArray[1]);
-		}else if(index == 2) {
+		} else if(index == 2) {
 			showHotareaDistribution(typeNameArray[2], numberArray[2]);
-		}else if(index == 3) {
+		} else if(index == 3) {
 			showHotareaDistribution(typeNameArray[3], numberArray[3]);
-		}else if(index == 4) {
+		} else if(index == 4) {
 			showHotareaDistribution(typeNameArray[4], numberArray[4]);
-		}else if(index == 5) {
+		} else if(index == 5) {
 			showHotareaDistribution(typeNameArray[5], numberArray[5]);
 		}
 	}, 3000);
@@ -73,6 +73,20 @@ function showHotareaDistribution(typeNameArray, numberArray) {
 		title: {
 			text: '',
 			subtext: ''
+		},
+		tooltip: {
+			trigger: 'axis',
+			itemGap: '	0',
+			textStyle: {
+				color: '#fff',
+				fontSize: 18
+			},
+			axisPointer: {
+				lineStyle: {
+					color: '#fff',
+					width: 1
+				}
+			}
 		},
 		calculable: false,
 		series: [{
@@ -132,16 +146,16 @@ function showHotareaDistribution(typeNameArray, numberArray) {
 			}
 		}]
 	};
-//	setInterval(function() {
-//		numberArray[0] = selectfrom(960, 1000);
-//		numberArray[1] = selectfrom(960, 900);
-//		numberArray[2] = selectfrom(960, 1000);
-//		numberArray[3] = selectfrom(960, 1000);
-//		numberArray[4] = selectfrom(960, 1000);
-//		numberArray[5] = selectfrom(960, 1000);
-//		for(var i = 0; i < 32; i++) {
-//			option.series[0].data[i].value = numberArray[i];
-//		}
-//		funnel_div.setOption(option, true);
-//	}, 3000);
+	//	setInterval(function() {
+	//		numberArray[0] = selectfrom(960, 1000);
+	//		numberArray[1] = selectfrom(960, 900);
+	//		numberArray[2] = selectfrom(960, 1000);
+	//		numberArray[3] = selectfrom(960, 1000);
+	//		numberArray[4] = selectfrom(960, 1000);
+	//		numberArray[5] = selectfrom(960, 1000);
+	//		for(var i = 0; i < 32; i++) {
+	//			option.series[0].data[i].value = numberArray[i];
+	//		}
+	//		funnel_div.setOption(option, true);
+	//	}, 3000);
 }

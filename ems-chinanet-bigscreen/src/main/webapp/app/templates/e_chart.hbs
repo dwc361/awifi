@@ -1,3 +1,4 @@
+<script type="text/javascript">
 // 基于准备好的dom，初始化echarts实例
 var endChart = echarts.init(document.getElementById('end'));
 
@@ -13,17 +14,7 @@ opt_end = {
 	},
 	tooltip: {
 		trigger: 'axis',
-		itemGap: '	0',
-		textStyle: {
-			color: '#fff',
-			fontSize: 18
-		},
-		axisPointer: {
-			lineStyle: {
-				color: '#fff',
-				width: 1
-			}
-		}
+		itemGap: '	0'
 	},
 	legend: {
 		data: ['', '']
@@ -189,3 +180,9 @@ app_end.timeTicket = setInterval(function() {
 }, 5000);
 // 使用刚指定的配置项和数据显示图表。
 endChart.setOption(opt_end);
+</script>
+<div class="topH">
+	<h1 style="	position: absolute;top: 0;">[ 用户终端信息 ]</h1></div>
+<div class="Echart" ui-view="chart_2">
+	<div id="end" style="width: 100%;height: 90%;"></div>
+</div>

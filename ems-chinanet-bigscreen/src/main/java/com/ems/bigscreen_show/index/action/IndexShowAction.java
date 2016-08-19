@@ -23,7 +23,7 @@ public class IndexShowAction {
 
 	@RequestMapping("/index")
 	public String index() {
-		return "/ems/bigscreen_show/index/index.jsp";
+		return "/ems/bigscreen_show/index/index2.jsp";
 	}
 
 	@Autowired(required = true)

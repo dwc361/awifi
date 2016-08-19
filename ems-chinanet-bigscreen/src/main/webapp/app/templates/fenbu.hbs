@@ -1,3 +1,4 @@
+<script type="text/javascript">
 // 基于准备好的dom，初始化echarts实例
 var spreadChart = echarts.init(document.getElementById('spread'));
 
@@ -9,16 +10,6 @@ opt_spread = {
 	//	backgroundColor: '#2c343c',
 	tooltip: {
 		trigger: 'item',
-		textStyle: {
-			color: '#fff',
-			fontSize: 18
-		},
-		axisPointer: {
-			lineStyle: {
-				color: '#fff',
-				width: 1
-			}
-		},
 		formatter: "{b} : {c}"
 	},
 	series: [{
@@ -44,13 +35,13 @@ opt_spread = {
 			name: '胖ap'
 		}, {
 			value: 310,
-			name: '光猫'
+			name: 'AC'
 		}, {
 			value: 234,
 			name: '瘦AP'
 		}, {
 			value: 135,
-			name: '融合终端'
+			name: '热点'
 		}],
 		itemStyle: {
 			emphasis: {
@@ -61,6 +52,7 @@ opt_spread = {
 		}
 	}]
 };
+                    
 
 var spread_app = {};
 
@@ -91,3 +83,9 @@ spread_app.timeTicket = setInterval(function() {
 
 // 使用刚指定的配置项和数据显示图表。
 spreadChart.setOption(opt_spread);
+</script>
+<div class="topH">
+	<h1 style="	position: absolute;top: 0;">[ 设备类型分布 ]</h1></div>
+<div class="Echart">
+	<div id='spread'></div>
+</div>
