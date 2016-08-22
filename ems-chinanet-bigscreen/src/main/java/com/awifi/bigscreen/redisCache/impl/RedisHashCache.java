@@ -40,6 +40,18 @@ public class RedisHashCache implements ChartCache {
 		// TODO Auto-generated method stub
 		return null;
 	}
+	
+	@Override
+	public String readCacheByKey(String key, int count, String order, DataTransform dataTransform) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String readCacheByKey(String key, double min, double max, String order, DataTransform dataTransform) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public void createOrUpdateCache(String key, DataAcquisition dataAcquisition, String param) {
@@ -53,12 +65,8 @@ public class RedisHashCache implements ChartCache {
 		redisTemplate.opsForHash().putAll(key, map);
 	}
 	
-
 	@Autowired
 	public void setRedisTemplate(RedisTemplate redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
-
-
-
 }

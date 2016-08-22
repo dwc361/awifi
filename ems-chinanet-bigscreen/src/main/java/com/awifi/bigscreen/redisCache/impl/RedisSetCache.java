@@ -52,6 +52,18 @@ public class RedisSetCache implements ChartCache {
 		}
 		return map.toString();
 	}
+	
+	@Override
+	public String readCacheByKey(String key, int count, String order, DataTransform dataTransform) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public String readCacheByKey(String key, double min, double max, String order, DataTransform dataTransform) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 	@Override
 	public void createOrUpdateCache(String key, DataAcquisition dataAcquisition, String param) {
@@ -67,12 +79,8 @@ public class RedisSetCache implements ChartCache {
 		redisTemplate.opsForZSet().add(key, data, Double.valueOf(score).doubleValue());
 	}
 	
-
 	@Autowired
 	public void setRedisTemplate(RedisTemplate redisTemplate) {
 		this.redisTemplate = redisTemplate;
 	}
-
-	
-
 }
