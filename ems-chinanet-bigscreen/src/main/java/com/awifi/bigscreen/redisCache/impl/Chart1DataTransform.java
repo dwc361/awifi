@@ -13,7 +13,7 @@ import com.awifi.bigscreen.chart.entity.Chart;
 import com.awifi.bigscreen.redisCache.DataTransform;
 
 @Service
-public class Chart1DataTransform implements DataTransform {
+public class Chart1DataTransform implements DataTransform<Map<String, Object>> {
 
 	@Override
 	public String transform(Map<String, Object> map) {

@@ -1,12 +1,9 @@
 package com.awifi.bigscreen.redisCache;
 
-import java.util.Map;
-
-public interface DataTransform {
+public interface DataTransform<T> {
 	/**
-	 * 
 	 * @param data
 	 * @return json
 	 */
-	public String transform(Map<String, Object> data);
+	public String transform(T t);
 }

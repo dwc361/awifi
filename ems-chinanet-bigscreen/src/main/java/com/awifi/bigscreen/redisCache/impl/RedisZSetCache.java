@@ -1,7 +1,5 @@
 package com.awifi.bigscreen.redisCache.impl;
 
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,46 +42,38 @@ public class RedisZSetCache implements ChartCache {
 	@Override
 	public String readCacheByKey(String key, int count, String order, DataTransform dataTransform) { // 取ZSet里面最新插入的count个数据
 		Long all = redisTemplate.opsForZSet().size(key);
-		Map map = new HashMap();
 		Set<Map> set;
 		if("desc".equals(order)) {
-			set = redisTemplate.opsForZSet().reverseRange(key, all-count, all-1); // zRevRange(key, start, end)：返回名称为key的zset（元素已按score从大到小排序）中的index从start到end的所有元素
+			// zRevRange(key, start, end)：返回名称为key的zset（元素已按score从大到小排序）中的index从start到end的所有元素
+			set = redisTemplate.opsForZSet().reverseRange(key, all-count, all-1);
 		} else {
-			set = redisTemplate.opsForZSet().range(key, all-count, all-1); // zRange(key, start, end)：返回名称为key的zset（元素已按score从小到大排序）中的index从start到end的所有元素
+			// zRange(key, start, end)：返回名称为key的zset（元素已按score从小到大排序）中的index从start到end的所有元素
+			set = redisTemplate.opsForZSet().range(key, all-count, all-1);
 		}
-		map.put("chartData", set);
-		Iterator<Map> iterator = set.iterator();
-		while (iterator.hasNext()) {
-			Map data = iterator.next();
-		}
-		return dataTransform.transform(map);
+		return dataTransform.transform(set);
 	}
 
 	@Override
 	public String readCacheByKey(String key, double min, double max, String order, DataTransform dataTransform) { // 取ZSet里面score在某个范围内的数据
-		Map map = new HashMap();
 		Set<Map> set;
 		if("desc".equals(order)) {
-			set = redisTemplate.opsForZSet().reverseRangeByScore(key, min, max); // zRevRangeByScore(key, min, max)：返回名称为key的zset（元素已按score从大到小排序）中score >= min且score <= max的所有元素
+			// zRevRangeByScore(key, min, max)：返回名称为key的zset（元素已按score从大到小排序）中score >= min且score <= max的所有元素
+			set = redisTemplate.opsForZSet().reverseRangeByScore(key, min, max);
 		} else {
-			set = redisTemplate.opsForZSet().rangeByScore(key, min, max); // zRangeByScore(key, min, max)：返回名称为key的zset（元素已按score从小到大排序）中score >= min且score <= max的所有元素
+			// zRangeByScore(key, min, max)：返回名称为key的zset（元素已按score从小到大排序）中score >= min且score <= max的所有元素
+			set = redisTemplate.opsForZSet().rangeByScore(key, min, max);
 		}
-		map.put("chartData", set);
-		Iterator<Map> iterator = set.iterator();
-		while (iterator.hasNext()) {
-			Map data = iterator.next();
-		}
-		return dataTransform.transform(map);
+		return dataTransform.transform(set);
 	}
 
 	@Override
 	public void createOrUpdateCache(String key, DataAcquisition dataAcquisition, String param) {
-		Assert.notNull(key, "RedisHashCache:key not be null");
-		Assert.notNull(dataAcquisition, "RedisHashCache:dataAcquisition object not be null");
+		Assert.notNull(key, "RedisZSetCache:key not be null");
+		Assert.notNull(dataAcquisition, "RedisZSetCache:dataAcquisition object not be null");
 		
 		Object o = dataAcquisition.selectData(param);
-		Assert.notNull(o, "RedisHashCache:result object must not be null");
-		Assert.isInstanceOf(Map.class, o, "RedisHashCache:result object instanceof Map.class");
+		Assert.notNull(o, "RedisZSetCache:result object must not be null");
+		Assert.isInstanceOf(Map.class, o, "RedisZSetCache:result object instanceof Map.class");
 		
 		Map<String, Object> map = (Map<String, Object>) o;
 		List<Map> list = (List<Map>) map.get("chartData");
