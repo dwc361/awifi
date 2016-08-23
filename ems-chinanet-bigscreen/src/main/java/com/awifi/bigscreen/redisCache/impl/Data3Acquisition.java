@@ -9,10 +9,10 @@ import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
-import com.awifi.bigscreen.redisCache.DataAcquisition;
+import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 
 @Service
-public class Data3Acquisition implements DataAcquisition<Map<String, Object>> {
+public class Data3Acquisition implements IDataAcquisition<Map<String, Object>> {
 
 	@Override
 	public Map<String, Object> selectData(String param) {

@@ -1,7 +1,6 @@
 package com.awifi.bigscreen.redisCache.impl;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.chart.entity.Chart;
-import com.awifi.bigscreen.redisCache.DataTransform;
+import com.awifi.bigscreen.redisCache.api.IDataTransform;
 
 @Service
-public class Chart1DataTransform implements DataTransform<Map<String, Object>> {
+public class Chart1DataTransform implements IDataTransform<Map<String, Object>> {
 
 	@Override
 	public String transform(Map<String, Object> map) {

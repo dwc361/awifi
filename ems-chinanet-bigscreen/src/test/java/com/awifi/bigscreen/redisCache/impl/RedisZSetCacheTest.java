@@ -8,19 +8,19 @@ import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import com.awifi.bigscreen.redisCache.ChartCache;
-import com.awifi.bigscreen.redisCache.DataAcquisition;
-import com.awifi.bigscreen.redisCache.DataTransform;
+import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
+import com.awifi.bigscreen.redisCache.api.IDataTransform;
+import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
 @ContextConfiguration(locations = { "classpath:spring.xml" })
 public class RedisZSetCacheTest extends AbstractJUnit4SpringContextTests {
 	
 	@Resource
-	private ChartCache redisZSetCache;
+	private IRedisCache redisZSetCache;
 	@Resource
-	private DataAcquisition data3Acquisition;
+	private IDataAcquisition data3Acquisition;
 	@Resource
-	private DataTransform chart3DataTransform;
+	private IDataTransform chart3DataTransform;
 	
 	@Test
 	public void testReadCacheByKey() {

@@ -11,12 +11,12 @@ import org.springframework.stereotype.Service;
 
 import reactor.util.Assert;
 
-import com.awifi.bigscreen.redisCache.ChartCache;
-import com.awifi.bigscreen.redisCache.DataAcquisition;
-import com.awifi.bigscreen.redisCache.DataTransform;
+import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
+import com.awifi.bigscreen.redisCache.api.IDataTransform;
+import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
 @Service
-public class RedisZSetCache implements ChartCache {
+public class RedisZSetCache implements IRedisCache {
 	Logger logger = Logger.getLogger(RedisZSetCache.class);
 
 	private RedisTemplate<String, Map> redisTemplate;
@@ -25,22 +25,22 @@ public class RedisZSetCache implements ChartCache {
 	private String defaultOrder = "asc";
 	
 	@Override
-	public String readCacheByKey(String key, DataTransform dataTransform) {
+	public String readCacheByKey(String key, IDataTransform dataTransform) {
 		return this.readCacheByKey(key, defaultCount, defaultOrder, dataTransform);
 	}
 	
 	@Override
-	public String readCacheByKey(String key, int count, DataTransform dataTransform) {
+	public String readCacheByKey(String key, int count, IDataTransform dataTransform) {
 		return this.readCacheByKey(key, count, defaultOrder, dataTransform);
 	}
 
 	@Override
-	public String readCacheByKey(String key, double min, double max, DataTransform dataTransform) {
+	public String readCacheByKey(String key, double min, double max, IDataTransform dataTransform) {
 		return this.readCacheByKey(key, min, max, defaultOrder, dataTransform);
 	}
 	
 	@Override
-	public String readCacheByKey(String key, int count, String order, DataTransform dataTransform) { // 取ZSet里面最新插入的count个数据
+	public String readCacheByKey(String key, int count, String order, IDataTransform dataTransform) { // 取ZSet里面最新插入的count个数据
 		Long all = redisTemplate.opsForZSet().size(key);
 		Set<Map> set;
 		if("desc".equals(order)) {
@@ -54,7 +54,7 @@ public class RedisZSetCache implements ChartCache {
 	}
 
 	@Override
-	public String readCacheByKey(String key, double min, double max, String order, DataTransform dataTransform) { // 取ZSet里面score在某个范围内的数据
+	public String readCacheByKey(String key, double min, double max, String order, IDataTransform dataTransform) { // 取ZSet里面score在某个范围内的数据
 		Set<Map> set;
 		if("desc".equals(order)) {
 			// zRevRangeByScore(key, min, max)：返回名称为key的zset（元素已按score从大到小排序）中score >= min且score <= max的所有元素
@@ -67,7 +67,7 @@ public class RedisZSetCache implements ChartCache {
 	}
 
 	@Override
-	public void createOrUpdateCache(String key, DataAcquisition dataAcquisition, String param) {
+	public void createOrUpdateCache(String key, IDataAcquisition dataAcquisition, String param) {
 		Assert.notNull(key, "RedisZSetCache:key not be null");
 		Assert.notNull(dataAcquisition, "RedisZSetCache:dataAcquisition object not be null");
 		

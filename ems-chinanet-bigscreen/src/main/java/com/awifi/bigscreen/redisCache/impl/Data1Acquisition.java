@@ -9,10 +9,10 @@ import org.springframework.stereotype.Service;
 
 import com.awifi.bigscreen.chart.entity.ChartVo;
 import com.awifi.bigscreen.chart.service.api.IChartService;
-import com.awifi.bigscreen.redisCache.DataAcquisition;
+import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 
 @Service
-public class Data1Acquisition implements DataAcquisition<Map<String, Object>> {
+public class Data1Acquisition implements IDataAcquisition<Map<String, Object>> {
 
 	private IChartService chartService;
 
@@ -28,5 +28,4 @@ public class Data1Acquisition implements DataAcquisition<Map<String, Object>> {
 	public void setChartService(IChartService chartService) {
 		this.chartService = chartService;
 	}
-
 }
