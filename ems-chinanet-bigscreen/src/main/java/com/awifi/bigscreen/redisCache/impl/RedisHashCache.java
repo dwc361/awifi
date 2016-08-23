@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 import reactor.util.Assert;
 
+import com.awifi.bigscreen.redisCache.api.AbstractRedisCache;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
-import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
 @Service
-public class RedisHashCache implements IRedisCache {
+public class RedisHashCache extends AbstractRedisCache {
 	Logger logger = Logger.getLogger(RedisHashCache.class);
 
 	private RedisTemplate redisTemplate;
@@ -24,30 +24,6 @@ public class RedisHashCache implements IRedisCache {
 		// get key from data centre cache
 		Map<String, Object> map = redisTemplate.opsForHash().entries(key);
 		return transverter.transform(map);
-	}
-	
-	@Override
-	public String readCacheByKey(String key, int count, IDataTransform dataTransform) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String readCacheByKey(String key, double min, double max, IDataTransform dataTransform) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	
-	@Override
-	public String readCacheByKey(String key, int count, String order, IDataTransform dataTransform) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String readCacheByKey(String key, double min, double max, String order, IDataTransform dataTransform) {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 	@Override
@@ -61,6 +37,8 @@ public class RedisHashCache implements IRedisCache {
 		Map<String, Object> map = (Map<String, Object>) o;
 		redisTemplate.opsForHash().putAll(key, map);
 	}
+	
+	
 	
 	@Autowired
 	public void setRedisTemplate(RedisTemplate redisTemplate) {

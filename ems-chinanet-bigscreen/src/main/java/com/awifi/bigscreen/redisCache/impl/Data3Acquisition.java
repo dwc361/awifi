@@ -1,36 +1,30 @@
 package com.awifi.bigscreen.redisCache.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
+import com.awifi.bigscreen.AwifiConstants;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 
 @Service
 public class Data3Acquisition implements IDataAcquisition<Map<String, Object>> {
-
 	@Override
 	public Map<String, Object> selectData(String param) {
-		Random generator = new Random();
 		Map<String, Object> map = new HashMap<String, Object>();
-		List<Map> list = new ArrayList<Map>();
-		for(int i=0; i<12; i++) {
-			Map m = new HashMap();
-			long time = new Date().getTime();
-			m.put("score", time);
-			m.put("x", time);
-			m.put("y", generator.nextInt(10000));
-			m.put("a", generator.nextDouble());
-			m.put("b", generator.nextDouble()+1);
-			m.put("c", generator.nextDouble()+2);
-			list.add(m);
-		}
-		map.put("chartData", list);
+		Random generator = new Random();
+		long time = new Date().getTime();
+		Map chartData = new HashMap();
+		chartData.put("x", time);
+		chartData.put("y", generator.nextInt(10000));
+		chartData.put("a", generator.nextDouble());
+		chartData.put("b", generator.nextDouble()+1);
+		chartData.put("c", generator.nextDouble()+2);
+		map.put(AwifiConstants.Interface_Return_Data, chartData);
+		map.put(AwifiConstants.Redis_ZSet_Score, time);
 		return map;
 	}
 }

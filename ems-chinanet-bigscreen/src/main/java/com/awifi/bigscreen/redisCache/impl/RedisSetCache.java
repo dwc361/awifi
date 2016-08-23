@@ -11,13 +11,15 @@ import org.springframework.stereotype.Service;
 
 import reactor.util.Assert;
 
+import com.awifi.bigscreen.AwifiConstants;
 import com.awifi.bigscreen.data.entity.UserData;
+import com.awifi.bigscreen.redisCache.api.AbstractRedisCache;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
 @Service
-public class RedisSetCache implements IRedisCache {
+public class RedisSetCache extends AbstractRedisCache {
 	Logger logger = Logger.getLogger(RedisSetCache.class);
 
 	private RedisTemplate<String,UserData> redisTemplate;
@@ -49,18 +51,6 @@ public class RedisSetCache implements IRedisCache {
 		}
 		return map.toString();
 	}
-	
-	@Override
-	public String readCacheByKey(String key, int count, String order, IDataTransform dataTransform) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public String readCacheByKey(String key, double min, double max, String order, IDataTransform dataTransform) {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	@Override
 	public void createOrUpdateCache(String key, IDataAcquisition dataAcquisition, String param) {
@@ -70,8 +60,8 @@ public class RedisSetCache implements IRedisCache {
 		Assert.notNull(o, "RedisHashCache:result object must not be null");
 		Assert.isInstanceOf(Map.class, o, "RedisHashCache:result object instanceof Map.class");
 		Map<String, Object> map = (Map<String, Object>) o;
-		String score = (String) map.get("score");
-		UserData data = (UserData) map.get("chartData");
+		String score = (String) map.get(AwifiConstants.Redis_ZSet_Score);
+		UserData data = (UserData) map.get(AwifiConstants.Interface_Return_Data);
 		Assert.notNull(score, "score not be null");
 		redisTemplate.opsForZSet().add(key, data, Double.valueOf(score).doubleValue());
 	}

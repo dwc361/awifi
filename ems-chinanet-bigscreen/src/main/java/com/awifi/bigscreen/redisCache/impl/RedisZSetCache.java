@@ -1,6 +1,5 @@
 package com.awifi.bigscreen.redisCache.impl;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -11,12 +10,13 @@ import org.springframework.stereotype.Service;
 
 import reactor.util.Assert;
 
+import com.awifi.bigscreen.AwifiConstants;
+import com.awifi.bigscreen.redisCache.api.AbstractRedisCache;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
-import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
 @Service
-public class RedisZSetCache implements IRedisCache {
+public class RedisZSetCache extends AbstractRedisCache {
 	Logger logger = Logger.getLogger(RedisZSetCache.class);
 
 	private RedisTemplate<String, Map> redisTemplate;
@@ -76,15 +76,14 @@ public class RedisZSetCache implements IRedisCache {
 		Assert.isInstanceOf(Map.class, o, "RedisZSetCache:result object instanceof Map.class");
 		
 		Map<String, Object> map = (Map<String, Object>) o;
-		List<Map> list = (List<Map>) map.get("chartData");
-		for (Map m : list) {
-			String score = String.valueOf(m.get("score"));
-			Assert.notNull(score, "score not be null");
-			redisTemplate.opsForZSet().add(key, m, Double.valueOf(score).doubleValue());
-		}
+		Map chartData = (Map) map.get(AwifiConstants.Interface_Return_Data);
+		String score = String.valueOf(map.get(AwifiConstants.Redis_ZSet_Score));
+		Assert.notNull(score, "score not be null");
+		redisTemplate.opsForZSet().add(key, chartData, Double.valueOf(score).doubleValue());
 	}
 	
-
+	
+	
 	@Autowired
 	public void setRedisTemplate(RedisTemplate redisTemplate) {
 		this.redisTemplate = redisTemplate;
