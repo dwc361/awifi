@@ -12,3 +12,4 @@ setInterval(function() {
 
 	});
 }, 1000);
+//进度条

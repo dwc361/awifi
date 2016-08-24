@@ -1,5 +1,5 @@
 // 基于准备好的dom，初始化echarts实例
-var hotspotChart = echarts.init(document.getElementById('hotspot'));
+var hotspotChart = echarts.init(document.getElementById('scatter_HotSpot'));
 
 // 指定图表的配置项和数据
 var x_data = [['学校','医院','码头','酒店','公园'],

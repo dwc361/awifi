@@ -1,4 +1,4 @@
-
+//定制终端设备状态统计
 $(document).ready(function(){
 	EcharTest_1();
 });
@@ -16,7 +16,7 @@ var dataList = (function (){
 })();
 
 function EcharTest_1(){
-	var stateChart_1=echarts.init(document.getElementById('state_1'),deviceTheme);
+	var stateChart_1=echarts.init(document.getElementById('barAndpie_DZZD'),deviceTheme);
 	opt_state_1 = {
 		    title: {
 		        text: '',

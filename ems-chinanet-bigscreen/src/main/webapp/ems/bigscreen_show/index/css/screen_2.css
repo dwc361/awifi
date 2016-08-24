@@ -439,7 +439,7 @@ h1 {
     margin-top: 5.66rem;
     margin-left: 2.2rem;
 }
-#areaspline_div{
+#areas_YHZL{
 	width:100%; height:80%;
 	margin-top:1.6rem;
 }
@@ -540,7 +540,7 @@ header div {
 	font-size: 1.8rem;
 	padding: 0;
 }
-#hotspot{
+#scatter_HotSpot{
 	width: 100%;
 	height: 100%;
 	margin-top: -1.6rem;
@@ -618,7 +618,7 @@ width:110px;
 	color:#ffffff;
 	color:rgba(0, 0, 0, 0.4);
 }
-#round_div{
+#pie_JHL_old{
 	width:32rem;
 	height: 32rem;
 	display: inline-block;
@@ -636,25 +636,25 @@ width:110px;
 	    margin-left: -1rem;
 	    margin-top: 1rem;
 }
-#funnel_div{
+#funnel_SBPM{
 	width: 100%;
 	height: 32rem;
 }
 #rate{
 	height: 100%;
 }
-#rank{
+#funnel_SBPM{
 	width: 100%;height: 90%;
 	margin-top: -1rem;
 	margin-left: 1rem;
 }
-#spread{
+#pie_LXFB_old{
 	width: 80%;
 	height: 100%;
 	margin-left: 2rem;
 	margin-top: -3.2rem;
 }
-#jihuolv{
+#barAndline_JHL{
 		width: 100%;
 	height: 100%;
 	margin-left: -1.2rem;
@@ -667,11 +667,11 @@ width:110px;
 	height: 32rem;
 	left:-6rem;
 }
-#dashboard{
+#gauge_YBP{
 	width: 100%;
 	height: 100%;
 }
-#zhongduan{
+#line_YHRZ{
 		width: 100%;
 	height: 90%;
 	margin-top: -1rem;

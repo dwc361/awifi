@@ -1,7 +1,7 @@
 $(function() {
 
-// 基于准备好的dom，初始化echarts实例
-var boardChart = echarts.init(document.getElementById('dashboard'));
+// 基于准备好的dom，初始化echarts实例  仪表盘
+var boardChart = echarts.init(document.getElementById('gauge_YBP'));
 
 // 指定图表的配置项和数据
 opt_board = {

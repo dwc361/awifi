@@ -1,5 +1,5 @@
-// 基于准备好的dom，初始化echarts实例
-var zhongduanChart = echarts.init(document.getElementById('zhongduan'));
+// 基于准备好的dom，初始化echarts实例   用户认证状态
+var zhongduanChart = echarts.init(document.getElementById('line_YHRZ'));
 
 // 指定图表的配置项和数据
 opt_zhongduan = {

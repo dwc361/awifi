@@ -10,7 +10,7 @@ var numberArray = [[812, 899, 890, 880, 870, 850, 70],
                    [812, 150, 130, 120, 100, 99]];
 
 // 基于准备好的dom，初始化echarts实例
-var rankChart = echarts.init(document.getElementById('rank'));
+var rankChart = echarts.init(document.getElementById('funnel_SBPM'));
 
 // 指定图表的配置项和数据
 rank_option = {

@@ -1,5 +1,5 @@
 // 基于准备好的dom，初始化echarts实例
-var spreadChart = echarts.init(document.getElementById('spread'));
+var spreadChart = echarts.init(document.getElementById('pie_LXFB_old'));
 
 // 指定图表的配置项和数据
 opt_spread = {
