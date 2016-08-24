@@ -16,7 +16,7 @@ var dataList = (function (){
 })();
 
 function EcharTest_1(){
-	var stateChart_1=echarts.init(document.getElementById('barAndpie_DZZD'),deviceTheme);
+	var stateChart_1=echarts.init(document.getElementById('mix_DZZD'),deviceTheme);
 	opt_state_1 = {
 		    title: {
 		        text: '',

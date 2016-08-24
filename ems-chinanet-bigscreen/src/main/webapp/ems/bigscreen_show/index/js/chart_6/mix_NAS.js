@@ -16,7 +16,7 @@ var dataList = (function (){
 })();
 
 function EcharTest_2(){
-	var stateChart_2=echarts.init(document.getElementById('barAndpie_NAS'),deviceTheme);
+	var stateChart_2=echarts.init(document.getElementById('mix_NAS'),deviceTheme);
 	opt_state_2 = {
 		    title: {
 		        text: '',

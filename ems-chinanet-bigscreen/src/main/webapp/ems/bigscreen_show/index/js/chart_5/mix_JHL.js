@@ -1,5 +1,5 @@
 // 基于准备好的dom，初始化echarts实例   胖ap激活率统计
-var jihuolvChart = echarts.init(document.getElementById('barAndline_JHL'));
+var jihuolvChart = echarts.init(document.getElementById('mix_JHL'));
 
 // 指定图表的配置项和数据
 

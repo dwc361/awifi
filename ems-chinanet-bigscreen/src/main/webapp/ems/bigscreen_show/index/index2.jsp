@@ -44,7 +44,7 @@
 				<div class="topH">
 					<h1 style="	position: absolute;top: 0;">[ 定制终端设备状态统计 ]</h1></div>
 				<div class="Echart" ui-view="chart_2">
-					<div id="barAndpie_DZZD" class="state"></div>
+					<div id="mix_DZZD" class="state"></div>
 				</div>
 			</div>
 			<div class="left col-md-12 col-lg-12 col-sm-12">
@@ -130,7 +130,7 @@
 				<div class="Echart">
 					<!--<div id="pie_JHL_old"></div>-->
 					<!--<div id="rate" style="width: 100%;height: 90%;"></div>-->
-					<div id="barAndpie_NAS" class="state"></div>
+					<div id="mix_NAS" class="state"></div>
 				</div>
 
 			</div>
@@ -145,7 +145,7 @@
 				<div class="topH">
 					<h1>[ 胖ap激活率统计 ]</h1></div>
 				<div class="Hchart">
-					<div id="barAndline_JHL"></div>
+					<div id="mix_JHL"></div>
 				</div>
 			</div>
 		</div>
@@ -165,12 +165,12 @@
 
 	<!--以下是chart_3-->
 	<!--<script src="${basePath}/ems/bigscreen_show/index/js/e_chart/e_chart.js" type="text/javascript" charset="utf-8"></script>-->
-	<script src="${basePath}/ems/bigscreen_show/index/js/chart_2/barAndpie_DZZD.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${basePath}/ems/bigscreen_show/index/js/chart_2/mix_DZZD.js" type="text/javascript" charset="utf-8"></script>
 
 	<!--以下是chart_4-->
 	<!--<script src="${basePath}/ems/bigscreen_show/index/js/chart_4/funnel_SBPM_old.js" type="text/javascript" charset="utf-8"></script>-->
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_4/funnel_SBPM.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/ems/bigscreen_show/index/js/chart_5/barAndline_JHL.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${basePath}/ems/bigscreen_show/index/js/chart_5/mix_JHL.js" type="text/javascript" charset="utf-8"></script>
 
 	<!--以下是仪表盘-->
 	<!--<script src="${basePath}/ems/bigscreen_show/index/js/dashboard/watch_chart.js" type="text/javascript" charset="utf-8"></script>-->
@@ -185,7 +185,7 @@
 	<!--以下是chart_6-->
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_6/chart_6.js" type="text/javascript" charset="utf-8"></script>
 	<!--<script src="${basePath}/ems/bigscreen_show/index/js/chart_6/rate.js" type="text/javascript" charset="utf-8"></script>-->
-	<script src="${basePath}/ems/bigscreen_show/index/js/chart_6/barAndpie_NAS.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${basePath}/ems/bigscreen_show/index/js/chart_6/mix_NAS.js" type="text/javascript" charset="utf-8"></script>
 
 	<!--以下是chart_7-->
 	<script src="${basePath}/ems/bigscreen_show/index/js/chart_7/many_spline_chart.js" type="text/javascript" charset="utf-8"></script>
