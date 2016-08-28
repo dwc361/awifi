@@ -14,20 +14,20 @@ const Line_YHRZ_ChartComponent = React.createClass({
         let currentIndex = -1;
         setInterval(function() {
             let dataLen = option.series[0].data.length;
-            // È¡ÏûÖ®Ç°¸ßÁÁµÄÍ¼ĞÎ
+            // å–æ¶ˆä¹‹å‰é«˜äº®çš„å›¾å½¢
             echartObj.dispatchAction({
                 type: 'downplay',
                 seriesIndex: 0,
                 dataIndex: currentIndex
             });
             currentIndex = (currentIndex + 1) % dataLen;
-            // ¸ßÁÁµ±Ç°Í¼ĞÎ
+            // é«˜äº®å½“å‰å›¾å½¢
             echartObj.dispatchAction({
                 type: 'highlight',
                 seriesIndex: 0,
                 dataIndex: currentIndex
             });
-            // ÏÔÊ¾ tooltip
+            // æ˜¾ç¤º tooltip
             echartObj.dispatchAction({
                 type: 'showTip',
                 seriesIndex: 0,
@@ -83,7 +83,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
                 type: 'category',
                 boundaryGap: false,
-                data: ['ÖÜÒ»', 'ÖÜ¶ş', 'ÖÜÈı', 'ÖÜËÄ', 'ÖÜÎå', 'ÖÜÁù', 'ÖÜÈÕ']
+                data: ['å‘¨ä¸€', 'å‘¨äºŒ', 'å‘¨ä¸‰', 'å‘¨å››', 'å‘¨äº”', 'å‘¨å…­', 'å‘¨æ—¥']
             }],
             yAxis: [{
                 splitNumber: 0,
@@ -105,7 +105,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
             }],
             series: [{
-                name: '¹âÃ¨',
+                name: 'å…‰çŒ«',
                 type: 'line',
                 smooth: true,
                 itemStyle: {
@@ -117,7 +117,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
                 data: [10, 12, 21, 54, 260, 830, 710]
             }, {
-                name: 'ÅÖAP',
+                name: 'èƒ–AP',
                 type: 'line',
                 smooth: true,
                 itemStyle: {
@@ -129,7 +129,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
                 data: [30, 182, 434, 791, 390, 30, 10]
             }, {
-                name: 'ÈıºÏÒ»',
+                name: 'ä¸‰åˆä¸€',
                 type: 'line',
                 smooth: true,
                 itemStyle: {
