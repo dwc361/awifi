@@ -14,20 +14,20 @@ const Line_YHRZ_ChartComponent = React.createClass({
         let currentIndex = -1;
         setInterval(function() {
             let dataLen = option.series[0].data.length;
-            // å–æ¶ˆä¹‹å‰é«˜äº®çš„å›¾å½¢
+            // È¡ÏûÖ®Ç°¸ßÁÁµÄÍ¼ĞÎ
             echartObj.dispatchAction({
                 type: 'downplay',
                 seriesIndex: 0,
                 dataIndex: currentIndex
             });
             currentIndex = (currentIndex + 1) % dataLen;
-            // é«˜äº®å½“å‰å›¾å½¢
+            // ¸ßÁÁµ±Ç°Í¼ĞÎ
             echartObj.dispatchAction({
                 type: 'highlight',
                 seriesIndex: 0,
                 dataIndex: currentIndex
             });
-            // æ˜¾ç¤º tooltip
+            // ÏÔÊ¾ tooltip
             echartObj.dispatchAction({
                 type: 'showTip',
                 seriesIndex: 0,
@@ -36,10 +36,9 @@ const Line_YHRZ_ChartComponent = React.createClass({
         }, 2000);
     },
     fetchNewDate: function() {
-        let option = this.state.option;
-        let dataLen = option.series[0].data.length;
-        this.currentIndex = (this.currentIndex + 1) % dataLen;
-        console.log(this.currentIndex);
+        // let option = this.state.option;
+        // let dataLen = option.series[0].data.length;
+        // this.currentIndex = (this.currentIndex + 1) % dataLen;
     },
     componentDidMount: function() {
         if (this.timeTicket) {
@@ -84,7 +83,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
                 type: 'category',
                 boundaryGap: false,
-                data: ['å‘¨ä¸€', 'å‘¨äºŒ', 'å‘¨ä¸‰', 'å‘¨å››', 'å‘¨äº”', 'å‘¨å…­', 'å‘¨æ—¥']
+                data: ['ÖÜÒ»', 'ÖÜ¶ş', 'ÖÜÈı', 'ÖÜËÄ', 'ÖÜÎå', 'ÖÜÁù', 'ÖÜÈÕ']
             }],
             yAxis: [{
                 splitNumber: 0,
@@ -106,7 +105,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
             }],
             series: [{
-                name: 'å…‰çŒ«',
+                name: '¹âÃ¨',
                 type: 'line',
                 smooth: true,
                 itemStyle: {
@@ -118,7 +117,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
                 data: [10, 12, 21, 54, 260, 830, 710]
             }, {
-                name: 'èƒ–AP',
+                name: 'ÅÖAP',
                 type: 'line',
                 smooth: true,
                 itemStyle: {
@@ -130,7 +129,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
                 data: [30, 182, 434, 791, 390, 30, 10]
             }, {
-                name: 'ä¸‰åˆä¸€',
+                name: 'ÈıºÏÒ»',
                 type: 'line',
                 smooth: true,
                 itemStyle: {
