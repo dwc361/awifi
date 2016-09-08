@@ -1,4 +1,4 @@
-html {
+﻿html {
 	font-size: 14px;
 	font-family: "微软雅黑";
 	background: #111;
@@ -648,7 +648,7 @@ width:110px;
 	margin-top: -1rem;
 	margin-left: 1rem;
 }
-#pie_LXFB_old{
+#pie_LXFB{
 	width: 80%;
 	height: 100%;
 	margin-left: 2rem;
