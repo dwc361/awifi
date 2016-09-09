@@ -105,10 +105,19 @@ const Pie_LXFB_ChartComponent = React.createClass({
     },
     render: function() {
         return (
-            <ReactEcharts ref='echarts_react' 
-                onChartReady={this.showToolTip} 
-                option={this.state.option} 
-                style={{height: '100%', width: '100%'}} />
+            <div className="left col-md-12 col-lg-12 col-sm-12">
+                <div className="topH">
+                    <h1>[ 设备类型分布 ]</h1>
+                </div>
+                <div className="Echart">
+                    <div id='pie_LXFB'>
+                        <ReactEcharts ref='echarts_react' 
+                        onChartReady={this.showToolTip} 
+                        option={this.state.option} 
+                        style={{height: '100%', width: '100%'}} />
+                    </div>
+                </div>
+            </div>
         ); 
     }
 });

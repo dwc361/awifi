@@ -155,10 +155,19 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
     },
     render: function() {
         return (
-            <ReactEcharts ref='echarts_react' 
-                onChartReady={this.showToolTip} 
-                option={this.state.option} 
-                style={{height: '100%', width: '100%'}} />
+            <div className="right col-md-12 col-lg-12 col-sm-12">
+                <div className="topH">
+                    <h1>[ 爱wifi热点类型分布 ]</h1>
+                </div>
+                <div className="Echart" >
+                    <div id="scatter_HotSpot">
+                        <ReactEcharts ref='echarts_react' 
+                        onChartReady={this.showToolTip} 
+                        option={this.state.option} 
+                        style={{height: '100%', width: '100%'}} />
+                    </div>
+                </div>
+            </div>
         );
     }
 });
