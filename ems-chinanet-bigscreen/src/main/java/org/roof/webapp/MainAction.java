@@ -31,7 +31,13 @@ public class MainAction {
 		model.addAttribute("menus", menu.getChildren());
 		return "/ems_common/user_main_auto.jsp";
 	}
-
+	
+	@RequestMapping("/goLogin")
+	public String goLogin(String errorCode, Model model) {
+		model.addAttribute("errorCode", errorCode == null ? "null" : "'" + errorCode + "'");
+		return "/login/user_goLogin.jsp";
+	}
+	
 	@RequestMapping("/main")
 	public String main(Model model, HttpServletRequest request, HttpSession httpSession) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
