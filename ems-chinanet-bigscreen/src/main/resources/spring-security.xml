@@ -12,7 +12,9 @@
  	<http pattern="/webSocketServer/**" security="none" /> 
 
  	<http pattern="/userAction/goLogin.action*" security="none" /> 
- 	<http pattern="/userAction/login.json*" security="none" /> 
+ 	<http pattern="/mainAction/goLogin.action*" security="none" />
+ 	<http pattern="/userAction/login.json*" security="none" />
+ 	<http pattern="/mainAction/login.json*" security="none" /> 
 	<http pattern="/tokenAction/accessToken.*" security="none" />
 	<http pattern="/common/js/fort_awesome/font/*" request-matcher="ant" security="none" />
 	<http pattern="/ems_common/static/font/*" request-matcher="ant" security="none" />
@@ -29,7 +31,7 @@
 		<custom-filter ref="filterSecurityInterceptor" before="FILTER_SECURITY_INTERCEPTOR" />
 		<logout logout-success-url="/logout_to_sso.jsp"
 			logout-url="/systemAction/j_spring_security_logout" delete-cookies="JSESSIONID" />
-		<form-login login-page="/userAction/goLogin.action"
+		<form-login login-page="/mainAction/goLogin.action"
 			authentication-failure-handler-ref="authenticationFailureHandler"
 			authentication-success-handler-ref="authenticationSuccessHandler" />
 	</http>
@@ -37,7 +39,7 @@
 
 	<beans:bean id="authenticationFailureHandler"
 		class="org.roof.web.user.service.api.ChainAuthenticationFailureHandler">
-		<beans:property name="defaultFailureUrl" value="/userAction/goLogin.action" />
+		<beans:property name="defaultFailureUrl" value="/mainAction/goLogin.action" />
 		<beans:property name="useForward" value="true" />
 		<beans:property name="exceptionMappings">
 			<beans:map>
