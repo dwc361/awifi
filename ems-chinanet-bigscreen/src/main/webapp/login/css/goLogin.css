@@ -13,64 +13,43 @@ body{
 	-webkit-background-size: 100%;
 	background-size: 100%;
 }
+img { border:none; }
 #login_bg2{ 
-	height: 47%;
-	width: 100%;
-	position:fixed; 
-	margin:-312px auto 0; 
-	background:url('../images/img2.png') no-repeat; 
-	_background:url('../images/img2.png') no-repeat;
-	background-position: center 0;  
+	max-width:100%; 
+	height:auto;
+	margin:14px auto 0;  
 }
 #login_logo2{ 
-	position:fixed; 
 	margin:-194px auto 0; 
-	width:100%; 
-	height:36%;  
-	background:url('../images/logo2.png') no-repeat; 
-	_background:url('../images/logo2.png') no-repeat;
-	background-position: center 0; 
+	max-width:100%; 
+	height:auto;   
+} 
+.logo{
+	text-align:center;
+	}
+#login_zu5{ 
+	margin:19px auto 0;  
+	max-width:100%; 
+	height:auto;
 }
 #login_loadBox{ 
-	margin:321px auto 0; 
-	width:100%; 
-	height:165px;  
-	background:url('../images/loadBox.png') no-repeat; 
-	_background:url('../images/loadBox.gif') no-repeat; 
-	background-position: center 0; 
+	margin:-130px auto 0;  
+	max-width:100%; 
+	height:auto;
 } 
-#login_zu5{ 
-	margin:-164px auto 0; 
-	width:100%; 
-	height:165px;  
-	background:url('../images/loadBox.png') no-repeat; 
-	_background:url('../images/loadBox.gif') no-repeat; 
-	background-position: center 0; 
+#login_line{
+	margin:-379px auto 0;  
+	max-width:100%; 
+	height:auto;
 }
-#login_line{ 
-	position:fixed;
-	margin: -125px 0 0 110px; 
-	width: 8%; 
-	height: 0.01%; 
-	border: solid 0px; 
+#login_wraper{ width:700px; margin:116px auto 0;}
+#checkbox{
+	width: 16px; 
+	height: 16px; 
+	vertical-align:middle;
+	background-color: #355B90;
+    z-index: 1000;
 }
-#login_line2{ 
-	position:fixed;
-	margin:-125px 0 0 547px; 
-	width: 8%; 
-	height: 0.01%; 
-	border: solid 0px; 
-}
-#login_word{
-	position:fixed;
-	margin: -147px 0 0 223px;
-	font-size: 32px;
-	/* font-family: Arial, Helvetica, sans-serif; */
-	color:#FFFFFF;
-	text-align:center;
-    line-height:-500px;
-}
-#login_wraper{ width:700px; margin:-111px auto 0;}
 .btn {
   display: inline-block;
   margin-bottom: 0;
@@ -122,7 +101,7 @@ a:link {
 	font-size: 16px;
 	color:#FFFFFF;  
 }
-#login_word2{
+#login_word{
 	position:fixed;
 	margin:112px 0 0 223px;
 	font-size: 14px;
@@ -132,10 +111,10 @@ a:link {
 #btn{ 
 	width: 26%; 
 	height: 100%; 
-	border: #2BD5B3 solid 0px;
+	border: solid 0px;
 	border-radius: 5px;
-  	background-color: #2BD5B3;
-  	margin:-43px 0 0 519px;
+  	background-color: #25C4C7;
+  	margin:-45px 0 0 519px;
   	z-index: 1000;
   	font:bold 16px/60px '宋体'; 
   	border:0 none; 
