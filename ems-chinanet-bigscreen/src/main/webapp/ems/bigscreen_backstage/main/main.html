@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>大屏后台管理系统</title>
+<link rel="stylesheet" href="./css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="./css/font-awesome.min.css">-->
+<link rel="stylesheet" href="./font-awesome-4.6.3/css/font-awesome.css">
+<link rel="stylesheet" href="./css/index.css">
+</head>
+
+<body>
+	<div id="header">
+		<div id="line"></div>
+		<div id="head">
+			<div id="logo" class="col-sm-10 col-md-10 col-lg-10">
+				<img src="image/logo.png" alt="">
+			</div>
+			<div id="user" class="col-sm-2 col-md-2 col-lg-2">
+				<div id="innerUr">
+					<div>
+						<span class="fa fa-user"></span>
+						<p id="admin" value="admin">Admin</p>
+						<button></button>
+						<div id="window">
+							<a href="#">退出账号</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="content">
+		<div id="left">
+			<div id="title">
+				<h2>配置图表</h2>
+			</div>
+			<div id="chartCnt"></div>
+		</div>
+		<div id="right">
+			<div id="screen" class="col-sm-12 col-md-12 col-lg-12"></div>
+		</div>
+	</div>
+	<!--<div id="alert"></div>-->
+</body>
+
+<script type="text/javascript">
+	var chartList = [
+	    {id:1, name:"平均用户总量", icon:"http://pic2.97uimg.com/58pic/19/62/67/99I58PICpYn.jpg!w1200"},
+	    {id:2, name:"定制终端状态统计", icon:"http://pic.97uimg.com/back_pic/00/04/20/33/f9fa39c44faaa2e630b7c4486cbc8b66.jpg!w1200"},
+	    {id:3, name:"设备类型分布", icon:"http://pic2.97uimg.com/58pic/19/62/67/99I58PICpYn.jpg!w1200"},
+	    {id:4, name:"全省设备排名", icon:"http://pic.97uimg.com/back_pic/00/04/20/33/f9fa39c44faaa2e630b7c4486cbc8b66.jpg!w1200"},
+	    {id:5, name:"成功认证量", icon:"http://pic2.97uimg.com/58pic/19/62/67/99I58PICpYn.jpg!w1200"},
+	    {id:6, name:"NAS设备状态统计", icon:"http://pic.97uimg.com/back_pic/00/04/20/33/f9fa39c44faaa2e630b7c4486cbc8b66.jpg!w1200"},
+	    {id:7, name:"awifi热点类型分布", icon:"http://pic2.97uimg.com/58pic/19/62/67/99I58PICpYn.jpg!w1200"},
+	    {id:8, name:"AP激活率统计", icon:"http://pic.97uimg.com/back_pic/00/04/20/33/f9fa39c44faaa2e630b7c4486cbc8b66.jpg!w1200"}
+	];
+</script>
+<script src="js/react_bigscreen_backstage_main_component.js"></script>
+<script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<script src="js/jquery-ui"></script>
+<script src="js/main.js"></script>
+</html>
