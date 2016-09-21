@@ -52,6 +52,12 @@
 			<input type="hidden" name="templates.id" value="${templates.id }" />
 			<input type="hidden" name="templates.path" value="${templates.path }" />
 			<div id="right">
+				<div class="handle">
+	               <span>
+	                  <i id="save" class="fa fa-folder-open"></i>
+	                  <i id="preview" class="fa fa-eye"></i>
+	               </span>
+	            </div>
 				<div id="screen" class="col-sm-12 col-md-12 col-lg-12"></div>
 			</div>
 		</form>
@@ -62,13 +68,12 @@
 			<div id="chartCnt"></div>
 		</div>
 	</div>
-	<button type="button" class="btn btn-default" id="save">保存</button>
-	<button type="button" class="btn btn-default" id="preview">预览</button>
 </body>
 	
 <!--react封装的组件-->
 <script type="text/javascript">
 	var chartList = ${chartList};
+	var relList = ${relList};
 </script>
 <script src="${basePath}/ems/bigscreen_backstage/main/js/react_bigscreen_backstage_main_component.js"></script>
 </html>

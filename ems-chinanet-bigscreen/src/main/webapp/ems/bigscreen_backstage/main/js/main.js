@@ -3,6 +3,24 @@ $(function() {
     $("#header").find("button").click(function(){
         $("#window").slideToggle(400);
     });
+    
+    // 配置里的图表移除
+    $("#screen").find("[id^='part']").mouseenter(function(){
+        $(this).find("i").show();
+    });
+    $("#screen").find("[id^='part']").mouseleave(function(){
+        $(this).find("i").hide();
+    });
+    $("#screen").find("[id^='part']").find(".part-clean").click(function () {
+        $(this).parent().empty();
+    });
+
+    // 修改name属性(SpringMVC里面BigScreenModel.List<BigScreenHandlebarsVo>.target_name接收需要name="vos[i].target_name")
+    $("#screen").find("[id^='part']").each(function(i) {
+        $(this).find("#chart_id").attr("name", "vos["+$(this).attr("value")+"].chart_id");
+        $(this).find("#chart_path").attr("name", "vos["+$(this).attr("value")+"].chart_path");
+        $(this).find("#target_name").attr("name", "vos["+$(this).attr("value")+"].target_name");
+    });
 
     // jquery-ui拖拽-源dom设置拖拽属性
     $(".draggable").draggable({
@@ -22,7 +40,7 @@ $(function() {
             // 克隆到容器中
             var source = ui.draggable.clone();
             
-            // 添加移除按钮
+            // 配置里的图表移除
             $('<i class="part-clean fa fa-close"/>').appendTo(source);
             source.mouseenter(function () {
                 $(this).find("i").show();

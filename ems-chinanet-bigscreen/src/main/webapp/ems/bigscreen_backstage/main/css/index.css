@@ -88,6 +88,9 @@ a, a:hover, a:focus {
     background-image: -ms-linear-gradient( 0deg, rgb(1,174,238) 0%, rgb(2,196,234) 34%, rgb(2,217,230) 61%, rgb(81,234,189) 100%);
 
 }
+#header{
+
+}
 #head{
     background-color:#fff;
     box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.2);
@@ -171,17 +174,39 @@ a, a:hover, a:focus {
     border-width: 1px;
     border-color: rgb(221, 221, 221);
     background-color:#fff;
+    height:100%;
     width:352px ;
     float: left;
     position: absolute;
     top: 4.86rem;
     background: #fff;
+    /*overflow: auto;*/
 }
 #right{
     padding: 3.2rem;
     background: #f5f5f5;
     height: 100vh;
     margin-left: 352px;
+    padding-top: 1rem;
+}
+.handle{
+    width: 100%;
+    height: 4rem;
+    /*background: red;*/
+}
+.handle span{
+    display: inline-block;
+    position: absolute;
+    right: 3.2rem;
+}
+.handle span .fa{
+    color: #888;
+    font-size: 2.2rem;
+    letter-spacing: 1rem;
+
+}
+.handle span .fa:hover{
+    color: #01b2ed;
 }
 #screen{
     border-radius: 3px;
@@ -245,9 +270,9 @@ a, a:hover, a:focus {
     border: 1px solid #979797;
     float: left;
     overflow: hidden;
-
 }
 .part-clean{
+    font-weight:normal;
     display: none;
     color: #ff3333;
     /* background: red; */
@@ -255,4 +280,22 @@ a, a:hover, a:focus {
     font-size: 2rem;
     top: -0.6rem;
     right: 0.8rem;
+}
+
+/*#myModal{*/
+    /*margin-top: ;*/
+/*}*/
+.fileSet{
+    width: 40%;
+    height:10rem ;
+    background: #444;
+}
+.fileSet input{
+    width: 100%;
+    height:10rem ;
+   /*opacity: 0;*/
+    float: left;
+    position: relative;
+    top: 0;
+    background: red;
 }

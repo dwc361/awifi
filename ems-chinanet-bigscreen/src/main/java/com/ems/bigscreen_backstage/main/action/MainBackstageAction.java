@@ -79,7 +79,11 @@ public class MainBackstageAction {
 		BigscreenChartRel bigscreenChartRel = new BigscreenChartRel();
 		bigscreenChartRel.setScreen_id(bigscreenVo.getId());
 		List<BigscreenChartRelVo> relList = bigscreenChartRelService.selectForList(bigscreenChartRel);
+		for(BigscreenChartRelVo vo : relList) {
+			vo.setChart_icon(basePath + vo.getChart_icon());
+		}
 		model.addAttribute("relList", JSON.toJSONString(relList));
+		System.out.print(JSON.toJSONString(relList));
 		
 		return "/ems/bigscreen_backstage/main/main.jsp";
 	}

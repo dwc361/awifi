@@ -101,9 +101,9 @@
 	</select>
 	
 	<select id="selectBigscreenChartRel" resultType="com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRelVo">
-		select 
-		a.id, a.chart_id, a.screen_id, a.target,b.path as chart_path ,b.icon as chart_icon
-		from e_bigscreen_chart_rel a left join e_chart b on a.chart_id = b.id
+		select a.id, a.chart_id, a.screen_id, a.target, b.path as chart_path, b.icon as chart_icon, b.name as chart_title
+		from e_bigscreen_chart_rel a 
+		left join e_chart b on a.chart_id = b.id
 		where 1=1
 		<if test="id != null and id != ''">
 			and a.id = #{id}

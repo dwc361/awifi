@@ -22,6 +22,7 @@ public class BigscreenChartRel implements Serializable {
 	protected String target;// target
 	protected String chart_path;
 	protected String chart_icon;
+	protected String chart_title;
 	
 
 	public BigscreenChartRel() {
@@ -86,5 +87,13 @@ public class BigscreenChartRel implements Serializable {
 
 	public void setChart_icon(String chart_icon) {
 		this.chart_icon = chart_icon;
+	}
+	
+	public String getChart_title() {
+		return chart_title;
+	}
+	
+	public void setChart_title(String chart_title) {
+		this.chart_title = chart_title;
 	}
 }
