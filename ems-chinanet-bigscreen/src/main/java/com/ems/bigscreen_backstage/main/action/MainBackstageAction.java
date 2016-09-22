@@ -83,7 +83,6 @@ public class MainBackstageAction {
 			vo.setChart_icon(basePath + vo.getChart_icon());
 		}
 		model.addAttribute("relList", JSON.toJSONString(relList));
-		System.out.print(JSON.toJSONString(relList));
 		
 		return "/ems/bigscreen_backstage/main/main.jsp";
 	}
