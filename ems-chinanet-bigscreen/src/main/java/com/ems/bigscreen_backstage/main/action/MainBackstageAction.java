@@ -27,10 +27,8 @@ import com.awifi.bigscreen.bigscreen_chart_rel.service.api.IBigscreenChartRelSer
 import com.awifi.bigscreen.chart.entity.Chart;
 import com.awifi.bigscreen.chart.entity.ChartVo;
 import com.awifi.bigscreen.chart.service.api.IChartService;
-import com.awifi.bigscreen.templates.entity.Templates;
 import com.awifi.bigscreen.templates.entity.TemplatesVo;
 import com.awifi.bigscreen.templates.service.api.ITemplatesService;
-import com.awifi.bigscreen.theme.entity.Theme;
 import com.awifi.bigscreen.theme.entity.ThemeVo;
 import com.awifi.bigscreen.theme.service.api.IThemeService;
 
@@ -63,18 +61,15 @@ public class MainBackstageAction {
 		}
 		model.addAttribute("chartList", JSON.toJSONString(chartList));
 		
-		BigscreenVo bigscreenVo = bigscreenService.load(new Bigscreen(8L));
+		// 加载大屏信息
+		//BigscreenVo bigscreenVo = bigscreenService.load(new Bigscreen(8L));
+		BigscreenVo bigscreenVo = new BigscreenVo();
+		bigscreenVo.setEnabled("1");
+		List<BigscreenVo> bigscreenList = bigscreenService.selectForList(bigscreenVo);
+		if(bigscreenList!=null && bigscreenList.size()>0) {
+			bigscreenVo = bigscreenList.get(0);
+		}
 		model.addAttribute("bigscreen", bigscreenVo);
-		
-		Theme theme = new Theme(1L);
-		theme.setEnabled("1");
-		ThemeVo themeVo = themeService.selectForObject(theme);
-		model.addAttribute("theme", themeVo);
-		
-		Templates templates = new Templates(4L);
-		templates.setEnabled("1");
-		TemplatesVo templatesVo = templatesService.selectForObject(templates);
-		model.addAttribute("templates", templatesVo);
 		
 		BigscreenChartRel bigscreenChartRel = new BigscreenChartRel();
 		bigscreenChartRel.setScreen_id(bigscreenVo.getId());
@@ -83,6 +78,26 @@ public class MainBackstageAction {
 			vo.setChart_icon(basePath + vo.getChart_icon());
 		}
 		model.addAttribute("relList", JSON.toJSONString(relList));
+		
+		// 选用哪一套主题
+		//ThemeVo themeVo = themeService.load(new Theme(1L));
+		ThemeVo themeVo = new ThemeVo();
+		themeVo.setEnabled("1");
+		List<ThemeVo> themeList = themeService.selectForList(themeVo);
+		if(themeList!=null && themeList.size()>0) {
+			themeVo = themeList.get(0);
+		}
+		model.addAttribute("theme", themeVo);
+		
+		// 选用哪一套模板
+		//TemplatesVo templatesVo = templatesService.load(new Templates(4L));
+		TemplatesVo templatesVo = new TemplatesVo();
+		templatesVo.setEnabled("1");
+		List<TemplatesVo> templatesList = templatesService.selectForList(templatesVo);
+		if(templatesList!=null && templatesList.size()>0) {
+			templatesVo = templatesList.get(0);
+		}
+		model.addAttribute("templates", templatesVo);
 		
 		return "/ems/bigscreen_backstage/main/main.jsp";
 	}

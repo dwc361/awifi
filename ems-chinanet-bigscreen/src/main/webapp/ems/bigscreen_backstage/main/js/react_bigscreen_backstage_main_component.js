@@ -96,8 +96,10 @@
 
 	if (typeof relList != 'undefined') {
 	    for (var i = 0; i < relList.length; i++) {
-	        _reactDom2.default.render(_react2.default.createElement(_SourceFillBigscreen2.default, { id: relList[i].chart_id, path: relList[i].chart_path,
-	            url: relList[i].chart_icon, target: relList[i].target, title: relList[i].chart_title }), document.getElementById(relList[i].target));
+	        if (document.getElementById(relList[i].target) != null) {
+	            _reactDom2.default.render(_react2.default.createElement(_SourceFillBigscreen2.default, { id: relList[i].chart_id, path: relList[i].chart_path,
+	                url: relList[i].chart_icon, target: relList[i].target, title: relList[i].chart_title }), document.getElementById(relList[i].target));
+	        }
 	    };
 	}
 
