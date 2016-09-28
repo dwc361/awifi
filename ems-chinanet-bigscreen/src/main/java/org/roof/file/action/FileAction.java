@@ -104,6 +104,21 @@ public class FileAction {
 			LOGGER.error(e.getMessage(), e);
 		}
 	}
+	
+	/**
+	 * 删除文件
+	 * @return 
+	 */
+	@RequestMapping("/delete/{name}")
+	public @ResponseBody Result delete(@PathVariable("name") String name, HttpServletRequest request) throws Exception {
+		try {
+			fileManager.deleteFile(name);
+			return new Result(Result.SUCCESS, "删除成功!");
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage(), e);
+			return new Result(Result.FAIL, "删除失败:"+e.toString());
+		}
+	}
 
 	@RequestMapping("/upload_page")
 	public String upload_page() {
