@@ -29,22 +29,23 @@
 		</property>
 	</bean>
 
-
 	<!-- SpringMVC -->
 	<import resource="classpath:spring-mvc.xml" />
 
-	
 	<!-- 权限 -->
 	<import resource="classpath:spring-security.xml" />
 	<import resource="classpath:spring-security-bean.xml" />
 
+	<!-- 数据源 -->
 	<import resource="classpath:spring-db-mybatis.xml" />
+	
 	<import resource="classpath:spring-cache-concurrentMap.xml" />
 	<import resource="classpath:spring-redis.xml" />
 	<import resource="classpath:spring-service-aop.xml" />
 	<import resource="classpath:spring-websocket.xml" />
 
-
+	<!-- 文件上传下载 -->
+	<import resource="classpath:spring-fileupload.xml" />
 
 	<bean id="injectionApplicationContextListener" class="org.roof.spring.InjectionApplicationContextListener" />
 

@@ -63,7 +63,7 @@
 
 	<beans:bean id="authenticationSuccessHandler"
 		class="org.roof.web.user.service.api.ChainAuthenticationSuccessHandler">
-		<beans:property name="defaultTargetUrl" value="/mainAction/main.action" />
+		<beans:property name="defaultTargetUrl" value="/ems/bigscreen_backstage/MainBackstageAction/main.action" />
 		<beans:property name="redirectStrategy">
 			<beans:bean class="org.roof.web.user.service.api.JsonRedirectStrategy" />
 		</beans:property>
