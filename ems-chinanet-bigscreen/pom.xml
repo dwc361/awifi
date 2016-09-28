@@ -233,6 +233,26 @@
 		</dependency>
 		<dependency>
 			<groupId>org.roof</groupId>
+			<artifactId>roof-file</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.roof</groupId>
+			<artifactId>roof-file-default-impl</artifactId>
+			<version>3.0.1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.roof</groupId>
 			<artifactId>roof-file-upload-impl</artifactId>
 			<version>3.0.1</version>
 		</dependency>
