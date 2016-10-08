@@ -14,19 +14,39 @@
 		<spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
 
-
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 			<version>3.1.0</version>
 		</dependency>
+<!-- 		<dependency>   -->
+<!--             <groupId>org.apache.tomcat</groupId>   -->
+<!--             <artifactId>tomcat-servlet-api</artifactId>   -->
+<!--             <version>8.0.0-RC5</version>   -->
+<!--             <scope>provided</scope>   -->
+<!--         </dependency> -->
+		<dependency>
+			<groupId>javax.persistence</groupId>
+			<artifactId>persistence-api</artifactId>
+			<version>1.0.2</version>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.roof</groupId>
 			<artifactId>roof-dataaccess-api</artifactId>
 			<version>3.0.1</version>
 		</dependency>
+		<dependency>
+			<groupId>org.roof</groupId>
+			<version>3.0.1</version>
+			<artifactId>roof-dataaccess-mybatis</artifactId>
+		</dependency>
+		
+		
+		
 		<dependency>
 			<groupId>org.roof</groupId>
 			<artifactId>roof-web-user-service-api</artifactId>
@@ -90,7 +110,6 @@
 			<version>3.0.1</version>
 		</dependency>
 
-
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
@@ -126,14 +145,6 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
-
-		<dependency>
-			<groupId>javax.persistence</groupId>
-			<artifactId>persistence-api</artifactId>
-			<version>1.0.2</version>
-		</dependency>
-
 
 		<dependency>
 			<groupId>org.roof</groupId>
@@ -184,93 +195,6 @@
 
 
 		<dependency>
-			<groupId>org.springframework.security</groupId>
-			<artifactId>spring-security-taglibs</artifactId>
-			<version>3.1.2.RELEASE</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-expression</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-context</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-aop</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-web</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-asm</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.roof</groupId>
-			<version>3.0.1</version>
-			<artifactId>roof-dataaccess-mybatis</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.roof</groupId>
-			<artifactId>roof-spring</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.roof</groupId>
-			<artifactId>roof-file</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.roof</groupId>
-			<artifactId>roof-file-default-impl</artifactId>
-			<version>3.0.1</version>
-			<exclusions>
-				<exclusion>
-					<artifactId>spring-beans</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>spring-core</artifactId>
-					<groupId>org.springframework</groupId>
-				</exclusion>
-			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.roof</groupId>
-			<artifactId>roof-file-upload-impl</artifactId>
-			<version>3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-test</artifactId>
-			<version>${spring.version}</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.springframework.batch</groupId>
-			<artifactId>spring-batch-core</artifactId>
-			<version>3.0.6.RELEASE</version>
-		</dependency>
-
-
-		<dependency>
 			<groupId>org.roof</groupId>
 			<artifactId>roof-web-user-service-impl</artifactId>
 			<version>3.0.1</version>
@@ -279,8 +203,6 @@
 			<groupId>org.roof</groupId>
 			<artifactId>roof-web-menu-service-impl</artifactId>
 			<version>3.0.1</version>
-			<!-- <exclusions> <exclusion> <artifactId>roof-web-menu-dao-impl</artifactId> 
-				<groupId>org.roof</groupId> </exclusion> </exclusions> -->
 		</dependency>
 		<dependency>
 			<groupId>org.roof</groupId>
@@ -345,11 +267,57 @@
 		</dependency>
 
 
+
+		<dependency>
+			<groupId>org.roof</groupId>
+			<artifactId>roof-spring</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.roof</groupId>
+			<artifactId>roof-file</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		<dependency>
+			<groupId>org.roof</groupId>
+			<artifactId>roof-file-default-impl</artifactId>
+			<version>3.0.1</version>
+			<exclusions>
+				<exclusion>
+					<artifactId>spring-beans</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+				<exclusion>
+					<artifactId>spring-core</artifactId>
+					<groupId>org.springframework</groupId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>org.roof</groupId>
+			<artifactId>roof-file-upload-impl</artifactId>
+			<version>3.0.1</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>commons-fileupload</groupId>
 			<artifactId>commons-fileupload</artifactId>
 			<version>1.3.1</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${spring.version}</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>org.springframework.batch</groupId>
+			<artifactId>spring-batch-core</artifactId>
+			<version>3.0.6.RELEASE</version>
+		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework.data</groupId>
 			<artifactId>spring-data-redis</artifactId>
@@ -360,6 +328,7 @@
 			<artifactId>jedis</artifactId>
 			<version>2.7.2</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>com.alibaba</groupId>
 			<artifactId>fastjson</artifactId>
@@ -372,8 +341,7 @@
 			<version>4.10</version>
 			<scope>test</scope>
 		</dependency>
-		<!-- <dependency> <groupId>javax.servlet</groupId> <artifactId>javax.servlet-api</artifactId> 
-			<version>3.1.0</version> </dependency> -->
+		
 		<dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-core</artifactId>
@@ -384,6 +352,7 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.3.0</version>
 		</dependency>
+		
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-websocket</artifactId>
@@ -411,7 +380,6 @@
 			<artifactId>jsonrpc4j</artifactId>
 			<version>1.4.6</version>
 		</dependency>
-
 	</dependencies>
 
 	<build>
@@ -444,11 +412,12 @@
 					<failOnMissingWebXml>true</failOnMissingWebXml>
 					<webResources>
 						<resource>
-							<directory>E:\Users\hc_workspace_2016\webc</directory>
+							<directory>D:\phoenix122411_git\awifi\webc</directory>
 						</resource>
 					</webResources>
 				</configuration>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.mortbay.jetty</groupId>
 				<artifactId>jetty-maven-plugin</artifactId>
@@ -459,6 +428,19 @@
 					</webAppConfig>
 				</configuration>
 			</plugin>
+			
+			<plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                	<path>/${project.artifactId}</path>
+					<port>8080</port>
+					<uriEncoding>UTF-8</uriEncoding>
+                    <url>http://localhost:8080/manager/html</url>
+                    <server>tomcat7</server>
+                </configuration>
+            </plugin>
 		</plugins>
 	</build>
 
