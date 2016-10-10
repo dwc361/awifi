@@ -6,6 +6,11 @@ import { render } from 'react-dom';
 import SiderMenu from './sidermenu.jsx';
 import First from '../../html/first.jsx';
 import Second from  '../../html/second.jsx';
+import Third from  '../../html/third.jsx';
+import Forth from  '../../html/forth.jsx';
+import Fifth from  '../../html/fifth.jsx';
+import Sixth from  '../../html/sixth.jsx';
+import Seventh from  '../../html/seventh.jsx';
 
 export default class Index extends React.Component{
 
@@ -31,6 +36,22 @@ export default class Index extends React.Component{
             case 'Second':
                 content = <Second />;
                 break;
+            case 'Third':
+                content = <Third />;
+                break;
+            case 'Forth':
+                content = <Forth />;
+                break;
+            case 'Fifth':
+                content = <Fifth />;
+                break;
+            case 'Sixth':
+                content = <Sixth />;
+                break;
+            case 'Seventh':
+                content = <Seventh />;
+                break;
+
             default:
                 content = <First />;
         }

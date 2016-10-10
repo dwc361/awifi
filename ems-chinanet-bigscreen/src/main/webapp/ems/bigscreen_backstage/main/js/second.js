@@ -3,10 +3,7 @@
  */
 
 $(function() {
-    // 系统登出按钮
-    $("#header").find("button").click(function(){
-        $("#window").slideToggle(400);
-    });
+
 
     // 配置里的图表移除
     $("#screen").find("[id^='part']").mouseenter(function(){
