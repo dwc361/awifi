@@ -36,7 +36,7 @@
         </style>  
       
         <script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>  
-      <script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
+      	<script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
       
         <script type="text/javascript">  
             var ws = null;  
@@ -54,12 +54,10 @@
                     alert('Select whether to use W3C WebSocket or SockJS');  
                     return;  
                 }  
-                  
-                  
-                //ws = new WebSocket('ws://192.168.10.107:8080/mspjapi/webSocketServer');/* (url.indexOf('sockjs') != -1) ?   
-                    //new SockJS(url, undefined, {protocols_whitelist: transports}) :  */  
-                    ws = new SockJS(ROOF.Utils.projectName()+"/webSocketServer/webSocketServer/sockjs");  
-                    //console.log("http://192.168.10.107:8080/mspjapi/webSocketServer/sockjs");  
+                
+                //ws = new WebSocket('ws://192.168.10.107:8080/mspjapi/websocketDemo');/* (url.indexOf('sockjs') != -1) ?   
+                //new SockJS(url, undefined, {protocols_whitelist: transports}) :  */  
+                ws = new SockJS(ROOF.Utils.projectName()+"/WebSocketServlet/websocketDemo/sockjs");
                       
                 ws.onopen = function () {  
                     setConnected(true);  

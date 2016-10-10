@@ -36,7 +36,7 @@ import com.awifi.bigscreen.templates.service.api.ITemplatesService;
 import com.awifi.bigscreen.theme.entity.Theme;
 import com.awifi.bigscreen.theme.entity.ThemeVo;
 import com.awifi.bigscreen.theme.service.api.IThemeService;
-import com.awifi.bigscreen.websocket.SystemWebSocketHandler;
+import com.awifi.bigscreen.websocket.handler.SystemWebSocketHandler;
 
 @Controller
 @RequestMapping("awifi/bigscreenAction")
@@ -92,7 +92,8 @@ public class BigscreenAction {
 	@RequestMapping("/list")
 	public String list(Bigscreen bigscreen, HttpServletRequest request, Model model) {
 		SystemWebSocketHandler hander = new SystemWebSocketHandler();
-		hander.sendMessageToUsers(new TextMessage("ssss"));
+		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"mainAction/main.action";
+		hander.sendMessageToUsers(new TextMessage(url));
 		Page page = PageUtils.createPage(request);
 		page = bigscreenService.page(page, bigscreen);
 		model.addAttribute("page", page);

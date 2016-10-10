@@ -7,21 +7,30 @@ import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-public class MyHandler extends TextWebSocketHandler{
+/**
+ * websocket处理类
+ * @author zhangmm
+ */
+public class MyHandler extends TextWebSocketHandler {
 
 	@Override
 	protected void handleBinaryMessage(WebSocketSession session, BinaryMessage message) {
-		// TODO Auto-generated method stub
+		System.out.println("handleBinaryMessage");
 		super.handleBinaryMessage(session, message);
-		 TextMessage returnMessage = new TextMessage(message.getPayload()+" received at server");  
-	        try {
-				session.sendMessage(returnMessage);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}  
+		TextMessage returnMessage = new TextMessage(message.getPayload() + " received at server");
+		try {
+			session.sendMessage(returnMessage);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
-	
-	
 
+	@Override
+	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+		System.out.println("handleTextMessage");
+		super.handleTextMessage(session, message);
+		TextMessage returnMessage = new TextMessage(message.getPayload() + " received at server");
+		session.sendMessage(returnMessage);
+	}
 }

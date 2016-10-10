@@ -23,19 +23,19 @@ import com.alibaba.fastjson.JSON;
 public class MainAction {
 	private IMenuFilter menuFilter;
 	
-	@RequestMapping("/index")
+	@RequestMapping("/goLogin")
+	public String goLogin(String errorCode, Model model) {
+		model.addAttribute("errorCode", errorCode == null ? "null" : "'" + errorCode + "'");
+		return "/login/user_goLogin.jsp";
+	}
+	
+	@RequestMapping("/roof_main")
 	public String index(Model model, HttpServletRequest request, HttpSession httpSession) {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		Menu menu = menuFilter.doFilter(1L, new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
 				authentication.getCredentials(), authentication.getAuthorities()));
 		model.addAttribute("menus", menu.getChildren());
 		return "/ems_common/user_main_auto.jsp";
-	}
-	
-	@RequestMapping("/goLogin")
-	public String goLogin(String errorCode, Model model) {
-		model.addAttribute("errorCode", errorCode == null ? "null" : "'" + errorCode + "'");
-		return "/login/user_goLogin.jsp";
 	}
 	
 	@RequestMapping("/main")
@@ -48,6 +48,16 @@ public class MainAction {
 		model.addAttribute("user", user);
 		//return "/ems_common/user_main_auto.jsp";
 		return "/ems_common/main/index_bak.jsp";
+	}
+	
+	@RequestMapping("/websocket_chart_demo")
+	public String websocket_chart_demo(Model model, HttpServletRequest request, HttpSession httpSession) {
+		return "/ems_common/main/websocket_chart_demo.jsp";
+	}
+	
+	@RequestMapping("/websocket_test")
+	public String websocket_test(Model model, HttpServletRequest request, HttpSession httpSession) {
+		return "/ems_common/main/websocket_test.jsp";
 	}
 	
 	/**
