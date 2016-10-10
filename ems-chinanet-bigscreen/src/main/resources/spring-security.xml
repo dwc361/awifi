@@ -9,13 +9,14 @@
 	<!-- 拦截排除列表 -->
 	<!-- <http pattern="/**/*" security="none" /> -->
 <!-- 	<http pattern="/codeAction/image.action*" security="none" /> -->
- 	<http pattern="/webSocketServer/**" security="none" /> 
-
  	<http pattern="/userAction/goLogin.action*" security="none" /> 
  	<http pattern="/mainAction/goLogin.action*" security="none" />
  	<http pattern="/userAction/login.json*" security="none" />
  	<http pattern="/mainAction/login.json*" security="none" /> 
+ 	<!-- 令牌 -->
 	<http pattern="/tokenAction/accessToken.*" security="none" />
+	<!-- WebSocket -->
+	<http pattern="/WebSocketServlet/**/*" security="none" />
 	<http pattern="/common/js/fort_awesome/font/*" request-matcher="ant" security="none" />
 	<http pattern="/ems_common/static/font/*" request-matcher="ant" security="none" />
 	<http pattern="/ems_common/bootstrap/fonts/*" request-matcher="ant" security="none" />
