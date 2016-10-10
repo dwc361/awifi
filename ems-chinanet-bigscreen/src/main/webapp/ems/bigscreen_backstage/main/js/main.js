@@ -21581,7 +21581,7 @@
 	                                        _react2.default.createElement('button', null),
 	                                        _react2.default.createElement(
 	                                            'div',
-	                                            { id: 'window' },
+	                                            { id: 'window', className: 'dropdown-menu' },
 	                                            _react2.default.createElement(
 	                                                'a',
 	                                                { href: '#' },

@@ -1,6 +1,7 @@
 
 
 import { Row, Col } from 'antd';
+import {}
 import React from 'react';
 import { render } from 'react-dom';
 import SiderMenu from './sidermenu.jsx';
@@ -73,9 +74,9 @@ export default class Index extends React.Component{
                                         <span className="fa fa-user"></span>
                                         <p id="admin" value="admin">Admin</p>
                                         <button></button>
-                                        <div id="window">
+                                        <NavDropdown id="nav-dropdown" className="dropdown-menu">
                                             <a href="#">退出账号</a>
-                                        </div>
+                                        </NavDropdown>
                                     </div>
                                 </div>
                             </div>
