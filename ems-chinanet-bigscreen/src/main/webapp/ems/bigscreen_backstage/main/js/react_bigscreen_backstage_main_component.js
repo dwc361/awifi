@@ -2098,8 +2098,8 @@
 	var injectedMixins = [];
 
 	/**
-	 * Composite components are higher-level components that compose other composite
-	 * or host components.
+	 * Composite second are higher-level second that compose other composite
+	 * or host second.
 	 *
 	 * To create a new type of `ReactClass`, pass a specification of
 	 * your new class to `React.createClass`. The only requirement of your class
@@ -2400,7 +2400,7 @@
 	function validateTypeDef(Constructor, typeDef, location) {
 	  for (var propName in typeDef) {
 	    if (typeDef.hasOwnProperty(propName)) {
-	      // use a warning instead of an invariant so components
+	      // use a warning instead of an invariant so second
 	      // don't show up in prod but only in __DEV__
 	      process.env.NODE_ENV !== 'production' ? warning(typeof typeDef[propName] === 'function', '%s: %s type `%s` is invalid; it must be a function, usually from ' + 'React.PropTypes.', Constructor.displayName || 'ReactClass', ReactPropTypeLocationNames[location], propName) : void 0;
 	    }
@@ -2669,7 +2669,7 @@
 	_assign(ReactClassComponent.prototype, ReactComponent.prototype, ReactClassMixin);
 
 	/**
-	 * Module for creating composite components.
+	 * Module for creating composite second.
 	 *
 	 * @class ReactClass
 	 */
@@ -3269,7 +3269,7 @@
 	    // We warn in this case but don't throw. We expect the element creation to
 	    // succeed and there will likely be errors in render.
 	    if (!validType) {
-	      process.env.NODE_ENV !== 'production' ? warning(false, 'React.createElement: type should not be null, undefined, boolean, or ' + 'number. It should be a string (for DOM elements) or a ReactClass ' + '(for composite components).%s', getDeclarationErrorAddendum()) : void 0;
+	      process.env.NODE_ENV !== 'production' ? warning(false, 'React.createElement: type should not be null, undefined, boolean, or ' + 'number. It should be a string (for DOM elements) or a ReactClass ' + '(for composite second).%s', getDeclarationErrorAddendum()) : void 0;
 	    }
 
 	    var element = ReactElement.createElement.apply(this, arguments);
@@ -3535,7 +3535,7 @@
 	      if (nextChild.parentID == null) {
 	        nextChild.parentID = id;
 	        // TODO: This shouldn't be necessary but mounting a new root during in
-	        // componentWillMount currently causes not-yet-mounted components to
+	        // componentWillMount currently causes not-yet-mounted second to
 	        // be purged from our tree data so their parent ID is missing.
 	      }
 	      !(nextChild.parentID === id) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected onBeforeMountComponent() parent and onSetChildren() to be consistent (%s has parents %s and %s).', nextChildID, nextChild.parentID, id) : _prodInvariant('142', nextChildID, nextChild.parentID, id) : void 0;
@@ -3822,7 +3822,7 @@
 
 	/**
 	 * Collection of methods that allow declaration and validation of props that are
-	 * supplied to React components. Example usage:
+	 * supplied to React second. Example usage:
 	 *
 	 *   var Props = require('ReactPropTypes');
 	 *   var MyArticle = React.createClass({
@@ -7484,7 +7484,7 @@
 
 	function runBatchedUpdates(transaction) {
 	  var len = transaction.dirtyComponentsLength;
-	  !(len === dirtyComponents.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected flush transaction\'s stored dirty-components length (%s) to match dirty-components array length (%s).', len, dirtyComponents.length) : _prodInvariant('124', len, dirtyComponents.length) : void 0;
+	  !(len === dirtyComponents.length) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Expected flush transaction\'s stored dirty-second length (%s) to match dirty-second array length (%s).', len, dirtyComponents.length) : _prodInvariant('124', len, dirtyComponents.length) : void 0;
 
 	  // Since reconciling a component higher in the owner hierarchy usually (not
 	  // always -- see shouldComponentUpdate()) will reconcile children, reconcile
@@ -7568,7 +7568,7 @@
 	  // _renderValidatedComponent) assume that calls to render aren't nested;
 	  // verify that that's the case. (This is called by each top-level update
 	  // function, like setState, forceUpdate, etc.; creation and
-	  // destruction of top-level components is guarded in ReactMount.)
+	  // destruction of top-level second is guarded in ReactMount.)
 
 	  if (!batchingStrategy.isBatchingUpdates) {
 	    batchingStrategy.batchedUpdates(enqueueUpdate, component);
@@ -8044,10 +8044,10 @@
 	var invariant = __webpack_require__(8);
 
 	/**
-	 * ReactOwners are capable of storing references to owned components.
+	 * ReactOwners are capable of storing references to owned second.
 	 *
-	 * All components are capable of //being// referenced by owner components, but
-	 * only ReactOwner components are capable of //referencing// owned components.
+	 * All second are capable of //being// referenced by owner second, but
+	 * only ReactOwner second are capable of //referencing// owned second.
 	 * The named reference is known as a "ref".
 	 *
 	 * Refs are available when mounted and updated during reconciliation.
@@ -11163,7 +11163,7 @@
 
 	/**
 	 * Creates a new React class that is idempotent and capable of containing other
-	 * React components. It accepts event listeners and DOM properties that are
+	 * React second. It accepts event listeners and DOM properties that are
 	 * valid according to `DOMProperty`.
 	 *
 	 *  - Event listeners: `onClick`, `onMouseDown`, etc.
@@ -13431,7 +13431,7 @@
 	        didWarnCheckedLink = true;
 	      }
 	      if (props.checked !== undefined && props.defaultChecked !== undefined && !didWarnCheckedDefaultChecked) {
-	        process.env.NODE_ENV !== 'production' ? warning(false, '%s contains an input of type %s with both checked and defaultChecked props. ' + 'Input elements must be either controlled or uncontrolled ' + '(specify either the checked prop, or the defaultChecked prop, but not ' + 'both). Decide between using a controlled or uncontrolled input ' + 'element and remove one of these props. More info: ' + 'https://fb.me/react-controlled-components', owner && owner.getName() || 'A component', props.type) : void 0;
+	        process.env.NODE_ENV !== 'production' ? warning(false, '%s contains an input of type %s with both checked and defaultChecked props. ' + 'Input elements must be either controlled or uncontrolled ' + '(specify either the checked prop, or the defaultChecked prop, but not ' + 'both). Decide between using a controlled or uncontrolled input ' + 'element and remove one of these props. More info: ' + 'https://fb.me/react-controlled-second', owner && owner.getName() || 'A component', props.type) : void 0;
 	        didWarnCheckedDefaultChecked = true;
 	      }
 	      if (props.value !== undefined && props.defaultValue !== undefined && !didWarnValueDefaultValue) {
@@ -13461,7 +13461,7 @@
 	      var owner = inst._currentElement._owner;
 
 	      if (!inst._wrapperState.controlled && controlled && !didWarnUncontrolledToControlled) {
-	        process.env.NODE_ENV !== 'production' ? warning(false, '%s is changing an uncontrolled input of type %s to be controlled. ' + 'Input elements should not switch from uncontrolled to controlled (or vice versa). ' + 'Decide between using a controlled or uncontrolled input ' + 'element for the lifetime of the component. More info: https://fb.me/react-controlled-components', owner && owner.getName() || 'A component', props.type) : void 0;
+	        process.env.NODE_ENV !== 'production' ? warning(false, '%s is changing an uncontrolled input of type %s to be controlled. ' + 'Input elements should not switch from uncontrolled to controlled (or vice versa). ' + 'Decide between using a controlled or uncontrolled input ' + 'element for the lifetime of the component. More info: https://fb.me/react-controlled-second', owner && owner.getName() || 'A component', props.type) : void 0;
 	        didWarnUncontrolledToControlled = true;
 	      }
 	      if (inst._wrapperState.controlled && !controlled && !didWarnControlledToUncontrolled) {
@@ -14158,7 +14158,7 @@
 	        didWarnValueLink = true;
 	      }
 	      if (props.value !== undefined && props.defaultValue !== undefined && !didWarnValDefaultVal) {
-	        process.env.NODE_ENV !== 'production' ? warning(false, 'Textarea elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled textarea ' + 'and remove one of these props. More info: ' + 'https://fb.me/react-controlled-components') : void 0;
+	        process.env.NODE_ENV !== 'production' ? warning(false, 'Textarea elements must be either controlled or uncontrolled ' + '(specify either the value prop, or the defaultValue prop, but not ' + 'both). Decide between using a controlled or uncontrolled textarea ' + 'and remove one of these props. More info: ' + 'https://fb.me/react-controlled-second') : void 0;
 	        didWarnValDefaultVal = true;
 	      }
 	    }
@@ -15033,7 +15033,7 @@
 	    instance = ReactEmptyComponent.create(instantiateReactComponent);
 	  } else if (typeof node === 'object') {
 	    var element = node;
-	    !(element && (typeof element.type === 'function' || typeof element.type === 'string')) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element type is invalid: expected a string (for built-in components) or a class/function (for composite components) but got: %s.%s', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : _prodInvariant('130', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : void 0;
+	    !(element && (typeof element.type === 'function' || typeof element.type === 'string')) ? process.env.NODE_ENV !== 'production' ? invariant(false, 'Element type is invalid: expected a string (for built-in second) or a class/function (for composite second) but got: %s.%s', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : _prodInvariant('130', element.type == null ? element.type : typeof element.type, getDeclarationErrorAddendum(element._owner)) : void 0;
 
 	    // Special case string values
 	    if (typeof element.type === 'string') {
@@ -15202,7 +15202,7 @@
 
 	/**
 	 * An incrementing ID assigned to each component when it is mounted. This is
-	 * used to enforce the order in which `ReactUpdates` updates dirty components.
+	 * used to enforce the order in which `ReactUpdates` updates dirty second.
 	 *
 	 * @private
 	 */
@@ -15281,7 +15281,7 @@
 	    var inst = this._constructComponent(doConstruct, publicProps, publicContext, updateQueue);
 	    var renderedElement;
 
-	    // Support functional components
+	    // Support functional second
 	    if (!doConstruct && (inst == null || inst.render == null)) {
 	      renderedElement = inst;
 	      warnIfInvalidElement(Component, renderedElement);
@@ -15547,7 +15547,7 @@
 	    // leaks a reference to the public instance.
 	    ReactInstanceMap.remove(inst);
 
-	    // Some existing components rely on inst.props even after they've been
+	    // Some existing second rely on inst.props even after they've been
 	    // destroyed (in event handlers).
 	    // TODO: inst.props = null;
 	    // TODO: inst.state = null;
@@ -17460,7 +17460,7 @@
 	var validateDOMNesting = __webpack_require__(132);
 
 	/**
-	 * Text nodes violate a couple assumptions that React makes about components:
+	 * Text nodes violate a couple assumptions that React makes about second:
 	 *
 	 *  - When mounting text into the DOM, adjacent text nodes are merged.
 	 *  - Text nodes cannot be assigned a React root ID.
@@ -17468,7 +17468,7 @@
 	 * This component is used to wrap strings between comment nodes so that they
 	 * can undergo the same reconciliation that is applied to elements.
 	 *
-	 * TODO: Investigate representing React components in the DOM with text nodes.
+	 * TODO: Investigate representing React second in the DOM with text nodes.
 	 *
 	 * @class ReactDOMTextComponent
 	 * @extends ReactComponent
@@ -17656,7 +17656,7 @@
 
 	  /**
 	   * Call the provided function in a context within which calls to `setState`
-	   * and friends are batched such that components aren't updated unnecessarily.
+	   * and friends are batched such that second aren't updated unnecessarily.
 	   */
 	  batchedUpdates: function (callback, a, b, c, d, e) {
 	    var alreadyBatchingUpdates = ReactDefaultBatchingStrategy.isBatchingUpdates;
@@ -21456,7 +21456,7 @@
 	    return;
 	  }
 	  if (element.props != null && element.props.value === null && !didWarnValueNull) {
-	    process.env.NODE_ENV !== 'production' ? warning(false, '`value` prop on `%s` should not be null. ' + 'Consider using the empty string to clear the component or `undefined` ' + 'for uncontrolled components.%s', element.type, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;
+	    process.env.NODE_ENV !== 'production' ? warning(false, '`value` prop on `%s` should not be null. ' + 'Consider using the empty string to clear the component or `undefined` ' + 'for uncontrolled second.%s', element.type, ReactComponentTreeHook.getStackAddendumByID(debugID)) : void 0;
 
 	    didWarnValueNull = true;
 	  }
@@ -24304,9 +24304,9 @@
 
 	/**
 	 * Iterates through children that are typically specified as `props.children`,
-	 * but only maps over children that are "valid components".
+	 * but only maps over children that are "valid second".
 	 *
-	 * The mapFunction provided index will be normalised to the components mapped,
+	 * The mapFunction provided index will be normalised to the second mapped,
 	 * so an invalid component would not increase the index.
 	 *
 	 * @param {?*} children Children tree container.
@@ -24327,10 +24327,10 @@
 	}
 
 	/**
-	 * Iterates through children that are "valid components".
+	 * Iterates through children that are "valid second".
 	 *
 	 * The provided forEachFunc(child, index) will be called for each
-	 * leaf child with the index reflecting the position relative to "valid components".
+	 * leaf child with the index reflecting the position relative to "valid second".
 	 *
 	 * @param {?*} children Children tree container.
 	 * @param {function(*, int)} func.
@@ -24372,10 +24372,10 @@
 
 	/**
 	 * Finds children that are typically specified as `props.children`,
-	 * but only iterates over children that are "valid components".
+	 * but only iterates over children that are "valid second".
 	 *
 	 * The provided forEachFunc(child, index) will be called for each
-	 * leaf child with the index reflecting the position relative to "valid components".
+	 * leaf child with the index reflecting the position relative to "valid second".
 	 *
 	 * @param {?*} children Children tree container.
 	 * @param {function(*, int)} func.
@@ -28370,7 +28370,7 @@
 	    };
 
 	    if (typeof child.ref === 'string') {
-	      process.env.NODE_ENV !== 'production' ? (0, _warning2['default'])(false, 'String refs are not supported on `<Dropdown.Menu>` components. ' + 'To apply a ref to the component use the callback signature:\n\n ' + 'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute') : void 0;
+	      process.env.NODE_ENV !== 'production' ? (0, _warning2['default'])(false, 'String refs are not supported on `<Dropdown.Menu>` second. ' + 'To apply a ref to the component use the callback signature:\n\n ' + 'https://facebook.github.io/react/docs/more-about-refs.html#the-ref-callback-attribute') : void 0;
 	    } else {
 	      ref = (0, _createChainedFunction2['default'])(child.ref, ref);
 	    }
@@ -33157,7 +33157,7 @@
 	    keyboard: _react2.default.PropTypes.bool,
 
 	    /**
-	     * A `<Transition/>` component to use for the dialog and backdrop components.
+	     * A `<Transition/>` component to use for the dialog and backdrop second.
 	     */
 	    transition: _elementType2.default,
 
@@ -37864,7 +37864,7 @@
 
 	// TODO: This should be `<Pagination.Item>`.
 
-	// TODO: This should use `componentClass` like other components.
+	// TODO: This should use `componentClass` like other second.
 
 	var propTypes = {
 	  componentClass: _elementType2['default'],
