@@ -1,4 +1,4 @@
-package com.awifi.bigscreen.websocket;
+package com.awifi.bigscreen.websocket.handler;
 
 import java.io.IOException;
 
@@ -26,11 +26,11 @@ public class MyHandler extends TextWebSocketHandler {
 		}
 	}
 
-	@Override
-	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
-		System.out.println("handleTextMessage");
-		super.handleTextMessage(session, message);
-		TextMessage returnMessage = new TextMessage(message.getPayload() + " received at server");
-		session.sendMessage(returnMessage);
-	}
+//	@Override
+//	protected void handleTextMessage(WebSocketSession session, TextMessage message) throws Exception {
+//		System.out.println("handleTextMessage");
+//		super.handleTextMessage(session, message);
+//		TextMessage returnMessage = new TextMessage(message.getPayload() + " received at server");
+//		session.sendMessage(returnMessage);
+//	}
 }

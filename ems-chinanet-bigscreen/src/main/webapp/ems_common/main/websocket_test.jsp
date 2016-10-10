@@ -43,8 +43,6 @@
 		
 			$(function() {
 				connect();
-				
-				console.log(isDigit(1));
 			});
 		
 			function setConnected(connected) {
@@ -66,7 +64,6 @@
 					console.log(event);
 					log('Received: ' + event.data);
 					var url = event.data;
-					alert(isUrl(url));
 					if(isUrl(url)) {
 						// 直接跳转
 						window.location.href = url;
