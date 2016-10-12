@@ -22,7 +22,7 @@
 <body >
     <div id="container"></div>
 
-    <script src="${basePath}/ems/bigscreen_backstage/main/js/main.js"></script>
+    <script src="${basePath}/ems/bigscreen_backstage/main/build/main.js"></script>
     <%--<script type="text/javascript">--%>
         <%--var chartList = ${chartList};--%>
         <%--var relList = ${relList};--%>

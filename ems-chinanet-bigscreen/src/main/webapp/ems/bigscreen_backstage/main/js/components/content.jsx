@@ -1,9 +1,8 @@
 
 
 import { Row, Col } from 'antd';
-import {}
 import React from 'react';
-import { render } from 'react-dom';
+// import { render } from 'react-dom';
 import SiderMenu from './sidermenu.jsx';
 import First from '../../html/first.jsx';
 import Second from  '../../html/second.jsx';
@@ -54,7 +53,7 @@ export default class Index extends React.Component{
                 break;
 
             default:
-                content = <First />;
+                content = <Seventh />;
         }
 
 
@@ -74,9 +73,9 @@ export default class Index extends React.Component{
                                         <span className="fa fa-user"></span>
                                         <p id="admin" value="admin">Admin</p>
                                         <button></button>
-                                        <NavDropdown id="nav-dropdown" className="dropdown-menu">
+                                        <div id="nav-dropdown" className="dropdown-menu">
                                             <a href="#">退出账号</a>
-                                        </NavDropdown>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -87,7 +86,7 @@ export default class Index extends React.Component{
                   <Col className="left_part" span={4} offset={2} >
                     <SiderMenu clickEvent={this.handleClick.bind(this)} current={this.state.current} />
                    </Col>
-                  <Col id="content" className="right_part" span={16} offset={2} >
+                  <Col className="right_part" span={16} offset={2} >
                         <div className="context">
                             {content}
                         </div>

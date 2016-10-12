@@ -4,8 +4,11 @@ export default class Second extends React.Component {
 	render() {
 	return (
 	<div className="content" >
-		<h3>nihao</h3>
+		 <div id="chartCnt">
+         </div>
+         <div id="screen"></div>
 	</div>
 );
 }
 }
+

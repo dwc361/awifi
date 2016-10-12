@@ -3,7 +3,7 @@
 	
    output: {
       path:__dirname +'/',
-      filename: './js/main.js',
+      filename: './build/main.js',
       publicPath: '/'
    },
 	

@@ -64,7 +64,7 @@ a, a:hover, a:focus {
 .context{
     width: 100%;
     height: 100%;
-    background: #fff;
+    /*background: #fff;*/
 }
 .top{
     width: 100%;
@@ -150,7 +150,8 @@ a, a:hover, a:focus {
     height: 100%;
     /*display: inline-block;*/
     margin-left: 210px;
-    background: #ca8737;
+    background:#e6e8ec;
+    padding:24px;
 }
 .ant-menu-item{
     width: 100%;
@@ -189,6 +190,10 @@ a, a:hover, a:focus {
     vertical-align: middle;
     text-align: center;
     margin-right: 1rem;
+}
+.content{
+    width: 100%;
+    height: 100%;
 }
 #innerUr {
 
@@ -499,4 +504,45 @@ ul.sidebar-menu li a.active i {
     position: relative;
     top: 0;
     background: red;
+}
+.layer{
+    width: 100%;
+    height: 24rem;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    background: #fff;
+    margin-bottom: 2rem;
+}
+.row{
+    margin:0;
+    height: 21rem;
+}
+.title{
+    background: #d5ddee;
+    width: 100%;
+    height: 3rem;
+    color: #25282f;
+    font-size: 1.4rem;
+    text-align: left;
+    line-height: 3rem;
+    padding-left: 1.2rem;
+}
+ .btn-default{
+    color: #fff;
+    background-color: #5b99f1;
+    font-weight: 800;
+    font-size: 1.4rem;
+    border-color: #ccc;
+    outline: none;
+
+}
+.btn:hover {
+    color: #333;
+    text-decoration: none;
+    outline: none;
+}
+.col-md-3 {
+    height: 50%;
+    /*background: #eee;*/
+    padding: 1rem;
 }
