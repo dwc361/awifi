@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awifi.bigscreen.templates.dao">
+
+	<sql id="columns">
+		id, name, path, enabled, create_time, create_by, update_time, update_by
+	</sql>
+	<sql id="vals">
+		#{id}, #{name}, #{path}, #{enabled}, #{create_time}, #{create_by}, #{update_time}, #{update_by}
+	</sql>
+	<sql id="conds">
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="path != null and path != ''">
+			and path = #{path}
+		</if>
+		<if test="enabled != null and enabled != ''">
+			and enabled = #{enabled}
+		</if>
+		<if test="create_time != null">
+			and create_time = #{create_time}
+		</if>
+		<if test="create_by != null and create_by != ''">
+			and create_by = #{create_by}
+		</if>
+		<if test="update_time != null">
+			and update_time = #{update_time}
+		</if>
+		<if test="update_by != null and update_by != ''">
+			and update_by = #{update_by}
+		</if>
+	</sql>
+
+	<insert id="saveTemplates" parameterType="com.awifi.bigscreen.templates.entity.Templates" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" resultType="Long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into e_templates (<include refid="columns" />) 
+		values (<include refid="vals" />)
+	</insert>
+
+	<delete id="deleteTemplates">
+		delete from e_templates
+		where id=#{id} 
+	</delete>
+
+	<delete id="deleteByExampleTemplates">
+		delete from e_templates
+		where 1=1
+		<include refid="conds" />
+	</delete>
+
+	<update id="updateTemplates">
+		update e_templates
+		<set>
+			id=#{id}, 
+			name=#{name}, 
+			path=#{path}, 
+			enabled=#{enabled}, 
+			create_time=#{create_time}, 
+			create_by=#{create_by}, 
+			update_time=#{update_time}, 
+			update_by=#{update_by}
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateIgnoreNullTemplates">
+		update e_templates
+		<set>
+		<if test="id != null and id != ''">
+			id=#{id}, 
+		</if>
+		<if test="name != null and name != ''">
+			name=#{name}, 
+		</if>
+		<if test="path != null and path != ''">
+			path=#{path}, 
+		</if>
+		<if test="enabled != null and enabled != ''">
+			enabled=#{enabled}, 
+		</if>
+		<if test="create_time != null">
+			create_time=#{create_time}, 
+		</if>
+		<if test="create_by != null and create_by != ''">
+			create_by=#{create_by}, 
+		</if>
+		<if test="update_time != null">
+			update_time=#{update_time}, 
+		</if>
+		<if test="update_by != null and update_by != ''">
+			update_by=#{update_by}
+		</if>
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateByExampleTemplates">
+		update e_templates
+		<set>
+			<if test="id != null and id != ''">
+			id=#{id}, 
+			</if>
+			<if test="name != null and name != ''">
+			name=#{name}, 
+			</if>
+			<if test="path != null and path != ''">
+			path=#{path}, 
+			</if>
+			<if test="enabled != null and enabled != ''">
+			enabled=#{enabled}, 
+			</if>
+			<if test="create_time != null">
+			create_time=#{create_time}, 
+			</if>
+			<if test="create_by != null and create_by != ''">
+			create_by=#{create_by}, 
+			</if>
+			<if test="update_time != null">
+			update_time=#{update_time}, 
+			</if>
+			<if test="update_by != null and update_by != ''">
+			update_by=#{update_by}
+			</if>
+		</set>
+		where 1=1
+		<include refid="conds" />
+	</update>
+	
+	<select id="loadTemplates" resultType="com.awifi.bigscreen.templates.entity.TemplatesVo">
+		select 
+		<include refid="columns"/>
+		from e_templates
+		where id=#{id} 
+	</select>
+	
+	<select id="selectTemplates" resultType="com.awifi.bigscreen.templates.entity.TemplatesVo">
+		select 
+		<include refid="columns"/>
+		from e_templates
+		where 1=1
+		<include refid="conds" />
+	</select>
+</mapper>

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+     http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/context
+     http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/aop
+     http://www.springframework.org/schema/aop/spring-aop-3.0.xsd ">
+
+	<!-- 启用注解 -->
+	<context:annotation-config />
+	<!-- AOP配置 -->
+	<aop:aspectj-autoproxy />
+	<!-- 扫描组件 -->
+	<context:component-scan base-package="org.roof.*,org.roof.web.*,com.awifi.*,com.ems.*" />
+	<bean id="defaultWebInvocationPrivilegeEvaluator"
+		class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
+		<constructor-arg ref="filterSecurityInterceptor" />
+	</bean>
+	<bean id="propertyConfigurer"
+		class="org.roof.commons.CustomizedPropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:project.properties</value>
+				<value>classpath:app-ds.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- SpringMVC -->
+	<import resource="classpath:spring-mvc.xml" />
+
+	<!-- 权限 -->
+	<import resource="classpath:spring-security.xml" />
+	<import resource="classpath:spring-security-bean.xml" />
+
+	<!-- 数据源 -->
+	<import resource="classpath:spring-db-mybatis.xml" />
+	
+	<import resource="classpath:spring-cache-concurrentMap.xml" />
+	<import resource="classpath:spring-redis.xml" />
+	<import resource="classpath:spring-service-aop.xml" />
+
+	<!-- 文件上传下载 -->
+	<import resource="classpath:spring-fileupload.xml" />
+
+	<bean id="injectionApplicationContextListener" class="org.roof.spring.InjectionApplicationContextListener" />
+
+
+</beans>

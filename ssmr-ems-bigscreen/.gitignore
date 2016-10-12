@@ -1,0 +1,13 @@
+/target/
+target/
+.settings/
+/.settings/
+/target
+/.settings
+/.classpath
+*.epoch
+*.log
+*.iml
+/.idea
+/bin/
+bin/
