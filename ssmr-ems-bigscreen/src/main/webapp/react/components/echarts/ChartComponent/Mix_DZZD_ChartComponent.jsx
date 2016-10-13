@@ -209,7 +209,7 @@ const Mix_DZZD_ChartComponent = React.createClass({
                 <div className="topH">
                     <h1>[ 定制终端设备状态统计 ]</h1>
                 </div>
-                <div className="Echart" ui-view="chart_2">
+                <div className="Echart">
                     <div id="mix_DZZD" className="state">
                         <ReactEcharts ref='echarts_react' 
                         onChartReady={this.showToolTip} 

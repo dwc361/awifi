@@ -1,6 +1,5 @@
 import echarts from 'echarts';
 import React from 'react';
-
 import elementResizeEvent from 'element-resize-event';
 
 const ReactEcharts = React.createClass({

@@ -159,7 +159,7 @@ const Funnel_SBPM_ChartComponent = React.createClass({
                 <div className="topH">
                     <h1>[ 全省设备排名 ]</h1>
                 </div>
-                <div className="Echart" ui-view="chart_2">
+                <div className="Echart">
                     <div id="funnel_SBPM" >
                         <ReactEcharts ref='echarts_react' 
                         onChartReady={this.showToolTip} 
