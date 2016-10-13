@@ -11,12 +11,68 @@
 	<meta name="author" content="Mosaddek">
 	<meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 	<title>大屏监控网</title>
+	<!-- <script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script> -->
 	<script type="text/javascript" src="${basePath}/common/js/jquery/jquery-1.7.2.min.js"></script>
 	<script type="text/javascript" src="${basePath}/common/js/jquery/jquery.json.js"></script>
 	<script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
 	<script type="text/javascript" src="${basePath}/common/js/ROOF.Class.js"></script>
+	<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
 	<script type="text/javascript">
-		var basePathConst = "${basePath }";
+		var ws = null;
+	
+		$(function() {
+			connect();
+		});
+	
+		// 建立连接
+		function connect() {
+			//ws = new WebSocket("ws://127.0.0.1:8080/ssmr-ems-bigscreen/WebSocketServlet/websocket");
+			ws = new SockJS(ROOF.Utils.projectName() + "/WebSocketServlet/websocket/sockjs");
+	
+			ws.onopen = function() {
+				console.log('Info: connection opened.');
+			};
+			ws.onmessage = function(event) {
+				console.log('Received: ' + event.data);
+				var url = event.data;
+				if(isUrl(url)) {
+					echo("zmmmmmmmm");
+					// 直接跳转
+					window.location.href = url;
+					// 定时跳转
+					//setTimeout("javascript:location.href='" + url + "'", 5000); 
+				}
+			};
+			ws.onclose = function(event) {
+				console.log('Info: connection closed.');
+			};
+		}
+	
+		// 断开连接
+		function disconnect() {
+			if (ws != null) {
+				ws.close();
+				ws = null;
+			}
+			setConnected(false);
+		}
+	
+		// 发送消息
+		function echo(message) {
+			if (ws != null) {
+				ws.send(message);
+			} else {
+				alert('connection not established, please connect.');
+			}
+		}
+		
+		// 使用正则表达式判断是否为URL
+		function isUrl(url) {
+			var reg = /^(\w+):\/\/([^\/:]*)(?::(\d+))?\/([^\/]*)(\/.*)/;
+			if (!reg.exec(url))
+				return false
+			return true
+		}
 	</script>
 	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/index/css/bootstrap.min.css" />
 	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/index/css/screen_2.css" />
