@@ -175,18 +175,9 @@ export default class Second extends React.Component {
 				}
 			});
 	    });
-	    
-	    // 预览
-		$("#preview").click(function() {
-			$("#bigscreen").attr("action", ROOF.Utils.projectName() + "/ems/bigscreen_backstage/SecondBackstageAction/preview.action");	
-			$("#bigscreen").attr("target", "_blank");	
-			$("#bigscreen").submit();
-			$("#bigscreen").attr("action", "");	
-			$("#bigscreen").attr("target", "_self");
-			return false;
-		})
 	}
 	
+	// 保存配置
 	saveBigscreenSecondData() {
 	    $('#bigscreen').validate({
 			rules : {
@@ -203,6 +194,15 @@ export default class Second extends React.Component {
 		});
 		
     	actions.saveBigscreenSecondData($("#bigscreen").serialize());
+  	}
+	
+	// 预览
+  	preview() {
+  		$("#bigscreen").attr("action", ROOF.Utils.projectName() + "/ems/bigscreen_backstage/SecondBackstageAction/preview.action");	
+		$("#bigscreen").attr("target", "_blank");	
+		$("#bigscreen").submit();
+		$("#bigscreen").attr("action", "");	
+		$("#bigscreen").attr("target", "_self");
   	}
 
 	// 在第一次渲染后调用，只在客户端。之后组件已经生成了对应的DOM结构，可以通过this.getDOMNode()来进行访问。
@@ -237,7 +237,7 @@ export default class Second extends React.Component {
 						<div className="handle">
 			               <span>
 			                  <i id="save" className="fa fa-folder-open" onClick={this.saveBigscreenSecondData}></i>
-			                  <i id="preview" className="fa fa-eye"></i>
+			                  <i id="preview" className="fa fa-eye" onClick={this.preview}></i>
 			               </span>
 			            </div>
 						<div id="screen" className="col-sm-12 col-md-12 col-lg-12"></div>
