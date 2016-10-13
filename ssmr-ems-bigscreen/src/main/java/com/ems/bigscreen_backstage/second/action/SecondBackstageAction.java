@@ -31,8 +31,10 @@ import com.awifi.bigscreen.bigscreen_chart_rel.service.api.IBigscreenChartRelSer
 import com.awifi.bigscreen.chart.entity.Chart;
 import com.awifi.bigscreen.chart.entity.ChartVo;
 import com.awifi.bigscreen.chart.service.api.IChartService;
+import com.awifi.bigscreen.templates.entity.Templates;
 import com.awifi.bigscreen.templates.entity.TemplatesVo;
 import com.awifi.bigscreen.templates.service.api.ITemplatesService;
+import com.awifi.bigscreen.theme.entity.Theme;
 import com.awifi.bigscreen.theme.entity.ThemeVo;
 import com.awifi.bigscreen.theme.service.api.IThemeService;
 
@@ -53,7 +55,7 @@ public class SecondBackstageAction {
 	}
 	
 	/**
-	 * 二层架构配置页面
+	 * 二层架构配置页面(已废弃，但可以访问)
 	 */
 	@RequestMapping("/bigscreen_second_config")
 	public String bigscreen_second_config(Bigscreen bigscreen, HttpServletRequest request, Model model) {
@@ -84,21 +86,11 @@ public class SecondBackstageAction {
 		model.addAttribute("relList", JSON.toJSONString(relList));
 		
 		// 选用哪一套主题
-		ThemeVo themeVo = new ThemeVo();
-		themeVo.setEnabled("1");
-		List<ThemeVo> themeList = themeService.selectForList(themeVo);
-		if(themeList!=null && themeList.size()>0) {
-			themeVo = themeList.get(0);
-		}
+		ThemeVo themeVo = themeService.load(new Theme(bigscreenVo.getTheme_id()));
 		model.addAttribute("theme", themeVo);
 		
 		// 选用哪一套模板
-		TemplatesVo templatesVo = new TemplatesVo();
-		templatesVo.setEnabled("1");
-		List<TemplatesVo> templatesList = templatesService.selectForList(templatesVo);
-		if(templatesList!=null && templatesList.size()>0) {
-			templatesVo = templatesList.get(0);
-		}
+		TemplatesVo templatesVo = templatesService.load(new Templates(bigscreenVo.getTemplate_id()));
 		model.addAttribute("templates", templatesVo);
 		
 		return "/ems/bigscreen_backstage/second/second_config.jsp";
@@ -165,6 +157,12 @@ public class SecondBackstageAction {
 		return new Result("保存成功!");
 	}
 	
+	/**
+	 * 二层架构配置数据加载
+	 * @param request
+	 * @param response
+	 * @return json
+	 */
 	@RequestMapping("/get_bigscreen_second_data")
 	public @ResponseBody Result get_bigscreen_second_data(HttpServletRequest request, HttpServletResponse response) {
 		Map<String, Object> map = new HashMap<String, Object>();
@@ -195,21 +193,11 @@ public class SecondBackstageAction {
 		map.put("relList", relList);
 		
 		// 选用哪一套主题
-		ThemeVo themeVo = new ThemeVo();
-		themeVo.setEnabled("1");
-		List<ThemeVo> themeList = themeService.selectForList(themeVo);
-		if(themeList!=null && themeList.size()>0) {
-			themeVo = themeList.get(0);
-		}
+		ThemeVo themeVo = themeService.load(new Theme(bigscreenVo.getTheme_id()));
 		map.put("theme", themeVo);
 		
 		// 选用哪一套模板
-		TemplatesVo templatesVo = new TemplatesVo();
-		templatesVo.setEnabled("1");
-		List<TemplatesVo> templatesList = templatesService.selectForList(templatesVo);
-		if(templatesList!=null && templatesList.size()>0) {
-			templatesVo = templatesList.get(0);
-		}
+		TemplatesVo templatesVo = templatesService.load(new Templates(bigscreenVo.getTemplate_id()));
 		map.put("templates", templatesVo);
 		
 		return new Result("二层架构配置数据加载成功!", map);

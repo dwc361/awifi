@@ -3,6 +3,7 @@ var path = require('path');
 var config = {
 	entry : {
 		main : path.join(__dirname, 'react/page/main.jsx'),
+		bigscreen_echarts : path.join(__dirname, 'react/page/bigscreen_echarts.jsx'),
 		vendors : [ 'react', 'reflux', 'react-mixin' ]
 	},
 	

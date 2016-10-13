@@ -23,8 +23,10 @@ import com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRel;
 import com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRelVo;
 import com.awifi.bigscreen.bigscreen_chart_rel.service.api.IBigscreenChartRelService;
 import com.awifi.bigscreen.chart.service.api.IChartService;
+import com.awifi.bigscreen.templates.entity.Templates;
 import com.awifi.bigscreen.templates.entity.TemplatesVo;
 import com.awifi.bigscreen.templates.service.api.ITemplatesService;
+import com.awifi.bigscreen.theme.entity.Theme;
 import com.awifi.bigscreen.theme.entity.ThemeVo;
 import com.awifi.bigscreen.theme.service.api.IThemeService;
 
@@ -69,7 +71,6 @@ public class IndexShowAction {
 		if(bigscreenList!=null && bigscreenList.size()>0) {
 			bigscreenVo = bigscreenList.get(0);
 		}
-		//model.addAttribute("bigscreen", bigscreenVo);
 		
 		BigscreenChartRel bigscreenChartRel = new BigscreenChartRel();
 		bigscreenChartRel.setScreen_id(bigscreenVo.getId());
@@ -77,16 +78,6 @@ public class IndexShowAction {
 		for(BigscreenChartRelVo vo : relList) {
 			vo.setChart_icon(basePath + vo.getChart_icon());
 		}
-		//model.addAttribute("relList", JSON.toJSONString(relList));
-		
-		// 选用哪一套模板
-		TemplatesVo templatesVo = new TemplatesVo();
-		templatesVo.setEnabled("1");
-		List<TemplatesVo> templatesList = templatesService.selectForList(templatesVo);
-		if(templatesList!=null && templatesList.size()>0) {
-			templatesVo = templatesList.get(0);
-		}
-		//model.addAttribute("templates", templatesVo);
 		
 		List<BigScreenHandlebarsVo> list = new ArrayList<BigScreenHandlebarsVo>();
 		if(relList != null) {
@@ -96,6 +87,13 @@ public class IndexShowAction {
 			}
 		}
 		model.addAttribute("list", JSON.toJSONString(list));
+		
+		// 选用哪一套模板
+		TemplatesVo templatesVo = templatesService.load(new Templates(bigscreenVo.getTemplate_id()));
+		
+		// 选用哪一套主题
+		ThemeVo themeVo = themeService.load(new Theme(bigscreenVo.getTheme_id()));
+		
 		return templatesVo.getPath();
 	}
 	
