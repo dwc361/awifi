@@ -1,5 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -107,7 +109,6 @@
 </script>
 </head>
 <body>
-<body>
 	<div id="login_bg111">
 		<div class="login">
 			<div class="logo" id="login_bg2"><img src="${basePath}/login/images/img2.png"></div>
@@ -119,13 +120,13 @@
 			<form id="login_Form" action="${basePath}/j_spring_security_check" method="post">
 				<div id="login_div">
   					<a class="btn btn-primary" href="#"><i class="fa fa-user fa-fw"></i> 
-  					<input name="j_username" id="j_username" type="text" value="admin" placeholder="User" /></a>
-					<a class="btn btn-primary" href="#"><i class="fa fa-lock fa-fw"></i>
-					<input name="j_password" id="j_password" type="password" value="123456abc" placeholder="PassWord" /></a>
+  					<input name="j_username" id="j_username" type="text" value="admin" placeholder="User" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					<a class="btn btn-primary" href="#"><i class="fa  fa-lock fa-fw"></i>
+					<input name="j_password" id="j_password" type="password" value="123456abc" placeholder="PassWord" /></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<label for="checkbox"><input type="checkbox" id="checkbox" checked />&nbsp;&nbsp;记住密码</label>
 				</div>
 				<div id="login_Btn" class="login_right" style="cursor: pointer;">
-					<input id="btn" class="blue24" type="button" value="登录" />
+					<input id="btn" class="blue24" type="button" value="登  录" />
 					<p id="login_word">&nbsp;Copyright&nbsp;2016&nbsp;awifi运营基地&nbsp;版权所有&nbsp;</p>
 				</div>
 			</form>
