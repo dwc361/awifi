@@ -22,7 +22,7 @@ public class Bigscreen implements Serializable {
 	protected Long theme_id;// 主题id
 	protected String publish;// 是否发布
 	protected Long re_time;// 刷新时间
-	protected String re_type;// re_type
+	protected String re_type;// 大屏架构类型
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
 	protected Date create_time;// 新建时间
 	protected String create_by;// 所属用户

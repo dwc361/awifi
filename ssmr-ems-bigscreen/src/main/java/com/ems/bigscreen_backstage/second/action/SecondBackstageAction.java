@@ -22,6 +22,7 @@ import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.bigscreen.entity.BigScreenHandlebarsVo;
 import com.awifi.bigscreen.bigscreen.entity.BigScreenModel;
 import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
+import com.awifi.bigscreen.bigscreen.entity.BigscreenReTypeEnum;
 import com.awifi.bigscreen.bigscreen.entity.BigscreenVo;
 import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
 import com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRel;
@@ -65,9 +66,9 @@ public class SecondBackstageAction {
 		model.addAttribute("chartList", JSON.toJSONString(chartList));
 		
 		// 加载大屏信息
-		//BigscreenVo bigscreenVo = bigscreenService.load(new Bigscreen(8L));
 		BigscreenVo bigscreenVo = new BigscreenVo();
 		bigscreenVo.setEnabled("1");
+		bigscreenVo.setRe_type(BigscreenReTypeEnum.Second.getCode());
 		List<BigscreenVo> bigscreenList = bigscreenService.selectForList(bigscreenVo);
 		if(bigscreenList!=null && bigscreenList.size()>0) {
 			bigscreenVo = bigscreenList.get(0);
@@ -83,7 +84,6 @@ public class SecondBackstageAction {
 		model.addAttribute("relList", JSON.toJSONString(relList));
 		
 		// 选用哪一套主题
-		//ThemeVo themeVo = themeService.load(new Theme(1L));
 		ThemeVo themeVo = new ThemeVo();
 		themeVo.setEnabled("1");
 		List<ThemeVo> themeList = themeService.selectForList(themeVo);
@@ -93,7 +93,6 @@ public class SecondBackstageAction {
 		model.addAttribute("theme", themeVo);
 		
 		// 选用哪一套模板
-		//TemplatesVo templatesVo = templatesService.load(new Templates(4L));
 		TemplatesVo templatesVo = new TemplatesVo();
 		templatesVo.setEnabled("1");
 		List<TemplatesVo> templatesList = templatesService.selectForList(templatesVo);
@@ -178,9 +177,9 @@ public class SecondBackstageAction {
 		map.put("chartList", chartList);
 		
 		// 加载大屏信息
-		//BigscreenVo bigscreenVo = bigscreenService.load(new Bigscreen(8L));
 		BigscreenVo bigscreenVo = new BigscreenVo();
 		bigscreenVo.setEnabled("1");
+		bigscreenVo.setRe_type(BigscreenReTypeEnum.Second.getCode());
 		List<BigscreenVo> bigscreenList = bigscreenService.selectForList(bigscreenVo);
 		if(bigscreenList!=null && bigscreenList.size()>0) {
 			bigscreenVo = bigscreenList.get(0);
@@ -196,7 +195,6 @@ public class SecondBackstageAction {
 		map.put("relList", relList);
 		
 		// 选用哪一套主题
-		//ThemeVo themeVo = themeService.load(new Theme(1L));
 		ThemeVo themeVo = new ThemeVo();
 		themeVo.setEnabled("1");
 		List<ThemeVo> themeList = themeService.selectForList(themeVo);
@@ -206,7 +204,6 @@ public class SecondBackstageAction {
 		map.put("theme", themeVo);
 		
 		// 选用哪一套模板
-		//TemplatesVo templatesVo = templatesService.load(new Templates(4L));
 		TemplatesVo templatesVo = new TemplatesVo();
 		templatesVo.setEnabled("1");
 		List<TemplatesVo> templatesList = templatesService.selectForList(templatesVo);
@@ -215,7 +212,7 @@ public class SecondBackstageAction {
 		}
 		map.put("templates", templatesVo);
 		
-		return new Result("保存成功!", map);
+		return new Result("二层架构配置数据加载成功!", map);
 	}
 	
 	

@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.bigscreen.entity.BigScreenHandlebarsVo;
 import com.awifi.bigscreen.bigscreen.entity.BigScreenModel;
+import com.awifi.bigscreen.bigscreen.entity.BigscreenReTypeEnum;
 import com.awifi.bigscreen.bigscreen.entity.BigscreenVo;
 import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
 import com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRel;
@@ -63,6 +64,7 @@ public class IndexShowAction {
 		// 加载大屏信息
 		BigscreenVo bigscreenVo = new BigscreenVo();
 		bigscreenVo.setEnabled("1");
+		bigscreenVo.setRe_type(BigscreenReTypeEnum.Second.getCode());
 		List<BigscreenVo> bigscreenList = bigscreenService.selectForList(bigscreenVo);
 		if(bigscreenList!=null && bigscreenList.size()>0) {
 			bigscreenVo = bigscreenList.get(0);
