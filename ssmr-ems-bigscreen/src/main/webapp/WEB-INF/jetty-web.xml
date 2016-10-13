@@ -5,7 +5,7 @@
 		<New class="org.eclipse.jetty.util.resource.ResourceCollection">
 			<Arg>
 				<Array type="java.lang.String">
-					<Item>src\main\webapp</Item>
+					<Item>D:\phoenix122411_git\awifi\ssmr-ems-bigscreen\src\main\webapp</Item>
 					<Item>D:\phoenix122411_git\awifi\roof-web-menu-webapp\src\main\webapp</Item>
 					<Item>D:\phoenix122411_git\awifi\roof-web-user-webapp\src\main\webapp</Item>
 					<Item>D:\phoenix122411_git\awifi\roof-web-dictionary-webapp\src\main\webapp</Item>
