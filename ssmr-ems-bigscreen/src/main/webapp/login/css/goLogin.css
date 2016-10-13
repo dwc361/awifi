@@ -78,7 +78,7 @@ img { border:none; }
 	border: solid 0px;
 }
 #j_username{ 
-	width: 132px;
+	width: 77%;
     height: 26px;
     padding: 2% 4%;
     border-radius: 5px;
@@ -86,7 +86,7 @@ img { border:none; }
     z-index: 1000;
 }
 #j_password{ 
-	width: 132px; 
+	width: 77%;
 	height: 26px; 
 	padding: 2% 4%; 
 	border-radius: 5px;
