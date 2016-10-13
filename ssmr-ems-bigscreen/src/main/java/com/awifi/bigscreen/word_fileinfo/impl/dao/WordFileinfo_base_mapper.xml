@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.awifi.bigscreen.word_fileinfo.dao">
+
+	<sql id="columns">
+		id, name, type, wordid
+	</sql>
+	<sql id="vals">
+		#{id}, #{name}, #{type}, #{wordid}
+	</sql>
+	<sql id="conds">
+		<if test="id != null and id != ''">
+			and id = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			and name = #{name}
+		</if>
+		<if test="type != null and type != ''">
+			and type = #{type}
+		</if>
+		<if test="wordid != null and wordid != ''">
+			and wordid = #{wordid}
+		</if>
+	</sql>
+
+	<insert id="saveWordFileinfo" parameterType="com.awifi.bigscreen.word_fileinfo.entity.WordFileinfo" useGeneratedKeys="true" keyProperty="id">
+		<selectKey keyProperty="id" resultType="Long" order="AFTER">
+			select last_insert_id()
+		</selectKey>
+		insert into e_word_fileinfo (<include refid="columns" />) 
+		values (<include refid="vals" />)
+	</insert>
+
+	<delete id="deleteWordFileinfo">
+		delete from e_word_fileinfo
+		where id=#{id} 
+	</delete>
+
+	<delete id="deleteByExampleWordFileinfo">
+		delete from e_word_fileinfo
+		where 1=1
+		<include refid="conds" />
+	</delete>
+	
+	<select id="loadWordFileinfo" resultType="com.awifi.bigscreen.word_fileinfo.entity.WordFileinfoVo">
+		select 
+		<include refid="columns"/>
+		from e_word_fileinfo
+		where id=#{id} 
+	</select>
+	
+	<select id="selectWordFileinfo" resultType="com.awifi.bigscreen.word_fileinfo.entity.WordFileinfoVo">
+		select 
+		<include refid="columns"/>
+		from e_word_fileinfo
+		where 1=1
+		<include refid="conds" />
+	</select>
+
+	<update id="updateWordFileinfo">
+		update e_word_fileinfo
+		<set>
+			id=#{id}, 
+			name=#{name}, 
+			type=#{type}, 
+			wordid=#{wordid}
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateIgnoreNullWordFileinfo">
+		update e_word_fileinfo
+		<set>
+		<if test="id != null and id != ''">
+			id=#{id}, 
+		</if>
+		<if test="name != null and name != ''">
+			name=#{name}, 
+		</if>
+		<if test="type != null and type != ''">
+			type=#{type}, 
+		</if>
+		<if test="wordid != null and wordid != ''">
+			wordid=#{wordid}
+		</if>
+		</set>
+		where id=#{id} 
+	</update>
+
+	<update id="updateByExampleWordFileinfo">
+		update e_word_fileinfo
+		<set>
+			<if test="id != null and id != ''">
+			id=#{id}, 
+			</if>
+			<if test="name != null and name != ''">
+			name=#{name}, 
+			</if>
+			<if test="type != null and type != ''">
+			type=#{type}, 
+			</if>
+			<if test="wordid != null and wordid != ''">
+			wordid=#{wordid}
+			</if>
+		</set>
+		where 1=1
+		<include refid="conds" />
+	</update>
+
+</mapper>

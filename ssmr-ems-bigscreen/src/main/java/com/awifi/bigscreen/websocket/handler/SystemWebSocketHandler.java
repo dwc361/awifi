@@ -22,7 +22,7 @@ import org.springframework.web.socket.WebSocketSession;
  * 我把它叫做消息处理中心。
  * @author zhangmm
  */
-@Component
+//@Component
 public class SystemWebSocketHandler implements WebSocketHandler {
 	private Logger log = Logger.getLogger(SystemWebSocketHandler.class);
 
