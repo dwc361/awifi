@@ -30,21 +30,23 @@
 			ws = new SockJS(ROOF.Utils.projectName() + "/WebSocketServlet/websocket/sockjs");
 	
 			ws.onopen = function() {
-				console.log('Info: connection opened.');
+				//console.log('Info: connection opened.');
 			};
+
 			ws.onmessage = function(event) {
-				console.log('Received: ' + event.data);
+				//console.log('Received: ' + event.data);
 				var url = event.data;
 				if(isUrl(url)) {
-					echo("zmmmmmmmm");
+					echo("切换成功！");
 					// 直接跳转
 					window.location.href = url;
 					// 定时跳转
 					//setTimeout("javascript:location.href='" + url + "'", 5000); 
 				}
 			};
+
 			ws.onclose = function(event) {
-				console.log('Info: connection closed.');
+				//console.log('Info: connection closed.');
 			};
 		}
 	
@@ -54,7 +56,6 @@
 				ws.close();
 				ws = null;
 			}
-			setConnected(false);
 		}
 	
 		// 发送消息
