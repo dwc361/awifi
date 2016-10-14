@@ -12,9 +12,9 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import com.awifi.bigscreen.websocket.handler.SystemWebSocketHandler;
 import com.awifi.bigscreen.websocket.interceptor.HandshakeInterceptor;
 
-//@Configuration
-//@EnableWebMvc
-//@EnableWebSocket //开启websocket
+@Configuration
+@EnableWebMvc
+@EnableWebSocket //开启websocket
 public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 
     public WebSocketConfig() {
@@ -22,8 +22,6 @@ public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocke
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    	System.out.println("registed!");
-    	
     	registry.addHandler(systemWebSocketHandler(), "/websocketDemo");
 		registry.addHandler(systemWebSocketHandler(), "/websocketDemo/sockjs").setAllowedOrigins("*").withSockJS();
 		registry.addHandler(systemWebSocketHandler(), "/websocketDemo/sockjs").withSockJS();
@@ -34,7 +32,7 @@ public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocke
 		registry.addHandler(systemWebSocketHandler(), "/websocket/sockjs").addInterceptors(new HandshakeInterceptor()).withSockJS();
     }
 
-//    @Bean
+    @Bean
     public WebSocketHandler systemWebSocketHandler() {
         //return new InfoSocketEndPoint();
         return new SystemWebSocketHandler();
