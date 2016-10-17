@@ -5,7 +5,7 @@ import java.util.Locale;
 import com.awifi.bigscreen.bigscreen.entity.BigscreenReTypeEnum;
 
 /**
- * 大屏架构类型
+ * 省份
  */
 public enum ProvinceEnum {
 

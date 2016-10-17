@@ -3,6 +3,7 @@ package com.awifi.bigscreen.data.service.Impl;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -11,8 +12,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.awifi.bigscreen.data.entity.CountryEnum;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.utils.http.HttpUtil;
 
@@ -58,12 +59,13 @@ public class Mix_JHL_Chart_PullData implements IPullData<Map>, InitializingBean{
 		 */
 		Map<String, String> params = new HashMap<String, String>();
 		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("province", 31);
+		m.put("country", CountryEnum.China.getCode());
+//		m.put("province", 31);
 //		m.put("city", 383);
 //		m.put("county", 3289);
-		m.put("globalKey", "");
-		m.put("globalValue", "");
-		m.put("globalStandby", "");
+//		m.put("globalKey", "");
+//		m.put("globalValue", "");
+//		m.put("globalStandby", "");
 		String json = JSON.toJSONString(m);
 		params.put("json", json);
 		
@@ -78,7 +80,11 @@ public class Mix_JHL_Chart_PullData implements IPullData<Map>, InitializingBean{
 			 * 解析结果集
 			 */
 			JSONObject fjsonObject = JSON.parseObject(result);
-			map = fjsonObject.toJavaObject(Map.class);
+			Iterator itor=fjsonObject.entrySet().iterator();
+			while(itor.hasNext()) {
+				Map.Entry entry = (Map.Entry)itor.next();
+				map.put(entry.getKey().toString(), entry.getValue());
+			}
 		} catch (Throwable e) {
 			log.error("接口["+url+"]调用失败:"+e.toString());
 		}
