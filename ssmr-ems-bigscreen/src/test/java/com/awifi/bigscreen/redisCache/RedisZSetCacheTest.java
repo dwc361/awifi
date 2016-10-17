@@ -1,4 +1,4 @@
-package com.awifi.bigscreen.redisCache.impl;
+package com.awifi.bigscreen.redisCache;
 
 import java.util.Date;
 

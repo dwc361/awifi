@@ -1,9 +1,13 @@
-package com.awifi.bigscreen.redisCache.impl;
+package com.awifi.bigscreen.redisCache;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+
+import com.awifi.bigscreen.redisCache.impl.Chart1DataTransform;
+import com.awifi.bigscreen.redisCache.impl.Data2Acquisition;
+import com.awifi.bigscreen.redisCache.impl.RedisSetCache;
 
 @ContextConfiguration(locations = { "classpath:spring.xml" })
 public class RedisSetCacheTest extends AbstractJUnit4SpringContextTests {

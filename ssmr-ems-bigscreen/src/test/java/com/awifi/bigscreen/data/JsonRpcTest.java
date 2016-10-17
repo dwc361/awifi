@@ -1,4 +1,4 @@
-package com.awifi.bigscreen.redisCache.impl;
+package com.awifi.bigscreen.data;
 
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
