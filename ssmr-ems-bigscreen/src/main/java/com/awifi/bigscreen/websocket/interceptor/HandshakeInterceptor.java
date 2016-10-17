@@ -12,7 +12,7 @@ import org.springframework.web.socket.server.support.HttpSessionHandshakeInterce
  * HandshakeInterceptor 拦截器
  * @author zhangmm
  */
-//@Component
+@Component
 public class HandshakeInterceptor extends HttpSessionHandshakeInterceptor {
 
 	@Override
