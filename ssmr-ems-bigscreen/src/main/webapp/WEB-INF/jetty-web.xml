@@ -5,12 +5,12 @@
 		<New class="org.eclipse.jetty.util.resource.ResourceCollection">
 			<Arg>
 				<Array type="java.lang.String">
-					<Item>D:\phoenix122411_git\awifi\ssmr-ems-bigscreen\src\main\webapp</Item>
-					<Item>D:\phoenix122411_git\awifi\roof-web-menu-webapp\src\main\webapp</Item>
-					<Item>D:\phoenix122411_git\awifi\roof-web-user-webapp\src\main\webapp</Item>
-					<Item>D:\phoenix122411_git\awifi\roof-web-dictionary-webapp\src\main\webapp</Item>
-					<Item>D:\phoenix122411_git\awifi\roof-web-org-webapp\src\main\webapp</Item>
-					<Item>D:\phoenix122411_git\awifi\webc</Item>
+					<Item>/Users/xuqiying/Desktop/awifi/ssmr-ems-bigscreen/src/main/webapp</Item>
+					<Item>/Users/xuqiying/Desktop/awifi/roof-web-menu-webapp/src/main/webapp</Item>
+					<Item>/Users/xuqiying/Desktop/awifi/roof-web-user-webapp/src/main/webapp</Item>
+					<Item>/Users/xuqiying/Desktop/awifi/roof-web-dictionary-webapp/src/main/webapp</Item>
+					<Item>/Users/xuqiying/Desktop/awifi/roof-web-org-webapp/src/main/webapp</Item>
+					<Item>/Users/xuqiying/Desktop/awifi/webc</Item>
 				</Array>
 			</Arg>
 		</New>

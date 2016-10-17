@@ -61,7 +61,7 @@ export default class Index extends React.Component{
                         <div id="line"></div>
                         <div id="head">
                             <div id="logo" className="col-sm-10 col-md-10 col-lg-10">
-                                <img className="logo_img" src="http://localhost:8080/ssmr-ems-bigscreen/ems/bigscreen_backstage/main/image/logo.png" />
+                                <img className="logo_img" src={basePathConst+"/ems/bigscreen_backstage/main/image/logo.png"} />
                             </div>
                             <div id="user" className="col-sm-2 col-md-2 col-lg-2">
                                 <div id="innerUr">

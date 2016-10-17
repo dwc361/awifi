@@ -167,6 +167,9 @@ a, a:hover, a:focus {
 }
 .ant-menu{
     outline: none;
+    position: fixed;
+    width: 210px;
+
 }
 .fixing{
     text-align: center;
@@ -366,7 +369,6 @@ ul.sidebar-menu li a.active i {
 #content {
     width: 100%;
     height: 100%;
-    padding: 2rem;
     background: #f5f5f5;
 
 }
@@ -384,16 +386,18 @@ ul.sidebar-menu li a.active i {
     width:352px ;
     float: left;
     position: absolute;
-    top: 4.86rem;
+    top: 2rem;
     background: #fff;
     /*overflow: auto;*/
 }
 #right{
     padding: 3.2rem;
-    background: #f5f5f5;
+    background: #fff;
+    border: 1px solid #e1e1e1;
     height: 100vh;
     margin-left: 352px;
     padding-top: 1rem;
+
 }
 .handle{
     width: 100%;
@@ -507,14 +511,15 @@ ul.sidebar-menu li a.active i {
 }
 .layer{
     width: 100%;
-    height: 24rem;
+    height: 40rem;
     border: 1px solid #eee;
     border-radius: 10px;
     background: #fff;
     margin-bottom: 2rem;
+    position: relative;
 }
 .row{
-    margin:0;
+    margin:0px;
     height: 21rem;
 }
 .title{
@@ -541,8 +546,56 @@ ul.sidebar-menu li a.active i {
     text-decoration: none;
     outline: none;
 }
-.col-md-3 {
-    height: 50%;
+
+.show-grid .col-md-12 {
+    height: 37rem;
     /*background: #eee;*/
     padding: 1rem;
+}
+.col-md-12 img{
+    width:100%;
+    height:90%;
+    background: #fff;
+    /*padding: 1rem;*/
+    /*border: 1px solid #aaa;*/
+}
+.col-md-12 img:hover{
+    background: #a11734;
+    border: 2px solid #ff0d0d;
+}
+.col-md-12 div{
+
+    height: 50%;
+    background: #6e6e6e;
+}
+.col-md-12 i{
+    display: inline-block;
+    width: 100%;
+    font-style: normal;
+    margin-top: 1rem;
+    font-size: 1.6rem;
+    color: #333;
+    font-weight: 500;
+    text-align: center;
+}
+.btnTab{
+    width: 12rem;
+    height: 3.2rem;
+    border: 1px solid #c4d1ed;
+    text-align: center;
+    line-height: 3.2rem;
+    font-size: 1.8rem;
+    font-weight: 400;
+    background: #fff;
+    color: #333;
+    position: absolute;
+    top: 1rem;
+    left: 0rem;
+    border-radius: 8px;
+
+}
+.btnTab:hover{
+    background: #5197ef;
+    color: #fff;
+
 }

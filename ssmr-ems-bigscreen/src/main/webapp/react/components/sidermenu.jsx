@@ -11,8 +11,7 @@ export default class SiderMenu extends React.Component {
     render() {
         return (
             <Menu onClick={this.props.clickEvent}
-                  style={{ width: '100%' }}
-                  theme={'dark'}
+                  style={{ width: '210px' }}
                   selectedKeys={[this.props.current]}
                   mode="inline">
                   
