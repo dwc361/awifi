@@ -44,6 +44,7 @@ public class Pie_LXFB_Chart_PullData implements IPullData<List<Map>>, Initializi
 		try {
 			URL url = new URL(this.url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.connect();
 		} catch (Exception e) {
 			log.error("接口地址：["+url+"]不通:"+e.toString());
 			return false;

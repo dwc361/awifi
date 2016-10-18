@@ -2,6 +2,7 @@ package com.awifi.bigscreen.data.service.Impl;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -43,6 +44,7 @@ public class Mix_DZZD_Chart_PullData implements IPullData<Map>, InitializingBean
 		try {
 			URL url = new URL(this.url);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.connect();
 		} catch (Exception e) {
 			log.error("接口地址：["+url+"]不通:"+e.toString());
 			return false;
@@ -52,6 +54,8 @@ public class Mix_DZZD_Chart_PullData implements IPullData<Map>, InitializingBean
 
 	public Map Pull() {
 		Map map = new HashMap();
+		long time = new Date().getTime();
+		map.put("createTime", time);
 		
 		/**
 		 * 拼接入参

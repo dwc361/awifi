@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 
 @Service
-public class Mix_JHL_Chart_DataTransform implements IDataTransform<Set<Map>> {
+public class Mix_DZZD_Chart_DataTransform implements IDataTransform<Set<Map>> {
 
 	/**
 	 * 把Set里的Map对象转成报表所需要的对象输出
@@ -23,8 +23,8 @@ public class Mix_JHL_Chart_DataTransform implements IDataTransform<Set<Map>> {
 		for (Map m : set) {
 			Map<String, Object> target_map = new HashMap<String, Object>();
 			target_map.put("createTime", m.get("createTime")); //插入redis时间
-			target_map.put("activateNum", m.get("activateNum")); //
-			target_map.put("activatePer", m.get("activatePer")); //
+			target_map.put("onlineNum", m.get("onlineNum")); //在线设备数量
+			target_map.put("offlineNum", m.get("offlineNum")); //离线设备数量
 			target_list.add(target_map);
 		}
 		return JSON.toJSONString(target_list);

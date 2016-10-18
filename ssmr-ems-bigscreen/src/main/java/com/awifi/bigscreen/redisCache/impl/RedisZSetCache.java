@@ -68,17 +68,18 @@ public class RedisZSetCache extends AbstractRedisCache {
 
 	@Override
 	public void createOrUpdateCache(String key, IDataAcquisition dataAcquisition, String param) {
-		Assert.notNull(key, "RedisZSetCache:key not be null");
-		Assert.notNull(dataAcquisition, "RedisZSetCache:dataAcquisition object not be null");
+		Assert.notNull(key, "RedisZSetCache:key can't be null");
+		Assert.notNull(dataAcquisition, "RedisZSetCache:dataAcquisition object can't be null");
 		
-		Object o = dataAcquisition.selectData(param);
-		Assert.notNull(o, "RedisZSetCache:result object must not be null");
-		Assert.isInstanceOf(Map.class, o, "RedisZSetCache:result object instanceof Map.class");
+		Object result = dataAcquisition.selectData(param);
+		Assert.notNull(result, "RedisZSetCache:result object can't be null");
+		Assert.isInstanceOf(Map.class, result, "RedisZSetCache:result object not instanceof Map.class");
 		
-		Map<String, Object> map = (Map<String, Object>) o;
+		Map<String, Object> map = (Map<String, Object>) result;
 		Map chartData = (Map) map.get(AwifiConstants.Interface_Return_Data);
+		Assert.notNull(chartData, "chartData can't be null");
 		String score = String.valueOf(map.get(AwifiConstants.Redis_ZSet_Score));
-		Assert.notNull(score, "score not be null");
+		Assert.notNull(score, "score can't be null");
 		redisTemplate.opsForZSet().add(key, chartData, Double.valueOf(score).doubleValue());
 	}
 	
