@@ -11,16 +11,22 @@
 
 	<!-- 启用注解 -->
 	<context:annotation-config />
+	
 	<!-- AOP配置 -->
 	<aop:aspectj-autoproxy />
+	
 	<!-- 扫描组件 -->
 	<context:component-scan base-package="org.roof.*,org.roof.web.*,com.awifi.*,com.ems.*" />
-	<bean id="defaultWebInvocationPrivilegeEvaluator"
-		class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
+	
+	<bean id="defaultWebInvocationPrivilegeEvaluator" class="org.springframework.security.web.access.DefaultWebInvocationPrivilegeEvaluator">
 		<constructor-arg ref="filterSecurityInterceptor" />
 	</bean>
-	<bean id="propertyConfigurer"
-		class="org.roof.commons.CustomizedPropertyPlaceholderConfigurer">
+	
+	<!-- Spring 容器启动成功后，将容器设置为当前容器 -->
+	<bean id="injectionApplicationContextListener" class="org.roof.spring.InjectionApplicationContextListener" />
+	
+	<!-- 加载.properties文件 -->
+	<bean id="propertyConfigurer" class="org.roof.commons.CustomizedPropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<value>classpath:project.properties</value>
@@ -39,14 +45,18 @@
 	<!-- 数据源 -->
 	<import resource="classpath:spring-db-mybatis.xml" />
 	
-	<import resource="classpath:spring-cache-concurrentMap.xml" />
+	<!-- Redis -->
 	<import resource="classpath:spring-redis.xml" />
+	
+	<!-- 缓存 -->
+	<import resource="classpath:spring-cache-concurrentMap.xml" />
+	
+	<!-- Service层的Aop -->
 	<import resource="classpath:spring-service-aop.xml" />
-
+	
 	<!-- 文件上传下载 -->
 	<import resource="classpath:spring-fileupload.xml" />
 
-	<bean id="injectionApplicationContextListener" class="org.roof.spring.InjectionApplicationContextListener" />
-
-
+	<!-- 定时任务 -->
+	<import resource="classpath:spring-quartz.xml" />
 </beans>
