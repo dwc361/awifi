@@ -22,11 +22,13 @@ public class Scatter_HotSpot_Chart_DataTransform implements IDataTransform<Map<S
 		List<Map<String, Object>> target_list = new ArrayList<Map<String, Object>>();
 		//long time = (long) map.get(AwifiConstants.Redis_Create_Time); //插入redis时间
 		List<Map> list = (List<Map>) map.get(AwifiConstants.Interface_Return_Data);
-		for (Map m : list) {
-			Map<String, Object> target_map = new HashMap<String, Object>();
-			target_map.put("typeName", m.get("typeName")); //热点类型名称
-			target_map.put("hotareaNum", m.get("hotareaNum")); //热点数量
-			target_list.add(target_map);
+		if(list != null) {
+			for (Map m : list) {
+				Map<String, Object> target_map = new HashMap<String, Object>();
+				target_map.put("typeName", m.get("typeName")); //热点类型名称
+				target_map.put("hotareaNum", m.get("hotareaNum")); //热点数量
+				target_list.add(target_map);
+			}
 		}
 		return JSON.toJSONString(target_list);
 	}

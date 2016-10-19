@@ -25,4 +25,8 @@ public interface IRedisCache {
 	 * @param dataAcquisition 写缓存转换器
 	 */
 	public void createOrUpdateCache(String key, IDataAcquisition dataAcquisition, String param);
+	
+	public void LeftPushListCache(String key, IDataAcquisition dataAcquisition, String param);
+	
+	public void RightPushListCache(String key, IDataAcquisition dataAcquisition, String param);
 }

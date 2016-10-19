@@ -11,7 +11,7 @@ import com.awifi.bigscreen.AwifiConstants;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 
 @Service
-public class Data3Acquisition implements IDataAcquisition<Map<String, Object>> {
+public class TestZSetDataAcquisition implements IDataAcquisition<Map<String, Object>> {
 	@Override
 	public Map<String, Object> selectData(String param) {
 		Map<String, Object> map = new HashMap<String, Object>();

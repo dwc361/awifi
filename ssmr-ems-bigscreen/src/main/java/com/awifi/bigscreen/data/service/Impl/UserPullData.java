@@ -4,21 +4,19 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.roof.commons.PropertiesUtil;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import com.alibaba.fastjson.JSON;
-import com.awifi.bigscreen.data.entity.GetUserData;
 import com.awifi.bigscreen.data.entity.UserData;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
 
 @Service
-public class ZpullData implements IPullData<UserData>,InitializingBean{
+public class UserPullData implements IPullData<UserData>,InitializingBean{
 	
 	private String url = PropertiesUtil.getPorpertyString("zabbix.url");
 	private String user = PropertiesUtil.getPorpertyString("zabbix.user");
@@ -65,8 +63,12 @@ public class ZpullData implements IPullData<UserData>,InitializingBean{
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
-		return userDatas.get(0);
 		
+		if(userDatas == null) {
+			return null;
+		} else {
+			return userDatas.get(0);
+		}
 	}
 
 	

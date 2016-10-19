@@ -13,7 +13,7 @@ import com.awifi.bigscreen.chart.service.api.IChartService;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 
 @Service
-public class Data1Acquisition implements IDataAcquisition<Map<String, Object>> {
+public class TestListDataAcquisition implements IDataAcquisition<Map<String, Object>> {
 
 	private IChartService chartService;
 

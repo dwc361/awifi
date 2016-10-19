@@ -12,7 +12,7 @@ import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 
 @Service
-public class Chart3DataTransform implements IDataTransform<Set<Map>> {
+public class TestZSetDataTransform implements IDataTransform<Set<Map>> {
 
 	@Override
 	public String transform(Set<Map> set) {

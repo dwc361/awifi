@@ -16,18 +16,18 @@ public class RedisHashCacheTest extends AbstractJUnit4SpringContextTests {
 	@Resource
 	private IRedisCache redisHashCache;
 	@Resource
-	private IDataAcquisition data1Acquisition;
+	private IDataAcquisition testHashDataAcquisition;
 	@Resource
-	private IDataTransform chart1DataTransform;
+	private IDataTransform testHashDataTransform;
 
 	@Test
 	public void testReadCacheByKey() {
-		String s = redisHashCache.readCacheByKey("testchart", chart1DataTransform);
+		String s = redisHashCache.readCacheByKey("Redis_Hash_Test", testHashDataTransform);
 		System.out.println(s);
 	}
 
 	@Test
 	public void testCreateOrUpdateCache() {
-		redisHashCache.createOrUpdateCache("testchart", data1Acquisition, "{'key':'value'}");
+		redisHashCache.createOrUpdateCache("Redis_Hash_Test", testHashDataAcquisition, "{'key':'value'}");
 	}
 }

@@ -18,24 +18,24 @@ public class RedisZSetCacheTest extends AbstractJUnit4SpringContextTests {
 	@Resource
 	private IRedisCache redisZSetCache;
 	@Resource
-	private IDataAcquisition data3Acquisition;
+	private IDataAcquisition testZSetDataAcquisition;
 	@Resource
-	private IDataTransform chart3DataTransform;
+	private IDataTransform testZSetDataTransform;
 	
 	@Test
 	public void testReadCacheByKey() {
-		String s = redisZSetCache.readCacheByKey("test_zset_chart", chart3DataTransform);
+		String s = redisZSetCache.readCacheByKey("Redis_ZSet_Test", testZSetDataTransform);
 		System.out.println(s);
-		String s1 = redisZSetCache.readCacheByKey("test_zset_chart", 6, chart3DataTransform);
-		System.out.println(s1);
-		String s2 = redisZSetCache.readCacheByKey("test_zset_chart", 6, "desc", chart3DataTransform);
-		System.out.println(s2);
-		String s3 = redisZSetCache.readCacheByKey("test_zset_chart", 1471568532, new Date().getTime(), chart3DataTransform);
-		System.out.println(s3);
+//		String s1 = redisZSetCache.readCacheByKey("Redis_ZSet_Test", 6, testZSetDataTransform);
+//		System.out.println(s1);
+//		String s2 = redisZSetCache.readCacheByKey("Redis_ZSet_Test", 6, "desc", testZSetDataTransform);
+//		System.out.println(s2);
+//		String s3 = redisZSetCache.readCacheByKey("Redis_ZSet_Test", 1471568532, new Date().getTime(), testZSetDataTransform);
+//		System.out.println(s3);
 	}
 	
 	@Test
 	public void testCreateOrUpdateCache() {
-		redisZSetCache.createOrUpdateCache("test_zset_chart", data3Acquisition, "{'key':'value'}");
+		redisZSetCache.createOrUpdateCache("Redis_ZSet_Test", testZSetDataAcquisition, "{'key':'value'}");
 	}
 }

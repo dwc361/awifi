@@ -1,5 +1,8 @@
 package com.awifi.bigscreen.redisCache.api;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+
 public abstract class AbstractRedisCache implements IRedisCache {
 
 	@Override
@@ -34,6 +37,16 @@ public abstract class AbstractRedisCache implements IRedisCache {
 
 	@Override
 	public void createOrUpdateCache(String key, IDataAcquisition dataAcquisition, String param) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void LeftPushListCache(String key, IDataAcquisition dataAcquisition, String param) {
+		// TODO Auto-generated method stub
+	}
+
+	@Override
+	public void RightPushListCache(String key, IDataAcquisition dataAcquisition, String param) {
 		// TODO Auto-generated method stub
 	}
 
