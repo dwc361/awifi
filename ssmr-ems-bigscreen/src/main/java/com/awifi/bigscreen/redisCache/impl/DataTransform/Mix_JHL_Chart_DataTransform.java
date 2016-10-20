@@ -29,10 +29,9 @@ public class Mix_JHL_Chart_DataTransform implements IDataTransform<Set<Map<Strin
 			if(redis_time_object != null) {
 				redis_time = (long) redis_time_object;
 			}
-			result_map.put("time", redis_time); //插入redis时间
+			result_map.put("createTime", redis_time); //插入redis时间
 			Map data = (Map) map.get(AwifiConstants.Interface_Return_Data);
 			if(data != null) {
-				result_map.put("createTime", data.get("createTime")); //插入redis时间
 				result_map.put("activateNum", data.get("activateNum")); //胖AP激活数量
 				result_map.put("activatePer", data.get("activatePer")); //胖AP激活率
 			}

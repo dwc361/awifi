@@ -47,6 +47,8 @@ public class RedisHashCache extends AbstractRedisCache {
 		Assert.isInstanceOf(Map.class, result, "RedisHashCache:result object not instanceof Map.class");
 		
 		Map<String, Object> map = (Map<String, Object>) result;
+		//Object data = map.get(AwifiConstants.Interface_Return_Data);
+		//Assert.notNull(data, "data can't be null");
 		redisTemplate.opsForHash().putAll(key, map);
 		//redisTemplate.boundHashOps(key).putAll(map);
 	}

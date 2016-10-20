@@ -30,7 +30,7 @@ public class Scatter_HotSpot_Chart_DataTransform implements IDataTransform<Map<S
 		if(dataList != null) {
 			for (Map m : dataList) {
 				Map<String, Object> result_map = new HashMap<String, Object>();
-				result_map.put("time", redis_time); //插入redis时间
+				result_map.put("createTime", redis_time); //插入redis时间
 				result_map.put("typeName", m.get("typeName")); //热点类型名称
 				result_map.put("hotareaNum", m.get("hotareaNum")); //热点数量
 				result_list.add(result_map);

@@ -1,5 +1,6 @@
 package com.awifi.bigscreen.redisCache.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,8 +20,10 @@ public class TestHashDataAcquisition implements IDataAcquisition<Map<String, Obj
 
 	@Override
 	public Map<String, Object> selectData(String param) {
-		List<ChartVo> charts = chartService.selectForList(null);
 		Map<String, Object> map = new HashMap<String, Object>();
+		long time = new Date().getTime();
+		map.put(AwifiConstants.Redis_Create_Time, time);
+		List<ChartVo> charts = chartService.selectForList(null);
 		map.put(AwifiConstants.Interface_Return_Data, charts);
 		return map;
 	}

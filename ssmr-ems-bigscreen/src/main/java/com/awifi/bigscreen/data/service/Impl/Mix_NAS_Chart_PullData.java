@@ -57,8 +57,6 @@ public class Mix_NAS_Chart_PullData implements IPullData<Map>, InitializingBean{
 
 	public Map Pull() {
 		Map map = new HashMap();
-		long time = new Date().getTime();
-		map.put("createTime", time);
 		
 		/**
 		 * 拼接入参
