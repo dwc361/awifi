@@ -19,6 +19,8 @@ import com.awifi.bigscreen.data.service.api.IPullData;
 public class TestAction {
 	
 	@Resource
+	private IPullData user_PV_UV_PullData;
+	@Resource
 	private IPullData funnel_SBPM_Chart_PullData;
 	@Resource
 	private IPullData line_YHRZ_Chart_PullData;
@@ -39,6 +41,7 @@ public class TestAction {
 	@RequestMapping("/test")
 	public @ResponseBody Result test(HttpServletRequest request, Model model) {
 		Map map = new HashMap();
+		map.put("User_PV_UV", user_PV_UV_PullData.Pull());
 		map.put("Funnel_SBPM_Chart", funnel_SBPM_Chart_PullData.Pull());
 		map.put("Line_YHRZ_Chart", line_YHRZ_Chart_PullData.Pull());
 		map.put("Mix_DZZD_Chart", mix_DZZD_Chart_PullData.Pull());
