@@ -58,9 +58,9 @@ public class RedisListCache extends AbstractRedisCache {
 		Assert.isInstanceOf(Map.class, result, "RedisListCache:result object not instanceof Map.class");
 		
 		Map<String, Object> map = (Map<String, Object>) result;
-		Object chartData = map.get(AwifiConstants.Interface_Return_Data);
-		Assert.notNull(chartData, "chartData can't be null");
-		redisTemplate.opsForList().leftPush(key, chartData);
+		Object data = map.get(AwifiConstants.Interface_Return_Data);
+		Assert.notNull(data, "data can't be null");
+		redisTemplate.opsForList().leftPush(key, data);
 	}
 	
 	/**
@@ -76,9 +76,9 @@ public class RedisListCache extends AbstractRedisCache {
 		Assert.isInstanceOf(Map.class, result, "RedisListCache:result object not instanceof Map.class");
 		
 		Map<String, Object> map = (Map<String, Object>) result;
-		Object chartData = map.get(AwifiConstants.Interface_Return_Data);
-		Assert.notNull(chartData, "chartData can't be null");
-		redisTemplate.opsForList().rightPush(key, chartData);
+		Object data = map.get(AwifiConstants.Interface_Return_Data);
+		Assert.notNull(data, "data can't be null");
+		redisTemplate.opsForList().rightPush(key, data);
 	}
 	
 	

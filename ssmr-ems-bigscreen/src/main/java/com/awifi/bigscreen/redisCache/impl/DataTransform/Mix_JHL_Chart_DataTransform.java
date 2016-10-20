@@ -1,6 +1,7 @@
 package com.awifi.bigscreen.redisCache.impl.DataTransform;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,25 +10,35 @@ import java.util.Set;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
+import com.awifi.bigscreen.AwifiConstants;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 
 @Service
-public class Mix_JHL_Chart_DataTransform implements IDataTransform<Set<Map>> {
+public class Mix_JHL_Chart_DataTransform implements IDataTransform<Set<Map<String, Object>>> {
 
 	/**
 	 * 把Set里的Map对象转成报表所需要的对象输出
 	 */
 	@Override
-	public String transform(Set<Map> set) {
-		List<Map<String, Object>> target_list = new ArrayList<Map<String, Object>>();
-		for (Map m : set) {
-			Map<String, Object> target_map = new HashMap<String, Object>();
-			target_map.put("createTime", m.get("createTime")); //插入redis时间
-			target_map.put("activateNum", m.get("activateNum")); //
-			target_map.put("activatePer", m.get("activatePer")); //
-			target_list.add(target_map);
+	public String transform(Set<Map<String, Object>> set) {
+		List<Map> result_list = new ArrayList<Map>();
+		for (Map<String, Object> map : set) {
+			Map<String, Object> result_map = new HashMap<String, Object>();
+			Object redis_time_object = map.get(AwifiConstants.Redis_ZSet_Score);
+			long redis_time = new Date().getTime();
+			if(redis_time_object != null) {
+				redis_time = (long) redis_time_object;
+			}
+			result_map.put("time", redis_time); //插入redis时间
+			Map data = (Map) map.get(AwifiConstants.Interface_Return_Data);
+			if(data != null) {
+				result_map.put("createTime", data.get("createTime")); //插入redis时间
+				result_map.put("activateNum", data.get("activateNum")); //胖AP激活数量
+				result_map.put("activatePer", data.get("activatePer")); //胖AP激活率
+			}
+			result_list.add(result_map);
 		}
-		return JSON.toJSONString(target_list);
+		return JSON.toJSONString(result_list);
 	}
 	
 }
