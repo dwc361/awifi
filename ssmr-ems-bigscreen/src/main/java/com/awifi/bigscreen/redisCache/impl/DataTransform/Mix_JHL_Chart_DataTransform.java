@@ -23,18 +23,21 @@ public class Mix_JHL_Chart_DataTransform implements IDataTransform<Set<Map<Strin
 	public String transform(Set<Map<String, Object>> set) {
 		List<Map> result_list = new ArrayList<Map>();
 		for (Map<String, Object> map : set) {
-			Map<String, Object> result_map = new HashMap<String, Object>();
-			Object redis_time_object = map.get(AwifiConstants.Redis_ZSet_Score);
+			Map result_map = new HashMap();
+			
 			long redis_time = new Date().getTime();
+			Object redis_time_object = map.get(AwifiConstants.Redis_ZSet_Score);
 			if(redis_time_object != null) {
 				redis_time = (long) redis_time_object;
 			}
 			result_map.put("createTime", redis_time); //插入redis时间
+			
 			Map data = (Map) map.get(AwifiConstants.Interface_Return_Data);
 			if(data != null) {
 				result_map.put("activateNum", data.get("activateNum")); //胖AP激活数量
 				result_map.put("activatePer", data.get("activatePer")); //胖AP激活率
 			}
+			
 			result_list.add(result_map);
 		}
 		return JSON.toJSONString(result_list);

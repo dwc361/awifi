@@ -23,7 +23,7 @@ import reactor.util.Assert;
 public class RedisListCache extends AbstractRedisCache {
 	Logger logger = Logger.getLogger(this.getClass());
 
-	private RedisTemplate redisTemplate;
+	private RedisTemplate<String, Object> redisTemplate;
 	
 	private int defaultCount = 12;
 	
@@ -58,9 +58,9 @@ public class RedisListCache extends AbstractRedisCache {
 		Assert.isInstanceOf(Map.class, result, "RedisListCache:result object not instanceof Map.class");
 		
 		Map<String, Object> map = (Map<String, Object>) result;
-		Object data = map.get(AwifiConstants.Interface_Return_Data);
-		Assert.notNull(data, "data can't be null");
-		redisTemplate.opsForList().leftPush(key, data);
+//		Object data = map.get(AwifiConstants.Interface_Return_Data);
+//		Assert.notNull(data, "data can't be null");
+		redisTemplate.opsForList().leftPush(key, map);
 	}
 	
 	/**
@@ -76,9 +76,9 @@ public class RedisListCache extends AbstractRedisCache {
 		Assert.isInstanceOf(Map.class, result, "RedisListCache:result object not instanceof Map.class");
 		
 		Map<String, Object> map = (Map<String, Object>) result;
-		Object data = map.get(AwifiConstants.Interface_Return_Data);
-		Assert.notNull(data, "data can't be null");
-		redisTemplate.opsForList().rightPush(key, data);
+//		Object data = map.get(AwifiConstants.Interface_Return_Data);
+//		Assert.notNull(data, "data can't be null");
+		redisTemplate.opsForList().rightPush(key, map);
 	}
 	
 	

@@ -28,20 +28,19 @@ public class RedisSetCache extends AbstractRedisCache {
 
 	private RedisTemplate<String, Object> redisTemplate;
 	
-	private int defaultcount = 12;
-	
+	/**
+	 * 取Set里面所有的数据
+	 */
 	@Override
-	public String readCacheByKey(String key, IDataTransform transverter) {
-		return this.readCacheByKey(key, defaultcount, transverter);
-	}
-	
-	@Override
-	public String readCacheByKey(String key, int count, IDataTransform dataTransform) {
+	public String readCacheByKey(String key, IDataTransform dataTransform) {
 		Long all = redisTemplate.opsForSet().size(key);
 		Set<Object> set = redisTemplate.opsForSet().members(key);
 		return dataTransform.transform(set);
 	}
 
+	/**
+	 * 将数据更新到Set里面
+	 */
 	@Override
 	public void createOrUpdateCache(String key, IDataAcquisition dataAcquisition, String param) {
 		Assert.notNull(key, "RedisHashCache:key can't be null");
@@ -52,10 +51,12 @@ public class RedisSetCache extends AbstractRedisCache {
 		Assert.isInstanceOf(Map.class, o, "RedisHashCache:result object not instanceof Map.class");
 		
 		Map<String, Object> map = (Map<String, Object>) o;
-		Object data = map.get(AwifiConstants.Interface_Return_Data);
-		Assert.notNull(data, "data can't be null");
-		redisTemplate.opsForSet().add(key, data);
+//		Object data = map.get(AwifiConstants.Interface_Return_Data);
+//		Assert.notNull(data, "data can't be null");
+		redisTemplate.opsForSet().add(key, map);
 	}
+	
+	
 	
 	@Autowired
 	public void setRedisTemplate(RedisTemplate redisTemplate) {

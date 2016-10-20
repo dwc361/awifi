@@ -20,11 +20,13 @@ public class TestHashDataTransform implements IDataTransform<Map<String, Object>
 	public String transform(Map<String, Object> map) {
 		// 把chart的map对象转成 报表所需要的x，y对象输出
 		List<Map<String,Object>> result_list = new ArrayList<Map<String,Object>>();
-		Object redis_time_object = map.get(AwifiConstants.Redis_Create_Time);
+		
 		long redis_time = new Date().getTime();
+		Object redis_time_object = map.get(AwifiConstants.Redis_Create_Time);
 		if(redis_time_object != null) {
 			redis_time = (long) redis_time_object;
 		}
+		
 		List<Chart> list = (List<Chart>) map.get(AwifiConstants.Interface_Return_Data);
 		if(list != null) {
 			for (Chart chart : list) {
@@ -34,6 +36,7 @@ public class TestHashDataTransform implements IDataTransform<Map<String, Object>
 				result_list.add(result_map);
 			}
 		}
+		
 		return JSON.toJSONString(result_list);
 	}
 
