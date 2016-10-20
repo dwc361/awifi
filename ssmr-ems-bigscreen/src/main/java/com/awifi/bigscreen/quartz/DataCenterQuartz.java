@@ -112,4 +112,16 @@ public class DataCenterQuartz {
 	public void pull_Pie_LXFB_Chart_data() {
 		log.info("@Scheduled-------pull_Pie_LXFB_Chart_data()");
 	}
+	
+	@Resource
+	private IDataAcquisition user_PV_UV_DataAcquisition;
+	/**
+	 * [用户、商户、PV、UV统计]数据拉取
+	 * 每天3:00:00拉取一次
+	 */
+	@Scheduled(cron = "0 0 3 * * ? ")
+	public void pull_User_PV_UV_data() {
+		log.info("@Scheduled-------pull_Pie_LXFB_Chart_data()");
+		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_PV_UV, user_PV_UV_DataAcquisition, "{'key':'value'}");
+	}
 }
