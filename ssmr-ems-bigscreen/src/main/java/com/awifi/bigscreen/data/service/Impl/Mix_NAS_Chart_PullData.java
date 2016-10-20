@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.awifi.bigscreen.data.entity.CountryEnum;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.utils.http.HttpUtil;
 
@@ -63,12 +64,13 @@ public class Mix_NAS_Chart_PullData implements IPullData<Map>, InitializingBean{
 		 */
 		Map<String, String> params = new HashMap<String, String>();
 		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("province", 31);
+		m.put("country", CountryEnum.China.getCode());
+//		m.put("province", 31);
 //		m.put("city", 383);
 //		m.put("county", 3289);
-		m.put("globalKey", "");
-		m.put("globalValue", "");
-		m.put("globalStandby", "");
+//		m.put("globalKey", "");
+//		m.put("globalValue", "");
+//		m.put("globalStandby", "");
 		String json = JSON.toJSONString(m);
 		params.put("json", json);
 		

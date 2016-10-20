@@ -26,6 +26,11 @@ public class AwifiConstants {
 	
 	
 	/**
+	 * [用户、商户、PV、UV统计]图表对应Redis里面的Key
+	 */
+	public static final String Redis_Key_User_PV_UV = "User_PV_UV";
+	
+	/**
 	 * [全省设备排名]图表对应Redis里面的Key
 	 */
 	public static final String Redis_Key_Funnel_SBPM_Chart = "Funnel_SBPM_Chart";

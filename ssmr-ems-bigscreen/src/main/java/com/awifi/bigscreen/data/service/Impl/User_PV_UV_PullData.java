@@ -4,6 +4,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,17 +15,18 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.awifi.bigscreen.data.entity.CountryEnum;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.utils.http.HttpUtil;
 
 /**
- * 接口：[爱wifi热点类型分布]
+ * 接口：[用户、商户、PV、UV统计]
  * @author zhangmm
  */
 @Service
-public class Scatter_HotSpot_Chart_PullData implements IPullData<List<Map>>, InitializingBean{
-	private Logger log = Logger.getLogger(Scatter_HotSpot_Chart_PullData.class);
+public class User_PV_UV_PullData implements IPullData<Map>, InitializingBean{
+	private Logger log = Logger.getLogger(User_PV_UV_PullData.class);
 	
 	private static String address = "";
 	private static String method = "";
@@ -33,7 +35,7 @@ public class Scatter_HotSpot_Chart_PullData implements IPullData<List<Map>>, Ini
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		address = PropertiesUtil.getPorpertyString("DataCenter.address");
-		method = PropertiesUtil.getPorpertyString("DataCenter.method.queryHotareaDistributionByArea");
+		method = PropertiesUtil.getPorpertyString("DataCenter.method.queryUserAndMerchant");
 		url = String.format(address, method);
 	}
 
@@ -53,8 +55,8 @@ public class Scatter_HotSpot_Chart_PullData implements IPullData<List<Map>>, Ini
 		return flag;
 	}
 
-	public List<Map> Pull() {
-		List<Map> list = new ArrayList();
+	public Map Pull() {
+		Map map = new HashMap();
 		
 		/**
 		 * 拼接入参
@@ -81,16 +83,16 @@ public class Scatter_HotSpot_Chart_PullData implements IPullData<List<Map>>, Ini
 			/**
 			 * 解析结果集
 			 */
-			//JSONObject fjsonObject = JSON.parseObject(result);
-			JSONArray fjsonArray = JSON.parseArray(result);
-			Object[] objects = fjsonArray.toArray();
-			for(Object obj : objects) {
-				list.add((Map) obj);
+			JSONObject fjsonObject = JSON.parseObject(result);
+			Iterator itor=fjsonObject.entrySet().iterator();
+			while(itor.hasNext()) {
+				Map.Entry entry = (Map.Entry)itor.next();
+				map.put(entry.getKey().toString(), entry.getValue());
 			}
 		} catch (Throwable e) {
 			log.error("接口["+url+"]调用失败:"+e.toString());
 		}
 		
-		return list;
+		return map;
 	}
 }

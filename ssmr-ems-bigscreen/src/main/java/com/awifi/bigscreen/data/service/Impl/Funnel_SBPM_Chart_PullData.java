@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.awifi.bigscreen.data.entity.CountryEnum;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.utils.http.HttpUtil;
 
@@ -60,12 +61,13 @@ public class Funnel_SBPM_Chart_PullData implements IPullData<List<Map>>, Initial
 		 */
 		Map<String, String> params = new HashMap<String, String>();
 		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("province", 31);
+		m.put("country", CountryEnum.China.getCode());
+//		m.put("province", 31);
 //		m.put("city", 383);
 //		m.put("county", 3289);
-		m.put("globalKey", "");
-		m.put("globalValue", "");
-		m.put("globalStandby", "");
+//		m.put("globalKey", "");
+//		m.put("globalValue", "");
+//		m.put("globalStandby", "");
 		String json = JSON.toJSONString(m);
 		params.put("json", json);
 		
