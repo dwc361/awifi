@@ -68,7 +68,7 @@ public class DataShowAction {
 	 */
 	@Resource
 	private IDataTransform mix_NAS_Chart_DataTransform;
-	@RequestMapping(value="/mix_dzzd_data", produces="application/json; charset=utf-8")
+	@RequestMapping(value="/mix_nas_data", produces="application/json; charset=utf-8")
     public @ResponseBody String mix_nas_data() {
 		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_NAS_Chart, 6, "desc", mix_NAS_Chart_DataTransform);
     }
