@@ -25,10 +25,10 @@ public class Mix_JHL_Chart_Redis_Test extends AbstractJUnit4SpringContextTests {
 	
 	@Test
 	public void testReadCacheByKey() {
-		String s = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_JHL_Chart, dataTransform);
-		System.out.println(s);
-//		String s1 = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_JHL_Chart, 6, dataTransform);
-//		System.out.println(s1);
+//		String s = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_JHL_Chart, dataTransform);
+//		System.out.println(s);
+		String s1 = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_JHL_Chart, 6, dataTransform);
+		System.out.println(s1);
 //		String s2 = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_JHL_Chart, 6, "desc", dataTransform);
 //		System.out.println(s2);
 //		String s3 = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_JHL_Chart, 1471568532, new Date().getTime(), dataTransform);
