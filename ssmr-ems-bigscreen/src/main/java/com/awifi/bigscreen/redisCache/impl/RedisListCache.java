@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-import com.awifi.bigscreen.AwifiConstants;
 import com.awifi.bigscreen.redisCache.api.AbstractRedisCache;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
@@ -57,10 +56,10 @@ public class RedisListCache extends AbstractRedisCache {
 		Assert.notNull(result, "RedisListCache:result object can't be null");
 		Assert.isInstanceOf(Map.class, result, "RedisListCache:result object not instanceof Map.class");
 		
-		Map<String, Object> map = (Map<String, Object>) result;
+//		Map<String, Object> map = (Map<String, Object>) result;
 //		Object data = map.get(AwifiConstants.Interface_Return_Data);
 //		Assert.notNull(data, "data can't be null");
-		redisTemplate.opsForList().leftPush(key, map);
+		redisTemplate.opsForList().leftPush(key, result);
 	}
 	
 	/**
@@ -75,10 +74,10 @@ public class RedisListCache extends AbstractRedisCache {
 		Assert.notNull(result, "RedisListCache:result object can't be null");
 		Assert.isInstanceOf(Map.class, result, "RedisListCache:result object not instanceof Map.class");
 		
-		Map<String, Object> map = (Map<String, Object>) result;
+//		Map<String, Object> map = (Map<String, Object>) result;
 //		Object data = map.get(AwifiConstants.Interface_Return_Data);
 //		Assert.notNull(data, "data can't be null");
-		redisTemplate.opsForList().rightPush(key, map);
+		redisTemplate.opsForList().rightPush(key, result);
 	}
 	
 	

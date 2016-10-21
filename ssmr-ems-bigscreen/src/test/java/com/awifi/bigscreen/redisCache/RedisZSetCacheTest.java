@@ -24,10 +24,10 @@ public class RedisZSetCacheTest extends AbstractJUnit4SpringContextTests {
 	
 	@Test
 	public void testReadCacheByKey() {
-		String s = redisZSetCache.readCacheByKey("Redis_ZSet_Test", testZSetDataTransform);
-		System.out.println(s);
-//		String s1 = redisZSetCache.readCacheByKey("Redis_ZSet_Test", 6, testZSetDataTransform);
-//		System.out.println(s1);
+//		String s = redisZSetCache.readCacheByKey("Redis_ZSet_Test", testZSetDataTransform);
+//		System.out.println(s);
+		String s1 = redisZSetCache.readCacheByKey("Redis_ZSet_Test", 6, testZSetDataTransform);
+		System.out.println(s1);
 //		String s2 = redisZSetCache.readCacheByKey("Redis_ZSet_Test", 6, "desc", testZSetDataTransform);
 //		System.out.println(s2);
 //		String s3 = redisZSetCache.readCacheByKey("Redis_ZSet_Test", 1471568532, new Date().getTime(), testZSetDataTransform);
