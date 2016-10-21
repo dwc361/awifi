@@ -25,13 +25,19 @@ public class Mix_NAS_Chart_DataTransform implements IDataTransform<Set<Map<Strin
 		for (Map<String, Object> map : set) {
 			Map result_map = new HashMap();
 			
+			/**
+			 * 插入redis时间
+			 */
 			long redis_time = new Date().getTime();
 			Object redis_time_object = map.get(AwifiConstants.Redis_ZSet_Score);
 			if(redis_time_object != null) {
 				redis_time = (long) redis_time_object;
 			}
-			result_map.put("createTime", redis_time); //插入redis时间
+			result_map.put("createTime", redis_time);
 			
+			/**
+			 * 展示数据
+			 */
 			Map data = (Map) map.get(AwifiConstants.Interface_Return_Data);
 			if(data != null) {
 				result_map.put("onlineNum", data.get("onlineNum")); //在线设备数量
