@@ -46,8 +46,8 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	__webpack_require__(1);
-	__webpack_require__(574);
-	module.exports = __webpack_require__(571);
+	__webpack_require__(566);
+	module.exports = __webpack_require__(564);
 
 
 /***/ },
@@ -4261,11 +4261,11 @@
 
 /***/ },
 
-/***/ 571:
+/***/ 564:
 /***/ function(module, exports, __webpack_require__) {
 
-	var mixin = __webpack_require__(572);
-	var assign = __webpack_require__(573);
+	var mixin = __webpack_require__(565);
+	var assign = __webpack_require__(4);
 
 	var mixinProto = mixin({
 	  // lifecycle stuff is as you'd expect
@@ -4421,7 +4421,7 @@
 
 /***/ },
 
-/***/ 572:
+/***/ 565:
 /***/ function(module, exports) {
 
 	function objToStr(x){ return Object.prototype.toString.call(x); };
@@ -4599,117 +4599,27 @@
 
 /***/ },
 
-/***/ 573:
-/***/ function(module, exports) {
-
-	'use strict';
-	/* eslint-disable no-unused-vars */
-	var hasOwnProperty = Object.prototype.hasOwnProperty;
-	var propIsEnumerable = Object.prototype.propertyIsEnumerable;
-
-	function toObject(val) {
-		if (val === null || val === undefined) {
-			throw new TypeError('Object.assign cannot be called with null or undefined');
-		}
-
-		return Object(val);
-	}
-
-	function shouldUseNative() {
-		try {
-			if (!Object.assign) {
-				return false;
-			}
-
-			// Detect buggy property enumeration order in older V8 versions.
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=4118
-			var test1 = new String('abc');  // eslint-disable-line
-			test1[5] = 'de';
-			if (Object.getOwnPropertyNames(test1)[0] === '5') {
-				return false;
-			}
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test2 = {};
-			for (var i = 0; i < 10; i++) {
-				test2['_' + String.fromCharCode(i)] = i;
-			}
-			var order2 = Object.getOwnPropertyNames(test2).map(function (n) {
-				return test2[n];
-			});
-			if (order2.join('') !== '0123456789') {
-				return false;
-			}
-
-			// https://bugs.chromium.org/p/v8/issues/detail?id=3056
-			var test3 = {};
-			'abcdefghijklmnopqrst'.split('').forEach(function (letter) {
-				test3[letter] = letter;
-			});
-			if (Object.keys(Object.assign({}, test3)).join('') !==
-					'abcdefghijklmnopqrst') {
-				return false;
-			}
-
-			return true;
-		} catch (e) {
-			// We don't expect any of the above to throw, but better to be safe.
-			return false;
-		}
-	}
-
-	module.exports = shouldUseNative() ? Object.assign : function (target, source) {
-		var from;
-		var to = toObject(target);
-		var symbols;
-
-		for (var s = 1; s < arguments.length; s++) {
-			from = Object(arguments[s]);
-
-			for (var key in from) {
-				if (hasOwnProperty.call(from, key)) {
-					to[key] = from[key];
-				}
-			}
-
-			if (Object.getOwnPropertySymbols) {
-				symbols = Object.getOwnPropertySymbols(from);
-				for (var i = 0; i < symbols.length; i++) {
-					if (propIsEnumerable.call(from, symbols[i])) {
-						to[symbols[i]] = from[symbols[i]];
-					}
-				}
-			}
-		}
-
-		return to;
-	};
-
-
-/***/ },
-
-/***/ 574:
+/***/ 566:
 /***/ function(module, exports, __webpack_require__) {
 
-	var Reflux = __webpack_require__(575);
+	var Reflux = __webpack_require__(567);
 
-	Reflux.connect = __webpack_require__(588);
+	Reflux.connect = __webpack_require__(580);
 
-	Reflux.connectFilter = __webpack_require__(590);
+	Reflux.connectFilter = __webpack_require__(582);
 
-	Reflux.ListenerMixin = __webpack_require__(589);
+	Reflux.ListenerMixin = __webpack_require__(581);
 
-	Reflux.listenTo = __webpack_require__(591);
+	Reflux.listenTo = __webpack_require__(583);
 
-	Reflux.listenToMany = __webpack_require__(592);
+	Reflux.listenToMany = __webpack_require__(584);
 
 	module.exports = Reflux;
 
 
 /***/ },
 
-/***/ 575:
+/***/ 567:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -4723,19 +4633,19 @@
 	    }
 	};
 
-	Reflux.ActionMethods = __webpack_require__(576);
+	Reflux.ActionMethods = __webpack_require__(568);
 
-	Reflux.ListenerMethods = __webpack_require__(577);
+	Reflux.ListenerMethods = __webpack_require__(569);
 
-	Reflux.PublisherMethods = __webpack_require__(586);
+	Reflux.PublisherMethods = __webpack_require__(578);
 
-	Reflux.StoreMethods = __webpack_require__(585);
+	Reflux.StoreMethods = __webpack_require__(577);
 
-	Reflux.createAction = __webpack_require__(587);
+	Reflux.createAction = __webpack_require__(579);
 
-	Reflux.createStore = __webpack_require__(581);
+	Reflux.createStore = __webpack_require__(573);
 
-	var maker = __webpack_require__(580).staticJoinCreator;
+	var maker = __webpack_require__(572).staticJoinCreator;
 
 	Reflux.joinTrailing = Reflux.all = maker("last"); // Reflux.all alias for backward compatibility
 
@@ -4745,7 +4655,7 @@
 
 	Reflux.joinConcat = maker("all");
 
-	var _ = Reflux.utils = __webpack_require__(578);
+	var _ = Reflux.utils = __webpack_require__(570);
 
 	Reflux.EventEmitter = _.EventEmitter;
 
@@ -4804,7 +4714,7 @@
 	 * Provides the set of created actions and stores for introspection
 	 */
 	/*eslint-disable no-underscore-dangle*/
-	Reflux.__keep = __webpack_require__(582);
+	Reflux.__keep = __webpack_require__(574);
 	/*eslint-enable no-underscore-dangle*/
 
 	/**
@@ -4819,7 +4729,7 @@
 
 /***/ },
 
-/***/ 576:
+/***/ 568:
 /***/ function(module, exports) {
 
 	/**
@@ -4832,13 +4742,13 @@
 
 /***/ },
 
-/***/ 577:
+/***/ 569:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(578),
-	    maker = __webpack_require__(580).instanceJoinCreator;
+	var _ = __webpack_require__(570),
+	    maker = __webpack_require__(572).instanceJoinCreator;
 
 	/**
 	 * Extract child listenables from a parent from their
@@ -5071,7 +4981,7 @@
 
 /***/ },
 
-/***/ 578:
+/***/ 570:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
@@ -5130,7 +5040,7 @@
 	    return typeof value === "function";
 	}
 
-	exports.EventEmitter = __webpack_require__(579);
+	exports.EventEmitter = __webpack_require__(571);
 
 	exports.nextTick = function (callback) {
 	    setTimeout(callback, 0);
@@ -5157,7 +5067,7 @@
 
 /***/ },
 
-/***/ 579:
+/***/ 571:
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
@@ -5453,7 +5363,7 @@
 
 /***/ },
 
-/***/ 580:
+/***/ 572:
 /***/ function(module, exports, __webpack_require__) {
 
 	/**
@@ -5462,8 +5372,8 @@
 
 	"use strict";
 
-	var createStore = __webpack_require__(581),
-	    _ = __webpack_require__(578);
+	var createStore = __webpack_require__(573),
+	    _ = __webpack_require__(570);
 
 	var slice = Array.prototype.slice,
 	    strategyMethodNames = {
@@ -5575,15 +5485,15 @@
 
 /***/ },
 
-/***/ 581:
+/***/ 573:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(578),
-	    Keep = __webpack_require__(582),
-	    mixer = __webpack_require__(583),
-	    bindMethods = __webpack_require__(584);
+	var _ = __webpack_require__(570),
+	    Keep = __webpack_require__(574),
+	    mixer = __webpack_require__(575),
+	    bindMethods = __webpack_require__(576);
 
 	var allowed = { preEmit: 1, shouldEmit: 1 };
 
@@ -5597,9 +5507,9 @@
 	 */
 	module.exports = function (definition) {
 
-	    var StoreMethods = __webpack_require__(585),
-	        PublisherMethods = __webpack_require__(586),
-	        ListenerMethods = __webpack_require__(577);
+	    var StoreMethods = __webpack_require__(577),
+	        PublisherMethods = __webpack_require__(578),
+	        ListenerMethods = __webpack_require__(569);
 
 	    definition = definition || {};
 
@@ -5645,7 +5555,7 @@
 
 /***/ },
 
-/***/ 582:
+/***/ 574:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5665,12 +5575,12 @@
 
 /***/ },
 
-/***/ 583:
+/***/ 575:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(578);
+	var _ = __webpack_require__(570);
 
 	module.exports = function mix(def) {
 	    var composed = {
@@ -5730,7 +5640,7 @@
 
 /***/ },
 
-/***/ 584:
+/***/ 576:
 /***/ function(module, exports) {
 
 	"use strict";
@@ -5761,7 +5671,7 @@
 
 /***/ },
 
-/***/ 585:
+/***/ 577:
 /***/ function(module, exports) {
 
 	/**
@@ -5774,12 +5684,12 @@
 
 /***/ },
 
-/***/ 586:
+/***/ 578:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(578);
+	var _ = __webpack_require__(570);
 
 	/**
 	 * A module of methods for object that you want to be able to listen to.
@@ -5877,15 +5787,15 @@
 
 /***/ },
 
-/***/ 587:
+/***/ 579:
 /***/ function(module, exports, __webpack_require__) {
 
 	"use strict";
 
-	var _ = __webpack_require__(578),
-	    ActionMethods = __webpack_require__(576),
-	    PublisherMethods = __webpack_require__(586),
-	    Keep = __webpack_require__(582);
+	var _ = __webpack_require__(570),
+	    ActionMethods = __webpack_require__(568),
+	    PublisherMethods = __webpack_require__(578),
+	    Keep = __webpack_require__(574);
 
 	var allowed = { preEmit: 1, shouldEmit: 1 };
 
@@ -5949,12 +5859,12 @@
 
 /***/ },
 
-/***/ 588:
+/***/ 580:
 /***/ function(module, exports, __webpack_require__) {
 
-	var ListenerMethods = __webpack_require__(577),
-	    ListenerMixin = __webpack_require__(589),
-	    _ = __webpack_require__(578);
+	var ListenerMethods = __webpack_require__(569),
+	    ListenerMixin = __webpack_require__(581),
+	    _ = __webpack_require__(570);
 
 	module.exports = function(listenable,key){
 	    return {
@@ -5983,11 +5893,11 @@
 
 /***/ },
 
-/***/ 589:
+/***/ 581:
 /***/ function(module, exports, __webpack_require__) {
 
-	var _ = __webpack_require__(578),
-	    ListenerMethods = __webpack_require__(577);
+	var _ = __webpack_require__(570),
+	    ListenerMethods = __webpack_require__(569);
 
 	/**
 	 * A module meant to be consumed as a mixin by a React component. Supplies the methods from
@@ -6007,12 +5917,12 @@
 
 /***/ },
 
-/***/ 590:
+/***/ 582:
 /***/ function(module, exports, __webpack_require__) {
 
-	var ListenerMethods = __webpack_require__(577),
-	    ListenerMixin = __webpack_require__(589),
-	    _ = __webpack_require__(578);
+	var ListenerMethods = __webpack_require__(569),
+	    ListenerMixin = __webpack_require__(581),
+	    _ = __webpack_require__(570);
 
 	module.exports = function(listenable, key, filterFunc) {
 	    filterFunc = _.isFunction(key) ? key : filterFunc;
@@ -6054,10 +5964,10 @@
 
 /***/ },
 
-/***/ 591:
+/***/ 583:
 /***/ function(module, exports, __webpack_require__) {
 
-	var ListenerMethods = __webpack_require__(577);
+	var ListenerMethods = __webpack_require__(569);
 
 	/**
 	 * A mixin factory for a React component. Meant as a more convenient way of using the `ListenerMixin`,
@@ -6096,10 +6006,10 @@
 
 /***/ },
 
-/***/ 592:
+/***/ 584:
 /***/ function(module, exports, __webpack_require__) {
 
-	var ListenerMethods = __webpack_require__(577);
+	var ListenerMethods = __webpack_require__(569);
 
 	/**
 	 * A mixin factory for a React component. Meant as a more convenient way of using the `listenerMixin`,
