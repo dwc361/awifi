@@ -3,17 +3,20 @@ package com.awifi.bigscreen.redisCache.impl.DataTransform;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.AwifiConstants;
+import com.awifi.bigscreen.data.entity.ProvinceEnum;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 
 @Service
-public class Scatter_HotSpot_Chart_DataTransform implements IDataTransform<Map<String, Object>> {
+public class Funnel_SBPM_Chart_DataTransform implements IDataTransform<Map<String, Object>> {
 
 	/**
 	 * 把Set里的Map对象转成报表所需要的对象输出
@@ -21,7 +24,15 @@ public class Scatter_HotSpot_Chart_DataTransform implements IDataTransform<Map<S
 	@Override
 	public String transform(Map<String, Object> map) {
 		Map result_map = new HashMap();
-		List<Map> result_list = new ArrayList<Map>();
+		
+		/**
+		 * 全部省的Map
+		 */
+		Map provinceMap = new HashMap();
+		ProvinceEnum[] provinceEnum = ProvinceEnum.values();
+		for (int i = 0; i < provinceEnum.length; i++) {
+			provinceMap.put(provinceEnum[i].getCode().toString(), provinceEnum[i].getDisplay().toString());
+		}
 		
 		/**
 		 * 插入redis时间
@@ -36,13 +47,18 @@ public class Scatter_HotSpot_Chart_DataTransform implements IDataTransform<Map<S
 		/**
 		 * 展示数据
 		 */
-		@SuppressWarnings("unchecked")
-		List<Map> dataList = (List<Map>) map.get(AwifiConstants.Interface_Return_Data);
-		if(dataList != null) {
-			for (Map data : dataList) {
+		List<Map> result_list = new ArrayList<Map>();
+		Map data = (Map) map.get(AwifiConstants.Interface_Return_Data);
+		if(data != null) {
+			Iterator<Entry<String, String>> iterator = data.entrySet().iterator();
+			while (iterator.hasNext()) {
+				Map.Entry entry = (Map.Entry)iterator.next();
+				Object key = entry.getKey();
+				Object value = entry.getValue();
+				
 				Map m = new HashMap();
-				m.put("typeName", data.get("typeName")); //热点类型名称
-				m.put("hotareaNum", data.get("hotareaNum")); //热点数量
+				m.put("province", provinceMap.get(key));
+				m.put("deviceNum", value);
 				result_list.add(m);
 			}
 		}

@@ -2,9 +2,8 @@ package com.awifi.bigscreen.data.service.Impl;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -13,8 +12,9 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.awifi.bigscreen.data.entity.CountryEnum;
+import com.awifi.bigscreen.data.entity.ProvinceEnum;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.utils.http.HttpUtil;
 
@@ -23,7 +23,7 @@ import com.awifi.bigscreen.utils.http.HttpUtil;
  * @author zhangmm
  */
 @Service
-public class Funnel_SBPM_Chart_PullData implements IPullData<List<Map>>, InitializingBean{
+public class Funnel_SBPM_Chart_PullData implements IPullData<Map>, InitializingBean{
 	private Logger log = Logger.getLogger(Funnel_SBPM_Chart_PullData.class);
 	
 	private static String address = "";
@@ -53,44 +53,47 @@ public class Funnel_SBPM_Chart_PullData implements IPullData<List<Map>>, Initial
 		return flag;
 	}
 
-	public List<Map> Pull() {
-		List<Map> list = new ArrayList();
+	public Map Pull() {
+		Map map = new HashMap();
 		
-		/**
-		 * 拼接入参
-		 */
-		Map<String, String> params = new HashMap<String, String>();
-		Map<String, Object> m = new HashMap<String, Object>();
-		m.put("country", CountryEnum.China.getCode());
-//		m.put("province", 31);
-//		m.put("city", 383);
-//		m.put("county", 3289);
-//		m.put("globalKey", "");
-//		m.put("globalValue", "");
-//		m.put("globalStandby", "");
-		String json = JSON.toJSONString(m);
-		params.put("json", json);
-		
-		/**
-		 * 远程调用
-		 */
-		String result = null;
-		try {
-			result = HttpUtil.post(url, params);
+		ProvinceEnum[] provinceEnum = ProvinceEnum.values();
+		for (int i = 0; i < provinceEnum.length; i++) {
+			/**
+			 * 拼接入参
+			 */
+			Map<String, String> params = new HashMap<String, String>();
+			Map<String, Object> m = new HashMap<String, Object>();
+			m.put("country", CountryEnum.China.getCode());
+			m.put("province", provinceEnum[i].getCode());
+//			m.put("city", 383);
+//			m.put("county", 3289);
+//			m.put("globalKey", "");
+//			m.put("globalValue", "");
+//			m.put("globalStandby", "");
+			String json = JSON.toJSONString(m);
+			params.put("json", json);
 			
 			/**
-			 * 解析结果集
+			 * 远程调用
 			 */
-			//JSONObject fjsonObject = JSON.parseObject(result);
-			JSONArray fjsonArray = JSON.parseArray(result);
-			Object[] objects = fjsonArray.toArray();
-			for(Object obj : objects) {
-				list.add((Map) obj);
+			String result = null;
+			try {
+				result = HttpUtil.post(url, params);
+				
+				/**
+				 * 解析结果集
+				 */
+				JSONObject fjsonObject = JSON.parseObject(result);
+				Iterator itor=fjsonObject.entrySet().iterator();
+				while(itor.hasNext()) {
+					Map.Entry entry = (Map.Entry)itor.next();
+					map.put(entry.getKey().toString(), entry.getValue());
+				}
+			} catch (Throwable e) {
+				log.error("接口["+url+"]调用失败:"+e.toString());
 			}
-		} catch (Throwable e) {
-			log.error("接口["+url+"]调用失败:"+e.toString());
 		}
 		
-		return list;
+		return map;
 	}
 }
