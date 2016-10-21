@@ -53,11 +53,11 @@ public class RedisZSetCache extends AbstractRedisCache {
 		Set<Object> set;
 		if("desc".equals(order)) {
 			// zRevRange(key, start, end)：返回名称为key的zset（元素已按score从大到小排序）中的index从start到end的所有元素
-			set = redisTemplate.opsForZSet().reverseRange(key, all-count, all-1);
+			set = redisTemplate.opsForZSet().reverseRange(key, (all>count)?(all-count):0, (all>1)?(all-1):0);
 			//set = redisTemplate.boundZSetOps(key).reverseRange(all-count, all-1);
 		} else {
 			// zRange(key, start, end)：返回名称为key的zset（元素已按score从小到大排序）中的index从start到end的所有元素
-			set = redisTemplate.opsForZSet().range(key, all-count, all-1);
+			set = redisTemplate.opsForZSet().range(key, (all>count)?(all-count):0, (all>1)?(all-1):0);
 			//set = redisTemplate.boundZSetOps(key).range(all-count, all-1);
 		}
 		return dataTransform.transform(set);
