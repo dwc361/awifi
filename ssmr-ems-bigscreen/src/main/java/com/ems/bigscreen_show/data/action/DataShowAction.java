@@ -58,7 +58,27 @@ public class DataShowAction {
 			return new Result("数据传输失败!");
 		}
 	}
-	
+	//模拟测试action
+	//定制终端
+	@RequestMapping("/mix_dzzd_data")
+	public @ResponseBody Result mix_dzzd_data(String x_json,HttpServletRequest request, HttpServletResponse response) {
+		if (x_json != null) {
+			Random generator = new Random();
+			Map<String, Object> dzzdList = new HashMap<String, Object>();
+			List<Integer> onlist = new ArrayList<Integer>();
+			List<Integer> offlist = new ArrayList<Integer>();
+			for(int i=0;i<6;i++) {
+				onlist.add(generator.nextInt(10000));
+				offlist.add(generator.nextInt(10000));
+			}
+			dzzdList.put("onlineNum",onlist);
+			dzzdList.put("offlineNum",offlist);
+			System.out.print(dzzdList.get("onlineNum").toString() + "#################################"+dzzdList.toString());
+			return new Result("保存成功!", dzzdList);
+		} else {
+			return new Result("数据传输失败!");
+		}
+	}
 	
 	
 	@Autowired(required = true)
