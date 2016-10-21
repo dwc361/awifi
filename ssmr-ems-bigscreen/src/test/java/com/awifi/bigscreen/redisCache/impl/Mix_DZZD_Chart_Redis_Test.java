@@ -37,6 +37,6 @@ public class Mix_DZZD_Chart_Redis_Test extends AbstractJUnit4SpringContextTests 
 	
 	@Test
 	public void testCreateOrUpdateCache() {
-//		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_Mix_DZZD_Chart, acquisition, "{'key':'value'}");
+		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_Mix_DZZD_Chart, acquisition, "{'key':'value'}");
 	}
 }
