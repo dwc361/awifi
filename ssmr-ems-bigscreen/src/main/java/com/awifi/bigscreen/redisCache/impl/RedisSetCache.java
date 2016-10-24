@@ -18,53 +18,45 @@ import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
+/**
+ * Redis数据结构：Set(无序集合)
+ * @author zhangmm
+ */
 @Service
 public class RedisSetCache extends AbstractRedisCache {
 	Logger logger = Logger.getLogger(RedisSetCache.class);
 
-	private RedisTemplate<String,UserData> redisTemplate;
+	private RedisTemplate<String, Object> redisTemplate;
 	
-	private int defaultcount = 12;
-	
+	/**
+	 * 取Set里面所有的数据
+	 */
 	@Override
-	public String readCacheByKey(String key, IDataTransform transverter) {
-		return this.readCacheByKey(key, defaultcount, transverter);
-	}
-	
-	@Override
-	public String readCacheByKey(String key, int count, IDataTransform dataTransform) {
-		Long all = redisTemplate.opsForZSet().size(key);
-		Set<UserData> map = redisTemplate.opsForZSet().range(key, all-count, all-1);
-		Iterator<UserData> iterator = map.iterator();
-		while (iterator.hasNext()) {
-			UserData data = iterator.next();
-		}
-		return map.toString();
+	public String readCacheByKey(String key, IDataTransform dataTransform) {
+		Long all = redisTemplate.opsForSet().size(key);
+		Set<Object> set = redisTemplate.opsForSet().members(key);
+		return dataTransform.transform(set);
 	}
 
-	@Override
-	public String readCacheByKey(String key, double min, double max, IDataTransform dataTransform) {
-		Set<UserData> map = redisTemplate.opsForZSet().rangeByScore(key, min, max);
-		Iterator<UserData> iterator = map.iterator();
-		while (iterator.hasNext()) {
-			UserData data = iterator.next();
-		}
-		return map.toString();
-	}
-
+	/**
+	 * 将数据更新到Set里面
+	 */
 	@Override
 	public void createOrUpdateCache(String key, IDataAcquisition dataAcquisition, String param) {
-		Assert.notNull(key, "RedisHashCache:key not be null");
-		Assert.notNull(dataAcquisition, "RedisHashCache:dataAcquisition object not be null");
-		Object o = dataAcquisition.selectData(param);
-		Assert.notNull(o, "RedisHashCache:result object must not be null");
-		Assert.isInstanceOf(Map.class, o, "RedisHashCache:result object instanceof Map.class");
-		Map<String, Object> map = (Map<String, Object>) o;
-		String score = (String) map.get(AwifiConstants.Redis_ZSet_Score);
-		UserData data = (UserData) map.get(AwifiConstants.Interface_Return_Data);
-		Assert.notNull(score, "score not be null");
-		redisTemplate.opsForZSet().add(key, data, Double.valueOf(score).doubleValue());
+		Assert.notNull(key, "RedisHashCache:key can't be null");
+		Assert.notNull(dataAcquisition, "RedisHashCache:dataAcquisition object can't be null");
+		
+		Object result = dataAcquisition.selectData(param);
+		Assert.notNull(result, "RedisHashCache:result object can't be null");
+		Assert.isInstanceOf(Map.class, result, "RedisHashCache:result object not instanceof Map.class");
+		
+//		Map<String, Object> map = (Map<String, Object>) result;
+//		Object data = map.get(AwifiConstants.Interface_Return_Data);
+//		Assert.notNull(data, "data can't be null");
+		redisTemplate.opsForSet().add(key, result);
 	}
+	
+	
 	
 	@Autowired
 	public void setRedisTemplate(RedisTemplate redisTemplate) {

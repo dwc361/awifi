@@ -1,29 +1,31 @@
-package com.awifi.bigscreen.redisCache.impl;
+package com.awifi.bigscreen.redisCache.impl.DataAcquisition;
 
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.awifi.bigscreen.AwifiConstants;
+import com.awifi.bigscreen.data.entity.UserData;
+import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 
 @Service
-public class Data3Acquisition implements IDataAcquisition<Map<String, Object>> {
+public class Mix_JHL_Chart_DataAcquisition implements IDataAcquisition<Map<String, Object>> {
+	
+	@Resource(name="mix_JHL_Chart_PullData")
+	private IPullData<UserData> pullData;
+	
 	@Override
 	public Map<String, Object> selectData(String param) {
 		Map<String, Object> map = new HashMap<String, Object>();
-		Random generator = new Random();
 		long time = new Date().getTime();
-		Map chartData = new HashMap();
-		chartData.put("x", time);
-		chartData.put("y", generator.nextInt(10000));
-		chartData.put("a", generator.nextDouble());
-		chartData.put("b", generator.nextDouble()+1);
-		chartData.put("c", generator.nextDouble()+2);
-		map.put(AwifiConstants.Interface_Return_Data, chartData);
+		Object data = pullData.Pull();
+		map.put(AwifiConstants.Interface_Return_Data, data);
 		map.put(AwifiConstants.Redis_ZSet_Score, time);
 		return map;
 	}

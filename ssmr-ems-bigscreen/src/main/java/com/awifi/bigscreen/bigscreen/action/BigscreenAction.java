@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.socket.TextMessage;
 
 import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.bigscreen.entity.BigScreenHandlebarsVo;
@@ -36,7 +35,6 @@ import com.awifi.bigscreen.templates.service.api.ITemplatesService;
 import com.awifi.bigscreen.theme.entity.Theme;
 import com.awifi.bigscreen.theme.entity.ThemeVo;
 import com.awifi.bigscreen.theme.service.api.IThemeService;
-import com.awifi.bigscreen.websocket.handler.SystemWebSocketHandler;
 
 @Controller
 @RequestMapping("awifi/bigscreenAction")
@@ -91,9 +89,9 @@ public class BigscreenAction {
 
 	@RequestMapping("/list")
 	public String list(Bigscreen bigscreen, HttpServletRequest request, Model model) {
-		SystemWebSocketHandler hander = new SystemWebSocketHandler();
-		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"mainAction/main.action";
-		hander.sendMessageToUsers(new TextMessage(url));
+//		SystemWebSocketHandler hander = new SystemWebSocketHandler();
+//		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/"+"mainAction/main.action";
+//		hander.sendMessageToUsers(new TextMessage(url));
 		Page page = PageUtils.createPage(request);
 		page = bigscreenService.page(page, bigscreen);
 		model.addAttribute("page", page);

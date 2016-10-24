@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.roof.spring.Result;
 import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,21 +12,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
 
-import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.bigscreen.entity.Bigscreen;
-import com.awifi.bigscreen.bigscreen.entity.BigscreenVo;
 import com.awifi.bigscreen.bigscreen.service.api.IBigscreenService;
-import com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRel;
-import com.awifi.bigscreen.bigscreen_chart_rel.entity.BigscreenChartRelVo;
 import com.awifi.bigscreen.bigscreen_chart_rel.service.api.IBigscreenChartRelService;
-import com.awifi.bigscreen.chart.entity.Chart;
-import com.awifi.bigscreen.chart.entity.ChartVo;
 import com.awifi.bigscreen.chart.service.api.IChartService;
-import com.awifi.bigscreen.templates.entity.TemplatesVo;
 import com.awifi.bigscreen.templates.service.api.ITemplatesService;
-import com.awifi.bigscreen.theme.entity.ThemeVo;
 import com.awifi.bigscreen.theme.service.api.IThemeService;
+import com.awifi.bigscreen.websocket.handler.SystemWebSocketHandler;
 
 @Controller
 @RequestMapping("ems/bigscreen_backstage/MainBackstageAction")
@@ -52,6 +48,28 @@ public class MainBackstageAction {
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
 		
 		return "/ems/bigscreen_backstage/main/main.jsp";
+	}
+	
+	/**
+	 * 大屏切换到一层架构
+	 */
+	@RequestMapping("/switch_to_bigscreen_first_display_page")
+	public @ResponseBody Result switch_to_bigscreen_first_display_page(HttpServletRequest request) {
+		SystemWebSocketHandler hander = new SystemWebSocketHandler();
+		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/ems/bigscreen_show/indexShowAction/bigscreen_first_display.action";
+		hander.sendMessageToUsers(new TextMessage(url));
+		return new Result("大屏成功切换到一层架构!");
+	}
+	
+	/**
+	 * 大屏切换到二层架构
+	 */
+	@RequestMapping("/switch_to_bigscreen_second_display_page")
+	public @ResponseBody Result switch_to_bigscreen_second_display_page(HttpServletRequest request) {
+		SystemWebSocketHandler hander = new SystemWebSocketHandler();
+		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/ems/bigscreen_show/indexShowAction/bigscreen_second_display.action";
+		hander.sendMessageToUsers(new TextMessage(url));
+		return new Result("大屏成功切换到二层架构!");
 	}
 	
 	

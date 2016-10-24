@@ -1,4 +1,4 @@
-package com.awifi.bigscreen.redisCache.impl;
+package com.awifi.bigscreen.redisCache;
 
 import javax.annotation.Resource;
 
@@ -8,26 +8,26 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
-import com.awifi.bigscreen.redisCache.api.IRedisCache;
+import com.awifi.bigscreen.redisCache.impl.RedisSetCache;
 
 @ContextConfiguration(locations = { "classpath:spring.xml" })
-public class RedisHashCacheTest extends AbstractJUnit4SpringContextTests {
-	
+public class RedisSetCacheTest extends AbstractJUnit4SpringContextTests {
+
 	@Resource
-	private IRedisCache redisHashCache;
+	private RedisSetCache redisSetCache;
 	@Resource
-	private IDataAcquisition data1Acquisition;
+	private IDataAcquisition testSetDataAcquisition;
 	@Resource
-	private IDataTransform chart1DataTransform;
+	private IDataTransform testSetDataTransform;
 
 	@Test
 	public void testReadCacheByKey() {
-		String s = redisHashCache.readCacheByKey("testchart", chart1DataTransform);
+		String s = redisSetCache.readCacheByKey("Redis_Set_Test", testSetDataTransform);
 		System.out.println(s);
 	}
 
 	@Test
 	public void testCreateOrUpdateCache() {
-		redisHashCache.createOrUpdateCache("testchart", data1Acquisition, "{'key':'value'}");
+		redisSetCache.createOrUpdateCache("Redis_Set_Test", testSetDataAcquisition, "{'key':'value'}");
 	}
 }
