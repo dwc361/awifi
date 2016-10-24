@@ -64,4 +64,16 @@ public class AwifiConstants {
 	 * [爱wifi热点类型分布]图表对应Redis里面的Key
 	 */
 	public static final String Redis_Key_Scatter_HotSpot_Chart = "Scatter_HotSpot_Chart";
+	
+	
+	
+	/**
+	 * 设备类型-定制终端
+	 */
+	public static final String SBLX_DZZD ="31,32,33,34,35,36,37";
+	
+	/**
+	 * 设备类型-NAS
+	 */
+	public static final String SBLX_NAS ="11,21,41,42,43";
 }

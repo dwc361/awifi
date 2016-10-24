@@ -76763,6 +76763,7 @@
 	    this.listenTo(_secondActions2.default.saveBigscreenSecondData, 'saveBigscreenSecondData');
 	    this.listenTo(_secondActions2.default.openAddModal, 'openAddModal');
 	    this.listenTo(_secondActions2.default.setStateValue, 'setStateValue');
+	    this.listenTo(_secondActions2.default.getMix_Dzzd_data, 'getMix_Dzzd_data');
 	  },
 	  getBigscreenSecondData: function getBigscreenSecondData() {
 	    _jquery2.default.ajax({
@@ -76799,6 +76800,22 @@
 	  },
 	  setStateValue: function setStateValue(value) {
 	    this.trigger(value);
+	  },
+
+	  //定制终端test
+	  getMix_Dzzd_data: function getMix_Dzzd_data(data) {
+	    _jquery2.default.ajax({
+	      async: false,
+	      type: "post",
+	      url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/mix_dzzd_data.action",
+	      data: { x_json: data },
+	      datatype: 'json',
+	      success: function (d) {
+	        console.log(d.data.onlineNum + "##" + d.data.offlineNum);
+	        this.trigger({ onlineNum: d.data.onlineNum });
+	        this.trigger({ offlineNum: d.data.offlineNum });
+	      }.bind(this)
+	    });
 	  }
 	});
 
@@ -76818,7 +76835,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _reflux2.default.createActions(['getBigscreenSecondData', 'saveBigscreenSecondData', 'setStateValue', 'openAddModal']);
+	exports.default = _reflux2.default.createActions(['getBigscreenSecondData', 'saveBigscreenSecondData', 'setStateValue', 'openAddModal', 'getMix_Dzzd_data']);
 
 /***/ },
 /* 594 */

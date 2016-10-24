@@ -1,15 +1,17 @@
 import React from 'react';
-import echarts from 'echarts';
-import ReactEcharts from '../src/echarts-for-react';
+import ReactEcharts from '../../src/echarts-for-react';
 
-// 指定图表的配置项和数据
-var x_data = [['学校','医院','码头','酒店','公园'],
-              ['机场','浴室','商场','游乐场','文化厅','车站'],
-              ['饭馆','图书馆','展览馆','美容店','体育场','招待所']];
-var y_data = [[37, 77.4, 58, 14.7, 25],
-              [67.1, 25.4, 78.1, 19.8, 29.1, 67.9],
-              [72, 75.4, 6.8, 40.8, 19.6, 37.3]];
-const Scatter_HotSpot_ChartComponent = React.createClass({
+var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃', '海南'],
+                     ['山西', '辽宁', '吉林', '黑龙江', '云南', '贵州'],
+                     ['福建', '广东', '重庆', '上海', '四川', '湖北'],
+                     ['湖南', '江西', '安徽', '江苏', '青海', '新疆'],
+                     ['内蒙古', '宁夏', '西藏', '广西', '北京', '天津']];
+var numberArray = [[812, 899, 890, 880, 870, 850, 70],
+                   [812, 809, 779, 760, 710, 670],
+                   [812, 600, 520, 570, 490, 460],
+                   [812, 390, 360, 230, 200, 190],
+                   [812, 150, 130, 120, 100, 99]];
+const Funnel_SBPM_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
@@ -18,18 +20,18 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
-        let hotspot_index = 0;
+        let rank_index = 0;
         let currentIndex = -1;
         setInterval(function() {
             let dataLen = option.series[0].data.length;
             currentIndex++;
             if(currentIndex == dataLen) {
                 currentIndex = -1;
-                hotspot_index = (hotspot_index + 1) % x_data.length;
+                rank_index = (rank_index + 1) % typeNameArray.length;
                 
                 // 重新加载图表内容
-                option.xAxis.data = x_data[hotspot_index];
-                option.series[0].data = y_data[hotspot_index];
+                option.yAxis.data = typeNameArray[rank_index];
+                option.series[0].data = numberArray[rank_index];
                 echartObj.setOption(option, true);
                 
                 // 取消之前高亮的图形
@@ -68,22 +70,24 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
     },
     getOption: function() {
         const option = {
+            //  color: [
+            //      '#21c6a5', '#65c7f7', '#096dc5'
+            //  ],
             tooltip: {
-                itemGap: '  0',
+                trigger: 'axis',
                 axisPointer: {
                     type: 'shadow'
                 }
             },
-            //  backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-            //      offset: 0,
-            //      color: '#333'
-            //  }, {
-            //      offset: 1,
-            //      color: '#333'
-            //  }]),
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
+            },
             xAxis: {
-                type : 'category',
-                data : x_data[0],
+                type: 'value',
+                boundaryGap: [0, 0.01],
                 axisLine: {
                     show: true,
                     onZero: true,
@@ -95,12 +99,33 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
                     },
                 },
                 splitLine: {
+                    show: false,
+                    interval: 'auto',
                     lineStyle: {
-                        type: 'dashed'
-                    }
-                }
+                        color: ['#ccc'],
+                        width: 0,
+                        type: 'solid',
+                    },
+                },
             },
             yAxis: {
+                type: 'category',
+                axisLabel: {
+        //          interval: 0,
+        //          rotate: 45,
+        //          margin: 2,
+                    textStyle: {
+                        color: "#fff",
+                        fontSize: 12
+                    }
+                },
+                data: typeNameArray[0],
+                nameTextStyle: {
+                    color: '#fff',
+                    fontStyle: 'normal',
+                    fontFamily: 'sans-serif',
+                    fontSize: 16
+                },
                 axisLine: {
                     show: true,
                     onZero: true,
@@ -111,41 +136,16 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
                         opacity: 1,
                     },
                 },
-                splitLine: {
-                    lineStyle: {
-                        type: 'dashed'
-                    }
-                },
-                scale: true
             },
             series: [{
-                name: '',
-                data: y_data[0],
-                type: 'scatter',
-                symbolSize: function(data) {
-                    return data;
-                },
-                label: {
-                    emphasis: {
-                        show: true,
-                        formatter: function(param) {
-                            return param.data;
-                        },
-                        position: 'top'
-                    }
-                },
+                type: 'bar',
+                data: numberArray[0],
                 itemStyle: {
                     normal: {
-                        shadowBlur: 10,
-                        shadowColor: 'rgba(120, 36, 50, 0.5)',
-                        shadowOffsetY: 5,
-                        color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                            offset: 0,
-                            color: 'rgb(129, 227, 238)'
-                        }, {
-                            offset: 1,
-                            color: 'rgb(25, 183, 207)'
-                        }])
+                        color: function(params) {
+                            var colorList = ['#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5', '#21c6a5', '#65c7f7', '#096dc5'];
+                            return colorList[params.dataIndex];
+                        }
                     }
                 }
             }]
@@ -155,16 +155,16 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
     },
     render: function() {
         return (
-            <div className="right col-md-12 col-lg-12 col-sm-12">
+            <div className="left col-md-12 col-lg-12 col-sm-12">
                 <div className="topH">
-                    <h1>[ 爱wifi热点类型分布 ]</h1>
+                    <h1>[ 全省设备排名 ]</h1>
                 </div>
-                <div className="Echart" >
-                    <div id="scatter_HotSpot">
+                <div className="Echart">
+                    <div id="funnel_SBPM" >
                         <ReactEcharts ref='echarts_react' 
                         onChartReady={this.showToolTip} 
                         option={this.state.option} 
-                        style={{height: '100%', width: '100%'}} />
+                        style={{height: '100%', width: '100%'}}  />
                     </div>
                 </div>
             </div>
@@ -172,4 +172,4 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
     }
 });
 
-export default Scatter_HotSpot_ChartComponent;
+export default Funnel_SBPM_ChartComponent;

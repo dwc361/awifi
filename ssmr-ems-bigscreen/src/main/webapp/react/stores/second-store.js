@@ -10,6 +10,7 @@ export default Reflux.createStore({
        this.listenTo(actions.saveBigscreenSecondData, 'saveBigscreenSecondData');
        this.listenTo(actions.openAddModal, 'openAddModal');
        this.listenTo(actions.setStateValue, 'setStateValue');
+	   this.listenTo(actions.getMix_Dzzd_data, 'getMix_Dzzd_data');
 	},
 	getBigscreenSecondData () {
     	$.ajax({
@@ -46,5 +47,20 @@ export default Reflux.createStore({
     },
     setStateValue(value){
 		this.trigger(value);
+	},
+    //定制终端test
+	getMix_Dzzd_data(data){
+		$.ajax({
+			async: false,
+			type : "post",
+			url : ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/mix_dzzd_data.action",
+			data: {x_json:data},
+			datatype : 'json',
+			success : function(d) {
+				console.log(d.data.onlineNum+"##"+d.data.offlineNum);
+				this.trigger({onlineNum:d.data.onlineNum});
+				this.trigger({offlineNum:d.data.offlineNum});
+			}.bind(this)
+		});
 	}
 });

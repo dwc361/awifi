@@ -75,7 +75,7 @@
 			return true
 		}
 	</script>
-	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/index/css/bootstrap.min.css" />
+	<%--<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/bootstrap.min.css" />--%>
 	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/index/css/screen_2.css" />
 	<script src="${basePath}/ems/bigscreen_show/index/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
 	<script src="${basePath}/ems/bigscreen_show/index/js/screen.js" type="text/javascript" charset="utf-8"></script>

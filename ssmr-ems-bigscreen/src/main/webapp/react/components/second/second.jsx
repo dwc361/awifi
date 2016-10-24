@@ -13,9 +13,9 @@ import AddChart from './AddChart.jsx';
 export default class Second extends React.Component {
 
 	constructor(props){
-    	super(props);
-    	this.state = {chartList:[], relList:[], bigscreen_id:"", theme_id:"", templates_id:"", templates_path:""}
-  	}
+		super(props);
+		this.state = {chartList:[], relList:[], bigscreen_id:"", theme_id:"", templates_id:"", templates_path:""}
+	}
 
 	addChart() {
 		var chartList = this.state.chartList;

@@ -103,7 +103,7 @@ public class IndexShowAction {
 	@RequestMapping("/bigscreen_third_display")
 	public String bigscreen_third_display(Model model, HttpServletRequest request) {
 		this.loadCommon(model);
-		return "/ems/bigscreen_show/index/bigscreen_display/third/third_display.jsp";
+		return "/ems/bigscreen_show/third/third_display.jsp";
 	}
 	
 	

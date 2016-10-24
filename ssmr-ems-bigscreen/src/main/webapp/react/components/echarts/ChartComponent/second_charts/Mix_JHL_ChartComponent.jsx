@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactEcharts from '../src/echarts-for-react';
+import ReactEcharts from '../../src/echarts-for-react';
 
 const Mix_JHL_ChartComponent = React.createClass({
     propTypes: {

@@ -1,14 +1,14 @@
 import React from 'react';
 
-import Default_Component from './ChartComponent/Default_Component.jsx';
-import Line_YHRZ_ChartComponent from './ChartComponent/Line_YHRZ_ChartComponent.jsx';
-import Funnel_SBPM_ChartComponent from './ChartComponent/Funnel_SBPM_ChartComponent.jsx';
-import Mix_JHL_ChartComponent from './ChartComponent/Mix_JHL_ChartComponent.jsx';
-import Scatter_HotSpot_ChartComponent from './ChartComponent/Scatter_HotSpot_ChartComponent.jsx';
-import Mix_NAS_ChartComponent from './ChartComponent/Mix_NAS_ChartComponent.jsx';
-import Mix_DZZD_ChartComponent from './ChartComponent/Mix_DZZD_ChartComponent.jsx';
-import Pie_LXFB_ChartComponent from './ChartComponent/Pie_LXFB_ChartComponent.jsx';
-import Gauge_YBP_ChartComponent from './ChartComponent/Gauge_YBP_ChartComponent.jsx';
+import Default_Component from './ChartComponent/second_charts/Default_Component.jsx';
+import Line_YHRZ_ChartComponent from './ChartComponent/second_charts/Line_YHRZ_ChartComponent.jsx';
+import Funnel_SBPM_ChartComponent from './ChartComponent/second_charts/Funnel_SBPM_ChartComponent.jsx';
+import Mix_JHL_ChartComponent from './ChartComponent/second_charts/Mix_JHL_ChartComponent.jsx';
+import Scatter_HotSpot_ChartComponent from './ChartComponent/second_charts/Scatter_HotSpot_ChartComponent.jsx';
+import Mix_NAS_ChartComponent from './ChartComponent/second_charts/Mix_NAS_ChartComponent.jsx';
+import Mix_DZZD_ChartComponent from './ChartComponent/second_charts/Mix_DZZD_ChartComponent.jsx';
+import Pie_LXFB_ChartComponent from './ChartComponent/second_charts/Pie_LXFB_ChartComponent.jsx';
+import Gauge_YBP_ChartComponent from './ChartComponent/second_charts/Gauge_YBP_ChartComponent.jsx';
 
 const EchartsComponent = React.createClass({
     propTypes: {
