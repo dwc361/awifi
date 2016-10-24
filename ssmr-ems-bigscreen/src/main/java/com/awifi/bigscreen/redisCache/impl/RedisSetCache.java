@@ -46,14 +46,14 @@ public class RedisSetCache extends AbstractRedisCache {
 		Assert.notNull(key, "RedisHashCache:key can't be null");
 		Assert.notNull(dataAcquisition, "RedisHashCache:dataAcquisition object can't be null");
 		
-		Object o = dataAcquisition.selectData(param);
-		Assert.notNull(o, "RedisHashCache:result object can't be null");
-		Assert.isInstanceOf(Map.class, o, "RedisHashCache:result object not instanceof Map.class");
+		Object result = dataAcquisition.selectData(param);
+		Assert.notNull(result, "RedisHashCache:result object can't be null");
+		Assert.isInstanceOf(Map.class, result, "RedisHashCache:result object not instanceof Map.class");
 		
-		Map<String, Object> map = (Map<String, Object>) o;
+//		Map<String, Object> map = (Map<String, Object>) result;
 //		Object data = map.get(AwifiConstants.Interface_Return_Data);
 //		Assert.notNull(data, "data can't be null");
-		redisTemplate.opsForSet().add(key, map);
+		redisTemplate.opsForSet().add(key, result);
 	}
 	
 	

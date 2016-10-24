@@ -97,6 +97,15 @@ public class IndexShowAction {
 		return templatesVo.getPath();
 	}
 	
+	/**
+	 * 大屏三层架构页面展示
+	 */
+	@RequestMapping("/bigscreen_third_display")
+	public String bigscreen_third_display(Model model, HttpServletRequest request) {
+		this.loadCommon(model);
+		return "/ems/bigscreen_show/index/bigscreen_display/third/third_display.jsp";
+	}
+	
 	
 	
 	@Autowired(required = true)
