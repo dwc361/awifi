@@ -75,10 +75,10 @@
 			return true
 		}
 	</script>
-	<%--<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/bootstrap.min.css" />--%>
-	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/index/css/screen_2.css" />
-	<script src="${basePath}/ems/bigscreen_show/index/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/ems/bigscreen_show/index/js/screen.js" type="text/javascript" charset="utf-8"></script>
+	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/bootstrap.min.css" />
+	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/screen_2.css" />
+	<script src="${basePath}/ems/bigscreen_show/second/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+	<script src="${basePath}/ems/bigscreen_show/second/js/screen.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body scrolling="no">
@@ -113,20 +113,20 @@
 		<header>
 			<div class="col-md-4 col-lg-4 col-sm-4">
 				<section class="stnFont col-md-6 col-lg-6 col-sm-6">3500080</section>
-				<section class="stnHr col-md-1 col-lg-1 col-sm-1"><img src="${basePath}/ems/bigscreen_show/index/img/xiaojiange.png" alt="" /></section>
+				<section class="stnHr col-md-1 col-lg-1 col-sm-1"><img src="${basePath}/ems/bigscreen_show/second/img/xiaojiange.png" alt="" /></section>
 				<section class="stnP col-md-4 col-lg-4 col-sm-4">
 					<span class="stnP-span">用户总数</span><br />
 					<i class="stnP-i">2016.02.14</i>
 				</section>
-			</div>
-			<div class="col-md-4 col-lg-4 col-sm-4" style="text-align: center;">
+			</div
+			><div class="col-md-4 col-lg-4 col-sm-4" style="text-align: center;">
 				<span class="stnFont-mid">全国商户总数— </span>
 				<i class="blueFont">1232434</i>
-			</div>
-			<div class="col-md-4 col-lg-4 col-sm-4" style="padding-right: 12px;padding-left: 12px;line-height: 3rem;text-align: center;">
+			</div
+			><div class="col-md-4 col-lg-4 col-sm-4" style="padding-right: 12px;padding-left: 12px;line-height: 3rem;text-align: center;">
 				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">PV- <i class="blueFont-right">125658</i></section>
 				<section class="stnHr col-md-1 col-lg-1 col-sm-1" style="width: 6%;">
-					<img src="${basePath}/ems/bigscreen_show/index/img/xiaojiange.png" alt="" />
+					<img src="${basePath}/ems/bigscreen_show/second/img/xiaojiange.png" alt="" />
 				</section>
 				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">UV- <i class="blueFont-right">125658</i></section>
 			</div>
@@ -168,9 +168,9 @@
 <!-- <script src="${basePath}/ems/bigscreen_show/index/bigscreen_display/second/js/second_display_react_charts_templates.js"></script> -->
 
 <!--以下是map-->
-<script type="text/javascript" src="${basePath}/ems/bigscreen_show/index/moduel/moduel_map/js/lib/raphael-min.js"></script>
-<script type="text/javascript" src="${basePath}/ems/bigscreen_show/index/moduel/moduel_map/js/res/chinaMapConfig.js"></script>
-<script type="text/javascript" src="${basePath}/ems/bigscreen_show/index/moduel/moduel_map/js/map.js"></script>
+<script type="text/javascript" src="${basePath}/ems/bigscreen_show/second/moduel/moduel_map/js/lib/raphael-min.js"></script>
+<script type="text/javascript" src="${basePath}/ems/bigscreen_show/second/moduel/moduel_map/js/res/chinaMapConfig.js"></script>
+<script type="text/javascript" src="${basePath}/ems/bigscreen_show/second/moduel/moduel_map/js/map.js"></script>
 
 <script type="text/javascript">
 	$(function() {

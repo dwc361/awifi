@@ -14,16 +14,18 @@
     <link href="//cdn.bootcss.com/tether/1.3.6/css/tether.min.css"
           rel="stylesheet">
     <script src="//cdn.bootcss.com/tether/1.3.6/js/tether.min.js"></script>
+
     <%@include file="/ems/bigscreen_backstage/bigscreen_backstage_head.jsp"%>
+    <link rel="stylesheet" href="${basePath}/ems/bigscreen_show/third/css/screen_3.css">
 </head>
 <body>
     <div class="container">
-        <div class="block_part leftClum"></div>
-        <div class="block_part rightClum"></div>
-        <div class="block_part rightClum"></div>
-        <div class="block_part leftClum"></div>
-        <div class="block_part rightClum"></div>
-        <div class="block_part rightClum"></div>
+        <section class="block_part leftClum"></section
+        ><section class="block_part rightClum"></section
+        ><section class="block_part rightClum"></section
+        ><section class="block_part leftClum"></section
+        ><section class="block_part rightClum"></section
+        ><section class="block_part rightClum"></section>
     </div>
 </body>
 </html>

@@ -17,15 +17,17 @@ html {overflow-y: scroll;}
 
 /*以下是三层监控CSS*/
 .container{
+    padding: 0;
     width: 100%;
     height: 100%;
-    background-image: -moz-linear-gradient(rgb(0,56,105) 5%, rgb(0,89,108) 50%, rgb(0,56,105) 90%);
-    background-image: -webkit-linear-gradient(rgb(0,56,105) 5%, rgb(0,89,108) 50%, rgb(0,56,105) 90%);
-    background-image: -ms-linear-gradient(rgb(0,56,105) 5%, rgb(0,89,108) 50%, rgb(0,56,105) 90%);
+    background-image: -moz-linear-gradient( -132deg, rgb(0,56,105) 5%, rgb(0,89,108) 50%, rgb(0,56,105) 90%);
+    background-image: -webkit-linear-gradient( -132deg, rgb(0,56,105) 5%, rgb(0,89,108) 50%, rgb(0,56,105) 90%);
+    background-image: -ms-linear-gradient( -132deg, rgb(0,56,105) 5%, rgb(0,89,108) 50%, rgb(0,56,105) 90%);
 }
 .block_part{
     height: 50%;
-    border: 2rem solid #26333b;
+    padding: 0.8rem;
+    display:inline-block;
 }
 .leftClum{
     width: 20%;
