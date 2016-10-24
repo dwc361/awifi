@@ -12,7 +12,7 @@ import org.springframework.web.socket.handler.TextWebSocketHandler;
  * websocket处理类
  * @author zhangmm
  */
-//@Component
+@Component
 public class InfoSocketEndPoint extends TextWebSocketHandler {
 
 	public InfoSocketEndPoint() {

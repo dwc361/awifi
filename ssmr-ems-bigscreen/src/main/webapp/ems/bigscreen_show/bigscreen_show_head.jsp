@@ -4,6 +4,9 @@
 <script type="text/javascript" src="${basePath}/common/js/jquery/jquery-1.7.2.min.js"></script>
 <script type="text/javascript" src="${basePath}/common/js/jquery/jquery.json.js"></script>
 
+<link rel="stylesheet" href="${basePath}/ems_common/bootstrap/css/bootstrap.min.css">
+<script type="text/javascript" src="${basePath}/ems_common/bootstrap/js/bootstrap.min.js"></script>
+
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Class.js"></script>
 

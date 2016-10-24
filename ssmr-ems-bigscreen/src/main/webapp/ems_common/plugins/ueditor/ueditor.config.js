@@ -30,57 +30,57 @@
         UEDITOR_HOME_URL : URL
 
         //图片上传配置区
-        ,imageUrl:URL+"jsp/imageUp.jsp"             //图片上传提交地址
-        ,imagePath:URL + "jsp/"                     //图片修正地址，引用了fixedImagePath,如有特殊需求，可自行配置
-        //,imageFieldName:"upfile"                  //图片数据的key,若此处修改，需要在后台对应文件修改对应参数
-        //,compressSide:0                           //等比压缩的基准，确定maxImageSideLength参数的参照对象。0为按照最长边，1为按照宽度，2为按照高度
-        //,maxImageSideLength:900                   //上传图片最大允许的边长，超过会自动等比缩放,不缩放就设置一个比较大的值，更多设置在image.html中
+        ,imUrl:URL+"jsp/imUp.jsp"             //图片上传提交地址
+        ,imPath:URL + "jsp/"                     //图片修正地址，引用了fixedImPath,如有特殊需求，可自行配置
+        //,imFieldName:"upfile"                  //图片数据的key,若此处修改，需要在后台对应文件修改对应参数
+        //,compressSide:0                           //等比压缩的基准，确定maxImSideLength参数的参照对象。0为按照最长边，1为按照宽度，2为按照高度
+        //,maxImSideLength:900                   //上传图片最大允许的边长，超过会自动等比缩放,不缩放就设置一个比较大的值，更多设置在im.html中
         //,savePath: [ 'upload1', 'upload2', 'upload3' ]    //图片保存在服务器端的目录， 默认为空， 此时在上传图片时会向服务器请求保存图片的目录列表，
                                                             // 如果用户不希望发送请求， 则可以在这里设置与服务器端能够对应上的目录名称列表
                                                             //比如： savePath: [ 'upload1', 'upload2' ]
 
         //涂鸦图片配置区
         ,scrawlUrl:URL+"jsp/scrawlUp.jsp"           //涂鸦上传地址
-        ,scrawlPath:URL+"jsp/"                            //图片修正地址，同imagePath
+        ,scrawlPath:URL+"jsp/"                            //图片修正地址，同imPath
 
         //附件上传配置区
         ,fileUrl:URL+"jsp/fileUp.jsp"               //附件上传提交地址
-        ,filePath:URL + "jsp/"                   //附件修正地址，同imagePath
+        ,filePath:URL + "jsp/"                   //附件修正地址，同imPath
         //,fileFieldName:"upfile"                    //附件提交的表单名，若此处修改，需要在后台对应文件修改对应参数
 
         //远程抓取配置区
-        //,catchRemoteImageEnable:true               //是否开启远程图片抓取,默认开启
-        ,catcherUrl:URL +"jsp/getRemoteImage.jsp"   //处理远程图片抓取的地址
-        ,catcherPath:URL + "jsp/"                  //图片修正地址，同imagePath
+        //,catchRemoteImEnable:true               //是否开启远程图片抓取,默认开启
+        ,catcherUrl:URL +"jsp/getRemoteIm.jsp"   //处理远程图片抓取的地址
+        ,catcherPath:URL + "jsp/"                  //图片修正地址，同imPath
         //,catchFieldName:"upfile"                   //提交到后台远程图片uri合集，若此处修改，需要在后台对应文件修改对应参数
         //,separater:'ue_separate_ue'               //提交至后台的远程图片地址字符串分隔符
         //,localDomain:[]                            //本地顶级域名，当开启远程图片抓取时，除此之外的所有其它域名下的图片都将被抓取到本地,默认不抓取127.0.0.1和localhost
 
         //图片在线管理配置区
-        ,imageManagerUrl:URL + "jsp/imageManager.jsp"       //图片在线管理的处理地址
-        ,imageManagerPath:URL + "jsp/"                                    //图片修正地址，同imagePath
+        ,imManrUrl:URL + "jsp/imManr.jsp"       //图片在线管理的处理地址
+        ,imManrPath:URL + "jsp/"                                    //图片修正地址，同imPath
 
         //屏幕截图配置区
         ,snapscreenHost: location.hostname                                 //屏幕截图的server端文件所在的网站地址或者ip，请不要加http://
-        ,snapscreenServerUrl: URL +"jsp/imageUp.jsp" //屏幕截图的server端保存程序，UEditor的范例代码为“URL +"server/upload/jsp/snapImgUp.jsp"”
+        ,snapscreenServerUrl: URL +"jsp/imUp.jsp" //屏幕截图的server端保存程序，UEditor的范例代码为“URL +"server/upload/jsp/snapImgUp.jsp"”
         ,snapscreenPath: URL + "jsp/"
         ,snapscreenServerPort: location.port                                   //屏幕截图的server端端口
         //,snapscreenImgAlign: ''                                //截图的图片默认的排版方式
 
         //word转存配置区
-        ,wordImageUrl:URL + "jsp/imageUp.jsp"             //word转存提交地址
-        ,wordImagePath:URL + "jsp/"                       //
-        //,wordImageFieldName:"upfile"                     //word转存表单名若此处修改，需要在后台对应文件修改对应参数
+        ,wordImUrl:URL + "jsp/imUp.jsp"             //word转存提交地址
+        ,wordImPath:URL + "jsp/"                       //
+        //,wordImFieldName:"upfile"                     //word转存表单名若此处修改，需要在后台对应文件修改对应参数
 
         //视频上传配置区
         ,getMovieUrl:URL+"jsp/getMovie.jsp"                   //视频数据获取地址
         ,videoUrl:URL+"jsp/fileUp.jsp"               //附件上传提交地址
-        ,videoPath:URL + "jsp/"                   //附件修正地址，同imagePath
+        ,videoPath:URL + "jsp/"                   //附件修正地址，同imPath
         //,videoFieldName:"upfile"                    //附件提交的表单名，若此处修改，需要在后台对应文件修改对应参数
 
         //工具栏上的所有的功能按钮和下拉框，可以在new编辑器的实例时选择自己需要的从新定义
 
-, toolbars: [["fullscreen","undo","redo","link","unlink","print","preview","insertimage","emotion","insertvideo","date","time","bold","italic","underline","fontborder","strikethrough","forecolor","backcolor","justifyleft","justifycenter","justifyright","justifyjustify","indent","removeformat","paragraph","rowspacingbottom","rowspacingtop","lineheight","fontfamily","fontsize","imagenone","imageleft","imageright","imagecenter","inserttable","deletetable"]]
+, toolbars: [["fullscreen","undo","redo","link","unlink","print","preview","insertim","emotion","insertvideo","date","time","bold","italic","underline","fontborder","strikethrough","forecolor","backcolor","justifyleft","justifycenter","justifyright","justifyjustify","indent","removeformat","paragraph","rowspacingbottom","rowspacingtop","lineheight","fontfamily","fontsize","imnone","imleft","imright","imcenter","inserttable","deletetable"]]
         //当鼠标放在工具栏上时显示的tooltip提示,留空支持自动多语言配置，否则以配置值为准
 //        ,labelMap:{
 //            'anchor':'', 'undo':''
@@ -90,7 +90,7 @@
         //,webAppKey:""
 
         //语言配置项,默认是zh-cn。有需要的话也可以使用如下这样的方式来自动多语言切换，当然，前提条件是lang文件夹下存在对应的语言文件：
-        //lang值也可以通过自动获取 (navigator.language||navigator.browserLanguage ||navigator.userLanguage).toLowerCase()
+        //lang值也可以通过自动获取 (navigator.langu||navigator.browserLangu ||navigator.userLangu).toLowerCase()
         //,lang:"zh-cn"
         //,langPath:URL +"lang/"
 
@@ -134,13 +134,13 @@
 
         //,zIndex : 900     //编辑器层级的基数,默认是900
 
-        //,imagePopup:true      //图片操作的浮层开关，默认打开
+        //,imPopup:true      //图片操作的浮层开关，默认打开
 
         //如果自定义，最好给p标签如下的行高，要不输入中文时，会有跳动感
         //,initialStyle:'p{line-height:1em}'//编辑器层级的基数,可以用来改变字体等
 
         //,autoSyncData:true //自动同步编辑器要提交的数据
-        //,emotionLocalization:false //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的images表情文件夹
+        //,emotionLocalization:false //是否开启表情本地化，默认关闭。若要开启请确保emotion文件夹下包含官网提供的ims表情文件夹
 
         //,pasteplain:false  //是否默认为纯文本粘贴。false为不使用纯文本粘贴，true为使用纯文本粘贴
         //纯文本粘贴模式下的过滤规则
@@ -334,9 +334,9 @@
         //首行缩进距离,默认是2em
         //,indentValue:'2em'
 
-        //pageBreakTag
-        //分页标识符,默认是_ueditor_page_break_tag_
-        //,pageBreakTag:'_ueditor_page_break_tag_'
+        //pBreakTag
+        //分页标识符,默认是_ueditor_p_break_tag_
+        //,pBreakTag:'_ueditor_p_break_tag_'
 
         //sourceEditor
         //源码的查看方式,codemirror 是代码高亮，textarea是文本框,默认是codemirror
@@ -357,7 +357,7 @@
         //      removeClass : true,           //去掉冗余的class
         //      removeEmptyline : false,      //去掉空行
         //      textAlign : "left" ,           //段落的排版方式，可以是 left,right,center,justify 去掉这个属性表示不执行排版
-        //      imageBlockLine : 'center',      //图片的浮动方式，独占一行剧中,左右浮动，默认: center,left,right,none 去掉这个属性表示不执行排版
+        //      imBlockLine : 'center',      //图片的浮动方式，独占一行剧中,左右浮动，默认: center,left,right,none 去掉这个属性表示不执行排版
         //      pasteFilter : false,            //根据规则过滤没事粘贴进来的内容
         //      clearFontSize : false,          //去掉所有的内嵌字号，使用编辑器默认的字号
         //      clearFontFamily : false,        //去掉所有的内嵌字体，使用编辑器默认的字体

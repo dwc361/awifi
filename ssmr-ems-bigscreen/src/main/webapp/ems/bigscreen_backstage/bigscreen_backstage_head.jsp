@@ -7,9 +7,8 @@
 <!-- 字体&图标 -->
 <link rel="stylesheet" href="${basePath}/ems/bigscreen_backstage/main/font-awesome-4.6.3/css/font-awesome.css">
 
-<!-- Bootstrap相关 -->
-<link rel="stylesheet" href="${basePath}/ems/bigscreen_backstage/main/css/bootstrap.min.css">
-<script src="${basePath}/ems/bigscreen_backstage/main/js/bootstrap.js"></script>
+
+
 
 <!-- JQuery相关 -->
 <script src="${basePath}/ems/bigscreen_backstage/main/js/jquery-3.1.1.js"></script>
@@ -19,6 +18,9 @@
 <script type="text/javascript" src="${basePath}/common/js/jquery/jquery.validate.message_cn.js"></script>
 <script type="text/javascript" src="${basePath}/common/js/jquery/jquery.validate.rules.js"></script>
 
+<!-- Bootstrap相关 -->
+<link rel="stylesheet" href="${basePath}/ems/bigscreen_backstage/main/css/bootstrap.min.css">
+<script src="${basePath}/ems/bigscreen_backstage/main/js/bootstrap.js"></script>
 <!-- 自定义工具组件 -->
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Class.js"></script>
