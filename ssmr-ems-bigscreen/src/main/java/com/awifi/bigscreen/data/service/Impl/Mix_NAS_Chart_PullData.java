@@ -2,11 +2,8 @@ package com.awifi.bigscreen.data.service.Impl;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -15,8 +12,8 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
+import com.awifi.bigscreen.AwifiConstants;
 import com.awifi.bigscreen.data.entity.CountryEnum;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.utils.http.HttpUtil;
@@ -68,6 +65,7 @@ public class Mix_NAS_Chart_PullData implements IPullData<Map>, InitializingBean{
 //		m.put("province", 31);
 //		m.put("city", 383);
 //		m.put("county", 3289);
+		m.put("entityType", AwifiConstants.SBLX_NAS);
 //		m.put("globalKey", "");
 //		m.put("globalValue", "");
 //		m.put("globalStandby", "");

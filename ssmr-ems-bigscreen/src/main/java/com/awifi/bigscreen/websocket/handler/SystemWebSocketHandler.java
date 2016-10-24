@@ -7,7 +7,6 @@ package com.awifi.bigscreen.websocket.handler;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Date;
 
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Component;
@@ -26,7 +25,7 @@ import org.springframework.web.socket.WebSocketSession;
 public class SystemWebSocketHandler implements WebSocketHandler {
 	private Logger log = Logger.getLogger(SystemWebSocketHandler.class);
 
-	private static final ArrayList<WebSocketSession> users = new ArrayList<WebSocketSession>();;
+	private static final ArrayList<WebSocketSession> users = new ArrayList<WebSocketSession>();
 
 	/**
 	 * 初次链接成功执行

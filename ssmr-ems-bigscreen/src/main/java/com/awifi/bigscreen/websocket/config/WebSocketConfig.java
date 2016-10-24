@@ -22,14 +22,16 @@ public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocke
 
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-    	registry.addHandler(systemWebSocketHandler(), "/websocketDemo");
-		registry.addHandler(systemWebSocketHandler(), "/websocketDemo/sockjs").setAllowedOrigins("*").withSockJS();
-		registry.addHandler(systemWebSocketHandler(), "/websocketDemo/sockjs").withSockJS();
-    	
 		//支持websocket 的访问链接
 		registry.addHandler(systemWebSocketHandler(), "/websocket").addInterceptors(new HandshakeInterceptor());
 		//不支持websocket的访问链接
 		registry.addHandler(systemWebSocketHandler(), "/websocket/sockjs").addInterceptors(new HandshakeInterceptor()).withSockJS();
+		
+		
+		
+//    	registry.addHandler(systemWebSocketHandler(), "/websocketDemo");
+//		registry.addHandler(systemWebSocketHandler(), "/websocketDemo/sockjs").setAllowedOrigins("*").withSockJS();
+//		registry.addHandler(systemWebSocketHandler(), "/websocketDemo/sockjs").withSockJS();
     }
 
     @Bean
