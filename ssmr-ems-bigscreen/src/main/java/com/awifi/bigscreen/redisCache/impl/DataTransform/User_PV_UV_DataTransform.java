@@ -35,9 +35,10 @@ public class User_PV_UV_DataTransform implements IDataTransform<Map<String, Obje
 		 */
 		Map data = (Map) map.get(AwifiConstants.Interface_Return_Data);
 		if(data != null) {
-			result_map.put("userNum", data.get("userNum")); //用户数
-			result_map.put("PV", data.get("PV")); //PV
-			result_map.put("UV", data.get("UV")); //PV
+			result_map.put("userNum", data.get("userNum")); //该地区用户数量
+			result_map.put("merchantNum", data.get("merchantNum")); //该地区商户数量
+			result_map.put("PV", data.get("PV")); //该地区PV量
+			result_map.put("UV", data.get("UV")); //该地区UV量
 		}
 		
 		return JSON.toJSONString(result_map);

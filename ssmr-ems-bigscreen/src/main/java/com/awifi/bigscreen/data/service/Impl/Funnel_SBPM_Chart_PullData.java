@@ -56,42 +56,39 @@ public class Funnel_SBPM_Chart_PullData implements IPullData<Map>, InitializingB
 	public Map Pull() {
 		Map map = new HashMap();
 		
-		ProvinceEnum[] provinceEnum = ProvinceEnum.values();
-		for (int i = 0; i < provinceEnum.length; i++) {
-			/**
-			 * 拼接入参
-			 */
-			Map<String, String> params = new HashMap<String, String>();
-			Map<String, Object> m = new HashMap<String, Object>();
-			m.put("country", CountryEnum.China.getCode());
-			m.put("province", provinceEnum[i].getCode());
-//			m.put("city", 383);
-//			m.put("county", 3289);
-//			m.put("globalKey", "");
-//			m.put("globalValue", "");
-//			m.put("globalStandby", "");
-			String json = JSON.toJSONString(m);
-			params.put("json", json);
+		/**
+		 * 拼接入参
+		 */
+		Map<String, String> params = new HashMap<String, String>();
+		Map<String, Object> m = new HashMap<String, Object>();
+		m.put("country", CountryEnum.China.getCode());
+//		m.put("province", provinceEnum[i].getCode());
+//		m.put("city", 383);
+//		m.put("county", 3289);
+//		m.put("globalKey", "");
+//		m.put("globalValue", "");
+//		m.put("globalStandby", "");
+		String json = JSON.toJSONString(m);
+		params.put("json", json);
+		
+		/**
+		 * 远程调用
+		 */
+		String result = null;
+		try {
+			result = HttpUtil.post(url, params);
 			
 			/**
-			 * 远程调用
+			 * 解析结果集
 			 */
-			String result = null;
-			try {
-				result = HttpUtil.post(url, params);
-				
-				/**
-				 * 解析结果集
-				 */
-				JSONObject fjsonObject = JSON.parseObject(result);
-				Iterator itor=fjsonObject.entrySet().iterator();
-				while(itor.hasNext()) {
-					Map.Entry entry = (Map.Entry)itor.next();
-					map.put(entry.getKey().toString(), entry.getValue());
-				}
-			} catch (Throwable e) {
-				log.error("接口["+url+"]调用失败:"+e.toString());
+			JSONObject fjsonObject = JSON.parseObject(result);
+			Iterator itor=fjsonObject.entrySet().iterator();
+			while(itor.hasNext()) {
+				Map.Entry entry = (Map.Entry)itor.next();
+				map.put(entry.getKey().toString(), entry.getValue());
 			}
+		} catch (Throwable e) {
+			log.error("接口["+url+"]调用失败:"+e.toString());
 		}
 		
 		return map;

@@ -12,11 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.awifi.bigscreen.AwifiConstants;
-import com.awifi.bigscreen.data.entity.ProvinceEnum;
+import com.awifi.bigscreen.data.entity.DeviceTypeEnum;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 
 @Service
-public class Funnel_SBPM_Chart_DataTransform implements IDataTransform<Map<String, Object>> {
+public class Pie_LXFB_Chart_DataTransform implements IDataTransform<Map<String, Object>> {
 
 	/**
 	 * 把Set里的Map对象转成报表所需要的对象输出
@@ -26,12 +26,12 @@ public class Funnel_SBPM_Chart_DataTransform implements IDataTransform<Map<Strin
 		Map result_map = new HashMap();
 		
 		/**
-		 * 全部省的Map
+		 * 设备类型的Map
 		 */
-		Map provinceMap = new HashMap();
-		ProvinceEnum[] provinceEnum = ProvinceEnum.values();
-		for (int i = 0; i < provinceEnum.length; i++) {
-			provinceMap.put(provinceEnum[i].getCode().toString(), provinceEnum[i].getDisplay().toString());
+		Map deviceTypeMap = new HashMap();
+		DeviceTypeEnum[] deviceTypeEnum = DeviceTypeEnum.values();
+		for (int i = 0; i < deviceTypeEnum.length; i++) {
+			deviceTypeMap.put(deviceTypeEnum[i].getCode().toString(), deviceTypeEnum[i].getEn_name().toString());
 		}
 		
 		/**
@@ -56,9 +56,14 @@ public class Funnel_SBPM_Chart_DataTransform implements IDataTransform<Map<Strin
 				Object key = entry.getKey();
 				Object value = entry.getValue();
 				
-				if(provinceMap.get(key) != null) {
+				if(deviceTypeMap.get(key) != null) {
 					Map m = new HashMap();
-					m.put("province", provinceMap.get(key));
+					m.put("deviceName", deviceTypeMap.get(key));
+					m.put("deviceNum", value);
+					result_list.add(m);
+				} else {
+					Map m = new HashMap();
+					m.put("deviceName", "其它");
 					m.put("deviceNum", value);
 					result_list.add(m);
 				}
