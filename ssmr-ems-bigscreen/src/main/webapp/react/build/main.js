@@ -23666,12 +23666,29 @@
 	      async: false,
 	      type: "post",
 	      url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/mix_dzzd_data.action",
-	      data: { x_json: data },
+	      /*data: {x_json:data},*/
 	      datatype: 'json',
 	      success: function (d) {
-	        console.log(d.data.onlineNum + "##" + d.data.offlineNum);
-	        this.trigger({ onlineNum: d.data.onlineNum });
-	        this.trigger({ offlineNum: d.data.offlineNum });
+	        var onLine = [];
+	        var offLine = [];
+	        var datas = [];
+	        var now;
+	        for (var i = 0; i < d.length; i++) {
+	          onLine.push(d[i].onlineNum);
+	          offLine.push(d[i].offlineNum);
+	          if (d[i].createTime == null) {
+	            now = new Date(); //定义一个时间对象
+	          } else {
+	            now = new Date(d[i].createTime);
+	          }
+	          var m = now.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+	          var date = now.getDate(); //获取当前日(1-31)
+	          datas.push(m + "/" + date);
+	        }
+	        console.log(d.length + "##" + "onLine:" + onLine);
+	        this.trigger({ onlineNum: onLine });
+	        this.trigger({ offlineNum: offLine });
+	        this.trigger({ createTime: datas });
 	      }.bind(this)
 	    });
 	  }

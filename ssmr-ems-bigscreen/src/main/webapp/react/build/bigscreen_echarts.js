@@ -86322,40 +86322,22 @@
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { onlineNum: [], offlineNum: [], option: this.getOption([], []) };
+	        return { onlineNum: [], offlineNum: [], option: this.getOption([], [], []), createTime: [] };
 	    },
 	    componentDidMount: function componentDidMount() {
 	        _secondActions2.default.getMix_Dzzd_data("test");
 	    },
 	    componentDidUpdate: function componentDidUpdate() {
-	        console.log(this.state.offlineNum + "*3*");
+	        console.log(this.state.offlineNum + "*3*" + this.state.createTime);
 	        var option = this.state.option;
 	        option.series[0].data = this.state.onlineNum;
 	        option.series[1].data = this.state.offlineNum;
+	        option.xAxis[0].data = this.state.createTime;
 	        this.option = option;
-	        this.getOption(this.state.onlineNum, this.state.offlineNum);
+	        this.getOption(this.state.onlineNum, this.state.offlineNum, this.state.createTime);
 	    },
 	    componentWillUnmount: function componentWillUnmount() {},
-	    fetchNewDate: function fetchNewDate() {
-	        var now = new Date(); //定义一个时间对象
-	        //var y = now.getFullYear(); //获取完整的年份(4位,1970-????)
-	        var m = now.getMonth() + 1; //获取当前月份(0-11,0代表1月)
-	        var d = now.getDate(); //获取当前日(1-31)
-	        var datas = [];
-	        for (var i = d - 5; i <= d; i++) {
-	            datas.push(m + "/" + i);
-	        }
-	        return datas;
-	    },
-	    /*getTestData:function (){
-	        var res = [];
-	        var len = 6;
-	        while (len--) {
-	            res.push(Math.round(Math.random() * 1000));
-	        }
-	        return res;
-	    },*/
-	    getOption: function getOption(onlineNum, offlineNum) {
+	    getOption: function getOption(onlineNum, offlineNum, createTime) {
 	        var option = {
 	            title: {
 	                text: '',
@@ -86367,7 +86349,7 @@
 	            xAxis: [{
 	                type: 'category',
 	                boundaryGap: true,
-	                data: this.fetchNewDate(),
+	                data: createTime,
 	                axisLine: {
 	                    show: true,
 	                    onZero: true,
@@ -88383,12 +88365,29 @@
 	      async: false,
 	      type: "post",
 	      url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/mix_dzzd_data.action",
-	      data: { x_json: data },
+	      /*data: {x_json:data},*/
 	      datatype: 'json',
 	      success: function (d) {
-	        console.log(d.data.onlineNum + "##" + d.data.offlineNum);
-	        this.trigger({ onlineNum: d.data.onlineNum });
-	        this.trigger({ offlineNum: d.data.offlineNum });
+	        var onLine = [];
+	        var offLine = [];
+	        var datas = [];
+	        var now;
+	        for (var i = 0; i < d.length; i++) {
+	          onLine.push(d[i].onlineNum);
+	          offLine.push(d[i].offlineNum);
+	          if (d[i].createTime == null) {
+	            now = new Date(); //定义一个时间对象
+	          } else {
+	            now = new Date(d[i].createTime);
+	          }
+	          var m = now.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+	          var date = now.getDate(); //获取当前日(1-31)
+	          datas.push(m + "/" + date);
+	        }
+	        console.log(d.length + "##" + "onLine:" + onLine);
+	        this.trigger({ onlineNum: onLine });
+	        this.trigger({ offlineNum: offLine });
+	        this.trigger({ createTime: datas });
 	      }.bind(this)
 	    });
 	  }
