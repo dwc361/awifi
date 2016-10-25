@@ -11,12 +11,9 @@
 	<meta name="author" content="Mosaddek">
 	<meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 	<title>大屏监控网</title>
-	<!-- <script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script> -->
-	<script type="text/javascript" src="${basePath}/common/js/jquery/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="${basePath}/common/js/jquery/jquery.json.js"></script>
-	<script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
-	<script type="text/javascript" src="${basePath}/common/js/ROOF.Class.js"></script>
-	<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+	<%@include file="/ems/bigscreen_show/bigscreen_show_head.jsp"%>
+	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/screen_2.css" />
+	<script type="text/javascript" src="${basePath}/ems/bigscreen_show/second/js/screen.js"></script>
 	<script type="text/javascript">
 		var ws = null;
 	
@@ -75,10 +72,6 @@
 			return true
 		}
 	</script>
-	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/screen_2.css" />
-	<script src="${basePath}/ems/bigscreen_show/second/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/ems/bigscreen_show/second/js/screen.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body scrolling="no">
@@ -88,22 +81,8 @@
 	</footer>
 	<!--以下是左侧4栏-->
 	<div class="leftPart">
-		<div id='part_1_1' class="box">
-			<div class="left col-md-12 col-lg-12 col-sm-12">
-				<div class="topH">
-					<h1>[ 平台用户总量 ]</h1>
-				</div>
-				<div class="Hchart" style="position: relative;">
-					<div id="areas_YHZL"></div>
-					<div id="textname">
-						<ul style="font-size: 1.4rem;">
-							<li> <i style="background: #367bdb;"></i>用户数量：<i id="areaspline1">343242424</i> <span></span></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-           <div id='part_2_1' class="box"></div>
+		<div id='part_1_1' class="box"></div>
+        <div id='part_2_1' class="box"></div>
 		<div id='part_3_1' class="box"></div>
 		<div id='part_4_1' class="box"></div>
 	</div>
@@ -163,8 +142,8 @@
 <script type="text/javascript">
 	var chartNameList = ${list};
 </script>
-<!-- <script src="http://localhost:8081/bigscreen_echarts.js"></script> -->
-<script src="${basePath}/react/build/bigscreen_echarts.js"></script>
+<%--<script src="http://localhost:8081/bigscreen_echarts.js"></script>--%>
+ <script src="${basePath}/react/build/bigscreen_echarts.js"></script>
 <!-- <script src="${basePath}/ems/bigscreen_show/index/bigscreen_display/second/js/second_display_react_charts_templates.js"></script> -->
 
 <!--以下是map-->
