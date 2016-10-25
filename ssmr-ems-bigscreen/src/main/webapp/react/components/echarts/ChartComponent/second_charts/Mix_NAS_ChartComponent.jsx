@@ -1,27 +1,48 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactMixin from 'react-mixin';
+import Reflux from 'reflux'
+
 import ReactEcharts from '../../src/echarts-for-react';
+import store from '../../../../stores/second-store';
+import actions from '../../../../actions/second-actions';
 
 const Mix_NAS_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
     getInitialState: function() {
-        return {option: this.getOption()};
+        return {onlineNum:[],offlineNum:[],option:this.getOption([],[],[]),createTime:[]};
+    },
+    componentDidMount: function() {
+        actions.getMix_nas_data();
+    },
+    componentDidUpdate: function(){
+        console.log(this.state.offlineNum+"*3*"+this.state.createTime);
+        let option = this.state.option;
+        option.series[0].data = this.state.onlineNum;
+        option.series[1].data = this.state.offlineNum;
+        option.xAxis[0].data = this.state.createTime;
+        this.option = option;
+        this.getOption(this.state.onlineNum,this.state.offlineNum,this.state.createTime);
+    },
+    componentWillUnmount: function() {
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
         let currentIndex = -1;
         setInterval(function() {
             let dataLen = option.series[0].data.length;
+            console.log(option.series[0].data+"&&&4&");
             // 取消之前高亮的图形
             echartObj.dispatchAction({
                 type: 'downplay',
                 seriesIndex: 0,
                 dataIndex: currentIndex
             });
-            
+
             currentIndex = (currentIndex + 1) % dataLen;
-            
+
             // 高亮当前图形
             echartObj.dispatchAction({
                 type: 'highlight',
@@ -34,9 +55,8 @@ const Mix_NAS_ChartComponent = React.createClass({
                 seriesIndex: 0,
                 dataIndex: currentIndex
             });
-            option.series[3].data[0].value = option.series[0].data[currentIndex];
-            option.series[3].data[1].value = option.series[1].data[currentIndex];
-            option.series[3].data[2].value = option.series[2].data[currentIndex];
+            option.series[2].data[0].value = option.series[0].data[currentIndex];
+            option.series[2].data[1].value = option.series[1].data[currentIndex];
             echartObj.setOption(option,true);
         }, 2000);
         echartObj.setOption(option);
@@ -52,11 +72,7 @@ const Mix_NAS_ChartComponent = React.createClass({
         }
         return datas;
     },
-    componentDidMount: function() {
-    },
-    componentWillUnmount: function() {
-    },
-    getOption: function() {
+    getOption: function(onlineNum,offlineNum,createTime) {
         const option = {
             title: {
                 text: '',
@@ -69,7 +85,7 @@ const Mix_NAS_ChartComponent = React.createClass({
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: this.fetchNewDate(),
+                    data: createTime,
                     axisLine: {
                         show: true,
                         onZero: true,
@@ -93,7 +109,7 @@ const Mix_NAS_ChartComponent = React.createClass({
                     type: 'value',
                     scale: true,
                     name: '',
-                    max: 1000,
+                    max: 10000,
                     min: 0,
                     boundaryGap: [0.2, 0.2],
                     axisLine: {
@@ -111,7 +127,7 @@ const Mix_NAS_ChartComponent = React.createClass({
                     type: 'value',
                     show: false,
                     name: '',
-                    max: 1000,
+                    max: 10000,
                     min: 0,
                     boundaryGap: [0.2, 0.2]
                 }
@@ -120,44 +136,30 @@ const Mix_NAS_ChartComponent = React.createClass({
                 {
                     name:'正常',
                     type:'bar',
-                    data:(function (){
-                        var res = [];
-                        var len = 6;
-                        while (len--) {
-                            res.push(Math.round(Math.random() * 1000));
-                        }
-                        return res;
-                    })(),
+                    data:onlineNum,
                     itemStyle:{normal:{
                         color:'#21c6a5'
                     }}
                 },
-                {
-                    name:'故障',
-                    type:'bar',
-                    data:(function (){
-                        var res = [];
-                        var len = 6;
-                        while (len--) {
-                            res.push(Math.round(Math.random() * 1000));
-                        }
-                        return res;
-                    })(),
-                    itemStyle:{normal:{
-                        color:'#65c7f7'
-                    }}
-                },
+                /* {
+                 name:'故障',
+                 type:'bar',
+                 data:(function (){
+                 var res = [];
+                 var len = 6;
+                 while (len--) {
+                 res.push(Math.round(Math.random() * 1000));
+                 }
+                 return res;
+                 })(),
+                 itemStyle:{normal:{
+                 color:'#65c7f7'
+                 }}
+                 },*/
                 {
                     name:'离线',
                     type:'bar',
-                    data:(function (){
-                        var res = [];
-                        var len = 6;
-                        while (len--) {
-                            res.push(Math.round(Math.random() * 1000));
-                        }
-                        return res;
-                    })(),
+                    data:offlineNum,
                     itemStyle:{normal:{
                         color:'#096dc5'
                     }}
@@ -177,7 +179,7 @@ const Mix_NAS_ChartComponent = React.createClass({
                             textStyle: {
                                 color: '#fff',
                                 fontFamily: '微软雅黑, Arial, Verdana, sans-serif',
-                                fontSize: 19,
+                                fontSize: 19
                             }
                         }
                     },
@@ -188,19 +190,18 @@ const Mix_NAS_ChartComponent = React.createClass({
                             length : 20
                         },
                         color:function(params){
-                            var colorList=['#21c6a5', '#65c7f7', '#096dc5'];
+                            /* var colorList=['#21c6a5', '#65c7f7', '#096dc5'];*/
+                            var colorList=['#21c6a5', '#096dc5'];
                             return colorList[params.dataIndex];
                         }
                     }},
                     data: [
-                            {value:100, name:'正常'},
-                            {value:100, name:'故障'},
-                            {value:100, name:'离线'}
+                        {value:1000, name:'正常'},
+                        {value:1000, name:'离线'}
                     ]
                 }
             ]
         };
-
         return option;
     },
     render: function() {
@@ -223,3 +224,5 @@ const Mix_NAS_ChartComponent = React.createClass({
 });
 
 export default Mix_NAS_ChartComponent;
+// ES6 mixin写法，通过mixin将store的与组件连接，功能是监听store带来的state变化并刷新到this.state
+ReactMixin.onClass(Mix_NAS_ChartComponent, Reflux.connect(store));

@@ -1,8 +1,13 @@
 import React from 'react';
-import echarts from 'echarts';
-import ReactEcharts from '../../src/echarts-for-react';
+import ReactDOM from 'react-dom';
+import ReactMixin from 'react-mixin';
+import Reflux from 'reflux'
 
-// 指定图表的配置项和数据
+import ReactEcharts from '../../src/echarts-for-react';
+import store from '../../../../stores/second-store';
+import actions from '../../../../actions/second-actions';
+
+// 指定图表的配置项和数据？？？？
 var x_data = [['学校','医院','码头','酒店','公园'],
               ['机场','浴室','商场','游乐场','文化厅','车站'],
               ['饭馆','图书馆','展览馆','美容店','体育场','招待所']];
@@ -14,7 +19,7 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
     },
     timeTicket: null,
     getInitialState: function() {
-        return {option: this.getOption()};
+        return {typeName:[],hotareaNum:[],option: this.getOption([],[])};
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
@@ -63,10 +68,19 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
         }, 2000);
     },
     componentDidMount: function() {
+        actions.getScatter_hotspot_data();
+    },
+    componentDidUpdate: function(){
+        console.log(this.state.typeName+"*3*"+this.state.hotareaNum);
+        let option = this.state.option;
+        option.yAxis.data = this.state.typeName;
+        option.series.data = this.state.hotareaNum;
+        this.option = option;
+        this.getOption(this.state.typeName,this.state.hotareaNum);
     },
     componentWillUnmount: function() {
     },
-    getOption: function() {
+    getOption: function(typeName,hotareaNum) {
         const option = {
             tooltip: {
                 itemGap: '  0',
@@ -83,7 +97,7 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
             //  }]),
             xAxis: {
                 type : 'category',
-                data : x_data[0],
+                data : typeName[0],
                 axisLine: {
                     show: true,
                     onZero: true,
@@ -120,7 +134,7 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
             },
             series: [{
                 name: '',
-                data: y_data[0],
+                data: hotareaNum[0],
                 type: 'scatter',
                 symbolSize: function(data) {
                     return data;
@@ -173,3 +187,4 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
 });
 
 export default Scatter_HotSpot_ChartComponent;
+ReactMixin.onClass(Scatter_HotSpot_ChartComponent, Reflux.connect(store));
