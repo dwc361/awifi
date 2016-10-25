@@ -3,7 +3,7 @@
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.awifi.bigscreen.word_fileinfo.dao">
 	<sql id="columnsAs">
-		t1.id, t1.name, t1.type, t1.wordid
+		t1.id, t1.name, t1.type, t1.wordid, t1.screen_id
 	</sql>
 
 	<select id="selectWordFileinfoPage" resultType="com.awifi.bigscreen.word_fileinfo.entity.WordFileinfoVo">
