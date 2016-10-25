@@ -5,6 +5,9 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.awifi.bigscreen.word_fileinfo.api.service.api.IWordFileinfoService;
+import com.awifi.bigscreen.word_fileinfo.entity.WordFileinfo;
+import com.awifi.bigscreen.word_fileinfo.entity.WordFileinfoVo;
 import org.roof.web.dictionary.entity.Dictionary;
 import org.roof.web.dictionary.service.api.IDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,6 +42,7 @@ public class IndexShowAction {
 	private IBigscreenChartRelService bigscreenChartRelService;
 	private IThemeService themeService;
 	private ITemplatesService templatesService;
+	private IWordFileinfoService wordFileinfoService;
 
 	// 加载页面的通用数据
 	private void loadCommon(Model model){
@@ -52,7 +56,28 @@ public class IndexShowAction {
 	@RequestMapping("/bigscreen_first_display")
 	public String bigscreen_first_display(Model model, HttpServletRequest request) {
 		this.loadCommon(model);
-		return "";
+		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
+
+		// 加载大屏信息
+		/*BigscreenVo bigscreenVo = new BigscreenVo();
+		bigscreenVo.setEnabled("1");
+		bigscreenVo.setRe_type(BigscreenReTypeEnum.First.getCode());
+		List<BigscreenVo> bigscreenList = bigscreenService.selectForList(bigscreenVo);
+		if(bigscreenList!=null && bigscreenList.size()>0) {
+			bigscreenVo = bigscreenList.get(0);
+		}
+		WordFileinfo wordFileinfo = new WordFileinfo();
+		wordFileinfo.setScreen_id(bigscreenVo.getId());
+		List<WordFileinfoVo> wordList = wordFileinfoService.selectForList(wordFileinfo);*/
+
+		// 选用哪一套模板
+		//TemplatesVo templatesVo = templatesService.load(new Templates(1L));
+
+		// 选用哪一套主题
+		//ThemeVo themeVo = themeService.load(new Theme(bigscreenVo.getTheme_id()));
+
+		//return templatesVo.getPath();
+		return "/ems/bigscreen_show/first/first_display.jsp";
 	}
 	
 	/**
