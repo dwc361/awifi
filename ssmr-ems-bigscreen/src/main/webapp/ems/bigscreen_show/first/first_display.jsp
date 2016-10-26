@@ -23,20 +23,20 @@
                 'dataType' : 'json',
                 'clearForm' : true,
                 'success' : function(d) {
-                    var src = ROOF.Utils.projectName() + "/fileAction/get/" + d.data.name + ".action";
-                    $("body").append("<object data='"+src+"' type='image/svg+xml' width='100%' height='100%' />");
+//                    var src = ROOF.Utils.projectName() + "/fileAction/get/" + d.data.name + ".action";
+                    var src =ROOF.Utils.projectName() + "/ems/bigscreen_show/first/svg/welcome.svg";
+                    $("body").append("<object data='"+src+"' type='image/svg+xml' width='1px' height='1px' />");
                     /*$("body").append("<img src='"+src+"' alt='svg not supported!'' />");*/
                 },
                 'error' : function(d) {
                 }
             });
-
         });
     </script>
 </head>
 <body>
     <div >
-    <object data="${basePath }/ems/bigscreen_show/first/svg/welcome.svg" type="image/svg+xml" width="1px" height="1px"></object>
+    <%--<object data="${basePath }/ems/bigscreen_show/first/svg/welcome.svg" type="image/svg+xml" width="1px" height="1px"></object>--%>
     <img src="${basePath }/file/test/welcome.svg" alt="" />
     </div>
     <input name="name" id="name" type="hidden" placeholder="图片名称" />
