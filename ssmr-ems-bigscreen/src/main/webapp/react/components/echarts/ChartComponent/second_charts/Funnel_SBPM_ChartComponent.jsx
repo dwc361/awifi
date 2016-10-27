@@ -74,7 +74,6 @@ const Funnel_SBPM_ChartComponent = React.createClass({
         actions.getFunnel_sbpm_data();
     },
     componentDidUpdate: function(){
-        console.log(this.state.deviceNum+"*3*"+this.state.createTime);
         let option = this.state.option;
         option.yAxis.data = this.state.deviceNum;
         option.series.data = this.state.provice;
