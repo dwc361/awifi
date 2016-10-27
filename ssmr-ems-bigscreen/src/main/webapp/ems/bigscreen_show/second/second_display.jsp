@@ -19,6 +19,19 @@
 	
 		$(function() {
 			connect();
+			$.ajax({
+				type: "post",
+				url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/user_pv_uv_data.action",
+				data: {username:$("#username").val(), content:$("#content").val()},
+				dataType: "json",
+				success: function(data){
+					console.log("pv/uv: "+data.toString());
+					$("#merchantNum").val(data.merchantNum);
+					$("#userNum").val(data.userNum);
+					$("#PV").val(data.PV);
+					$("#UV").val(data.UV);
+				}
+			});
 		});
 	
 		// 建立连接
@@ -71,6 +84,8 @@
 				return false
 			return true
 		}
+		//8.用户、商户、PV、UV统计
+
 	</script>
 </head>
 
@@ -95,19 +110,19 @@
 				<section class="stnHr col-md-1 col-lg-1 col-sm-1"><img src="${basePath}/ems/bigscreen_show/second/img/xiaojiange.png" alt="" /></section>
 				<section class="stnP col-md-4 col-lg-4 col-sm-4">
 					<span class="stnP-span">用户总数</span><br />
-					<i class="stnP-i">2016.02.14</i>
+					<i class="stnP-i"><input type="text" id="userNum" style= "background-color:transparent;border-style: solid; border-width: 0"/></i>
 				</section>
 			</div
 			><div class="col-md-4 col-lg-4 col-sm-4" style="text-align: center;">
 				<span class="stnFont-mid">全国商户总数— </span>
-				<i class="blueFont">1232434</i>
+				<i class="blueFont"><input type="text" id="merchantNum" style= "background-color:transparent;border-style: solid; border-width: 0"/></i>
 			</div
 			><div class="col-md-4 col-lg-4 col-sm-4" style="padding-right: 12px;padding-left: 12px;line-height: 3rem;text-align: center;">
-				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">PV- <i class="blueFont-right">125658</i></section>
+				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">PV- <i class="blueFont-right"><input type="text" id="PV" style= "background-color:transparent;border-style: solid; border-width: 0"/></i></section>
 				<section class="stnHr col-md-1 col-lg-1 col-sm-1" style="width: 6%;">
 					<img src="${basePath}/ems/bigscreen_show/second/img/xiaojiange.png" alt="" />
 				</section>
-				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">UV- <i class="blueFont-right">125658</i></section>
+				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">UV- <i class="blueFont-right"><input type="text" id="UV" style= "background-color:transparent;border-style: solid; border-width: 0"/></i></section>
 			</div>
 		</header>
 		<div class="content">
