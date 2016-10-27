@@ -7,7 +7,7 @@ import ReactEcharts from '../../src/echarts-for-react';
 import store from '../../../../stores/second-store';
 import actions from '../../../../actions/second-actions';
 
-/*var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃', '海南'],
+var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃', '海南'],
                      ['山西', '辽宁', '吉林', '黑龙江', '云南', '贵州'],
                      ['福建', '广东', '重庆', '上海', '四川', '湖北'],
                      ['湖南', '江西', '安徽', '江苏', '青海', '新疆'],
@@ -16,13 +16,13 @@ var numberArray = [[812, 899, 890, 880, 870, 850, 70],
                    [812, 809, 779, 760, 710, 670],
                    [812, 600, 520, 570, 490, 460],
                    [812, 390, 360, 230, 200, 190],
-                   [812, 150, 130, 120, 100, 99]];*/
+                   [812, 150, 130, 120, 100, 99]];
 const Funnel_SBPM_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
     getInitialState: function() {
-        return {deviceNum:[],provice:[],option: this.getOption([],[])};
+        return {option: this.getOption()};
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
@@ -71,18 +71,10 @@ const Funnel_SBPM_ChartComponent = React.createClass({
         }, 2000);
     },
     componentDidMount: function() {
-        actions.getFunnel_sbpm_data();
-    },
-    componentDidUpdate: function(){
-        let option = this.state.option;
-        option.yAxis.data = this.state.deviceNum;
-        option.series.data = this.state.provice;
-        this.option = option;
-        this.getOption(this.state.deviceNum,this.state.provice);
     },
     componentWillUnmount: function() {
     },
-    getOption: function(deviceNum,provice) {
+    getOption: function() {
         const option = {
             //  color: [
             //      '#21c6a5', '#65c7f7', '#096dc5'
@@ -133,7 +125,7 @@ const Funnel_SBPM_ChartComponent = React.createClass({
                         fontSize: 12
                     }
                 },
-                data: deviceNum,
+                data: typeNameArray[0],
                 nameTextStyle: {
                     color: '#fff',
                     fontStyle: 'normal',
@@ -153,7 +145,7 @@ const Funnel_SBPM_ChartComponent = React.createClass({
             },
             series: [{
                 type: 'bar',
-                data: provice,
+                data: numberArray[0],
                 itemStyle: {
                     normal: {
                         color: function(params) {

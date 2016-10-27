@@ -18,6 +18,7 @@ const Mix_NAS_ChartComponent = React.createClass({
         actions.getMix_nas_data();
     },
     componentDidUpdate: function(){
+       // console.log(this.state.offlineNum+"*3*"+this.state.createTime);
         let option = this.state.option;
         option.series[0].data = this.state.onlineNum;
         option.series[1].data = this.state.offlineNum;
@@ -32,6 +33,7 @@ const Mix_NAS_ChartComponent = React.createClass({
         let currentIndex = -1;
         setInterval(function() {
             let dataLen = option.series[0].data.length;
+           // console.log(option.series[0].data+"&&&4&");
             // 取消之前高亮的图形
             echartObj.dispatchAction({
                 type: 'downplay',
