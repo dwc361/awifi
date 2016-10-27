@@ -46,9 +46,9 @@ const Mix_JHL_ChartComponent = React.createClass({
         actions.getMix_jhl_data();
     },
     componentDidUpdate: function(){
-        console.log(this.state.activatePer+"*3*"+this.state.createTime);
+        console.log(this.state.activatePer+"*jhl*"+this.state.createTime);
         let option = this.state.option;
-        option.xAxis.data = this.state.createTime;
+        option.xAxis[0].data = this.state.createTime;
         option.series[0].data = this.state.activatePer;
         option.series[1].data = this.state.activateNum;
         this.option = option;
@@ -77,7 +77,6 @@ const Mix_JHL_ChartComponent = React.createClass({
                         opacity: 1,
                     },
                 },
-
                 data: createTime
             }],
             yAxis: [{

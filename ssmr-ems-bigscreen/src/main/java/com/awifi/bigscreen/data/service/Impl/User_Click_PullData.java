@@ -16,14 +16,14 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
 
 @Service
-public class UserPullData implements IPullData<UserData>,InitializingBean{
+public class User_Click_PullData implements IPullData<UserData>,InitializingBean{
 	
 	private String url = PropertiesUtil.getPorpertyString("zabbix.url");
 	private String user = PropertiesUtil.getPorpertyString("zabbix.user");
 	private String password = PropertiesUtil.getPorpertyString("zabbix.password");
-
-
+	
 	JsonRpcHttpClient client = null;
+	
 	@Override
 	public void afterPropertiesSet() throws Exception {
 		client = new JsonRpcHttpClient(new URL(url));
@@ -48,7 +48,6 @@ public class UserPullData implements IPullData<UserData>,InitializingBean{
         client.setAdditionalJsonContent(headers);
         
         Map<String,Object> params = new HashMap<String,Object>();
-
         params.put("output", "extend");
         params.put("history", 3);
         params.put("itemids", "47523");
@@ -70,17 +69,12 @@ public class UserPullData implements IPullData<UserData>,InitializingBean{
 			return userDatas.get(0);
 		}
 	}
-
 	
 	private String getAuth() throws Throwable {
         Map<String,String> params = new HashMap<String,String>();
         params.put("user", user);
         params.put("password", password);
-        
-		String s = client.invoke("user.login",params, String.class);
-		return s;
+		String auth = client.invoke("user.login", params, String.class);
+		return auth;
 	}
-
-	
-
 }
