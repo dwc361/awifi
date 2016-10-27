@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awifi.bigscreen.AwifiConstants;
 import com.awifi.bigscreen.data.service.api.IPullData;
+import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
@@ -135,6 +136,8 @@ public class DataShowAction {
 	}
 	@Resource
 	private IPullData user_Click_PullData;
+	@Resource
+	private IDataAcquisition user_Click_DataAcquisition;
 	@RequestMapping("/areaspline_chart_show_add_one_data")
 	public @ResponseBody Result areaspline_chart_show_add_one_data(HttpServletRequest request, HttpServletResponse response) {
 		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
@@ -148,6 +151,8 @@ public class DataShowAction {
 //		}
 		Random generator = new Random();
 		map.put("userClickNum", generator.nextInt(10000)); //用户点击量
+		
+		//redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, user_Click_DataAcquisition, "{'key':'value'}");
 		
 		return new Result("保存成功!", map);
 	}
