@@ -10,5 +10,4 @@ export default Reflux.createActions(['getBigscreenSecondData',
                                      'getMix_nas_data',
                                      'getMix_jhl_data',
                                      'getPie_lxfg_data',
-                                     'getScatter_hotspot_data',
-                                     'getUser_pv_uv_data']);
+                                     'getScatter_hotspot_data']);
