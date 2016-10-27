@@ -48,6 +48,29 @@ export default Reflux.createStore({
 	setStateValue(value){
 		this.trigger(value);
 	},
+	setListDate(arr){
+		var begin = 0,
+			end = begin + 5;
+		var result = [],
+			arrLength = arr.length;
+
+		if (end >= arrLength) return result.push(arr);
+
+		while (end < arrLength) {
+
+			result.push(arr.slice(begin, end));
+
+			begin = begin + 5;
+			end = begin + 5;
+			if (end > arrLength) {
+				end = arrLength;
+				result.push(arr.slice(begin, end));
+				break;
+			}
+		}
+		console.log("setListDate:"+result);
+		return  result;
+	},
 	// 1.全省设备排名
 	getFunnel_sbpm_data(){
 		$.ajax({
@@ -57,19 +80,22 @@ export default Reflux.createStore({
 			/*data: {x_json:data},*/
 			datatype : 'json',
 			success : function(d) {
+				console.log(d.length+"#排名#"+ " d.data:"+d.data);
 				var device = [];
 				var pro = [];
 				for(var i = 0;i< d.data.length;i++){
 					device.push(d.data[i].deviceNum);
 					pro.push(d.data[i].provice);
 				}
-				console.log(d.length+"##"+"device:"+device+ " d.data:"+d.data);
+				device = this.getList(device);
+				pro = this.getList(pro);
+				console.log("排名device:"+device);
 				this.trigger({deviceNum:device});
 				this.trigger({provice:pro});
 			}.bind(this)
 		});
 	},
-	// 2.用户认证状态????
+	// 2.用户认证状态
 	getLine_yhrz_data(){
 		$.ajax({
 			async: false,
@@ -78,16 +104,24 @@ export default Reflux.createStore({
 			/*data: {x_json:data},*/
 			datatype : 'json',
 			success : function(d) {
-				console.log("d :"+d.toString());
-				var device = [];
-				var provice = [];
-				for(var i = 0;i< d.data.length;i++){
-					device.push(d.data[i].onlineNum);
-					provice.push(d.data[i].offlineNum);
+				console.log("用户认证d :"+d.toString());
+				var success = [];
+				var datas = [];
+				var now;
+				for(var i = 0;i< d.length;i++){
+					success.push(d[i].successNum);
+					if(d[i].createTime==null){
+						now = new Date();//定义一个时间对象
+					}else{
+						now = new Date(d[i].createTime);
+					}
+					var m = now.getMonth()+1; //获取当前月份(0-11,0代表1月)
+					var date = now.getDate(); //获取当前日(1-31)
+					datas.push(m+"/"+date);
 				}
-				console.log(d.length+"##"+"device:"+device);
-				this.trigger({deviceNum:device});
-				this.trigger({provice:provice});
+				console.log(d.length+"#认证#"+"success:"+success);
+				this.trigger({successNum:success});
+				this.trigger({createTime:datas});
 			}.bind(this)
 		});
 	},
@@ -116,7 +150,7 @@ export default Reflux.createStore({
 					var date = now.getDate(); //获取当前日(1-31)
 					datas.push(m+"/"+date);
 				}
-				console.log(d.length+"##"+"onLine:"+onLine);
+				//console.log(d.length+"##"+"onLine:"+onLine);
 				this.trigger({onlineNum:onLine});
 				this.trigger({offlineNum:offLine});
 				this.trigger({createTime:datas});
@@ -148,7 +182,7 @@ export default Reflux.createStore({
 					var date = now.getDate(); //获取当前日(1-31)
 					datas.push(m+"/"+date);
 				}
-				console.log(d.length+"#nas#"+"onLine:"+onLine);
+				//console.log(d.length+"#nas#"+"onLine:"+onLine);
 				this.trigger({onlineNum:onLine});
 				this.trigger({offlineNum:offLine});
 				this.trigger({createTime:datas});
@@ -164,6 +198,8 @@ export default Reflux.createStore({
 			/*data: {x_json:data},*/
 			datatype : 'json',
 			success : function(d) {
+				debugger
+				console.log("jhl: d:"+ d.toString());
 				var num = [];
 				var per = [];
 				var datas = [];
@@ -203,7 +239,7 @@ export default Reflux.createStore({
 					name.push(d.data[i].typeName);
 					num.push(d.data[i].hotareaNum);
 				}
-				console.log(d.data.length+"##"+"device:"+name);
+				console.log(d.data.length+"#lxfb#"+"device:"+name);
 				this.trigger({typeName:name});
 				this.trigger({hotareaNum:num});
 			}.bind(this)
@@ -229,23 +265,5 @@ export default Reflux.createStore({
 				this.trigger({hotareaNum:num});
 			}.bind(this)
 		});
-	},
-	//8.用户、商户、PV、UV统计
-	getUser_pv_uv_data(){
-		$.ajax({
-			async: false,
-			type : "post",
-			url : ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/user_pv_uv_data.action",
-			/*data: {x_json:data},*/
-			datatype : 'json',
-			success : function(d) {
-				console.log("pv/uv: "+d.toString());
-				this.trigger({PV: d.PV});
-				this.trigger({userNum: d.userNum});
-				this.trigger({UA: d.UA});
-				//???
-				/*this.trigger({userNum: d.userNum});*/
-			}.bind(this)
-		});
-	},
+	}
 });
