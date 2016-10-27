@@ -30,6 +30,7 @@
 					$("#userNum").val(data.userNum);
 					$("#PV").val(data.PV);
 					$("#UV").val(data.UV);
+					
 				}
 			});
 		});
