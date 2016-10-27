@@ -12,9 +12,9 @@ import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry
 import com.awifi.bigscreen.websocket.handler.SystemWebSocketHandler;
 import com.awifi.bigscreen.websocket.interceptor.HandshakeInterceptor;
 
-@Configuration
-@EnableWebMvc
-@EnableWebSocket //开启websocket
+//@Configuration
+//@EnableWebMvc
+//@EnableWebSocket //开启websocket
 public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 
     public WebSocketConfig() {

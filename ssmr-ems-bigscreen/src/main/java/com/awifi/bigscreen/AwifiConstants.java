@@ -65,6 +65,11 @@ public class AwifiConstants {
 	 */
 	public static final String Redis_Key_Scatter_HotSpot_Chart = "Scatter_HotSpot_Chart";
 	
+	/**
+	 * [平台用户点击量]图表对应Redis里面的Key
+	 */
+	public static final String Redis_Key_User_Click = "User_Click";
+	
 	
 	
 	/**
