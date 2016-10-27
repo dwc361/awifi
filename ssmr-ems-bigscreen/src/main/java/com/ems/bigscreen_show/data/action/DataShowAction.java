@@ -19,6 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awifi.bigscreen.AwifiConstants;
+<<<<<<< HEAD
+=======
+import com.awifi.bigscreen.data.service.api.IPullData;
+import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
+>>>>>>> 24a626b0617cf97fe4f61054f2c06fea9b1e6453
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
@@ -118,6 +123,7 @@ public class DataShowAction {
     public @ResponseBody String user_pv_uv_data() {
 		return redisHashCache.readCacheByKey(AwifiConstants.Redis_Key_User_PV_UV, user_PV_UV_DataTransform);
     }
+<<<<<<< HEAD
 
 
 
@@ -148,6 +154,44 @@ public class DataShowAction {
 		} else {
 			return new Result("数据传输失败!");
 		}
+=======
+	
+	/**
+	 * [平台用户点击量]
+	 * @param x_json
+	 * @param request
+	 * @param response
+	 * @return json
+	 */
+	@Resource
+	private IDataTransform user_Click_DataTransform;
+	@RequestMapping(value="/areaspline_chart_data", produces="application/json; charset=utf-8")
+	public @ResponseBody String areaspline_chart_data(HttpServletRequest request, HttpServletResponse response) {
+		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 6, "asc", user_Click_DataTransform);
+	}
+	@Resource
+	private IPullData user_Click_PullData;
+	@Resource
+	private IDataAcquisition user_Click_DataAcquisition;
+	@RequestMapping("/areaspline_chart_show_add_one_data")
+	public @ResponseBody Result areaspline_chart_show_add_one_data(HttpServletRequest request, HttpServletResponse response) {
+		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
+		
+		Map map = new HashMap();
+		long time = new Date().getTime();
+		map.put("createTime", time);
+//		UserData data = (UserData) user_Click_PullData.Pull();
+//		if(data != null) {
+//			map.put("userClickNum", data.getValue()); //用户点击量
+//		}
+		Random generator = new Random();
+		map.put("userClickNum", generator.nextInt(10000)); //用户点击量
+		
+		//redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, user_Click_DataAcquisition, "{'key':'value'}");
+		
+		return new Result("保存成功!", map);
+>>>>>>> 24a626b0617cf97fe4f61054f2c06fea9b1e6453
 	}
 	
 	
