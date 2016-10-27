@@ -1,16 +1,9 @@
 package com.ems.bigscreen_show.data.action;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.roof.spring.Result;
 import org.roof.web.dictionary.service.api.IDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -46,9 +39,11 @@ public class DataShowAction {
 	 * 2.[用户认证状态]
 	 * @return json
 	 */
+	@Resource
+	private IDataTransform line_YHRZ_Chart_DataTransform;
 	@RequestMapping(value="/line_yhrz_data", produces="application/json; charset=utf-8")
     public @ResponseBody String line_yhrz_data() {
-		return null;
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Line_YHRZ_Chart, 6, "desc", line_YHRZ_Chart_DataTransform);
     }
 	
 	/**
@@ -88,9 +83,11 @@ public class DataShowAction {
 	 * 6.[设备类型分布]
 	 * @return json
 	 */
+	@Resource
+	private IDataTransform pie_LXFB_Chart_DataTransform;
 	@RequestMapping(value="/pie_lxfg_data", produces="application/json; charset=utf-8")
     public @ResponseBody String pie_lxfg_data() {
-		return null;
+		return redisHashCache.readCacheByKey(AwifiConstants.Redis_Key_Pie_LXFB_Chart, pie_LXFB_Chart_DataTransform);
     }
 	
 	/**
@@ -115,35 +112,24 @@ public class DataShowAction {
 		return redisHashCache.readCacheByKey(AwifiConstants.Redis_Key_User_PV_UV, user_PV_UV_DataTransform);
     }
 	
-	
-	
-	@RequestMapping("/areaspline_chart_data")
-	public @ResponseBody Result areaspline_chart_data(String x_json, HttpServletRequest request, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
-		
-		if (x_json != null) {
-			Random generator = new Random();
-			
-			com.alibaba.fastjson.JSONArray fjsArry = com.alibaba.fastjson.JSON.parseArray(x_json);
-			Object[] objects = fjsArry.toArray();
-			List<Map> dataList = new ArrayList<Map>();
-			for(Object object : objects) {
-				Map map = new HashMap();
-				map.put('x', object);
-				map.put('y', generator.nextInt(10000));
-				map.put('a', generator.nextDouble());
-				map.put('b', generator.nextDouble()+1);
-				map.put('c', generator.nextDouble()+2);
-//				map.put('a', generator.nextInt(10000));
-//				map.put('b', generator.nextInt(10000));
-//				map.put('c', generator.nextInt(10000));
-				
-				dataList.add(map);
-			}
-			return new Result("保存成功!", dataList);
-		} else {
-			return new Result("数据传输失败!");
-		}
+	/**
+	 * [平台用户点击量]
+	 * @param x_json
+	 * @param request
+	 * @param response
+	 * @return json
+	 */
+	@Resource
+	private IDataTransform user_Click_DataTransform;
+	@RequestMapping(value="/areaspline_chart_data", produces="application/json; charset=utf-8")
+	public @ResponseBody String areaspline_chart_data(int count, HttpServletRequest request, HttpServletResponse response) {
+		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, count, "desc", user_Click_DataTransform);
+	}
+	@RequestMapping(value="/areaspline_chart_show_add_one_data", produces="application/json; charset=utf-8")
+	public @ResponseBody String areaspline_chart_show_add_one_data(HttpServletRequest request, HttpServletResponse response) {
+		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 1, "desc", user_Click_DataTransform);
 	}
 	
 	
