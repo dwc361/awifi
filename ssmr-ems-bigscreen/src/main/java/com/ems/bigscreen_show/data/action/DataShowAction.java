@@ -1,9 +1,15 @@
 package com.ems.bigscreen_show.data.action;
 
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Random;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.roof.spring.Result;
 import org.roof.web.dictionary.service.api.IDictionaryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awifi.bigscreen.AwifiConstants;
+import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
@@ -122,14 +129,27 @@ public class DataShowAction {
 	@Resource
 	private IDataTransform user_Click_DataTransform;
 	@RequestMapping(value="/areaspline_chart_data", produces="application/json; charset=utf-8")
-	public @ResponseBody String areaspline_chart_data(int count, HttpServletRequest request, HttpServletResponse response) {
+	public @ResponseBody String areaspline_chart_data(HttpServletRequest request, HttpServletResponse response) {
 		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
-		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, count, "desc", user_Click_DataTransform);
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 6, "asc", user_Click_DataTransform);
 	}
-	@RequestMapping(value="/areaspline_chart_show_add_one_data", produces="application/json; charset=utf-8")
-	public @ResponseBody String areaspline_chart_show_add_one_data(HttpServletRequest request, HttpServletResponse response) {
+	@Resource
+	private IPullData user_Click_PullData;
+	@RequestMapping("/areaspline_chart_show_add_one_data")
+	public @ResponseBody Result areaspline_chart_show_add_one_data(HttpServletRequest request, HttpServletResponse response) {
 		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
-		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 1, "desc", user_Click_DataTransform);
+		
+		Map map = new HashMap();
+		long time = new Date().getTime();
+		map.put("createTime", time);
+//		UserData data = (UserData) user_Click_PullData.Pull();
+//		if(data != null) {
+//			map.put("userClickNum", data.getValue()); //用户点击量
+//		}
+		Random generator = new Random();
+		map.put("userClickNum", generator.nextInt(10000)); //用户点击量
+		
+		return new Result("保存成功!", map);
 	}
 	
 	
