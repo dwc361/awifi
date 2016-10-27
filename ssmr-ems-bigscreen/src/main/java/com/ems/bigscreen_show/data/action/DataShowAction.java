@@ -30,7 +30,7 @@ public class DataShowAction {
 	private IRedisCache redisZSetCache;
 	@Resource
 	private IRedisCache redisHashCache;
-	
+
 	/**
 	 * 1.[全省设备排名]
 	 * @return json
@@ -46,9 +46,11 @@ public class DataShowAction {
 	 * 2.[用户认证状态]
 	 * @return json
 	 */
+	@Resource
+	private IDataTransform line_YHRZ_Chart_DataTransform;
 	@RequestMapping(value="/line_yhrz_data", produces="application/json; charset=utf-8")
     public @ResponseBody String line_yhrz_data() {
-		return null;
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Line_YHRZ_Chart, line_YHRZ_Chart_DataTransform);
     }
 	
 	/**
@@ -88,9 +90,11 @@ public class DataShowAction {
 	 * 6.[设备类型分布]
 	 * @return json
 	 */
-	@RequestMapping(value="/pie_lxfg_data", produces="application/json; charset=utf-8")
+	@Resource
+	private IDataTransform pie_LXFB_Chart_DataTransform;
+	@RequestMapping(value="/pie_lxfb_data", produces="application/json; charset=utf-8")
     public @ResponseBody String pie_lxfg_data() {
-		return null;
+		return redisHashCache.readCacheByKey(AwifiConstants.Redis_Key_Pie_LXFB_Chart, 6, "desc", pie_LXFB_Chart_DataTransform);
     }
 	
 	/**
