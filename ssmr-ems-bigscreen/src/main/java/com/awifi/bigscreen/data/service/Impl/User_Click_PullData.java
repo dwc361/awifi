@@ -15,6 +15,9 @@ import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.googlecode.jsonrpc4j.JsonRpcHttpClient;
 
+/**
+ * 接口：[平台用户点击量]
+ */
 @Service
 public class User_Click_PullData implements IPullData<UserData>,InitializingBean{
 	

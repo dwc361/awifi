@@ -29,7 +29,7 @@ public class User_Click_Redis_Test extends AbstractJUnit4SpringContextTests {
 //		System.out.println(s);
 //		String s1 = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 6, dataTransform);
 //		System.out.println(s1);
-		String s2 = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 6, "desc", dataTransform);
+		String s2 = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 6, "asc", dataTransform);
 		System.out.println(s2);
 //		String s3 = redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 1471568532, new Date().getTime(), dataTransform);
 //		System.out.println(s3);
@@ -37,6 +37,6 @@ public class User_Click_Redis_Test extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testCreateOrUpdateCache() {
-		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, acquisition, "{'key':'value'}");
+//		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, acquisition, "{'key':'value'}");
 	}
 }

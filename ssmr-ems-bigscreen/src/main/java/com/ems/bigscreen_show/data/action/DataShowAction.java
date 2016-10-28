@@ -1,8 +1,7 @@
 package com.ems.bigscreen_show.data.action;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -19,11 +18,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awifi.bigscreen.AwifiConstants;
-<<<<<<< HEAD
-=======
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
->>>>>>> 24a626b0617cf97fe4f61054f2c06fea9b1e6453
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
@@ -98,8 +94,8 @@ public class DataShowAction {
 	@Resource
 	private IDataTransform pie_LXFB_Chart_DataTransform;
 	@RequestMapping(value="/pie_lxfb_data", produces="application/json; charset=utf-8")
-    public @ResponseBody String pie_lxfg_data() {
-		return redisHashCache.readCacheByKey(AwifiConstants.Redis_Key_Pie_LXFB_Chart, 6, "desc", pie_LXFB_Chart_DataTransform);
+    public @ResponseBody String pie_lxfb_data() {
+		return redisHashCache.readCacheByKey(AwifiConstants.Redis_Key_Pie_LXFB_Chart, pie_LXFB_Chart_DataTransform);
     }
 
 	/**
@@ -123,38 +119,6 @@ public class DataShowAction {
     public @ResponseBody String user_pv_uv_data() {
 		return redisHashCache.readCacheByKey(AwifiConstants.Redis_Key_User_PV_UV, user_PV_UV_DataTransform);
     }
-<<<<<<< HEAD
-
-
-
-	@RequestMapping("/areaspline_chart_data")
-	public @ResponseBody Result areaspline_chart_data(String x_json, HttpServletRequest request, HttpServletResponse response) {
-		response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
-
-		if (x_json != null) {
-			Random generator = new Random();
-
-			com.alibaba.fastjson.JSONArray fjsArry = com.alibaba.fastjson.JSON.parseArray(x_json);
-			Object[] objects = fjsArry.toArray();
-			List<Map> dataList = new ArrayList<Map>();
-			for(Object object : objects) {
-				Map map = new HashMap();
-				map.put('x', object);
-				map.put('y', generator.nextInt(10000));
-				map.put('a', generator.nextDouble());
-				map.put('b', generator.nextDouble()+1);
-				map.put('c', generator.nextDouble()+2);
-//				map.put('a', generator.nextInt(10000));
-//				map.put('b', generator.nextInt(10000));
-//				map.put('c', generator.nextInt(10000));
-
-				dataList.add(map);
-			}
-			return new Result("保存成功!", dataList);
-		} else {
-			return new Result("数据传输失败!");
-		}
-=======
 	
 	/**
 	 * [平台用户点击量]
@@ -191,7 +155,6 @@ public class DataShowAction {
 		//redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, user_Click_DataAcquisition, "{'key':'value'}");
 		
 		return new Result("保存成功!", map);
->>>>>>> 24a626b0617cf97fe4f61054f2c06fea9b1e6453
 	}
 	
 	
