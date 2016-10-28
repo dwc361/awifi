@@ -37,6 +37,6 @@ public class User_Click_Redis_Test extends AbstractJUnit4SpringContextTests {
 
 	@Test
 	public void testCreateOrUpdateCache() {
-//		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, acquisition, "{'key':'value'}");
+		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, acquisition, "{'key':'value'}");
 	}
 }
