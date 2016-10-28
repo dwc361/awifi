@@ -21594,7 +21594,7 @@
 	    timeTicket: null,
 	    currentIndex: -1,
 	    getInitialState: function getInitialState() {
-	        return { option: this.getOption() };
+	        return { successNum: [], createTime: [], option: this.getOption([], []) };
 	    },
 	    showToolTip: function showToolTip(echartObj) {
 	        var option = this.state.option;
@@ -21632,13 +21632,22 @@
 	            clearInterval(this.timeTicket);
 	        }
 	        this.timeTicket = setInterval(this.fetchNewDate, 1000);
+	        _secondActions2.default.getLine_yhrz_data();
+	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	        console.log(this.state.successNum + "*yhrz*" + this.state.createTime);
+	        var option = this.state.option;
+	        option.series[0].data = this.state.successNum;
+	        option.xAxis[0].data = this.state.createTime;
+	        this.option = option;
+	        this.getOption(this.state.successNum, this.state.createTime);
 	    },
 	    componentWillUnmount: function componentWillUnmount() {
 	        if (this.timeTicket) {
 	            clearInterval(this.timeTicket);
 	        }
 	    },
-	    getOption: function getOption() {
+	    getOption: function getOption(successNum, createTime) {
 	        var option = {
 	            color: ['#21c6a5', '#65c7f7', '#096dc5'],
 	            tooltip: {
@@ -21668,7 +21677,7 @@
 	                },
 	                type: 'category',
 	                boundaryGap: false,
-	                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+	                data: createTime
 	            }],
 	            yAxis: [{
 	                splitNumber: 0,
@@ -21690,7 +21699,7 @@
 	                }
 	            }],
 	            series: [{
-	                name: '光猫',
+	                name: '成功认证',
 	                type: 'line',
 	                smooth: true,
 	                itemStyle: {
@@ -21700,32 +21709,34 @@
 	                        }
 	                    }
 	                },
-	                data: [10, 12, 21, 54, 260, 830, 710]
+	                data: successNum
+	            }
+	            /* {
+	             name: '胖AP',
+	             type: 'line',
+	             smooth: true,
+	             itemStyle: {
+	                 normal: {
+	                     areaStyle: {ren
+	                         type: 'default'
+	                     }
+	                 }
+	             },
+	             data: [30, 182, 434, 791, 390, 30, 10]
 	            }, {
-	                name: '胖AP',
-	                type: 'line',
-	                smooth: true,
-	                itemStyle: {
-	                    normal: {
-	                        areaStyle: {
-	                            type: 'default'
-	                        }
-	                    }
-	                },
-	                data: [30, 182, 434, 791, 390, 30, 10]
-	            }, {
-	                name: '三合一',
-	                type: 'line',
-	                smooth: true,
-	                itemStyle: {
-	                    normal: {
-	                        areaStyle: {
-	                            type: 'default'
-	                        }
-	                    }
-	                },
-	                data: [1320, 1132, 601, 234, 120, 90, 20]
-	            }]
+	             name: '三合一',
+	             type: 'line',
+	             smooth: true,
+	             itemStyle: {
+	                 normal: {
+	                     areaStyle: {
+	                         type: 'default'
+	                     }
+	                 }
+	             },
+	             data: [1320, 1132, 601, 234, 120, 90, 20]
+	            }*/
+	            ]
 	        };
 
 	        return option;
@@ -21760,6 +21771,8 @@
 	});
 
 	exports.default = Line_YHRZ_ChartComponent;
+
+	_reactMixin2.default.onClass(Line_YHRZ_ChartComponent, _reflux2.default.connect(_secondStore2.default));
 
 /***/ },
 /* 175 */
@@ -87437,6 +87450,29 @@
 		setStateValue: function setStateValue(value) {
 			this.trigger(value);
 		},
+		setListDate: function setListDate(arr) {
+			var begin = 0,
+			    end = begin + 5;
+			var result = [],
+			    arrLength = arr.length;
+
+			if (end >= arrLength) return result.push(arr);
+
+			while (end < arrLength) {
+
+				result.push(arr.slice(begin, end));
+
+				begin = begin + 5;
+				end = begin + 5;
+				if (end > arrLength) {
+					end = arrLength;
+					result.push(arr.slice(begin, end));
+					break;
+				}
+			}
+			console.log("setListDate:" + result);
+			return result;
+		},
 
 		// 1.全省设备排名
 		getFunnel_sbpm_data: function getFunnel_sbpm_data() {
@@ -87447,20 +87483,23 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
+					console.log(d.length + "#排名#" + " d.data:" + d.data);
 					var device = [];
 					var pro = [];
 					for (var i = 0; i < d.data.length; i++) {
 						device.push(d.data[i].deviceNum);
 						pro.push(d.data[i].provice);
 					}
-					console.log(d.length + "##" + "device:" + device + " d.data:" + d.data);
+					device = this.getList(device);
+					pro = this.getList(pro);
+					console.log("排名device:" + device);
 					this.trigger({ deviceNum: device });
 					this.trigger({ provice: pro });
 				}.bind(this)
 			});
 		},
 
-		// 2.用户认证状态????
+		// 2.用户认证状态
 		getLine_yhrz_data: function getLine_yhrz_data() {
 			_jquery2.default.ajax({
 				async: false,
@@ -87469,16 +87508,24 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					console.log("d :" + d.toString());
-					var device = [];
-					var provice = [];
-					for (var i = 0; i < d.data.length; i++) {
-						device.push(d.data[i].onlineNum);
-						provice.push(d.data[i].offlineNum);
+					console.log("用户认证d :" + d.toString());
+					var success = [];
+					var datas = [];
+					var now;
+					for (var i = 0; i < d.length; i++) {
+						success.push(d[i].successNum);
+						if (d[i].createTime == null) {
+							now = new Date(); //定义一个时间对象
+						} else {
+							now = new Date(d[i].createTime);
+						}
+						var m = now.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+						var date = now.getDate(); //获取当前日(1-31)
+						datas.push(m + "/" + date);
 					}
-					console.log(d.length + "##" + "device:" + device);
-					this.trigger({ deviceNum: device });
-					this.trigger({ provice: provice });
+					console.log(d.length + "#认证#" + "success:" + success);
+					this.trigger({ successNum: success });
+					this.trigger({ createTime: datas });
 				}.bind(this)
 			});
 		},
@@ -87508,7 +87555,7 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					console.log(d.length + "##" + "onLine:" + onLine);
+					//console.log(d.length+"##"+"onLine:"+onLine);
 					this.trigger({ onlineNum: onLine });
 					this.trigger({ offlineNum: offLine });
 					this.trigger({ createTime: datas });
@@ -87541,7 +87588,7 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					console.log(d.length + "#nas#" + "onLine:" + onLine);
+					//console.log(d.length+"#nas#"+"onLine:"+onLine);
 					this.trigger({ onlineNum: onLine });
 					this.trigger({ offlineNum: offLine });
 					this.trigger({ createTime: datas });
@@ -87558,6 +87605,8 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
+					debugger;
+					console.log("jhl: d:" + d.toString());
 					var num = [];
 					var per = [];
 					var datas = [];
@@ -87598,7 +87647,7 @@
 						name.push(d.data[i].typeName);
 						num.push(d.data[i].hotareaNum);
 					}
-					console.log(d.data.length + "##" + "device:" + name);
+					console.log(d.data.length + "#lxfb#" + "device:" + name);
 					this.trigger({ typeName: name });
 					this.trigger({ hotareaNum: num });
 				}.bind(this)
@@ -87625,25 +87674,6 @@
 					this.trigger({ hotareaNum: num });
 				}.bind(this)
 			});
-		},
-
-		//8.用户、商户、PV、UV统计
-		getUser_pv_uv_data: function getUser_pv_uv_data() {
-			_jquery2.default.ajax({
-				async: false,
-				type: "post",
-				url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/user_pv_uv_data.action",
-				/*data: {x_json:data},*/
-				datatype: 'json',
-				success: function (d) {
-					console.log("pv/uv: " + d.toString());
-					this.trigger({ PV: d.PV });
-					this.trigger({ userNum: d.userNum });
-					this.trigger({ UA: d.UA });
-					//???
-					/*this.trigger({userNum: d.userNum});*/
-				}.bind(this)
-			});
 		}
 	});
 
@@ -87663,7 +87693,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _reflux2.default.createActions(['getBigscreenSecondData', 'saveBigscreenSecondData', 'setStateValue', 'openAddModal', 'getFunnel_sbpm_data', 'getLine_yhrz_data', 'getMix_Dzzd_data', 'getMix_nas_data', 'getMix_jhl_data', 'getPie_lxfg_data', 'getScatter_hotspot_data', 'getUser_pv_uv_data']);
+	exports.default = _reflux2.default.createActions(['getBigscreenSecondData', 'saveBigscreenSecondData', 'setStateValue', 'openAddModal', 'getFunnel_sbpm_data', 'getLine_yhrz_data', 'getMix_Dzzd_data', 'getMix_nas_data', 'getMix_jhl_data', 'getPie_lxfg_data', 'getScatter_hotspot_data']);
 
 /***/ },
 /* 583 */
@@ -97931,23 +97961,15 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	/*var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃', '海南'],
-	                     ['山西', '辽宁', '吉林', '黑龙江', '云南', '贵州'],
-	                     ['福建', '广东', '重庆', '上海', '四川', '湖北'],
-	                     ['湖南', '江西', '安徽', '江苏', '青海', '新疆'],
-	                     ['内蒙古', '宁夏', '西藏', '广西', '北京', '天津']];
-	var numberArray = [[812, 899, 890, 880, 870, 850, 70],
-	                   [812, 809, 779, 760, 710, 670],
-	                   [812, 600, 520, 570, 490, 460],
-	                   [812, 390, 360, 230, 200, 190],
-	                   [812, 150, 130, 120, 100, 99]];*/
+	var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃', '海南'], ['山西', '辽宁', '吉林', '黑龙江', '云南', '贵州'], ['福建', '广东', '重庆', '上海', '四川', '湖北'], ['湖南', '江西', '安徽', '江苏', '青海', '新疆'], ['内蒙古', '宁夏', '西藏', '广西', '北京', '天津']];
+	var numberArray = [[812, 899, 890, 880, 870, 850, 70], [812, 809, 779, 760, 710, 670], [812, 600, 520, 570, 490, 460], [812, 390, 360, 230, 200, 190], [812, 150, 130, 120, 100, 99]];
 	var Funnel_SBPM_ChartComponent = _react2.default.createClass({
 	    displayName: 'Funnel_SBPM_ChartComponent',
 
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { deviceNum: [], provice: [], option: this.getOption([], []) };
+	        return { option: this.getOption() };
 	    },
 	    showToolTip: function showToolTip(echartObj) {
 	        var option = this.state.option;
@@ -97995,18 +98017,9 @@
 	            }
 	        }, 2000);
 	    },
-	    componentDidMount: function componentDidMount() {
-	        _secondActions2.default.getFunnel_sbpm_data();
-	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	        var option = this.state.option;
-	        option.yAxis.data = this.state.deviceNum;
-	        option.series.data = this.state.provice;
-	        this.option = option;
-	        this.getOption(this.state.deviceNum, this.state.provice);
-	    },
+	    componentDidMount: function componentDidMount() {},
 	    componentWillUnmount: function componentWillUnmount() {},
-	    getOption: function getOption(deviceNum, provice) {
+	    getOption: function getOption() {
 	        var option = {
 	            //  color: [
 	            //      '#21c6a5', '#65c7f7', '#096dc5'
@@ -98057,7 +98070,7 @@
 	                        fontSize: 12
 	                    }
 	                },
-	                data: deviceNum,
+	                data: typeNameArray[0],
 	                nameTextStyle: {
 	                    color: '#fff',
 	                    fontStyle: 'normal',
@@ -98077,7 +98090,7 @@
 	            },
 	            series: [{
 	                type: 'bar',
-	                data: provice,
+	                data: numberArray[0],
 	                itemStyle: {
 	                    normal: {
 	                        color: function color(params) {
@@ -98205,9 +98218,9 @@
 	        _secondActions2.default.getMix_jhl_data();
 	    },
 	    componentDidUpdate: function componentDidUpdate() {
-	        console.log(this.state.activatePer + "*3*" + this.state.createTime);
+	        console.log(this.state.activatePer + "*jhl*" + this.state.createTime);
 	        var option = this.state.option;
-	        option.xAxis.data = this.state.createTime;
+	        option.xAxis[0].data = this.state.createTime;
 	        option.series[0].data = this.state.activatePer;
 	        option.series[1].data = this.state.activateNum;
 	        this.option = option;
@@ -98233,7 +98246,6 @@
 	                        opacity: 1
 	                    }
 	                },
-
 	                data: createTime
 	            }],
 	            yAxis: [{
@@ -98328,29 +98340,9 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
-	var _reactDom = __webpack_require__(34);
-
-	var _reactDom2 = _interopRequireDefault(_reactDom);
-
-	var _reactMixin = __webpack_require__(175);
-
-	var _reactMixin2 = _interopRequireDefault(_reactMixin);
-
-	var _reflux = __webpack_require__(178);
-
-	var _reflux2 = _interopRequireDefault(_reflux);
-
 	var _echartsForReact = __webpack_require__(197);
 
 	var _echartsForReact2 = _interopRequireDefault(_echartsForReact);
-
-	var _secondStore = __webpack_require__(581);
-
-	var _secondStore2 = _interopRequireDefault(_secondStore);
-
-	var _secondActions = __webpack_require__(582);
-
-	var _secondActions2 = _interopRequireDefault(_secondActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -98363,7 +98355,7 @@
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { typeName: [], hotareaNum: [], option: this.getOption([], []) };
+	        return { option: this.getOption() };
 	    },
 	    showToolTip: function showToolTip(echartObj) {
 	        var option = this.state.option;
@@ -98411,19 +98403,9 @@
 	            }
 	        }, 2000);
 	    },
-	    componentDidMount: function componentDidMount() {
-	        _secondActions2.default.getScatter_hotspot_data();
-	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	        console.log(this.state.typeName + "*3*" + this.state.hotareaNum);
-	        var option = this.state.option;
-	        option.yAxis.data = this.state.typeName;
-	        option.series.data = this.state.hotareaNum;
-	        this.option = option;
-	        this.getOption(this.state.typeName, this.state.hotareaNum);
-	    },
+	    componentDidMount: function componentDidMount() {},
 	    componentWillUnmount: function componentWillUnmount() {},
-	    getOption: function getOption(typeName, hotareaNum) {
+	    getOption: function getOption() {
 	        var option = {
 	            tooltip: {
 	                itemGap: '  0',
@@ -98440,7 +98422,7 @@
 	            //  }]),
 	            xAxis: {
 	                type: 'category',
-	                data: typeName[0],
+	                data: x_data[0],
 	                axisLine: {
 	                    show: true,
 	                    onZero: true,
@@ -98477,7 +98459,7 @@
 	            },
 	            series: [{
 	                name: '',
-	                data: hotareaNum[0],
+	                data: y_data[0],
 	                type: 'scatter',
 	                symbolSize: function symbolSize(data) {
 	                    return data;
@@ -98541,8 +98523,6 @@
 
 	exports.default = Scatter_HotSpot_ChartComponent;
 
-	_reactMixin2.default.onClass(Scatter_HotSpot_ChartComponent, _reflux2.default.connect(_secondStore2.default));
-
 /***/ },
 /* 587 */
 /***/ function(module, exports, __webpack_require__) {
@@ -98595,6 +98575,7 @@
 	        _secondActions2.default.getMix_nas_data();
 	    },
 	    componentDidUpdate: function componentDidUpdate() {
+	        // console.log(this.state.offlineNum+"*3*"+this.state.createTime);
 	        var option = this.state.option;
 	        option.series[0].data = this.state.onlineNum;
 	        option.series[1].data = this.state.offlineNum;
@@ -98608,6 +98589,7 @@
 	        var currentIndex = -1;
 	        setInterval(function () {
 	            var dataLen = option.series[0].data.length;
+	            // console.log(option.series[0].data+"&&&4&");
 	            // 取消之前高亮的图形
 	            echartObj.dispatchAction({
 	                type: 'downplay',
@@ -98852,6 +98834,7 @@
 	        _secondActions2.default.getMix_Dzzd_data();
 	    },
 	    componentDidUpdate: function componentDidUpdate() {
+	        console.log(this.state.offlineNum + "*dzzd*" + this.state.createTime);
 	        var option = this.state.option;
 	        option.series[0].data = this.state.onlineNum;
 	        option.series[1].data = this.state.offlineNum;
@@ -98985,6 +98968,7 @@
 	        var currentIndex = -1;
 	        setInterval(function () {
 	            var dataLen = option.series[0].data.length;
+	            //console.log(option.series[0].data+"&&&4&");
 	            // 取消之前高亮的图形
 	            echartObj.dispatchAction({
 	                type: 'downplay',
@@ -99407,7 +99391,7 @@
 	        type: 'post',
 	        dataType: "json",
 	        url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/areaspline_chart_data.action",
-	        //data: {'x_json':$.toJSON(x_arr)},
+	        data: { 'countStr': 8 },
 	        success: function success(d) {
 	            if (d != null) {
 	                var data_a = [];
@@ -99473,7 +99457,7 @@
 	                                alert(d.statusText);
 	                            }
 	                        });
-	                    }, 3000);
+	                    }, 3 * 1000);
 	                }
 	            }
 	        },
@@ -99554,7 +99538,7 @@
 	                linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
 	                stops: [[0, Highcharts.getOptions().colors[0]], [1, Highcharts.Color(Highcharts.getOptions().colors[0]).setOpacity(0).get('rgba')]]
 	            },
-	            lineWidth: 2,
+	            lineWidth: 0,
 	            lineColor: 'cyan',
 	            marker: {
 	                symbol: 'circle',

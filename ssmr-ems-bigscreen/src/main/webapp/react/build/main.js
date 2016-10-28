@@ -23743,6 +23743,29 @@
 		setStateValue: function setStateValue(value) {
 			this.trigger(value);
 		},
+		setListDate: function setListDate(arr) {
+			var begin = 0,
+			    end = begin + 5;
+			var result = [],
+			    arrLength = arr.length;
+
+			if (end >= arrLength) return result.push(arr);
+
+			while (end < arrLength) {
+
+				result.push(arr.slice(begin, end));
+
+				begin = begin + 5;
+				end = begin + 5;
+				if (end > arrLength) {
+					end = arrLength;
+					result.push(arr.slice(begin, end));
+					break;
+				}
+			}
+			console.log("setListDate:" + result);
+			return result;
+		},
 
 		// 1.全省设备排名
 		getFunnel_sbpm_data: function getFunnel_sbpm_data() {
@@ -23753,20 +23776,23 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
+					console.log(d.length + "#排名#" + " d.data:" + d.data);
 					var device = [];
 					var pro = [];
 					for (var i = 0; i < d.data.length; i++) {
 						device.push(d.data[i].deviceNum);
 						pro.push(d.data[i].provice);
 					}
-					console.log(d.length + "##" + "device:" + device + " d.data:" + d.data);
+					device = this.getList(device);
+					pro = this.getList(pro);
+					console.log("排名device:" + device);
 					this.trigger({ deviceNum: device });
 					this.trigger({ provice: pro });
 				}.bind(this)
 			});
 		},
 
-		// 2.用户认证状态????
+		// 2.用户认证状态
 		getLine_yhrz_data: function getLine_yhrz_data() {
 			_jquery2.default.ajax({
 				async: false,
@@ -23775,16 +23801,24 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					console.log("d :" + d.toString());
-					var device = [];
-					var provice = [];
-					for (var i = 0; i < d.data.length; i++) {
-						device.push(d.data[i].onlineNum);
-						provice.push(d.data[i].offlineNum);
+					console.log("用户认证d :" + d.toString());
+					var success = [];
+					var datas = [];
+					var now;
+					for (var i = 0; i < d.length; i++) {
+						success.push(d[i].successNum);
+						if (d[i].createTime == null) {
+							now = new Date(); //定义一个时间对象
+						} else {
+							now = new Date(d[i].createTime);
+						}
+						var m = now.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+						var date = now.getDate(); //获取当前日(1-31)
+						datas.push(m + "/" + date);
 					}
-					console.log(d.length + "##" + "device:" + device);
-					this.trigger({ deviceNum: device });
-					this.trigger({ provice: provice });
+					console.log(d.length + "#认证#" + "success:" + success);
+					this.trigger({ successNum: success });
+					this.trigger({ createTime: datas });
 				}.bind(this)
 			});
 		},
@@ -23814,7 +23848,7 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					console.log(d.length + "##" + "onLine:" + onLine);
+					//console.log(d.length+"##"+"onLine:"+onLine);
 					this.trigger({ onlineNum: onLine });
 					this.trigger({ offlineNum: offLine });
 					this.trigger({ createTime: datas });
@@ -23847,7 +23881,7 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					console.log(d.length + "#nas#" + "onLine:" + onLine);
+					//console.log(d.length+"#nas#"+"onLine:"+onLine);
 					this.trigger({ onlineNum: onLine });
 					this.trigger({ offlineNum: offLine });
 					this.trigger({ createTime: datas });
@@ -23864,6 +23898,8 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
+					debugger;
+					console.log("jhl: d:" + d.toString());
 					var num = [];
 					var per = [];
 					var datas = [];
@@ -23904,7 +23940,7 @@
 						name.push(d.data[i].typeName);
 						num.push(d.data[i].hotareaNum);
 					}
-					console.log(d.data.length + "##" + "device:" + name);
+					console.log(d.data.length + "#lxfb#" + "device:" + name);
 					this.trigger({ typeName: name });
 					this.trigger({ hotareaNum: num });
 				}.bind(this)
@@ -23931,25 +23967,6 @@
 					this.trigger({ hotareaNum: num });
 				}.bind(this)
 			});
-		},
-
-		//8.用户、商户、PV、UV统计
-		getUser_pv_uv_data: function getUser_pv_uv_data() {
-			_jquery2.default.ajax({
-				async: false,
-				type: "post",
-				url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/user_pv_uv_data.action",
-				/*data: {x_json:data},*/
-				datatype: 'json',
-				success: function (d) {
-					console.log("pv/uv: " + d.toString());
-					this.trigger({ PV: d.PV });
-					this.trigger({ userNum: d.userNum });
-					this.trigger({ UA: d.UA });
-					//???
-					/*this.trigger({userNum: d.userNum});*/
-				}.bind(this)
-			});
 		}
 	});
 
@@ -23969,7 +23986,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _reflux2.default.createActions(['getBigscreenSecondData', 'saveBigscreenSecondData', 'setStateValue', 'openAddModal', 'getFunnel_sbpm_data', 'getLine_yhrz_data', 'getMix_Dzzd_data', 'getMix_nas_data', 'getMix_jhl_data', 'getPie_lxfg_data', 'getScatter_hotspot_data', 'getUser_pv_uv_data']);
+	exports.default = _reflux2.default.createActions(['getBigscreenSecondData', 'saveBigscreenSecondData', 'setStateValue', 'openAddModal', 'getFunnel_sbpm_data', 'getLine_yhrz_data', 'getMix_Dzzd_data', 'getMix_nas_data', 'getMix_jhl_data', 'getPie_lxfg_data', 'getScatter_hotspot_data']);
 
 /***/ },
 /* 583 */
@@ -86953,7 +86970,7 @@
 /* 596 */
 /***/ function(module, exports, __webpack_require__) {
 
-	"use strict";
+	'use strict';
 
 	Object.defineProperty(exports, "__esModule", {
 	    value: true
@@ -86964,6 +86981,26 @@
 	var _react = __webpack_require__(1);
 
 	var _react2 = _interopRequireDefault(_react);
+
+	var _reactDom = __webpack_require__(34);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactMixin = __webpack_require__(175);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(178);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
+	var _secondStore = __webpack_require__(581);
+
+	var _secondStore2 = _interopRequireDefault(_secondStore);
+
+	var _secondActions = __webpack_require__(582);
+
+	var _secondActions2 = _interopRequireDefault(_secondActions);
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -86983,16 +87020,84 @@
 	    }
 
 	    _createClass(First, [{
-	        key: "render",
+	        key: 'render',
 	        value: function render() {
 	            return _react2.default.createElement(
-	                "div",
-	                { className: "content" },
+	                'div',
+	                { id: 'content' },
 	                _react2.default.createElement(
-	                    "h1",
-	                    null,
-	                    "111\u9875\u9762\u6B63\u5728\u7EF4\u62A4\u4E2D"
-	                )
+	                    'div',
+	                    { className: 'handle' },
+	                    _react2.default.createElement(
+	                        'span',
+	                        null,
+	                        _react2.default.createElement('i', { id: 'save', className: 'fa fa-folder-open', onClick: this.saveBigscreenSecondData }),
+	                        _react2.default.createElement(
+	                            'i',
+	                            { id: 'preview', className: 'fa fa-eye', onClick: this.preview },
+	                            '\u9884\u89C8'
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement(
+	                    'div',
+	                    { className: 'htmleaf-container' },
+	                    _react2.default.createElement(
+	                        'form',
+	                        { encType: 'multipart/form-data' },
+	                        _react2.default.createElement(
+	                            'span',
+	                            { className: 'file-input' },
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'file-preview' },
+	                                _react2.default.createElement('object', { data: '', className: 'file-preview-image' })
+	                            ),
+	                            _react2.default.createElement('div', { className: 'clearfix' }),
+	                            _react2.default.createElement(
+	                                'div',
+	                                { className: 'input-group' },
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { tabIndex: '-1', className: 'form-control file-caption  kv-fileinput-caption kv-has-ellipsis' },
+	                                    _react2.default.createElement(
+	                                        'span',
+	                                        { className: 'file-caption-ellipsis' },
+	                                        '...'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'div',
+	                                        { className: 'file-caption-name' },
+	                                        _react2.default.createElement('span', { className: 'glyphicon glyphicon-file kv-caption-icon' })
+	                                    )
+	                                ),
+	                                _react2.default.createElement(
+	                                    'div',
+	                                    { className: 'input-group-btn' },
+	                                    _react2.default.createElement(
+	                                        'button',
+	                                        { type: 'button', title: '\u6E05\u9664\u9009\u4E2D\u6587\u4EF6', className: 'btn btn-default fileinput-remove fileinput-remove-button' },
+	                                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-trash' }),
+	                                        '\u79FB\u9664'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'button',
+	                                        { type: 'submit', title: '\u4E0A\u4F20\u9009\u4E2D\u6587\u4EF6', className: 'btn btn-default kv-fileinput-upload fileinput-upload-button' },
+	                                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-upload' }),
+	                                        '\u4E0A\u4F20'
+	                                    ),
+	                                    _react2.default.createElement(
+	                                        'div',
+	                                        { className: 'btn btn-primary btn-file' },
+	                                        _react2.default.createElement('i', { className: 'glyphicon glyphicon-folder-open' }),
+	                                        _react2.default.createElement('input', { id: 'file-0a', className: 'file', type: 'file', 'aria-multiline': 'true', 'data-min-file-count': '1' })
+	                                    )
+	                                )
+	                            )
+	                        )
+	                    )
+	                ),
+	                _react2.default.createElement('div', { id: 'svgCnt' })
 	            );
 	        }
 	    }]);

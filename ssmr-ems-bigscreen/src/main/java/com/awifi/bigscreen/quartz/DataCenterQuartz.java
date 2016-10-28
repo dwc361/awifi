@@ -137,8 +137,8 @@ public class DataCenterQuartz {
 	@Resource
 	private IDataAcquisition user_Click_DataAcquisition;
 	/**
-	 * [用户、商户、PV、UV统计]数据拉取
-	 * 每天3:00:00拉取一次
+	 * [平台用户点击量]数据拉取
+	 * 每分钟拉取一次
 	 */
 	@Scheduled(cron = "0 * * * * ? ")
 	public void pull_User_Click_data() {

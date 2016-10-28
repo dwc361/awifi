@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.awifi.bigscreen.AwifiConstants;
-import com.awifi.bigscreen.data.service.api.IPullData;
-import com.awifi.bigscreen.redisCache.api.IDataAcquisition;
 import com.awifi.bigscreen.redisCache.api.IDataTransform;
 import com.awifi.bigscreen.redisCache.api.IRedisCache;
 
@@ -62,7 +60,7 @@ public class DataShowAction {
 	private IDataTransform mix_DZZD_Chart_DataTransform;
 	@RequestMapping(value="/mix_dzzd_data", produces="application/json; charset=utf-8")
 	public @ResponseBody String mix_dzzd_data() {
-		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_DZZD_Chart, 6, "desc", mix_DZZD_Chart_DataTransform);
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_DZZD_Chart, 6, "asc", mix_DZZD_Chart_DataTransform);
 	}
 
 	/**
@@ -73,7 +71,7 @@ public class DataShowAction {
 	private IDataTransform mix_NAS_Chart_DataTransform;
 	@RequestMapping(value="/mix_nas_data", produces="application/json; charset=utf-8")
     public @ResponseBody String mix_nas_data() {
-		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_NAS_Chart, 6, "desc", mix_NAS_Chart_DataTransform);
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_NAS_Chart, 6, "asc", mix_NAS_Chart_DataTransform);
     }
 
 	/**
@@ -84,7 +82,7 @@ public class DataShowAction {
 	private IDataTransform mix_JHL_Chart_DataTransform;
 	@RequestMapping(value="/mix_jhl_data", produces="application/json; charset=utf-8")
     public @ResponseBody String mix_jhl_data() {
-		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_JHL_Chart, 6, "desc", mix_JHL_Chart_DataTransform);
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_Mix_JHL_Chart, 6, "asc", mix_JHL_Chart_DataTransform);
     }
 
 	/**
@@ -130,31 +128,25 @@ public class DataShowAction {
 	@Resource
 	private IDataTransform user_Click_DataTransform;
 	@RequestMapping(value="/areaspline_chart_data", produces="application/json; charset=utf-8")
-	public @ResponseBody String areaspline_chart_data(HttpServletRequest request, HttpServletResponse response) {
-		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
-		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, 6, "asc", user_Click_DataTransform);
+	public @ResponseBody String areaspline_chart_data(String countStr, HttpServletRequest request, HttpServletResponse response) {
+		int count = 1;
+		if(countStr!=null && !"".equals(countStr)) {
+			count = Integer.valueOf(countStr);
+		}
+		return redisZSetCache.readCacheByKey(AwifiConstants.Redis_Key_User_Click, count, "asc", user_Click_DataTransform);
 	}
-	@Resource
-	private IPullData user_Click_PullData;
-	@Resource
-	private IDataAcquisition user_Click_DataAcquisition;
-	@RequestMapping("/areaspline_chart_show_add_one_data")
-	public @ResponseBody Result areaspline_chart_show_add_one_data(HttpServletRequest request, HttpServletResponse response) {
+	
+	
+	
+	@RequestMapping("/test")
+	public @ResponseBody Result test(HttpServletRequest request, HttpServletResponse response) {
 		//response.setHeader("Access-Control-Allow-origin", "*"); // 允许ajax跨域调用
-		
 		Map map = new HashMap();
 		long time = new Date().getTime();
 		map.put("createTime", time);
-//		UserData data = (UserData) user_Click_PullData.Pull();
-//		if(data != null) {
-//			map.put("userClickNum", data.getValue()); //用户点击量
-//		}
 		Random generator = new Random();
 		map.put("userClickNum", generator.nextInt(10000)); //用户点击量
-		
-		//redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, user_Click_DataAcquisition, "{'key':'value'}");
-		
-		return new Result("保存成功!", map);
+		return new Result("查询成功!", map);
 	}
 	
 	
