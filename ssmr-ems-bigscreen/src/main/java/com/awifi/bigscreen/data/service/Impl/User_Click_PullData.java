@@ -25,11 +25,13 @@ public class User_Click_PullData implements IPullData<UserData>,InitializingBean
 	private String user = PropertiesUtil.getPorpertyString("zabbix.user");
 	private String password = PropertiesUtil.getPorpertyString("zabbix.password");
 	
-	JsonRpcHttpClient client = null;
+	JsonRpcHttpClient authClient = null;
+	JsonRpcHttpClient dataClient = null;
 	
 	@Override
 	public void afterPropertiesSet() throws Exception {
-		client = new JsonRpcHttpClient(new URL(url));
+		authClient = new JsonRpcHttpClient(new URL(url));
+		dataClient = new JsonRpcHttpClient(new URL(url));
 	}
 
 	public boolean isExist() {
@@ -48,7 +50,7 @@ public class User_Click_PullData implements IPullData<UserData>,InitializingBean
         //headers.put("id", "1");
         headers.put("auth", auth);
 
-        client.setAdditionalJsonContent(headers);
+        dataClient.setAdditionalJsonContent(headers);
         
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("output", "extend");
@@ -61,7 +63,7 @@ public class User_Click_PullData implements IPullData<UserData>,InitializingBean
 		try {
 			ObjectMapper mapper = new ObjectMapper(); 
 			JavaType javaType = mapper.getTypeFactory().constructParametricType(List.class, UserData.class); 
-			userDatas = (List<UserData>) client.invoke("history.get",params,javaType);
+			userDatas = (List<UserData>) dataClient.invoke("history.get",params,javaType);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -77,7 +79,7 @@ public class User_Click_PullData implements IPullData<UserData>,InitializingBean
         Map<String,String> params = new HashMap<String,String>();
         params.put("user", user);
         params.put("password", password);
-		String auth = client.invoke("user.login", params, String.class);
+		String auth = authClient.invoke("user.login", params, String.class);
 		return auth;
 	}
 }
