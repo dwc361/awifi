@@ -11,41 +11,23 @@ const Mix_DZZD_ChartComponent = React.createClass({
     },
     timeTicket: null,
     getInitialState: function() {
-        return {onlineNum:[],offlineNum:[],option:this.getOption([],[])};
+        return {onlineNum:[],offlineNum:[],option:this.getOption([],[],[]),createTime:[]};
     },
     componentDidMount: function() {
-        actions.getMix_Dzzd_data("test");
+        actions.getMix_Dzzd_data();
     },
     componentDidUpdate: function(){
-       console.log(this.state.offlineNum+"*3*");
+       console.log(this.state.offlineNum+"*dzzd*"+this.state.createTime);
         let option = this.state.option;
         option.series[0].data = this.state.onlineNum;
         option.series[1].data = this.state.offlineNum;
+        option.xAxis[0].data = this.state.createTime;
         this.option = option;
-        this.getOption(this.state.onlineNum,this.state.offlineNum);
+        this.getOption(this.state.onlineNum,this.state.offlineNum,this.state.createTime);
     },
     componentWillUnmount: function() {
     },
-    fetchNewDate: function() {
-        var now = new Date(); //定义一个时间对象
-        //var y = now.getFullYear(); //获取完整的年份(4位,1970-????)
-        var m = now.getMonth()+1; //获取当前月份(0-11,0代表1月)
-        var d = now.getDate(); //获取当前日(1-31)
-        var datas = [];
-        for (var i = d-5; i <= d; i++) {
-            datas.push(m+"/"+i);
-        }
-        return datas;
-    },
-    /*getTestData:function (){
-        var res = [];
-        var len = 6;
-        while (len--) {
-            res.push(Math.round(Math.random() * 1000));
-        }
-        return res;
-    },*/
-    getOption: function(onlineNum,offlineNum) {
+    getOption: function(onlineNum,offlineNum,createTime) {
         const option = {
             title: {
                 text: '',
@@ -58,7 +40,7 @@ const Mix_DZZD_ChartComponent = React.createClass({
                 {
                     type: 'category',
                     boundaryGap: true,
-                    data: this.fetchNewDate(),
+                    data: createTime,
                     axisLine: {
                         show: true,
                         onZero: true,
@@ -182,7 +164,7 @@ const Mix_DZZD_ChartComponent = React.createClass({
         let currentIndex = -1;
         setInterval(function() {
             let dataLen = option.series[0].data.length;
-            console.log(option.series[0].data+"&&&4&");
+            //console.log(option.series[0].data+"&&&4&");
             // 取消之前高亮的图形
             echartObj.dispatchAction({
                 type: 'downplay',

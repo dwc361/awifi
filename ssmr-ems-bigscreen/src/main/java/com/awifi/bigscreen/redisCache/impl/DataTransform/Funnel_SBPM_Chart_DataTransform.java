@@ -56,10 +56,12 @@ public class Funnel_SBPM_Chart_DataTransform implements IDataTransform<Map<Strin
 				Object key = entry.getKey();
 				Object value = entry.getValue();
 				
-				Map m = new HashMap();
-				m.put("province", provinceMap.get(key));
-				m.put("deviceNum", value);
-				result_list.add(m);
+				if(provinceMap.get(key) != null) {
+					Map m = new HashMap();
+					m.put("province", provinceMap.get(key));
+					m.put("deviceNum", value);
+					result_list.add(m);
+				}
 			}
 		}
 		result_map.put("data", result_list);

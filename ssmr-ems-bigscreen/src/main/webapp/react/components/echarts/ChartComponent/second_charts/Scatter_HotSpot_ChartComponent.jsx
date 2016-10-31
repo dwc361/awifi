@@ -1,8 +1,7 @@
 import React from 'react';
-import echarts from 'echarts';
 import ReactEcharts from '../../src/echarts-for-react';
 
-// 指定图表的配置项和数据
+// 指定图表的配置项和数据？？？？
 var x_data = [['学校','医院','码头','酒店','公园'],
               ['机场','浴室','商场','游乐场','文化厅','车站'],
               ['饭馆','图书馆','展览馆','美容店','体育场','招待所']];

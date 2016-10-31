@@ -1,5 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactMixin from 'react-mixin';
+import Reflux from 'reflux'
+
 import ReactEcharts from '../../src/echarts-for-react';
+import store from '../../../../stores/second-store';
+import actions from '../../../../actions/second-actions';
 
 const Line_YHRZ_ChartComponent = React.createClass({
     propTypes: {
@@ -7,7 +13,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
     timeTicket: null,
     currentIndex: -1,
     getInitialState: function() {
-        return {option: this.getOption()};
+        return {successNum:[],createTime:[],option: this.getOption([],[])};
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
@@ -45,13 +51,22 @@ const Line_YHRZ_ChartComponent = React.createClass({
             clearInterval(this.timeTicket);
         }
         this.timeTicket = setInterval(this.fetchNewDate, 1000);
+        actions.getLine_yhrz_data();
+    },
+    componentDidUpdate: function(){
+        console.log(this.state.successNum+"*yhrz*"+this.state.createTime);
+        let option = this.state.option;
+        option.series[0].data = this.state.successNum;
+        option.xAxis[0].data = this.state.createTime;
+        this.option = option;
+        this.getOption(this.state.successNum,this.state.createTime);
     },
     componentWillUnmount: function() {
         if (this.timeTicket) {
             clearInterval(this.timeTicket);
         }
     },
-    getOption: function() {
+    getOption: function(successNum,createTime) {
         const option = {
             color: [
                 '#21c6a5', '#65c7f7', '#096dc5'
@@ -83,7 +98,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
                 type: 'category',
                 boundaryGap: false,
-                data: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+                data: createTime
             }],
             yAxis: [{
                 splitNumber: 0,
@@ -105,7 +120,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
                 },
             }],
             series: [{
-                name: '光猫',
+                name: '成功认证',
                 type: 'line',
                 smooth: true,
                 itemStyle: {
@@ -115,14 +130,15 @@ const Line_YHRZ_ChartComponent = React.createClass({
                         }
                     }
                 },
-                data: [10, 12, 21, 54, 260, 830, 710]
-            }, {
+                data: successNum
+            }
+               /* {
                 name: '胖AP',
                 type: 'line',
                 smooth: true,
                 itemStyle: {
                     normal: {
-                        areaStyle: {
+                        areaStyle: {ren
                             type: 'default'
                         }
                     }
@@ -140,7 +156,8 @@ const Line_YHRZ_ChartComponent = React.createClass({
                     }
                 },
                 data: [1320, 1132, 601, 234, 120, 90, 20]
-            }]
+            }*/
+            ]
         };
 
         return option;
@@ -165,3 +182,4 @@ const Line_YHRZ_ChartComponent = React.createClass({
 });
 
 export default Line_YHRZ_ChartComponent;
+ReactMixin.onClass(Line_YHRZ_ChartComponent, Reflux.connect(store));

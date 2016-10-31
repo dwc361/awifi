@@ -86,6 +86,8 @@ public class DataCenterQuartz {
 		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_Mix_NAS_Chart, mix_NAS_Chart_DataAcquisition, "{'key':'value'}");
 	}
 	
+	@Resource
+	private IDataAcquisition funnel_SBPM_Chart_DataAcquisition;
 	/**
 	 * [全省设备排名]数据拉取
 	 * 每天0:00:00拉取一次
@@ -93,8 +95,11 @@ public class DataCenterQuartz {
 	@Scheduled(cron = "0 0 0 * * ? ")
 	public void pull_Funnel_SBPM_Chart_data() {
 		log.info("@Scheduled-------pull_Funnel_SBPM_Chart_data()");
+		redisHashCache.createOrUpdateCache(AwifiConstants.Redis_Key_Funnel_SBPM_Chart, funnel_SBPM_Chart_DataAcquisition, "{'key':'value'}");
 	}
 	
+	@Resource
+	private IDataAcquisition line_YHRZ_Chart_DataAcquisition;
 	/**
 	 * [用户认证状态]数据拉取
 	 * 每天1:00:00拉取一次
@@ -102,8 +107,11 @@ public class DataCenterQuartz {
 	@Scheduled(cron = "0 0 1 * * ? ")
 	public void pull_Line_YHRZ_Chart_data() {
 		log.info("@Scheduled-------pull_Line_YHRZ_Chart_data()");
+		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_Line_YHRZ_Chart, line_YHRZ_Chart_DataAcquisition, "{'key':'value'}");
 	}
 	
+	@Resource
+	private IDataAcquisition pie_LXFB_Chart_DataAcquisition;
 	/**
 	 * [设备类型分布]数据拉取
 	 * 每天2:00:00拉取一次
@@ -111,6 +119,7 @@ public class DataCenterQuartz {
 	@Scheduled(cron = "0 0 2 * * ? ")
 	public void pull_Pie_LXFB_Chart_data() {
 		log.info("@Scheduled-------pull_Pie_LXFB_Chart_data()");
+		redisHashCache.createOrUpdateCache(AwifiConstants.Redis_Key_Pie_LXFB_Chart, pie_LXFB_Chart_DataAcquisition, "{'key':'value'}");
 	}
 	
 	@Resource
@@ -121,7 +130,19 @@ public class DataCenterQuartz {
 	 */
 	@Scheduled(cron = "0 0 3 * * ? ")
 	public void pull_User_PV_UV_data() {
-		log.info("@Scheduled-------pull_Pie_LXFB_Chart_data()");
+		log.info("@Scheduled-------pull_User_PV_UV_data()");
 		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_PV_UV, user_PV_UV_DataAcquisition, "{'key':'value'}");
+	}
+	
+	@Resource
+	private IDataAcquisition user_Click_DataAcquisition;
+	/**
+	 * [平台用户点击量]数据拉取
+	 * 每分钟拉取一次
+	 */
+	@Scheduled(cron = "0 * * * * ? ")
+	public void pull_User_Click_data() {
+		log.info("@Scheduled-------pull_User_PV_UV_data()");
+		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_User_Click, user_Click_DataAcquisition, "{'key':'value'}");
 	}
 }

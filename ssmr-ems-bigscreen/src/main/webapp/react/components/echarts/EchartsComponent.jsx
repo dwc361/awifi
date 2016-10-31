@@ -10,6 +10,8 @@ import Mix_DZZD_ChartComponent from './ChartComponent/second_charts/Mix_DZZD_Cha
 import Pie_LXFB_ChartComponent from './ChartComponent/second_charts/Pie_LXFB_ChartComponent.jsx';
 import Gauge_YBP_ChartComponent from './ChartComponent/second_charts/Gauge_YBP_ChartComponent.jsx';
 
+import Many_Areaspline_Chart_Component from './ChartComponent/second_charts/Many_Areaspline_Chart_Component.jsx';
+
 const EchartsComponent = React.createClass({
     propTypes: {
     },
@@ -22,6 +24,7 @@ const EchartsComponent = React.createClass({
         if (this.props.name == 'mix_DZZD') return (<Mix_DZZD_ChartComponent />);
         if (this.props.name == 'pie_LXFB') return (<Pie_LXFB_ChartComponent />);
         if (this.props.name == 'gauge_YBP') return (<Gauge_YBP_ChartComponent />);
+        if (this.props.name == 'many_Areaspline') return (<Many_Areaspline_Chart_Component />);
         return <Default_Component />;
     }
 });

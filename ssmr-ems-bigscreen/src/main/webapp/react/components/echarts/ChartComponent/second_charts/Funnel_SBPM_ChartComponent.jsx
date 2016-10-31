@@ -1,5 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactMixin from 'react-mixin';
+import Reflux from 'reflux'
+
 import ReactEcharts from '../../src/echarts-for-react';
+import store from '../../../../stores/second-store';
+import actions from '../../../../actions/second-actions';
 
 var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃', '海南'],
                      ['山西', '辽宁', '吉林', '黑龙江', '云南', '贵州'],
@@ -173,3 +179,5 @@ const Funnel_SBPM_ChartComponent = React.createClass({
 });
 
 export default Funnel_SBPM_ChartComponent;
+// ES6 mixin写法，通过mixin将store的与组件连接，功能是监听store带来的state变化并刷新到this.state
+ReactMixin.onClass(Funnel_SBPM_ChartComponent, Reflux.connect(store));

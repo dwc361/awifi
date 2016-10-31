@@ -2,9 +2,8 @@ package com.awifi.bigscreen.data.service.Impl;
 
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -13,7 +12,7 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.awifi.bigscreen.data.entity.CountryEnum;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.utils.http.HttpUtil;
@@ -23,7 +22,7 @@ import com.awifi.bigscreen.utils.http.HttpUtil;
  * @author zhangmm
  */
 @Service
-public class Line_YHRZ_Chart_PullData implements IPullData<List<Map>>, InitializingBean{
+public class Line_YHRZ_Chart_PullData implements IPullData<Map>, InitializingBean{
 	private Logger log = Logger.getLogger(Line_YHRZ_Chart_PullData.class);
 	
 	private static String address = "";
@@ -53,8 +52,8 @@ public class Line_YHRZ_Chart_PullData implements IPullData<List<Map>>, Initializ
 		return flag;
 	}
 
-	public List<Map> Pull() {
-		List<Map> list = new ArrayList();
+	public Map Pull() {
+		Map map = new HashMap();
 		
 		/**
 		 * 拼接入参
@@ -81,16 +80,16 @@ public class Line_YHRZ_Chart_PullData implements IPullData<List<Map>>, Initializ
 			/**
 			 * 解析结果集
 			 */
-			//JSONObject fjsonObject = JSON.parseObject(result);
-			JSONArray fjsonArray = JSON.parseArray(result);
-			Object[] objects = fjsonArray.toArray();
-			for(Object obj : objects) {
-				list.add((Map) obj);
+			JSONObject fjsonObject = JSON.parseObject(result);
+			Iterator itor=fjsonObject.entrySet().iterator();
+			while(itor.hasNext()) {
+				Map.Entry entry = (Map.Entry)itor.next();
+				map.put(entry.getKey().toString(), entry.getValue());
 			}
 		} catch (Throwable e) {
 			log.error("接口["+url+"]调用失败:"+e.toString());
 		}
 		
-		return list;
+		return map;
 	}
 }

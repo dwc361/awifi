@@ -4,15 +4,6 @@
         <wb-resource deploy-path="/" source-path="/target/m2e-wtp/web-resources"/>
         <wb-resource deploy-path="/" source-path="/src/main/webapp" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
-        <dependent-module archiveName="roof-web-menu-service-api-3.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/roof-web-menu-service-api/roof-web-menu-service-api">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="roof-web-menu-entity-3.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/roof-web-menu-entity/roof-web-menu-entity">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
-        <dependent-module archiveName="roof-web-menu-dao-api-3.0.1.jar" deploy-path="/WEB-INF/lib" handle="module:/resource/roof-web-menu-dao-api/roof-web-menu-dao-api">
-            <dependency-type>uses</dependency-type>
-        </dependent-module>
         <property name="context-root" value="roof-web-menu-webapp"/>
         <property name="java-output-path" value="/roof-web-menu-webapp/target/classes"/>
     </wb-module>

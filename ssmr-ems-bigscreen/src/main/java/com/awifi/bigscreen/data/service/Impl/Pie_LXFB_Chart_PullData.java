@@ -4,6 +4,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -14,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
+import com.alibaba.fastjson.JSONObject;
 import com.awifi.bigscreen.data.entity.CountryEnum;
 import com.awifi.bigscreen.data.service.api.IPullData;
 import com.awifi.bigscreen.utils.http.HttpUtil;
@@ -23,7 +25,7 @@ import com.awifi.bigscreen.utils.http.HttpUtil;
  * @author zhangmm
  */
 @Service
-public class Pie_LXFB_Chart_PullData implements IPullData<List<Map>>, InitializingBean{
+public class Pie_LXFB_Chart_PullData implements IPullData<Map>, InitializingBean{
 	private Logger log = Logger.getLogger(Pie_LXFB_Chart_PullData.class);
 	
 	private static String address = "";
@@ -53,8 +55,8 @@ public class Pie_LXFB_Chart_PullData implements IPullData<List<Map>>, Initializi
 		return flag;
 	}
 
-	public List<Map> Pull() {
-		List<Map> list = new ArrayList();
+	public Map Pull() {
+		Map map = new HashMap();
 		
 		/**
 		 * 拼接入参
@@ -81,16 +83,16 @@ public class Pie_LXFB_Chart_PullData implements IPullData<List<Map>>, Initializi
 			/**
 			 * 解析结果集
 			 */
-			//JSONObject fjsonObject = JSON.parseObject(result);
-			JSONArray fjsonArray = JSON.parseArray(result);
-			Object[] objects = fjsonArray.toArray();
-			for(Object obj : objects) {
-				list.add((Map) obj);
+			JSONObject fjsonObject = JSON.parseObject(result);
+			Iterator itor=fjsonObject.entrySet().iterator();
+			while(itor.hasNext()) {
+				Map.Entry entry = (Map.Entry)itor.next();
+				map.put(entry.getKey().toString(), entry.getValue());
 			}
 		} catch (Throwable e) {
 			log.error("接口["+url+"]调用失败:"+e.toString());
 		}
 		
-		return list;
+		return map;
 	}
 }

@@ -16,6 +16,7 @@ public class WordFileinfo implements Serializable {
 	protected String name;// name
 	protected String type;// type
 	protected String wordid;// wordId
+	protected Long screen_id;// screen_id
 
 	public WordFileinfo() {
 		super();
@@ -25,7 +26,15 @@ public class WordFileinfo implements Serializable {
 		super();
 		this.id = id;
 	}
-	
+
+	public WordFileinfo(Long id, String name, String type, String wordid, Long screen_id) {
+		this.id = id;
+		this.name = name;
+		this.type = type;
+		this.wordid = wordid;
+		this.screen_id = screen_id;
+	}
+
 	@Id// 主键
 	public Long getId() {
 		return id;
@@ -47,11 +56,20 @@ public class WordFileinfo implements Serializable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public String getWordid() {
 		return wordid;
 	}
+
 	public void setWordid(String wordid) {
 		this.wordid = wordid;
+	}
+
+	public Long getScreen_id() {
+		return screen_id;
+	}
+
+	public void setScreen_id(Long screen_id) {
+		this.screen_id = screen_id;
 	}
 }

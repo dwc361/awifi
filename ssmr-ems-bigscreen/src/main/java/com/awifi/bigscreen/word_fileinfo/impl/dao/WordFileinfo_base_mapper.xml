@@ -4,10 +4,10 @@
 <mapper namespace="com.awifi.bigscreen.word_fileinfo.dao">
 
 	<sql id="columns">
-		id, name, type, wordid
+		id, name, type, wordid, screen_id
 	</sql>
 	<sql id="vals">
-		#{id}, #{name}, #{type}, #{wordid}
+		#{id}, #{name}, #{type}, #{wordid}, #{screen_id}
 	</sql>
 	<sql id="conds">
 		<if test="id != null and id != ''">
@@ -21,6 +21,9 @@
 		</if>
 		<if test="wordid != null and wordid != ''">
 			and wordid = #{wordid}
+		</if>
+		<if test="screen_id != null and screen_id != ''">
+			and screen_id = #{screen_id}
 		</if>
 	</sql>
 
@@ -64,7 +67,8 @@
 			id=#{id}, 
 			name=#{name}, 
 			type=#{type}, 
-			wordid=#{wordid}
+			wordid=#{wordid},
+			screen_id=#{screen_id}
 		</set>
 		where id=#{id} 
 	</update>
@@ -72,18 +76,21 @@
 	<update id="updateIgnoreNullWordFileinfo">
 		update e_word_fileinfo
 		<set>
-		<if test="id != null and id != ''">
-			id=#{id}, 
-		</if>
-		<if test="name != null and name != ''">
-			name=#{name}, 
-		</if>
-		<if test="type != null and type != ''">
-			type=#{type}, 
-		</if>
-		<if test="wordid != null and wordid != ''">
-			wordid=#{wordid}
-		</if>
+			<if test="id != null and id != ''">
+				id=#{id},
+			</if>
+			<if test="name != null and name != ''">
+				name=#{name},
+			</if>
+			<if test="type != null and type != ''">
+				type=#{type},
+			</if>
+			<if test="wordid != null and wordid != ''">
+				wordid=#{wordid}
+			</if>
+			<if test="screen_id != null and screen_id != ''">
+				screen_id=#{screen_id}
+			</if>
 		</set>
 		where id=#{id} 
 	</update>
@@ -102,6 +109,9 @@
 			</if>
 			<if test="wordid != null and wordid != ''">
 			wordid=#{wordid}
+			</if>
+			<if test="screen_id != null and screen_id != ''">
+				screen_id=#{screen_id}
 			</if>
 		</set>
 		where 1=1

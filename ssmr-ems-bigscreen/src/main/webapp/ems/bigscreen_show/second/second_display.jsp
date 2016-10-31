@@ -11,17 +11,28 @@
 	<meta name="author" content="Mosaddek">
 	<meta name="keyword" content="FlatLab, Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 	<title>大屏监控网</title>
-	<!-- <script src="http://cdn.bootcss.com/jquery/2.2.3/jquery.js"></script> -->
-	<script type="text/javascript" src="${basePath}/common/js/jquery/jquery-1.7.2.min.js"></script>
-	<script type="text/javascript" src="${basePath}/common/js/jquery/jquery.json.js"></script>
-	<script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
-	<script type="text/javascript" src="${basePath}/common/js/ROOF.Class.js"></script>
-	<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+	<%@include file="/ems/bigscreen_show/bigscreen_show_head.jsp"%>
+	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/screen_2.css" />
+	<script type="text/javascript" src="${basePath}/ems/bigscreen_show/second/js/screen.js"></script>
 	<script type="text/javascript">
 		var ws = null;
 	
 		$(function() {
 			connect();
+			$.ajax({
+				type: "post",
+				url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/user_pv_uv_data.action",
+				data: {username:$("#username").val(), content:$("#content").val()},
+				dataType: "json",
+				success: function(data){
+					console.log("pv/uv: "+data.toString());
+					$("#merchantNum").val(data.merchantNum);
+					$("#userNum").val(data.userNum);
+					$("#PV").val(data.PV);
+					$("#UV").val(data.UV);
+					
+				}
+			});
 		});
 	
 		// 建立连接
@@ -74,11 +85,9 @@
 				return false
 			return true
 		}
+		//8.用户、商户、PV、UV统计
+
 	</script>
-	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/bootstrap.min.css" />
-	<link rel="stylesheet" type="text/css" href="${basePath}/ems/bigscreen_show/second/css/screen_2.css" />
-	<script src="${basePath}/ems/bigscreen_show/second/js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
-	<script src="${basePath}/ems/bigscreen_show/second/js/screen.js" type="text/javascript" charset="utf-8"></script>
 </head>
 
 <body scrolling="no">
@@ -88,22 +97,8 @@
 	</footer>
 	<!--以下是左侧4栏-->
 	<div class="leftPart">
-		<div id='part_1_1' class="box">
-			<div class="left col-md-12 col-lg-12 col-sm-12">
-				<div class="topH">
-					<h1>[ 平台用户总量 ]</h1>
-				</div>
-				<div class="Hchart" style="position: relative;">
-					<div id="areas_YHZL"></div>
-					<div id="textname">
-						<ul style="font-size: 1.4rem;">
-							<li> <i style="background: #367bdb;"></i>用户数量：<i id="areaspline1">343242424</i> <span></span></li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-           <div id='part_2_1' class="box"></div>
+		<div id='part_1_1' class="box"></div>
+        <div id='part_2_1' class="box"></div>
 		<div id='part_3_1' class="box"></div>
 		<div id='part_4_1' class="box"></div>
 	</div>
@@ -116,19 +111,19 @@
 				<section class="stnHr col-md-1 col-lg-1 col-sm-1"><img src="${basePath}/ems/bigscreen_show/second/img/xiaojiange.png" alt="" /></section>
 				<section class="stnP col-md-4 col-lg-4 col-sm-4">
 					<span class="stnP-span">用户总数</span><br />
-					<i class="stnP-i">2016.02.14</i>
+					<i class="stnP-i"><input type="text" id="userNum" style= "background-color:transparent;border-style: solid; border-width: 0"/></i>
 				</section>
 			</div
 			><div class="col-md-4 col-lg-4 col-sm-4" style="text-align: center;">
 				<span class="stnFont-mid">全国商户总数— </span>
-				<i class="blueFont">1232434</i>
+				<i class="blueFont"><input type="text" id="merchantNum" style= "background-color:transparent;border-style: solid; border-width: 0"/></i>
 			</div
 			><div class="col-md-4 col-lg-4 col-sm-4" style="padding-right: 12px;padding-left: 12px;line-height: 3rem;text-align: center;">
-				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">PV- <i class="blueFont-right">125658</i></section>
+				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">PV- <i class="blueFont-right"><input type="text" id="PV" style= "background-color:transparent;border-style: solid; border-width: 0"/></i></section>
 				<section class="stnHr col-md-1 col-lg-1 col-sm-1" style="width: 6%;">
 					<img src="${basePath}/ems/bigscreen_show/second/img/xiaojiange.png" alt="" />
 				</section>
-				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">UV- <i class="blueFont-right">125658</i></section>
+				<section class="stnFont-right col-md-5 col-lg-5 col-sm-5">UV- <i class="blueFont-right"><input type="text" id="UV" style= "background-color:transparent;border-style: solid; border-width: 0"/></i></section>
 			</div>
 		</header>
 		<div class="content">

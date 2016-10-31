@@ -1,12 +1,18 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactMixin from 'react-mixin';
+import Reflux from 'reflux'
+
 import ReactEcharts from '../../src/echarts-for-react';
+import store from '../../../../stores/second-store';
+import actions from '../../../../actions/second-actions';
 
 const Mix_JHL_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
     getInitialState: function() {
-        return {option: this.getOption()};
+        return {activateNum:[],activatePer:[],createTime:[],option: this.getOption([],[],[])};
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
@@ -37,10 +43,20 @@ const Mix_JHL_ChartComponent = React.createClass({
         }, 2000);
     },
     componentDidMount: function() {
+        actions.getMix_jhl_data();
+    },
+    componentDidUpdate: function(){
+        console.log(this.state.activatePer+"*jhl*"+this.state.createTime);
+        let option = this.state.option;
+        option.xAxis[0].data = this.state.createTime;
+        option.series[0].data = this.state.activatePer;
+        option.series[1].data = this.state.activateNum;
+        this.option = option;
+        this.getOption(this.state.activateNum,this.state.activatePer,this.state.createTime);
     },
     componentWillUnmount: function() {
     },
-    getOption: function() {
+    getOption: function(activateNum,activatePer,createTime) {
         const option = {
             //  backgroundColor:'#333',
             color: [
@@ -61,8 +77,7 @@ const Mix_JHL_ChartComponent = React.createClass({
                         opacity: 1,
                     },
                 },
-
-                data: ['1月', '2月', '3月', '4月', '5月', '6月', '7月', '8月', '9月', '10月', '11月', '12月']
+                data: createTime
             }],
             yAxis: [{
                 type: 'value',
@@ -97,14 +112,14 @@ const Mix_JHL_ChartComponent = React.createClass({
             series: [{
                     name: '激活率',
                     type: 'bar',
-                    data: [2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3]
+                    data: activatePer
                 },
 
                 {
                     name: '激活量',
                     type: 'line',
                     yAxisIndex: 1,
-                    data: [2.0, 2.2, 3.3, 4.5, 6.3, 10.2, 20.3, 23.4, 23.0, 16.5, 12.0, 6.2]
+                    data: activateNum
                 }
             ]
         };
@@ -131,3 +146,5 @@ const Mix_JHL_ChartComponent = React.createClass({
 });
 
 export default Mix_JHL_ChartComponent;
+// ES6 mixin写法，通过mixin将store的与组件连接，功能是监听store带来的state变化并刷新到this.state
+ReactMixin.onClass(Mix_JHL_ChartComponent, Reflux.connect(store));
