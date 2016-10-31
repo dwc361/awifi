@@ -4,7 +4,6 @@ import $ from 'jquery';
 
 export default Reflux.createStore({
 	init () {
-		console.log("stores init.");
 		// this.listenToMany(actions); 方法前面加on，如onHandleChange
 		this.listenTo(actions.getBigscreenSecondData, 'getBigscreenSecondData');
 		this.listenTo(actions.saveBigscreenSecondData, 'saveBigscreenSecondData');

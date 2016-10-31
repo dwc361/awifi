@@ -72,6 +72,39 @@ public class MainBackstageAction {
 		return new Result("大屏成功切换到二层架构!");
 	}
 	
+	/**
+	 * 大屏切换到三层架构
+	 */
+	@RequestMapping("/switch_to_bigscreen_third_display_page")
+	public @ResponseBody Result switch_to_bigscreen_third_display_page(HttpServletRequest request) {
+		SystemWebSocketHandler hander = new SystemWebSocketHandler();
+		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/ems/bigscreen_show/indexShowAction/bigscreen_third_display.action";
+		hander.sendMessageToUsers(new TextMessage(url));
+		return new Result("大屏成功切换到三层架构!");
+	}
+	
+	/**
+	 * 大屏切换到四层架构
+	 */
+	@RequestMapping("/switch_to_bigscreen_forth_display_page")
+	public @ResponseBody Result switch_to_bigscreen_forth_display_page(HttpServletRequest request) {
+		SystemWebSocketHandler hander = new SystemWebSocketHandler();
+		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/ems/bigscreen_show/indexShowAction/bigscreen_forth_display.action";
+		hander.sendMessageToUsers(new TextMessage(url));
+		return new Result("大屏成功切换到四层架构!");
+	}
+	
+	/**
+	 * 大屏切换到五层架构
+	 */
+	@RequestMapping("/switch_to_bigscreen_fifth_display_page")
+	public @ResponseBody Result switch_to_bigscreen_fifth_display_page(HttpServletRequest request) {
+		SystemWebSocketHandler hander = new SystemWebSocketHandler();
+		String url = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+request.getContextPath()+"/ems/bigscreen_show/indexShowAction/bigscreen_fifth_display.action";
+		hander.sendMessageToUsers(new TextMessage(url));
+		return new Result("大屏成功切换到五层架构!");
+	}
+	
 	
 	
 	@Autowired(required = true)

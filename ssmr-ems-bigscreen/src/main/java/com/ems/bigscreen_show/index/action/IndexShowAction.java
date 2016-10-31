@@ -131,6 +131,24 @@ public class IndexShowAction {
 		return "/ems/bigscreen_show/third/third_display.jsp";
 	}
 	
+	/**
+	 * 大屏四层架构页面展示
+	 */
+	@RequestMapping("/bigscreen_forth_display")
+	public String bigscreen_forth_display(Model model, HttpServletRequest request) {
+		this.loadCommon(model);
+		return "/ems/bigscreen_show/forth/forth_display.jsp";
+	}
+	
+	/**
+	 * 大屏五层架构页面展示
+	 */
+	@RequestMapping("/bigscreen_fifth_display")
+	public String bigscreen_fifth_display(Model model, HttpServletRequest request) {
+		this.loadCommon(model);
+		return "/ems/bigscreen_show/fifth/fifth_display.jsp";
+	}
+	
 	
 	
 	@Autowired(required = true)
