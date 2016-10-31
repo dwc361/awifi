@@ -10,7 +10,7 @@
 					<Item>D:\phoenix122411_git\awifi\roof-web-user-webapp\src\main\webapp</Item>
 					<Item>D:\phoenix122411_git\awifi\roof-web-dictionary-webapp\src\main\webapp</Item>
 					<Item>D:\phoenix122411_git\awifi\roof-web-org-webapp\src\main\webapp</Item>
-					<Item>D:\phoenix122411_git\awifi\webc</Item>
+					<!-- <Item>D:\phoenix122411_git\awifi\webc</Item> -->
 				</Array>
 			</Arg>
 		</New>

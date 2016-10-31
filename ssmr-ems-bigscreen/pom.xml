@@ -414,11 +414,11 @@
 				<version>2.2</version>
 				<configuration>
 					<failOnMissingWebXml>true</failOnMissingWebXml>
-					<webResources>
-						<resource>
-							<directory>D:\phoenix122411_git\awifi\webc</directory>
-						</resource>
-					</webResources>
+<!-- 					<webResources> -->
+<!-- 						<resource> -->
+<!-- 							<directory>D:\phoenix122411_git\awifi\webc</directory> -->
+<!-- 						</resource> -->
+<!-- 					</webResources> -->
 				</configuration>
 			</plugin>
 			
