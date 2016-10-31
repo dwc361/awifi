@@ -14,6 +14,7 @@
     <link href="//cdn.bootcss.com/tether/1.3.6/css/tether.min.css"
           rel="stylesheet">
     <script src="//cdn.bootcss.com/tether/1.3.6/js/tether.min.js"></script>
+    <script src="${basePath}/ems_common/"></script>
 
     <%@include file="/ems/bigscreen_show/bigscreen_show_head.jsp"%>
     <link rel="stylesheet" href="${basePath}/ems/bigscreen_show/third/css/screen_3.css">

@@ -2,9 +2,9 @@ var path = require('path');
 
 var config = {
 	entry : {
-		main : path.join(__dirname, 'src/main/webapp/react/page/second_page/main.jsx'),
-		bigscreen_echarts : path.join(__dirname, 'src/main/webapp/react/page/second_page/bigscreen_echarts.jsx'),
-		thirdScreen : path.join(__dirname,'src/main/webapp/react/page/third_page/thirdScreen.jsx'),
+		main : path.join(__dirname, 'src/main/webapp/react/page/bigscreen_backstage/main.jsx'),
+		secondScreen : path.join(__dirname, 'src/main/webapp/react/page/bigscreen_show/secondScreen.jsx'),
+		thirdScreen : path.join(__dirname,'src/main/webapp/react/page/bigscreen_show/thirdScreen.jsx'),
 		vendors : [ 'react', 'reflux', 'react-mixin' ]
 	},
 	
