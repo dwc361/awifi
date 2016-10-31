@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactEcharts from '../../../src/echarts-for-react';
 
-export default class Curve_ZDZX_ChartComponent extends React.Component({
+const Curve_ZDZX_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
@@ -44,53 +44,66 @@ export default class Curve_ZDZX_ChartComponent extends React.Component({
     getOption: function() {
         const option = {
             //backgroundColor:"#26333b",
-            tooltip: {
-                trigger: 'axis',
-                position: function (pt) {
-                    return [pt[0], '10%'];
-                }
-            },
+            color:['#007797'],
             title: {
-                left: 'right',
-                text: '终端数',
+                text: '堆叠区域图'
+            },
+            tooltip : {
+                trigger: 'axis'
             },
             legend: {
-                top: 'bottom',
-                data:['意向']
+                data:'搜索引擎'
             },
-            xAxis: {
-                type: 'category',
-                boundaryGap: false,
-                data: date
+            toolbox: {
+                feature: {
+                    saveAsImage: {}
+                }
             },
-            yAxis: {
-                type: 'value',
-                boundaryGap: [0, '100%']
+            grid: {
+                left: '3%',
+                right: '4%',
+                bottom: '3%',
+                containLabel: true
             },
-            dataZoom: [{
-                type: 'inside',
-                start: 0,
-                end: 10
-            }],
-            series: [
+            xAxis : [
                 {
-                    name:'当前时段终端在线数量',
+                    type : 'category',
+                    boundaryGap : false,
+                    data : ['周一','周二','周三','周四','周五','周六','周日'],
+                    axisLine: {
+                        show: true,
+                        onZero: true,
+                        lineStyle: {
+                            color:'#eee'
+                        }
+                    }
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    axisLine: {
+                        show: true,
+                        onZero: true,
+                        lineStyle: {
+                            color:'#eee'
+                        }
+                    }
+                }
+            ],
+            series : [
+                {
+                    name:'搜索引擎',
                     type:'line',
-                    smooth:true,
-                    symbol: 'none',
-                    sampling: 'average',
-                    itemStyle: {
+                    stack: '总量',
+                    label: {
                         normal: {
-                            color: 'none'
+                            show: true,
+                            position: 'top'
                         }
                     },
-                    areaStyle: {
-                        normal: {
-                            color: '#007797'
-                        }
-
-                    },
-                    data: data
+                    areaStyle: {normal: {}},
+                    data:[820, 932, 901, 934, 1290, 1330, 1320]
                 }
             ]
         };
@@ -98,9 +111,10 @@ export default class Curve_ZDZX_ChartComponent extends React.Component({
     },
     render: function() {
         return (
-            <div className="left_top">
+            <div className="chart_block">
                 <div className="topH">
-                    <h1>[ 今天终端在线趋势图 ]</h1>
+                    <hr/>
+                    <h1>今天终端在线趋势图</h1>
                 </div>
                 <div className="Echart">
                     <div id="newsShow">
@@ -118,3 +132,5 @@ export default class Curve_ZDZX_ChartComponent extends React.Component({
         );
     }
 });
+export default Curve_ZDZX_ChartComponent;
+

@@ -48,6 +48,7 @@ export default class Table_YDZD extends React.Component{
                    rowSelection={rowSelection}
                    dataSource={data}
                    className="table"
+                   bordered
             />
         );
     }

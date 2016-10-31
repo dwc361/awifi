@@ -3,7 +3,7 @@ import ReactEcharts from '../../../src/echarts-for-react';
 import Table_YDZD from './table-YDZD.jsx';
 
 
-export default class Pie_YDZD_ChartComponent extends React.Component({
+const Pie_YDZD_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
@@ -46,53 +46,65 @@ export default class Pie_YDZD_ChartComponent extends React.Component({
     getOption: function() {
         const option = {
             color: [
-                '#21c6a5', '#65c7f7', '#096dc5', '#4246ef'
+                '#005580', '#9ff0ff', '#26c4dd', '#007797','#0187e2', '#007797'
             ],
             //  backgroundColor: '#2c343c',
             tooltip: {
                 trigger: 'item',
                 textStyle: {
                     color: '#fff',
-                    fontSize: 18
+                    fontSize: 20
                 },
                 axisPointer: {
                     lineStyle: {
                         color: '#fff',
-                        width: 1
+                        width: 2
                     }
                 },
-                formatter: "{b} : {c}"
+                formatter: "{b} <br/>{c}"
             },
             series: [{
                 name: '类型分布',
                 type: 'pie',
                 label: {
                     normal: {
-                        show: true,
-                        position: 'outside',
+                        label : {
+                            position : 'inner',
+                            formatter : function (params) {
+                                return (params.percent - 0).toFixed(0) + '%'
+                            }
+                        },
+                        show: false,
+                        position: 'inside',
                         textStyle: {
                             color: '#fff',
                             fontStyle: 'normal',
                             fontWeight: 'normal',
                             fontFamily: 'sans-serif',
-                            fontSize: 18
+                            fontSize: 16
                         },
                     },
                 },
-                radius: '65%',
-                center: ['50%', '60%'],
+                radius: '80%',
+                center: ['50%', '50%'],
                 data: [{
-                    value: 335,
-                    name: '胖ap'
+                    value: 39.92,
+                    name: 'apple'
                 }, {
-                    value: 310,
-                    name: '光猫'
+                    value: 22.8,
+                    name: '未知'
                 }, {
-                    value: 234,
-                    name: '瘦AP'
+                    value: 5.54,
+                    name: 'Huaewi'
                 }, {
-                    value: 135,
-                    name: '融合终端'
+                    value: 5.21,
+                    name: 'Sangxing'
+                }, {
+                    value: 4.66,
+                    name: 'Xiaomi'
+                }, {
+                    value: 21.87,
+                    name: '其他'
                 }],
                 itemStyle: {
                     emphasis: {
@@ -107,22 +119,24 @@ export default class Pie_YDZD_ChartComponent extends React.Component({
     },
     render: function() {
         return (
-            <div className="left_top">
+            <div className="chart_block">
                 <div className="topH">
-                    <h1>[ 移动终端 ]</h1>
+                    <hr/>
+                    <h1>移动终端</h1>
                 </div>
                 <div className="Echart">
                     <div className="data-YDZD">
                         <Table_YDZD/>
                     </div>
-                    <div id='pie_YDZD'>
+                    <div id='pie_YDZD' className="chart_part">
                         <ReactEcharts ref='echarts_react'
                                       onChartReady={this.showToolTip}
-                                      option={this.state.option}
-                                      style={{height: '100%', width: '100%'}} />
+                                      option={this.state.option}/>
                     </div>
                 </div>
             </div>
         );
     }
 });
+
+export default Pie_YDZD_ChartComponent;

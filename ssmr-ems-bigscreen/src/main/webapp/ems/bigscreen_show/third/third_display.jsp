@@ -15,17 +15,11 @@
           rel="stylesheet">
     <script src="//cdn.bootcss.com/tether/1.3.6/js/tether.min.js"></script>
 
-    <%@include file="/ems/bigscreen_backstage/bigscreen_backstage_head.jsp"%>
+    <%@include file="/ems/bigscreen_show/bigscreen_show_head.jsp"%>
     <link rel="stylesheet" href="${basePath}/ems/bigscreen_show/third/css/screen_3.css">
 </head>
 <body>
-    <div class="container">
-        <section class="block_part leftClum"></section
-        ><section class="block_part rightClum"></section
-        ><section class="block_part rightClum"></section
-        ><section class="block_part leftClum"></section
-        ><section class="block_part rightClum"></section
-        ><section class="block_part rightClum"></section>
-    </div>
+    <div id="thirdScreen_show" class="container"></div>
+    <script src="${basePath}/react/build/thirdScreen.js"></script>
 </body>
 </html>
