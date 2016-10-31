@@ -22,7 +22,6 @@
 	<div id="container"></div>
 
 	<script src="${basePath}/react/build/main.js"></script>
-<!-- 	<script src="http://localhost:8081/main.js"></script> -->
-<%-- 	<script src="${basePath}/ems/bigscreen_backstage/main/js/react_bigscreen_backstage_main_component.js"></script> --%>
+	<!-- <script src="http://localhost:8081/main.js"></script> -->
 </body>
 </html>
