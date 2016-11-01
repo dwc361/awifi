@@ -170,7 +170,7 @@
 <script type="text/javascript">
 	$(function() {
 		// 自定义宽高
-		var mapWidth = 1260;
+		var mapWidth = document.body.clientWidth * 0.54;
 		var mapHeight = mapWidth * 0.8;
 
 		$('#ChinaMap1').SVGMap({
