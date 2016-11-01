@@ -59,7 +59,7 @@ public class IndexShowAction {
 		String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + request.getContextPath() + "/";
 
 		// 加载大屏信息
-		/*BigscreenVo bigscreenVo = new BigscreenVo();
+		BigscreenVo bigscreenVo = new BigscreenVo();
 		bigscreenVo.setEnabled("1");
 		bigscreenVo.setRe_type(BigscreenReTypeEnum.First.getCode());
 		List<BigscreenVo> bigscreenList = bigscreenService.selectForList(bigscreenVo);
@@ -68,16 +68,12 @@ public class IndexShowAction {
 		}
 		WordFileinfo wordFileinfo = new WordFileinfo();
 		wordFileinfo.setScreen_id(bigscreenVo.getId());
-		List<WordFileinfoVo> wordList = wordFileinfoService.selectForList(wordFileinfo);*/
-
+		List<WordFileinfoVo> wordList = wordFileinfoService.selectForList(wordFileinfo);
+		model.addAttribute("wordList", JSON.toJSONString(wordList));
 		// 选用哪一套模板
-		//TemplatesVo templatesVo = templatesService.load(new Templates(1L));
+		TemplatesVo templatesVo = templatesService.load(new Templates(bigscreenVo.getTemplate_id()));
 
-		// 选用哪一套主题
-		//ThemeVo themeVo = themeService.load(new Theme(bigscreenVo.getTheme_id()));
-
-		//return templatesVo.getPath();
-		return "/ems/bigscreen_show/first/first_display.jsp";
+		return templatesVo.getPath();
 	}
 	
 	/**
@@ -159,6 +155,11 @@ public class IndexShowAction {
 	@Autowired(required = true)
 	public void setDictionaryService(@Qualifier("dictionaryService") IDictionaryService dictionaryService) {
 		this.dictionaryService = dictionaryService;
+	}
+	
+	@Autowired(required = true)
+	public void setWordFileinfoService(@Qualifier("wordFileinfoService") IWordFileinfoService wordFileinfoService) {
+		this.wordFileinfoService = wordFileinfoService;
 	}
 
 	@Autowired
