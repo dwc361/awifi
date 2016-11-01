@@ -7,56 +7,36 @@ import ReactEcharts from '../../src/echarts-for-react';
 import store from '../../../../stores/second-store';
 import actions from '../../../../actions/second-actions';
 
+var NumList = [];
+var perList= [];
+var timeList = [];
 const Mix_JHL_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
     getInitialState: function() {
-        return {activateNum:[],activatePer:[],createTime:[],option: this.getOption([],[],[])};
-    },
-    showToolTip: function(echartObj) {
-        let option = this.state.option;
-        let currentIndex = -1;
-        setInterval(function() {
-            let dataLen = option.series[0].data.length;
-            // 取消之前高亮的图形
-            echartObj.dispatchAction({
-                type: 'downplay',
-                seriesIndex: 0,
-                dataIndex: currentIndex
-            });
-            
-            currentIndex = (currentIndex + 1) % dataLen;
-            
-            // 高亮当前图形
-            echartObj.dispatchAction({
-                type: 'highlight',
-                seriesIndex: 0,
-                dataIndex: currentIndex
-            });
-            // 显示 tooltip
-            echartObj.dispatchAction({
-                type: 'showTip',
-                seriesIndex: 0,
-                dataIndex: currentIndex
-            });
-        }, 2000);
+        return {activateNum:[],activatePer:[],createTime:[],option: this.getOption(NumList,perList,timeList)};
     },
     componentDidMount: function() {
         actions.getMix_jhl_data();
     },
     componentDidUpdate: function(){
-        console.log(this.state.activatePer+"*jhl*"+this.state.createTime);
+        //console.log(this.state.activatePer+"*jhl*"+this.state.createTime);
         let option = this.state.option;
-        option.xAxis[0].data = this.state.createTime;
-        option.series[0].data = this.state.activatePer;
-        option.series[1].data = this.state.activateNum;
-        this.option = option;
-        this.getOption(this.state.activateNum,this.state.activatePer,this.state.createTime);
+        if(this.state.activatePer.length>0){
+            NumList = this.state.createTime;
+            perList = this.state.activatePer;
+            timeList = this.state.activateNum;
+            option.xAxis[0].data = NumList;
+            option.series[0].data = perList;
+            option.series[1].data = timeList;
+            this.option = option;
+            this.getOption(NumList,perList,timeList);
+        }
     },
     componentWillUnmount: function() {
     },
-    getOption: function(activateNum,activatePer,createTime) {
+    getOption: function(NumList,perList,timeList) {
         const option = {
             //  backgroundColor:'#333',
             color: [
@@ -77,7 +57,7 @@ const Mix_JHL_ChartComponent = React.createClass({
                         opacity: 1,
                     },
                 },
-                data: createTime
+                data: timeList
             }],
             yAxis: [{
                 type: 'value',
@@ -112,19 +92,47 @@ const Mix_JHL_ChartComponent = React.createClass({
             series: [{
                     name: '激活率',
                     type: 'bar',
-                    data: activatePer
+                    data: perList
                 },
 
                 {
                     name: '激活量',
                     type: 'line',
                     yAxisIndex: 1,
-                    data: activateNum
+                    data: NumList
                 }
             ]
         };
 
         return option;
+    },
+    showToolTip: function(echartObj) {
+        let option = this.state.option;
+        let currentIndex = -1;
+        setInterval(function() {
+            let dataLen = option.series[0].data.length;
+            // 取消之前高亮的图形
+            echartObj.dispatchAction({
+                type: 'downplay',
+                seriesIndex: 0,
+                dataIndex: currentIndex
+            });
+
+            currentIndex = (currentIndex + 1) % dataLen;
+
+            // 高亮当前图形
+            echartObj.dispatchAction({
+                type: 'highlight',
+                seriesIndex: 0,
+                dataIndex: currentIndex
+            });
+            // 显示 tooltip
+            echartObj.dispatchAction({
+                type: 'showTip',
+                seriesIndex: 0,
+                dataIndex: currentIndex
+            });
+        }, 2000);
     },
     render: function() {
         return (
