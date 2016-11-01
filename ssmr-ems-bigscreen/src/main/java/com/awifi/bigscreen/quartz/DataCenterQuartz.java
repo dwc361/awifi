@@ -56,7 +56,8 @@ public class DataCenterQuartz {
 	 * [胖ap激活率统计]数据拉取
 	 * 本月第一天0:30:00拉取一次
 	 */
-	@Scheduled(cron = "0 30 0 1 * ? ")
+	//@Scheduled(cron = "0 30 0 1 * ? ")
+	@Scheduled(cron = "0 30 0 * * ? ")
 	public void pull_Mix_JHL_Chart_data() {
 		log.info("@Scheduled-------pull_Mix_JHL_Chart_data()");
 		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_Mix_JHL_Chart, mix_JHL_Chart_DataAcquisition, "{'key':'value'}");
@@ -68,7 +69,8 @@ public class DataCenterQuartz {
 	 * [定制终端设备状态统计]数据拉取
 	 * 本月第一天1:30:00拉取一次
 	 */
-	@Scheduled(cron = "0 30 1 1 * ? ")
+	//@Scheduled(cron = "0 30 1 1 * ? ")
+	@Scheduled(cron = "0 30 1 * * ? ")
 	public void pull_Mix_DZZD_Chart_data() {
 		log.info("@Scheduled-------pull_Mix_DZZD_Chart_data()");
 		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_Mix_DZZD_Chart, mix_DZZD_Chart_DataAcquisition, "{'key':'value'}");
@@ -80,7 +82,8 @@ public class DataCenterQuartz {
 	 * [NAS设备状态统计]数据拉取
 	 * 本月第一天2:30:00拉取一次
 	 */
-	@Scheduled(cron = "0 30 2 1 * ? ")
+	//@Scheduled(cron = "0 30 2 1 * ? ")
+	@Scheduled(cron = "0 30 2 * * ? ")
 	public void pull_Mix_NAS_Chart_data() {
 		log.info("@Scheduled-------pull_Mix_NAS_Chart_data()");
 		redisZSetCache.createOrUpdateCache(AwifiConstants.Redis_Key_Mix_NAS_Chart, mix_NAS_Chart_DataAcquisition, "{'key':'value'}");
