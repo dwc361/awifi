@@ -54,7 +54,7 @@ const Line_YHRZ_ChartComponent = React.createClass({
         actions.getLine_yhrz_data();
     },
     componentDidUpdate: function(){
-        console.log(this.state.successNum+"*yhrz*"+this.state.createTime);
+        //console.log(this.state.successNum+"*yhrz*"+this.state.createTime);
         let option = this.state.option;
         option.series[0].data = this.state.successNum;
         option.xAxis[0].data = this.state.createTime;

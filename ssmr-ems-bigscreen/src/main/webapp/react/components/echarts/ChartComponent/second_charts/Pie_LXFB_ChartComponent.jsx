@@ -13,7 +13,7 @@ const Pie_LXFB_ChartComponent = React.createClass({
     timeTicket: null,
     currentIndex: -1,
     getInitialState: function() {
-        return {option: this.getOption()};
+        return {option: this.getOption([]), dataList:[]};
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
@@ -44,10 +44,14 @@ const Pie_LXFB_ChartComponent = React.createClass({
     fetchNewDate: function() {
     },
     componentDidMount: function() {
+        actions.getPie_lxfb_data();
+    },
+    componentDidUpdate: function() {
+        this.state.option.series[0].data = this.state.dataList;
     },
     componentWillUnmount: function() {
     },
-    getOption: function() {
+    getOption: function(res) {
         const option = {
             color: [
                 '#21c6a5', '#65c7f7', '#096dc5', '#4246ef'
@@ -85,7 +89,8 @@ const Pie_LXFB_ChartComponent = React.createClass({
                 },
                 radius: '65%',
                 center: ['50%', '60%'],
-                data: [{
+                data: res,
+                /*data: [{
                     value: 335,
                     name: '胖ap'
                 }, {
@@ -97,7 +102,7 @@ const Pie_LXFB_ChartComponent = React.createClass({
                 }, {
                     value: 135,
                     name: '融合终端'
-                }],
+                }],*/
                 itemStyle: {
                     emphasis: {
                         shadowBlur: 10,
@@ -129,3 +134,4 @@ const Pie_LXFB_ChartComponent = React.createClass({
 });
 
 export default Pie_LXFB_ChartComponent;
+ReactMixin.onClass(Pie_LXFB_ChartComponent, Reflux.connect(store));

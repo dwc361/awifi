@@ -17,7 +17,6 @@ const Mix_DZZD_ChartComponent = React.createClass({
         actions.getMix_Dzzd_data();
     },
     componentDidUpdate: function(){
-       console.log(this.state.offlineNum+"*dzzd*"+this.state.createTime);
         let option = this.state.option;
         option.series[0].data = this.state.onlineNum;
         option.series[1].data = this.state.offlineNum;

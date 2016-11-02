@@ -1,5 +1,6 @@
 package com.awifi.bigscreen.redisCache.impl.DataTransform;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -29,9 +30,11 @@ public class Pie_LXFB_Chart_DataTransform implements IDataTransform<Map<String, 
 		 * 设备类型的Map
 		 */
 		Map deviceTypeMap = new HashMap();
+		Map dataMap = new HashMap();
 		DeviceTypeEnum[] deviceTypeEnum = DeviceTypeEnum.values();
 		for (int i = 0; i < deviceTypeEnum.length; i++) {
-			deviceTypeMap.put(deviceTypeEnum[i].getCode().toString(), deviceTypeEnum[i].getEn_name().toString());
+			deviceTypeMap.put(deviceTypeEnum[i].getCode().toString(), deviceTypeEnum[i].getDisplay().toString());
+			dataMap.put(deviceTypeEnum[i].getDisplay().toString(), new BigDecimal(0.0));
 		}
 		
 		/**
@@ -57,17 +60,33 @@ public class Pie_LXFB_Chart_DataTransform implements IDataTransform<Map<String, 
 				Object value = entry.getValue();
 				
 				if(deviceTypeMap.get(key) != null) {
-					Map m = new HashMap();
-					m.put("deviceName", deviceTypeMap.get(key));
-					m.put("deviceNum", value);
-					result_list.add(m);
-				} else {
-					Map m = new HashMap();
-					m.put("deviceName", "其它");
-					m.put("deviceNum", value);
-					result_list.add(m);
+					BigDecimal device_num = (BigDecimal) dataMap.get(deviceTypeMap.get(key));
+					device_num = device_num.add(new BigDecimal(value.toString()));
+					dataMap.put(deviceTypeMap.get(key), device_num);
 				}
+				
+//				if(deviceTypeMap.get(key) != null) {
+//					Map m = new HashMap();
+//					m.put("deviceName", deviceTypeMap.get(key));
+//					m.put("deviceNum", value);
+//					result_list.add(m);
+//				} else {
+//					Map m = new HashMap();
+//					m.put("deviceName", "其它");
+//					m.put("deviceNum", value);
+//					result_list.add(m);
+//				}
 			}
+			
+			Iterator<Entry<String, String>> itor = dataMap.entrySet().iterator();
+			while (itor.hasNext()) {
+				Map.Entry entry = (Map.Entry)itor.next();
+				Map m = new HashMap();
+				m.put("deviceName", entry.getKey());
+				m.put("deviceNum", entry.getValue());
+				result_list.add(m);
+			}
+			
 		}
 		result_map.put("data", result_list);
 		

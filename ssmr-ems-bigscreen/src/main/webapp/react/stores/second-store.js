@@ -10,6 +10,12 @@ export default Reflux.createStore({
 		this.listenTo(actions.openAddModal, 'openAddModal');
 		this.listenTo(actions.setStateValue, 'setStateValue');
 		this.listenTo(actions.getMix_Dzzd_data, 'getMix_Dzzd_data');
+		this.listenTo(actions.getFunnel_sbpm_data, 'getFunnel_sbpm_data');
+		this.listenTo(actions.getLine_yhrz_data, 'getLine_yhrz_data');
+		this.listenTo(actions.getMix_nas_data, 'getMix_nas_data');
+		this.listenTo(actions.getMix_jhl_data, 'getMix_jhl_data');
+		this.listenTo(actions.getPie_lxfb_data, 'getPie_lxfb_data');
+		this.listenTo(actions.getScatter_hotspot_data, 'getScatter_hotspot_data');
 	},
 	getBigscreenSecondData () {
 		$.ajax({
@@ -47,9 +53,9 @@ export default Reflux.createStore({
 	setStateValue(value){
 		this.trigger(value);
 	},
-	setListDate(arr){
+	setListDate(arr,num){
 		var begin = 0,
-			end = begin + 5;
+			end = begin + num;
 		var result = [],
 			arrLength = arr.length;
 
@@ -59,15 +65,15 @@ export default Reflux.createStore({
 
 			result.push(arr.slice(begin, end));
 
-			begin = begin + 5;
-			end = begin + 5;
+			begin = begin + num;
+			end = begin + num;
 			if (end > arrLength) {
 				end = arrLength;
 				result.push(arr.slice(begin, end));
 				break;
 			}
 		}
-		console.log("setListDate:"+result);
+		//console.log("setListDate:"+result);
 		return  result;
 	},
 	// 1.全省设备排名
@@ -79,18 +85,18 @@ export default Reflux.createStore({
 			/*data: {x_json:data},*/
 			datatype : 'json',
 			success : function(d) {
-				console.log(d.length+"#排名#"+ " d.data:"+d.data);
+				//console.log("#排名#"+ " d.data:"+d.data);
 				var device = [];
 				var pro = [];
 				for(var i = 0;i< d.data.length;i++){
 					device.push(d.data[i].deviceNum);
-					pro.push(d.data[i].provice);
+					pro.push(d.data[i].province);
 				}
-				device = this.getList(device);
-				pro = this.getList(pro);
-				console.log("排名device:"+device);
+				device = this.setListDate(device,6);
+				pro = this.setListDate(pro,6);
+				//console.log("排名device:"+device);
 				this.trigger({deviceNum:device});
-				this.trigger({provice:pro});
+				this.trigger({province:pro});
 			}.bind(this)
 		});
 	},
@@ -103,7 +109,6 @@ export default Reflux.createStore({
 			/*data: {x_json:data},*/
 			datatype : 'json',
 			success : function(d) {
-				console.log("用户认证d :"+d.toString());
 				var success = [];
 				var datas = [];
 				var now;
@@ -118,7 +123,7 @@ export default Reflux.createStore({
 					var date = now.getDate(); //获取当前日(1-31)
 					datas.push(m+"/"+date);
 				}
-				console.log(d.length+"#认证#"+"success:"+success);
+				//console.log(d.length+"#认证#"+"success:"+success);
 				this.trigger({successNum:success});
 				this.trigger({createTime:datas});
 			}.bind(this)
@@ -197,8 +202,7 @@ export default Reflux.createStore({
 			/*data: {x_json:data},*/
 			datatype : 'json',
 			success : function(d) {
-				debugger
-				console.log("jhl: d:"+ d.toString());
+				//console.log("jhl: d:"+ d.toString());
 				var num = [];
 				var per = [];
 				var datas = [];
@@ -215,14 +219,14 @@ export default Reflux.createStore({
 					var date = now.getDate(); //获取当前日(1-31)
 					datas.push(m+"/"+date);
 				}
-				console.log(d.length+"#jhl#"+"num:"+num);
+				//console.log(d.length+"#jhl#"+"num:"+num);
 				this.trigger({activateNum:num});
 				this.trigger({activatePer:per});
 				this.trigger({createTime:datas});
 			}.bind(this)
 		});
 	},
-	// 6.设备类型分布????
+	// 6.设备类型分布
 	getPie_lxfb_data(){
 		$.ajax({
 			async: false,
@@ -231,20 +235,17 @@ export default Reflux.createStore({
 			/*data: {x_json:data},*/
 			datatype : 'json',
 			success : function(d) {
-				console.log("lxfb: "+d.toString());
-				var name = [];
-				var num = [];
-				for(var i = 0;i< d.data.length;i++){
-					name.push(d.data[i].typeName);
-					num.push(d.data[i].hotareaNum);
+				var res = [];
+				if(d.data != null) {
+					for (var i=0;i<d.data.length;i++) {
+						res.push({"value":d.data[i].deviceNum,"name":d.data[i].deviceName});
+					}
 				}
-				console.log(d.data.length+"#lxfb#"+"device:"+name);
-				this.trigger({typeName:name});
-				this.trigger({hotareaNum:num});
+				this.trigger({dataList:res});
 			}.bind(this)
 		});
 	},
-	// 7.爱wifi热点类型分布??? 5个一组
+	// 7.爱wifi热点类型分布 (5个一组)
 	getScatter_hotspot_data(){
 		$.ajax({
 			async: false,
@@ -259,7 +260,7 @@ export default Reflux.createStore({
 					name.push(d.data[i].typeName);
 					num.push(d.data[i].hotareaNum);
 				}
-				console.log(d.data.length+"##"+"device:"+name);
+				//console.log(d.data.length+"##"+"device:"+name);
 				this.trigger({typeName:name});
 				this.trigger({hotareaNum:num});
 			}.bind(this)

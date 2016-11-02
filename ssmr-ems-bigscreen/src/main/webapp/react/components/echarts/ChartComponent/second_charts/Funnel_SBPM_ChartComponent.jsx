@@ -7,70 +7,28 @@ import ReactEcharts from '../../src/echarts-for-react';
 import store from '../../../../stores/second-store';
 import actions from '../../../../actions/second-actions';
 
-var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃', '海南'],
-                     ['山西', '辽宁', '吉林', '黑龙江', '云南', '贵州'],
-                     ['福建', '广东', '重庆', '上海', '四川', '湖北'],
-                     ['湖南', '江西', '安徽', '江苏', '青海', '新疆'],
-                     ['内蒙古', '宁夏', '西藏', '广西', '北京', '天津']];
-var numberArray = [[812, 899, 890, 880, 870, 850, 70],
-                   [812, 809, 779, 760, 710, 670],
-                   [812, 600, 520, 570, 490, 460],
-                   [812, 390, 360, 230, 200, 190],
-                   [812, 150, 130, 120, 100, 99]];
+var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃']];
+var numberArray = [[812, 899, 890, 880, 870, 850]];
 const Funnel_SBPM_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
     getInitialState: function() {
-        return {option: this.getOption()};
-    },
-    showToolTip: function(echartObj) {
-        let option = this.state.option;
-        let rank_index = 0;
-        let currentIndex = -1;
-        setInterval(function() {
-            let dataLen = option.series[0].data.length;
-            currentIndex++;
-            if(currentIndex == dataLen) {
-                currentIndex = -1;
-                rank_index = (rank_index + 1) % typeNameArray.length;
-                
-                // 重新加载图表内容
-                option.yAxis.data = typeNameArray[rank_index];
-                option.series[0].data = numberArray[rank_index];
-                echartObj.setOption(option, true);
-                
-                // 取消之前高亮的图形
-                echartObj.dispatchAction({
-                    type: 'downplay',
-                    seriesIndex: 0,
-                    dataIndex: currentIndex
-                });
-                
-                // 隐藏 tooltip
-                echartObj.dispatchAction({
-                    type: 'hideTip',
-                    seriesIndex: 0,
-                    dataIndex: currentIndex
-                });
-            } else {
-                // 高亮当前图形
-                echartObj.dispatchAction({
-                    type: 'highlight',
-                    seriesIndex: 0,
-                    dataIndex: currentIndex
-                });
-                
-                // 显示 tooltip
-                echartObj.dispatchAction({
-                    type: 'showTip',
-                    seriesIndex: 0,
-                    dataIndex: currentIndex
-                });
-            }
-        }, 2000);
+        return {option: this.getOption(),deviceNum:[],province:[]};
     },
     componentDidMount: function() {
+        actions.getFunnel_sbpm_data();
+    },
+    componentDidUpdate: function(){
+        //console.log(this.state.deviceNum+"*sbpm*"+this.state.province);
+        //let option = this.state.option;
+        if(this.state.deviceNum.length>0){
+            typeNameArray = this.state.province;
+            //option.yAxis.data = typeNameArray;
+            numberArray = this.state.deviceNum;
+            //option.series[0].data = numberArray;
+            //this.option = option;
+        }
     },
     componentWillUnmount: function() {
     },
@@ -117,9 +75,9 @@ const Funnel_SBPM_ChartComponent = React.createClass({
             yAxis: {
                 type: 'category',
                 axisLabel: {
-        //          interval: 0,
-        //          rotate: 45,
-        //          margin: 2,
+                    //          interval: 0,
+                    //          rotate: 45,
+                    //          margin: 2,
                     textStyle: {
                         color: "#fff",
                         fontSize: 12
@@ -158,6 +116,52 @@ const Funnel_SBPM_ChartComponent = React.createClass({
         };
 
         return option;
+    },
+    showToolTip: function(echartObj) {
+        let option = this.state.option;
+        let rank_index = 0;
+        let currentIndex = -1;
+        setInterval(function() {
+            let dataLen = option.series[0].data.length;
+            currentIndex++;
+            if(currentIndex == dataLen) {
+                currentIndex = -1;
+                rank_index = (rank_index + 1) % typeNameArray.length;
+                
+                // 重新加载图表内容
+                option.yAxis.data = typeNameArray[rank_index];
+                option.series[0].data = numberArray[rank_index];
+                echartObj.setOption(option, true);
+                
+                // 取消之前高亮的图形
+                echartObj.dispatchAction({
+                    type: 'downplay',
+                    seriesIndex: 0,
+                    dataIndex: currentIndex
+                });
+                
+                // 隐藏 tooltip
+                echartObj.dispatchAction({
+                    type: 'hideTip',
+                    seriesIndex: 0,
+                    dataIndex: currentIndex
+                });
+            } else {
+                // 高亮当前图形
+                echartObj.dispatchAction({
+                    type: 'highlight',
+                    seriesIndex: 0,
+                    dataIndex: currentIndex
+                });
+                
+                // 显示 tooltip
+                echartObj.dispatchAction({
+                    type: 'showTip',
+                    seriesIndex: 0,
+                    dataIndex: currentIndex
+                });
+            }
+        }, 2000);
     },
     render: function() {
         return (

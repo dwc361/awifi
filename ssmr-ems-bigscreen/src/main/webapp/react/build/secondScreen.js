@@ -23325,6 +23325,12 @@
 			this.listenTo(_secondActions2.default.openAddModal, 'openAddModal');
 			this.listenTo(_secondActions2.default.setStateValue, 'setStateValue');
 			this.listenTo(_secondActions2.default.getMix_Dzzd_data, 'getMix_Dzzd_data');
+			this.listenTo(_secondActions2.default.getFunnel_sbpm_data, 'getFunnel_sbpm_data');
+			this.listenTo(_secondActions2.default.getLine_yhrz_data, 'getLine_yhrz_data');
+			this.listenTo(_secondActions2.default.getMix_nas_data, 'getMix_nas_data');
+			this.listenTo(_secondActions2.default.getMix_jhl_data, 'getMix_jhl_data');
+			this.listenTo(_secondActions2.default.getPie_lxfb_data, 'getPie_lxfb_data');
+			this.listenTo(_secondActions2.default.getScatter_hotspot_data, 'getScatter_hotspot_data');
 		},
 		getBigscreenSecondData: function getBigscreenSecondData() {
 			_jquery2.default.ajax({
@@ -23362,9 +23368,9 @@
 		setStateValue: function setStateValue(value) {
 			this.trigger(value);
 		},
-		setListDate: function setListDate(arr) {
+		setListDate: function setListDate(arr, num) {
 			var begin = 0,
-			    end = begin + 5;
+			    end = begin + num;
 			var result = [],
 			    arrLength = arr.length;
 
@@ -23374,15 +23380,15 @@
 
 				result.push(arr.slice(begin, end));
 
-				begin = begin + 5;
-				end = begin + 5;
+				begin = begin + num;
+				end = begin + num;
 				if (end > arrLength) {
 					end = arrLength;
 					result.push(arr.slice(begin, end));
 					break;
 				}
 			}
-			console.log("setListDate:" + result);
+			//console.log("setListDate:"+result);
 			return result;
 		},
 
@@ -23395,18 +23401,18 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					console.log(d.length + "#排名#" + " d.data:" + d.data);
+					//console.log("#排名#"+ " d.data:"+d.data);
 					var device = [];
 					var pro = [];
 					for (var i = 0; i < d.data.length; i++) {
 						device.push(d.data[i].deviceNum);
-						pro.push(d.data[i].provice);
+						pro.push(d.data[i].province);
 					}
-					device = this.getList(device);
-					pro = this.getList(pro);
-					console.log("排名device:" + device);
+					device = this.setListDate(device, 6);
+					pro = this.setListDate(pro, 6);
+					//console.log("排名device:"+device);
 					this.trigger({ deviceNum: device });
-					this.trigger({ provice: pro });
+					this.trigger({ province: pro });
 				}.bind(this)
 			});
 		},
@@ -23420,7 +23426,6 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					console.log("用户认证d :" + d.toString());
 					var success = [];
 					var datas = [];
 					var now;
@@ -23435,7 +23440,7 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					console.log(d.length + "#认证#" + "success:" + success);
+					//console.log(d.length+"#认证#"+"success:"+success);
 					this.trigger({ successNum: success });
 					this.trigger({ createTime: datas });
 				}.bind(this)
@@ -23517,8 +23522,7 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					debugger;
-					console.log("jhl: d:" + d.toString());
+					//console.log("jhl: d:"+ d.toString());
 					var num = [];
 					var per = [];
 					var datas = [];
@@ -23535,7 +23539,7 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					console.log(d.length + "#jhl#" + "num:" + num);
+					//console.log(d.length+"#jhl#"+"num:"+num);
 					this.trigger({ activateNum: num });
 					this.trigger({ activatePer: per });
 					this.trigger({ createTime: datas });
@@ -23543,7 +23547,7 @@
 			});
 		},
 
-		// 6.设备类型分布????
+		// 6.设备类型分布
 		getPie_lxfb_data: function getPie_lxfb_data() {
 			_jquery2.default.ajax({
 				async: false,
@@ -23552,21 +23556,18 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					console.log("lxfb: " + d.toString());
-					var name = [];
-					var num = [];
-					for (var i = 0; i < d.data.length; i++) {
-						name.push(d.data[i].typeName);
-						num.push(d.data[i].hotareaNum);
+					var res = [];
+					if (d.data != null) {
+						for (var i = 0; i < d.data.length; i++) {
+							res.push({ "value": d.data[i].deviceNum, "name": d.data[i].deviceName });
+						}
 					}
-					console.log(d.data.length + "#lxfb#" + "device:" + name);
-					this.trigger({ typeName: name });
-					this.trigger({ hotareaNum: num });
+					this.trigger({ dataList: res });
 				}.bind(this)
 			});
 		},
 
-		// 7.爱wifi热点类型分布??? 5个一组
+		// 7.爱wifi热点类型分布 (5个一组)
 		getScatter_hotspot_data: function getScatter_hotspot_data() {
 			_jquery2.default.ajax({
 				async: false,
@@ -23581,7 +23582,7 @@
 						name.push(d.data[i].typeName);
 						num.push(d.data[i].hotareaNum);
 					}
-					console.log(d.data.length + "##" + "device:" + name);
+					//console.log(d.data.length+"##"+"device:"+name);
 					this.trigger({ typeName: name });
 					this.trigger({ hotareaNum: num });
 				}.bind(this)
@@ -23605,7 +23606,7 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	exports.default = _reflux2.default.createActions(['getBigscreenSecondData', 'saveBigscreenSecondData', 'setStateValue', 'openAddModal', 'getFunnel_sbpm_data', 'getLine_yhrz_data', 'getMix_Dzzd_data', 'getMix_nas_data', 'getMix_jhl_data', 'getPie_lxfg_data', 'getScatter_hotspot_data']);
+	exports.default = _reflux2.default.createActions(['getBigscreenSecondData', 'saveBigscreenSecondData', 'setStateValue', 'openAddModal', 'getFunnel_sbpm_data', 'getLine_yhrz_data', 'getMix_Dzzd_data', 'getMix_nas_data', 'getMix_jhl_data', 'getPie_lxfb_data', 'getScatter_hotspot_data']);
 
 /***/ },
 /* 200 */
@@ -34296,7 +34297,7 @@
 	        _secondActions2.default.getLine_yhrz_data();
 	    },
 	    componentDidUpdate: function componentDidUpdate() {
-	        console.log(this.state.successNum + "*yhrz*" + this.state.createTime);
+	        //console.log(this.state.successNum+"*yhrz*"+this.state.createTime);
 	        var option = this.state.option;
 	        option.series[0].data = this.state.successNum;
 	        option.xAxis[0].data = this.state.createTime;
@@ -98228,63 +98229,30 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃', '海南'], ['山西', '辽宁', '吉林', '黑龙江', '云南', '贵州'], ['福建', '广东', '重庆', '上海', '四川', '湖北'], ['湖南', '江西', '安徽', '江苏', '青海', '新疆'], ['内蒙古', '宁夏', '西藏', '广西', '北京', '天津']];
-	var numberArray = [[812, 899, 890, 880, 870, 850, 70], [812, 809, 779, 760, 710, 670], [812, 600, 520, 570, 490, 460], [812, 390, 360, 230, 200, 190], [812, 150, 130, 120, 100, 99]];
+	var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃']];
+	var numberArray = [[812, 899, 890, 880, 870, 850]];
 	var Funnel_SBPM_ChartComponent = _react2.default.createClass({
 	    displayName: 'Funnel_SBPM_ChartComponent',
 
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { option: this.getOption() };
+	        return { option: this.getOption(), deviceNum: [], province: [] };
 	    },
-	    showToolTip: function showToolTip(echartObj) {
-	        var option = this.state.option;
-	        var rank_index = 0;
-	        var currentIndex = -1;
-	        setInterval(function () {
-	            var dataLen = option.series[0].data.length;
-	            currentIndex++;
-	            if (currentIndex == dataLen) {
-	                currentIndex = -1;
-	                rank_index = (rank_index + 1) % typeNameArray.length;
-
-	                // 重新加载图表内容
-	                option.yAxis.data = typeNameArray[rank_index];
-	                option.series[0].data = numberArray[rank_index];
-	                echartObj.setOption(option, true);
-
-	                // 取消之前高亮的图形
-	                echartObj.dispatchAction({
-	                    type: 'downplay',
-	                    seriesIndex: 0,
-	                    dataIndex: currentIndex
-	                });
-
-	                // 隐藏 tooltip
-	                echartObj.dispatchAction({
-	                    type: 'hideTip',
-	                    seriesIndex: 0,
-	                    dataIndex: currentIndex
-	                });
-	            } else {
-	                // 高亮当前图形
-	                echartObj.dispatchAction({
-	                    type: 'highlight',
-	                    seriesIndex: 0,
-	                    dataIndex: currentIndex
-	                });
-
-	                // 显示 tooltip
-	                echartObj.dispatchAction({
-	                    type: 'showTip',
-	                    seriesIndex: 0,
-	                    dataIndex: currentIndex
-	                });
-	            }
-	        }, 2000);
+	    componentDidMount: function componentDidMount() {
+	        _secondActions2.default.getFunnel_sbpm_data();
 	    },
-	    componentDidMount: function componentDidMount() {},
+	    componentDidUpdate: function componentDidUpdate() {
+	        //console.log(this.state.deviceNum+"*sbpm*"+this.state.province);
+	        //let option = this.state.option;
+	        if (this.state.deviceNum.length > 0) {
+	            typeNameArray = this.state.province;
+	            //option.yAxis.data = typeNameArray;
+	            numberArray = this.state.deviceNum;
+	            //option.series[0].data = numberArray;
+	            //this.option = option;
+	        }
+	    },
 	    componentWillUnmount: function componentWillUnmount() {},
 	    getOption: function getOption() {
 	        var option = {
@@ -98371,6 +98339,52 @@
 
 	        return option;
 	    },
+	    showToolTip: function showToolTip(echartObj) {
+	        var option = this.state.option;
+	        var rank_index = 0;
+	        var currentIndex = -1;
+	        setInterval(function () {
+	            var dataLen = option.series[0].data.length;
+	            currentIndex++;
+	            if (currentIndex == dataLen) {
+	                currentIndex = -1;
+	                rank_index = (rank_index + 1) % typeNameArray.length;
+
+	                // 重新加载图表内容
+	                option.yAxis.data = typeNameArray[rank_index];
+	                option.series[0].data = numberArray[rank_index];
+	                echartObj.setOption(option, true);
+
+	                // 取消之前高亮的图形
+	                echartObj.dispatchAction({
+	                    type: 'downplay',
+	                    seriesIndex: 0,
+	                    dataIndex: currentIndex
+	                });
+
+	                // 隐藏 tooltip
+	                echartObj.dispatchAction({
+	                    type: 'hideTip',
+	                    seriesIndex: 0,
+	                    dataIndex: currentIndex
+	                });
+	            } else {
+	                // 高亮当前图形
+	                echartObj.dispatchAction({
+	                    type: 'highlight',
+	                    seriesIndex: 0,
+	                    dataIndex: currentIndex
+	                });
+
+	                // 显示 tooltip
+	                echartObj.dispatchAction({
+	                    type: 'showTip',
+	                    seriesIndex: 0,
+	                    dataIndex: currentIndex
+	                });
+	            }
+	        }, 2000);
+	    },
 	    render: function render() {
 	        return _react2.default.createElement(
 	            'div',
@@ -98445,56 +98459,36 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+	var NumList = [];
+	var perList = [];
+	var timeList = [];
 	var Mix_JHL_ChartComponent = _react2.default.createClass({
 	    displayName: 'Mix_JHL_ChartComponent',
 
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { activateNum: [], activatePer: [], createTime: [], option: this.getOption([], [], []) };
-	    },
-	    showToolTip: function showToolTip(echartObj) {
-	        var option = this.state.option;
-	        var currentIndex = -1;
-	        setInterval(function () {
-	            var dataLen = option.series[0].data.length;
-	            // 取消之前高亮的图形
-	            echartObj.dispatchAction({
-	                type: 'downplay',
-	                seriesIndex: 0,
-	                dataIndex: currentIndex
-	            });
-
-	            currentIndex = (currentIndex + 1) % dataLen;
-
-	            // 高亮当前图形
-	            echartObj.dispatchAction({
-	                type: 'highlight',
-	                seriesIndex: 0,
-	                dataIndex: currentIndex
-	            });
-	            // 显示 tooltip
-	            echartObj.dispatchAction({
-	                type: 'showTip',
-	                seriesIndex: 0,
-	                dataIndex: currentIndex
-	            });
-	        }, 2000);
+	        return { activateNum: [], activatePer: [], createTime: [], option: this.getOption(NumList, perList, timeList) };
 	    },
 	    componentDidMount: function componentDidMount() {
 	        _secondActions2.default.getMix_jhl_data();
 	    },
 	    componentDidUpdate: function componentDidUpdate() {
-	        console.log(this.state.activatePer + "*jhl*" + this.state.createTime);
+	        //console.log(this.state.activatePer+"*jhl*"+this.state.createTime);
 	        var option = this.state.option;
-	        option.xAxis[0].data = this.state.createTime;
-	        option.series[0].data = this.state.activatePer;
-	        option.series[1].data = this.state.activateNum;
-	        this.option = option;
-	        this.getOption(this.state.activateNum, this.state.activatePer, this.state.createTime);
+	        if (this.state.activatePer.length > 0) {
+	            NumList = this.state.createTime;
+	            perList = this.state.activatePer;
+	            timeList = this.state.activateNum;
+	            option.xAxis[0].data = NumList;
+	            option.series[0].data = perList;
+	            option.series[1].data = timeList;
+	            this.option = option;
+	            this.getOption(NumList, perList, timeList);
+	        }
 	    },
 	    componentWillUnmount: function componentWillUnmount() {},
-	    getOption: function getOption(activateNum, activatePer, createTime) {
+	    getOption: function getOption(NumList, perList, timeList) {
 	        var option = {
 	            //  backgroundColor:'#333',
 	            color: ['#21c6a5', '#65c7f7'],
@@ -98513,7 +98507,7 @@
 	                        opacity: 1
 	                    }
 	                },
-	                data: createTime
+	                data: timeList
 	            }],
 	            yAxis: [{
 	                type: 'value',
@@ -98548,16 +98542,44 @@
 	            series: [{
 	                name: '激活率',
 	                type: 'bar',
-	                data: activatePer
+	                data: perList
 	            }, {
 	                name: '激活量',
 	                type: 'line',
 	                yAxisIndex: 1,
-	                data: activateNum
+	                data: NumList
 	            }]
 	        };
 
 	        return option;
+	    },
+	    showToolTip: function showToolTip(echartObj) {
+	        var option = this.state.option;
+	        var currentIndex = -1;
+	        setInterval(function () {
+	            var dataLen = option.series[0].data.length;
+	            // 取消之前高亮的图形
+	            echartObj.dispatchAction({
+	                type: 'downplay',
+	                seriesIndex: 0,
+	                dataIndex: currentIndex
+	            });
+
+	            currentIndex = (currentIndex + 1) % dataLen;
+
+	            // 高亮当前图形
+	            echartObj.dispatchAction({
+	                type: 'highlight',
+	                seriesIndex: 0,
+	                dataIndex: currentIndex
+	            });
+	            // 显示 tooltip
+	            echartObj.dispatchAction({
+	                type: 'showTip',
+	                seriesIndex: 0,
+	                dataIndex: currentIndex
+	            });
+	        }, 2000);
 	    },
 	    render: function render() {
 	        return _react2.default.createElement(
@@ -99101,7 +99123,6 @@
 	        _secondActions2.default.getMix_Dzzd_data();
 	    },
 	    componentDidUpdate: function componentDidUpdate() {
-	        console.log(this.state.offlineNum + "*dzzd*" + this.state.createTime);
 	        var option = this.state.option;
 	        option.series[0].data = this.state.onlineNum;
 	        option.series[1].data = this.state.offlineNum;
@@ -99344,7 +99365,7 @@
 	    timeTicket: null,
 	    currentIndex: -1,
 	    getInitialState: function getInitialState() {
-	        return { option: this.getOption() };
+	        return { option: this.getOption([]), dataList: [] };
 	    },
 	    showToolTip: function showToolTip(echartObj) {
 	        var option = this.state.option;
@@ -99373,9 +99394,14 @@
 	        }, 2000);
 	    },
 	    fetchNewDate: function fetchNewDate() {},
-	    componentDidMount: function componentDidMount() {},
+	    componentDidMount: function componentDidMount() {
+	        _secondActions2.default.getPie_lxfb_data();
+	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	        this.state.option.series[0].data = this.state.dataList;
+	    },
 	    componentWillUnmount: function componentWillUnmount() {},
-	    getOption: function getOption() {
+	    getOption: function getOption(res) {
 	        var option = {
 	            color: ['#21c6a5', '#65c7f7', '#096dc5', '#4246ef'],
 	            //  backgroundColor: '#2c343c',
@@ -99411,7 +99437,8 @@
 	                },
 	                radius: '65%',
 	                center: ['50%', '60%'],
-	                data: [{
+	                data: res,
+	                /*data: [{
 	                    value: 335,
 	                    name: '胖ap'
 	                }, {
@@ -99423,7 +99450,7 @@
 	                }, {
 	                    value: 135,
 	                    name: '融合终端'
-	                }],
+	                }],*/
 	                itemStyle: {
 	                    emphasis: {
 	                        shadowBlur: 10,
@@ -99465,6 +99492,8 @@
 	});
 
 	exports.default = Pie_LXFB_ChartComponent;
+
+	_reactMixin2.default.onClass(Pie_LXFB_ChartComponent, _reflux2.default.connect(_secondStore2.default));
 
 /***/ },
 /* 858 */
