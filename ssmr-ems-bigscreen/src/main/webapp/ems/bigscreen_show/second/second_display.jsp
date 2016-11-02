@@ -19,6 +19,7 @@
 	
 		$(function() {
 			connect();
+			
 			$.ajax({
 				type: "post",
 				url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/user_pv_uv_data.action",
@@ -85,8 +86,6 @@
 				return false
 			return true
 		}
-		//8.用户、商户、PV、UV统计
-
 	</script>
 </head>
 
