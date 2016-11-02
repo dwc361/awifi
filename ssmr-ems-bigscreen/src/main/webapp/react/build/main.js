@@ -76415,11 +76415,8 @@
 			    arrLength = arr.length;
 
 			if (end >= arrLength) return result.push(arr);
-
 			while (end < arrLength) {
-
 				result.push(arr.slice(begin, end));
-
 				begin = begin + num;
 				end = begin + num;
 				if (end > arrLength) {
@@ -76428,7 +76425,6 @@
 					break;
 				}
 			}
-			//console.log("setListDate:"+result);
 			return result;
 		},
 
@@ -76441,7 +76437,6 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					//console.log("#排名#"+ " d.data:"+d.data);
 					var device = [];
 					var pro = [];
 					for (var i = 0; i < d.data.length; i++) {
@@ -76450,7 +76445,6 @@
 					}
 					device = this.setListDate(device, 6);
 					pro = this.setListDate(pro, 6);
-					//console.log("排名device:"+device);
 					this.trigger({ deviceNum: device });
 					this.trigger({ province: pro });
 				}.bind(this)
@@ -76480,7 +76474,6 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					//console.log(d.length+"#认证#"+"success:"+success);
 					this.trigger({ successNum: success });
 					this.trigger({ createTime: datas });
 				}.bind(this)
@@ -76512,7 +76505,6 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					//console.log(d.length+"##"+"onLine:"+onLine);
 					this.trigger({ onlineNum: onLine });
 					this.trigger({ offlineNum: offLine });
 					this.trigger({ createTime: datas });
@@ -76545,7 +76537,6 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					//console.log(d.length+"#nas#"+"onLine:"+onLine);
 					this.trigger({ onlineNum: onLine });
 					this.trigger({ offlineNum: offLine });
 					this.trigger({ createTime: datas });
@@ -76562,7 +76553,6 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					//console.log("jhl: d:"+ d.toString());
 					var num = [];
 					var per = [];
 					var datas = [];
@@ -76579,7 +76569,6 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					//console.log(d.length+"#jhl#"+"num:"+num);
 					this.trigger({ activateNum: num });
 					this.trigger({ activatePer: per });
 					this.trigger({ createTime: datas });
@@ -76622,7 +76611,8 @@
 						name.push(d.data[i].typeName);
 						num.push(d.data[i].hotareaNum);
 					}
-					//console.log(d.data.length+"##"+"device:"+name);
+					name = this.setListDate(name, 6);
+					num = this.setListDate(num, 6);
 					this.trigger({ typeName: name });
 					this.trigger({ hotareaNum: num });
 				}.bind(this)

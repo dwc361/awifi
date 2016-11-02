@@ -1,19 +1,21 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
+import ReactMixin from 'react-mixin';
+import Reflux from 'reflux'
+
 import ReactEcharts from '../../src/echarts-for-react';
+import store from '../../../../stores/second-store';
+import actions from '../../../../actions/second-actions';
 
 // 指定图表的配置项和数据？？？？
-var x_data = [['学校','医院','码头','酒店','公园'],
-              ['机场','浴室','商场','游乐场','文化厅','车站'],
-              ['饭馆','图书馆','展览馆','美容店','体育场','招待所']];
-var y_data = [[37, 77.4, 58, 14.7, 25],
-              [67.1, 25.4, 78.1, 19.8, 29.1, 67.9],
-              [72, 75.4, 6.8, 40.8, 19.6, 37.3]];
+var x_data = [['学校','医院','码头','酒店','公园']];
+var y_data = [[37, 77.4, 58, 14.7, 25]];
 const Scatter_HotSpot_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
     getInitialState: function() {
-        return {option: this.getOption()};
+        return {option: this.getOption([],[]),typeName:[],hotareaNum:[]};
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
@@ -62,8 +64,15 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
         }, 2000);
     },
     componentDidMount: function() {
+        actions.getScatter_hotspot_data();
     },
-    componentWillUnmount: function() {
+    componentDidUpdate: function(){
+        //console.log(this.state.deviceNum+"*sbpm*"+this.state.province);
+        //let option = this.state.option;
+        if(this.state.typeName.length>0){
+            x_data = this.state.typeName;
+            y_data = this.state.hotareaNum;
+        }
     },
     getOption: function() {
         const option = {
@@ -121,9 +130,9 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
                 name: '',
                 data: y_data[0],
                 type: 'scatter',
-                symbolSize: function(data) {
-                    return data;
-                },
+                // symbolSize: function(data) {
+                //     return data;
+                // },
                 label: {
                     emphasis: {
                         show: true,
@@ -172,3 +181,6 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
 });
 
 export default Scatter_HotSpot_ChartComponent;
+
+// ES6 mixin写法，通过mixin将store的与组件连接，功能是监听store带来的state变化并刷新到this.state
+ReactMixin.onClass(Scatter_HotSpot_ChartComponent, Reflux.connect(store));

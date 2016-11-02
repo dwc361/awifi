@@ -23375,11 +23375,8 @@
 			    arrLength = arr.length;
 
 			if (end >= arrLength) return result.push(arr);
-
 			while (end < arrLength) {
-
 				result.push(arr.slice(begin, end));
-
 				begin = begin + num;
 				end = begin + num;
 				if (end > arrLength) {
@@ -23388,7 +23385,6 @@
 					break;
 				}
 			}
-			//console.log("setListDate:"+result);
 			return result;
 		},
 
@@ -23401,7 +23397,6 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					//console.log("#排名#"+ " d.data:"+d.data);
 					var device = [];
 					var pro = [];
 					for (var i = 0; i < d.data.length; i++) {
@@ -23410,7 +23405,6 @@
 					}
 					device = this.setListDate(device, 6);
 					pro = this.setListDate(pro, 6);
-					//console.log("排名device:"+device);
 					this.trigger({ deviceNum: device });
 					this.trigger({ province: pro });
 				}.bind(this)
@@ -23440,7 +23434,6 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					//console.log(d.length+"#认证#"+"success:"+success);
 					this.trigger({ successNum: success });
 					this.trigger({ createTime: datas });
 				}.bind(this)
@@ -23472,7 +23465,6 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					//console.log(d.length+"##"+"onLine:"+onLine);
 					this.trigger({ onlineNum: onLine });
 					this.trigger({ offlineNum: offLine });
 					this.trigger({ createTime: datas });
@@ -23505,7 +23497,6 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					//console.log(d.length+"#nas#"+"onLine:"+onLine);
 					this.trigger({ onlineNum: onLine });
 					this.trigger({ offlineNum: offLine });
 					this.trigger({ createTime: datas });
@@ -23522,7 +23513,6 @@
 				/*data: {x_json:data},*/
 				datatype: 'json',
 				success: function (d) {
-					//console.log("jhl: d:"+ d.toString());
 					var num = [];
 					var per = [];
 					var datas = [];
@@ -23539,7 +23529,6 @@
 						var date = now.getDate(); //获取当前日(1-31)
 						datas.push(m + "/" + date);
 					}
-					//console.log(d.length+"#jhl#"+"num:"+num);
 					this.trigger({ activateNum: num });
 					this.trigger({ activatePer: per });
 					this.trigger({ createTime: datas });
@@ -23582,7 +23571,8 @@
 						name.push(d.data[i].typeName);
 						num.push(d.data[i].hotareaNum);
 					}
-					//console.log(d.data.length+"##"+"device:"+name);
+					name = this.setListDate(name, 6);
+					num = this.setListDate(num, 6);
 					this.trigger({ typeName: name });
 					this.trigger({ hotareaNum: num });
 				}.bind(this)
@@ -98631,22 +98621,42 @@
 
 	var _react2 = _interopRequireDefault(_react);
 
+	var _reactDom = __webpack_require__(34);
+
+	var _reactDom2 = _interopRequireDefault(_reactDom);
+
+	var _reactMixin = __webpack_require__(176);
+
+	var _reactMixin2 = _interopRequireDefault(_reactMixin);
+
+	var _reflux = __webpack_require__(179);
+
+	var _reflux2 = _interopRequireDefault(_reflux);
+
 	var _echartsForReact = __webpack_require__(469);
 
 	var _echartsForReact2 = _interopRequireDefault(_echartsForReact);
 
+	var _secondStore = __webpack_require__(198);
+
+	var _secondStore2 = _interopRequireDefault(_secondStore);
+
+	var _secondActions = __webpack_require__(199);
+
+	var _secondActions2 = _interopRequireDefault(_secondActions);
+
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 	// 指定图表的配置项和数据？？？？
-	var x_data = [['学校', '医院', '码头', '酒店', '公园'], ['机场', '浴室', '商场', '游乐场', '文化厅', '车站'], ['饭馆', '图书馆', '展览馆', '美容店', '体育场', '招待所']];
-	var y_data = [[37, 77.4, 58, 14.7, 25], [67.1, 25.4, 78.1, 19.8, 29.1, 67.9], [72, 75.4, 6.8, 40.8, 19.6, 37.3]];
+	var x_data = [['学校', '医院', '码头', '酒店', '公园']];
+	var y_data = [[37, 77.4, 58, 14.7, 25]];
 	var Scatter_HotSpot_ChartComponent = _react2.default.createClass({
 	    displayName: 'Scatter_HotSpot_ChartComponent',
 
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { option: this.getOption() };
+	        return { option: this.getOption([], []), typeName: [], hotareaNum: [] };
 	    },
 	    showToolTip: function showToolTip(echartObj) {
 	        var option = this.state.option;
@@ -98694,8 +98704,17 @@
 	            }
 	        }, 2000);
 	    },
-	    componentDidMount: function componentDidMount() {},
-	    componentWillUnmount: function componentWillUnmount() {},
+	    componentDidMount: function componentDidMount() {
+	        _secondActions2.default.getScatter_hotspot_data();
+	    },
+	    componentDidUpdate: function componentDidUpdate() {
+	        //console.log(this.state.deviceNum+"*sbpm*"+this.state.province);
+	        //let option = this.state.option;
+	        if (this.state.typeName.length > 0) {
+	            x_data = this.state.typeName;
+	            y_data = this.state.hotareaNum;
+	        }
+	    },
 	    getOption: function getOption() {
 	        var option = {
 	            tooltip: {
@@ -98752,9 +98771,9 @@
 	                name: '',
 	                data: y_data[0],
 	                type: 'scatter',
-	                symbolSize: function symbolSize(data) {
-	                    return data;
-	                },
+	                // symbolSize: function(data) {
+	                //     return data;
+	                // },
 	                label: {
 	                    emphasis: {
 	                        show: true,
@@ -98813,6 +98832,10 @@
 	});
 
 	exports.default = Scatter_HotSpot_ChartComponent;
+
+	// ES6 mixin写法，通过mixin将store的与组件连接，功能是监听store带来的state变化并刷新到this.state
+
+	_reactMixin2.default.onClass(Scatter_HotSpot_ChartComponent, _reflux2.default.connect(_secondStore2.default));
 
 /***/ },
 /* 856 */
