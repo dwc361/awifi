@@ -134,4 +134,6 @@ const Pie_LXFB_ChartComponent = React.createClass({
 });
 
 export default Pie_LXFB_ChartComponent;
+
+// ES6 mixin写法，通过mixin将store的与组件连接，功能是监听store带来的state变化并刷新到this.state
 ReactMixin.onClass(Pie_LXFB_ChartComponent, Reflux.connect(store));
