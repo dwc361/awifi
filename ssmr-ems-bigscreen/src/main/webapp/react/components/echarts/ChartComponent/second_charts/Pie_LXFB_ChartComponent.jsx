@@ -46,11 +46,6 @@ const Pie_LXFB_ChartComponent = React.createClass({
     componentDidMount: function() {
         actions.getPie_lxfb_data();
     },
-    componentDidUpdate: function() {
-        this.state.option.series[0].data = this.state.dataList;
-    },
-    componentWillUnmount: function() {
-    },
     getOption: function(res) {
         const option = {
             color: [
@@ -115,6 +110,7 @@ const Pie_LXFB_ChartComponent = React.createClass({
         return option;
     },
     render: function() {
+        this.state.option.series[0].data = this.state.dataList;
         return (
             <div className="left col-md-12 col-lg-12 col-sm-12">
                 <div className="topH">

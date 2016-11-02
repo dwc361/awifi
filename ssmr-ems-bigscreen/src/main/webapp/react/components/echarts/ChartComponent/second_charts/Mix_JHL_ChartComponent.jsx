@@ -17,25 +17,27 @@ const Mix_JHL_ChartComponent = React.createClass({
     componentDidMount: function() {
         actions.getMix_jhl_data();
     },
-    componentDidUpdate: function() {
-        //console.log(this.state.activatePer+"*jhl*"+this.state.createTime);
-        let option = this.state.option;
-        if(this.state.activatePer.length > 0) {option.xAxis[0].data = this.state.createTime;
-            option.series[0].data = this.state.activatePer;
-            option.series[1].data = this.state.activateNum;
-            this.state.option = option;
-        }
-    },
-    componentWillUnmount: function() {
-    },
     getOption: function(NumList, perList, timeList) {
         const option = {
-            //  backgroundColor:'#333',
+            //backgroundColor:'#333',
             color: [
-                '#21c6a5', '#65c7f7'
+                '#21c6a5', '#096dc5'
             ],
             tooltip: {
-                trigger: 'axis'
+                trigger: 'axis',
+                formatter: function (params) {
+                    var show_content = params[0].name + '<br/>';
+                    for(var i = 0; i < params.length; i++) {
+                        show_content += "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:"+params[i].color+"'></span>"
+                            +params[i].seriesName + ' : ' + params[i].value;
+                        if(params[i].seriesName == "激活率") {
+                            show_content += ' %<br/>';
+                        } else {
+                            show_content += '<br/>';
+                        }
+                    }
+                    return show_content;
+               }
             },
             xAxis: [{
                 type: 'category',
@@ -54,11 +56,12 @@ const Mix_JHL_ChartComponent = React.createClass({
             yAxis: [{
                 type: 'value',
                 min: 0,
-                max: 250,
-                interval: 50,
+                //max: 20,
+                interval: 1,
+                show: false,
                 axisLabel: {
-                    show:false
-        //          formatter: '{value} ml'
+                    formatter: '{value} %',
+                    show: false
                 },
                 axisLine: {
                     show: false,
@@ -74,24 +77,23 @@ const Mix_JHL_ChartComponent = React.createClass({
             }, {
                 type: 'value',
                 min: 0,
-                max: 25,
-                interval: 5,
+                //max: 2,
+                interval: 1000,
+                show: false,
                 axisLabel: {
-        //          formatter: '{value} °C'
-        show:false
+                    show: false
                 }
             }],
             series: [{
-                    name: '激活率',
-                    type: 'bar',
-                    data: perList
-                }, {
-                    name: '激活量',
-                    type: 'line',
-                    yAxisIndex: 1,
-                    data: NumList
-                }
-            ]
+                name: '激活率',
+                type: 'bar',
+                data: perList
+            }, {
+                name: '激活量',
+                type: 'line',
+                yAxisIndex: 1,
+                data: NumList
+            }]
         };
 
         return option;
@@ -125,6 +127,11 @@ const Mix_JHL_ChartComponent = React.createClass({
         }, 2000);
     },
     render: function() {
+        if(this.state.createTime.length > 0) {
+            this.state.option.xAxis[0].data = this.state.createTime;
+            this.state.option.series[0].data = this.state.activatePer;
+            this.state.option.series[1].data = this.state.activateNum;
+        }
         return (
             <div className="right col-md-12 col-lg-12 col-sm-12">
                 <div className="topH">

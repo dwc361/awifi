@@ -98460,41 +98460,35 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	var NumList = [];
-	var perList = [];
-	var timeList = [];
 	var Mix_JHL_ChartComponent = _react2.default.createClass({
 	    displayName: 'Mix_JHL_ChartComponent',
 
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { activateNum: [], activatePer: [], createTime: [], option: this.getOption(NumList, perList, timeList) };
+	        return { activateNum: [], activatePer: [], createTime: [], option: this.getOption([], [], []) };
 	    },
 	    componentDidMount: function componentDidMount() {
 	        _secondActions2.default.getMix_jhl_data();
 	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	        //console.log(this.state.activatePer+"*jhl*"+this.state.createTime);
-	        var option = this.state.option;
-	        if (this.state.activatePer.length > 0) {
-	            NumList = this.state.createTime;
-	            perList = this.state.activatePer;
-	            timeList = this.state.activateNum;
-	            option.xAxis[0].data = NumList;
-	            option.series[0].data = perList;
-	            option.series[1].data = timeList;
-	            this.option = option;
-	            this.getOption(NumList, perList, timeList);
-	        }
-	    },
-	    componentWillUnmount: function componentWillUnmount() {},
 	    getOption: function getOption(NumList, perList, timeList) {
 	        var option = {
-	            //  backgroundColor:'#333',
-	            color: ['#21c6a5', '#65c7f7'],
+	            //backgroundColor:'#333',
+	            color: ['#21c6a5', '#096dc5'],
 	            tooltip: {
-	                trigger: 'axis'
+	                trigger: 'axis',
+	                formatter: function formatter(params) {
+	                    var show_content = params[0].name + '<br/>';
+	                    for (var i = 0; i < params.length; i++) {
+	                        show_content += "<span style='display:inline-block;margin-right:5px;border-radius:10px;width:9px;height:9px;background-color:" + params[i].color + "'></span>" + params[i].seriesName + ' : ' + params[i].value;
+	                        if (params[i].seriesName == "激活率") {
+	                            show_content += ' %<br/>';
+	                        } else {
+	                            show_content += '<br/>';
+	                        }
+	                    }
+	                    return show_content;
+	                }
 	            },
 	            xAxis: [{
 	                type: 'category',
@@ -98513,11 +98507,12 @@
 	            yAxis: [{
 	                type: 'value',
 	                min: 0,
-	                max: 250,
-	                interval: 50,
+	                //max: 20,
+	                interval: 1,
+	                show: false,
 	                axisLabel: {
+	                    formatter: '{value} %',
 	                    show: false
-	                    //          formatter: '{value} ml'
 	                },
 	                axisLine: {
 	                    show: false,
@@ -98533,10 +98528,10 @@
 	            }, {
 	                type: 'value',
 	                min: 0,
-	                max: 25,
-	                interval: 5,
+	                //max: 2,
+	                interval: 1000,
+	                show: false,
 	                axisLabel: {
-	                    //          formatter: '{value} °C'
 	                    show: false
 	                }
 	            }],
@@ -98583,6 +98578,11 @@
 	        }, 2000);
 	    },
 	    render: function render() {
+	        if (this.state.createTime.length > 0) {
+	            this.state.option.xAxis[0].data = this.state.createTime;
+	            this.state.option.series[0].data = this.state.activatePer;
+	            this.state.option.series[1].data = this.state.activateNum;
+	        }
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'right col-md-12 col-lg-12 col-sm-12' },
@@ -98612,6 +98612,7 @@
 	});
 
 	exports.default = Mix_JHL_ChartComponent;
+
 	// ES6 mixin写法，通过mixin将store的与组件连接，功能是监听store带来的state变化并刷新到this.state
 
 	_reactMixin2.default.onClass(Mix_JHL_ChartComponent, _reflux2.default.connect(_secondStore2.default));
@@ -99398,10 +99399,6 @@
 	    componentDidMount: function componentDidMount() {
 	        _secondActions2.default.getPie_lxfb_data();
 	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	        this.state.option.series[0].data = this.state.dataList;
-	    },
-	    componentWillUnmount: function componentWillUnmount() {},
 	    getOption: function getOption(res) {
 	        var option = {
 	            color: ['#21c6a5', '#65c7f7', '#096dc5', '#4246ef'],
@@ -99464,6 +99461,7 @@
 	        return option;
 	    },
 	    render: function render() {
+	        this.state.option.series[0].data = this.state.dataList;
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'left col-md-12 col-lg-12 col-sm-12' },
@@ -99493,6 +99491,8 @@
 	});
 
 	exports.default = Pie_LXFB_ChartComponent;
+
+	// ES6 mixin写法，通过mixin将store的与组件连接，功能是监听store带来的state变化并刷新到this.state
 
 	_reactMixin2.default.onClass(Pie_LXFB_ChartComponent, _reflux2.default.connect(_secondStore2.default));
 
