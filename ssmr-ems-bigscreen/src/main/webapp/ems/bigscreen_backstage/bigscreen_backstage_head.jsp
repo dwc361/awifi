@@ -7,8 +7,9 @@
 <!-- 字体&图标 -->
 <link rel="stylesheet" href="${basePath}/ems/bigscreen_backstage/main/font-awesome-4.6.3/css/font-awesome.css">
 
-
-
+<!-- Bootstrap相关 -->
+<link rel="stylesheet" href="${basePath}/ems/bigscreen_backstage/main/css/bootstrap.min.css">
+<script src="${basePath}/ems/bigscreen_backstage/main/js/bootstrap.js"></script>
 
 <!-- JQuery相关 -->
 <script src="${basePath}/ems/bigscreen_backstage/main/js/jquery-3.1.1.js"></script>
@@ -18,9 +19,6 @@
 <script type="text/javascript" src="${basePath}/common/js/jquery/jquery.validate.message_cn.js"></script>
 <script type="text/javascript" src="${basePath}/common/js/jquery/jquery.validate.rules.js"></script>
 
-<!-- Bootstrap相关 -->
-<link rel="stylesheet" href="${basePath}/ems/bigscreen_backstage/main/css/bootstrap.min.css">
-<script src="${basePath}/ems/bigscreen_backstage/main/js/bootstrap.js"></script>
 <!-- 自定义工具组件 -->
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Utils.js"></script>
 <script type="text/javascript" src="${basePath}/common/js/ROOF.Class.js"></script>
@@ -37,6 +35,10 @@
 
 <!-- WEB操作 -->
 <script type="text/javascript" src="${basePath }/ems/bigscreen_backstage/main/js/web.js"></script>
+
+<!-- 一层监控 -->
+<link href="${basePath}/ems/bigscreen_backstage/main/css/default.css" rel="stylesheet" type="text/css" >
+<link href="${basePath}/ems/bigscreen_backstage/main/css/fileinput.css" media="all" rel="stylesheet" type="text/css" />
 
 <script type="text/javascript">
 	var basePathConst = "${basePath }";
