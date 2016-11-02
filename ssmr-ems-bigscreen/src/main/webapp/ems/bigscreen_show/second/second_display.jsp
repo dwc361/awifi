@@ -25,13 +25,11 @@
 				url: ROOF.Utils.projectName() + "/ems/bigscreen_show/dataShowAction/user_pv_uv_data.action",
 				data: {username:$("#username").val(), content:$("#content").val()},
 				dataType: "json",
-				success: function(data){
-					console.log("pv/uv: "+data.toString());
+				success: function(data) {
 					$("#merchantNum").val(data.merchantNum);
 					$("#userNum").val(data.userNum);
 					$("#PV").val(data.PV);
 					$("#UV").val(data.UV);
-					
 				}
 			});
 		});
@@ -157,7 +155,7 @@
 <script type="text/javascript">
 	var chartNameList = ${list};
 </script>
-<!-- <script src="http://localhost:8081/bigscreen_echarts.js"></script> -->
+<!-- <script src="http://localhost:8081/secondScreen.js"></script> -->
 <script src="${basePath}/react/build/secondScreen.js"></script>
 <!-- <script src="${basePath}/ems/bigscreen_show/index/bigscreen_display/second/js/second_display_react_charts_templates.js"></script> -->
 
