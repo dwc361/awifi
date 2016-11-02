@@ -150,17 +150,16 @@ body {
 	height: 100vh;
 	width: 100vw;
 	background: #222;
-	background-image: url(../img/backgroundImg.svg) ;
-	background-repeat: repeat-x;
-	background-size:cover
-	background-size: 100%;
-	background-attachment:fixed;
-	overflow: hidden;
-	background-repeat: repeat;
-	filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";
-	-moz-background-size: 100%;
-	-webkit-background-size: 100%;
-	background-size: 100%;
+	background-image: url(../img/backgroundImg.svg);
+	/*background-size:cover;*/
+	/*background-attachment:fixed;*/
+	/*overflow: hidden;*/
+	/*background-repeat: repeat;*/
+	/*filter: "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod='scale')";*/
+	background-size:100% 100%;
+	-moz-background-size:100% 100%; /* 老版本的 Firefox */
+	-webkit-background-size: 100% 100%;
+	background-repeat:no-repeat;
 }
 
 
