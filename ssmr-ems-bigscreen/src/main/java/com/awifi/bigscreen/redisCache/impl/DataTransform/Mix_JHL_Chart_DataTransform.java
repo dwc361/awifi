@@ -1,5 +1,6 @@
 package com.awifi.bigscreen.redisCache.impl.DataTransform;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -40,12 +41,20 @@ public class Mix_JHL_Chart_DataTransform implements IDataTransform<Set<Map<Strin
 			 */
 			Map data = (Map) map.get(AwifiConstants.Interface_Return_Data);
 			if(data != null) {
+				String activatePer = data.get("activatePer").toString();
+				String beforePer = activatePer.substring(0, activatePer.indexOf("%"));
+				result_map.put("activatePer", beforePer); //胖AP激活率
 				result_map.put("activateNum", data.get("activateNum")); //胖AP激活数量
-				result_map.put("activatePer", data.get("activatePer")); //胖AP激活率
+				//result_map.put("activatePer", data.get("activatePer")); //胖AP激活率
+//				String activateNum = data.get("activateNum").toString();
+//				BigDecimal showNum = new BigDecimal(activateNum).divide(new BigDecimal(100));
+//				result_map.put("activateNum", showNum); //胖AP激活数量
 			}
 			
 			result_list.add(result_map);
 		}
+		
+		System.out.println(JSON.toJSONString(result_list));
 		return JSON.toJSONString(result_list);
 	}
 	
