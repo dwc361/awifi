@@ -50,37 +50,97 @@ export default class First extends React.Component {
 
     render() {
         return (
-            <div id="content">
-                <div className="handle">
-                   <span>
-                      <i id="save" className="fa fa-folder-open"></i>
-                      <i id="preview" className="fa fa-eye" onClick={this.preview}></i>
-                   </span>
-                </div>
-                <div className="htmleaf-container">
-                    <form encType="multipart/form-data">
-                        <span className="">
-                            <div id="svgCnt" className="file-preview">
-                            </div>
-                            <div className="">
-                                <input type="text" id="name" title="文件名称" value={this.state.name}/>
-                                <input type="text" id="wordId" title="内容" value={this.state.wordid}/>
-                                <div className="input-group-btn">
-                                    <button type="button" title="修改" className="btn btn-primary">
-                                    <i className="fa fa-pencil-square-o"></i>修改</button>
-                                    <button type="button" title="清除选中文件" className="btn btn-primary">
-                                        <i className="fa fa-trash-o"></i>删除</button>
-                                    <button type="submit" title="上传选中文件" className="btn btn-primary">
-                                        <i className="fa fa-level-up"></i>上传</button>
-                                    <div className="btn btn-primary btn-file">
-                                        <i className="fa fa-plus">选择...</i><input id="file-0a" className="file" type="file" aria-multiline="true" data-min-file-count="1" />
+
+            <section id="content">
+                <section className="wrapper" id="ad">
+                    <form id="jq22" className="jq22" name="f1" method="post" >
+                        <div id="box1" className="box" name="box">
+                            <div  className="item item1" >
+                                <header ><h3>广告图片1</h3></header>
+
+                                <hr/>
+
+                                    <div  className="blockLeft col-md-6 col-lg-6 col-sm-6">
+                                        <object id="img1"  data="" />
+                                          <span className="fa fa-plus-square">
+                                            <input id="in1" name="upload" type="file" className="webuploader-element-invisible"  />
+                                          </span>
+
                                     </div>
-                                </div>
+
+
+                                    <div className="blockRight col-md-6 col-lg-6 col-sm-6">
+                                        <label className="col-md-4 col-lg-4 col-sm-4">广告名称:</label>
+                                        <input id="text1" type="text" name="advertName" value={this.state.name} />
+                                            <i className="warnAD">*</i>
+                                            <br/>
+                                        <label className="col-md-8 col-lg-8 col-sm-8" >URL： </label><br/>
+                                        <input id="url111" type="text" name="url" value={this.state.wordid} />
+                                    </div>
+                                    <p className="note">* 温馨提示:图片格式-jpg; 图片大小（720*360）;</p>
+                                    <div className="delete fa fa-times-circle" click-type="delete"></div>
                             </div>
-                        </span>
+
+
+
+                        </div>
+
+                        <div id="box2" className="box" name="box">
+                            <div  className="item item2" >
+                                <header ><h3>广告图片2</h3></header>
+                                <hr/>
+                                    <div  className="blockLeft col-md-6 col-lg-6 col-sm-6">
+                                        <object id="img2"  data="" />
+                                <span className="fa fa-plus-square">
+                                  <input id="in2" name="upload" type="file"  className="webuploader-element-invisible" />
+                                </span>
+
+
+                                            <img id="img" alt="" src="" />
+                                    </div>
+
+                                    <div className="blockRight col-md-6 col-lg-6 col-sm-6">
+                                        <label className="col-md-4 col-lg-4 col-sm-4">广告名称:</label>
+                                        <input id="text2" type="text" name="advertName" value={this.state.name}  />
+                                            <i className="warnAD">*</i><br/>
+                                            <label className="col-md-8 col-lg-8 col-sm-8" >URL： </label><br/>
+                                            <input  type="url" name="url" value={this.state.wordid} />
+                                    </div>
+                                    <p className="note">* 温馨提示:图片格式-jpg; 图片大小（720*360）;</p>
+                                    <div className="delete fa fa-times-circle" click-type="delete"></div>
+                            </div>
+                        </div>
+
+                        <div id="box3" className="box" name="box">
+                            <div  className="item item3">
+                                <header ><h3>广告图片3</h3></header>
+                                <hr/>
+                                    <div  className="blockLeft col-md-6 col-lg-6 col-sm-6">
+                                        <object id="img3" alt="" data="" />
+                                    <span className="fa fa-plus-square">
+                                      <input id="in3" name="upload" type="file" className="webuploader-element-invisible" />
+                                    </span>
+
+                                    </div>
+
+                                    <div className="blockRight col-md-6 col-lg-6 col-sm-6" >
+                                        <label className="col-md-4 col-lg-4 col-sm-4">广告名称:</label>
+                                        <input id="text3" type="text" name="advertName" value={this.state.name} />
+                                            <i className="warnAD">*</i><br/>
+                                            <label className="col-md-8 col-lg-8 col-sm-8" >URL： </label><br/>
+                                            <input type="url" name="url" value={this.state.wordid} />
+                                    </div>
+                                    <p className="note">* 温馨提示:图片格式-jpg; 图片大小（720*360）;</p>
+                                    <div className="delete fa fa-times-circle" click-type="delete"></div>
+
+                            </div>
+
+                        </div>
                     </form>
-                </div>
-            </div>
+                </section>
+
+            </section>
+
         );
     }
 }
