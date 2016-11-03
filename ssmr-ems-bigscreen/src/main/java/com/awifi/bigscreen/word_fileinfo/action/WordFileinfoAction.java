@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
-@RequestMapping("word_fileinfoAction")
+@RequestMapping("aiwifi/bigscreen/word_fileinfoAction")
 public class WordFileinfoAction {
 	private IWordFileinfoService wordFileinfoService;
 	private IDictionaryService dictionaryService;
@@ -31,7 +33,7 @@ public class WordFileinfoAction {
 
 	@RequestMapping("/index")
 	public String index() {
-		return "/ems/firstWelcome/wordFileinfo/wordFileinfo_index.jsp";
+		return "/awifi/wordFileinfo/wordFileinfo_index.jsp";
 	}
 
 	@RequestMapping("/list")
@@ -41,16 +43,23 @@ public class WordFileinfoAction {
 		model.addAttribute("page", page);
 		model.addAllAttributes(PageUtils.createPagePar(page));
 		this.loadCommon(model);
-		return "/awifi/bigscreen/wordFileinfo/wordFileinfo_list.jsp";
+		return "/awifi/wordFileinfo/wordFileinfo_list.jsp";
 	}
-	
+
+	@RequestMapping("/getOne")
+	public Result getOne(WordFileinfo wordFileinfo) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		wordFileinfo = wordFileinfoService.selectForObject(wordFileinfo);
+		map.put("wordFileinfo",wordFileinfo);
+		return new Result("一层架构配置数据加载成功!", map);
+	}
 	
 	@RequestMapping("/create_page")
 	public String create_page(Model model) {
 		WordFileinfo wordFileinfo = new WordFileinfo();
 		model.addAttribute("wordFileinfo", wordFileinfo);
 		this.loadCommon(model);
-		return "/awifi/bigscreen/wordFileinfo/wordFileinfo_create.jsp";
+		return "/awifi/wordFileinfo//wordFileinfo_create.jsp";
 	}
 	
 	@RequestMapping("/update_page")
@@ -58,7 +67,7 @@ public class WordFileinfoAction {
 		wordFileinfo = wordFileinfoService.load(wordFileinfo);
 		model.addAttribute("wordFileinfo", wordFileinfo);
 		this.loadCommon(model);
-		return "/awifi/bigscreen/wordFileinfo/wordFileinfo_update.jsp";
+		return "/awifi/wordFileinfo//wordFileinfo_update.jsp";
 	}
 
 	@RequestMapping("/detail_page")
@@ -66,7 +75,7 @@ public class WordFileinfoAction {
 		wordFileinfo = wordFileinfoService.load(wordFileinfo);
 		model.addAttribute("wordFileinfo", wordFileinfo);
 		this.loadCommon(model);
-		return "/awifi/bigscreen/wordFileinfo/wordFileinfo_detail.jsp";
+		return "/awifi/wordFileinfo//wordFileinfo_detail.jsp";
 	}
 
 	@RequestMapping("/create")

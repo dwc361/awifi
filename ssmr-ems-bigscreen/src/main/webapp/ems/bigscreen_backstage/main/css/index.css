@@ -707,7 +707,7 @@ ul.sidebar-menu li a.active i {
 }
 #ad .blockLeft{
     padding:0;
-    max-width:720px;
+    max-width:504px;
     height:400px;
     background:#efefef;
     overflow:hidden;
@@ -718,6 +718,11 @@ ul.sidebar-menu li a.active i {
     padding-left:10rem;
     /* padding-left:6rem; */
 }
+#ad .checkRight {
+    padding-top: 6rem;
+    padding-left: 10rem;
+}
+
 #ad  .note{
     font-size:1rem;
     color:#666;
@@ -805,4 +810,15 @@ ul.sidebar-menu li a.active i {
 }
 #ad .btnImg:hover{
     background:#3bbcb2;
+}
+#checkbox{
+    width: 16px;
+    height: 16px;
+    vertical-align:middle;
+    background-color: #355B90;
+    z-index: 1000;
+}
+#ad .checkdiv{
+    width: 9%;
+    padding-left: 0rem;
 }

@@ -1,4 +1,4 @@
-﻿body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,button,textarea,p,blockquote,th,td { margin:0; padding:0; }
 body {
     width:100%;
     height:100%;
@@ -10,25 +10,84 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-font-smoothing: antialiased;
 }
-#wordid{
-    margin:auto 0;
-    width:100%;
-    height:100%;
-    background:none;
-    border:none;
+#welobject{
+    position: relative;
+}
+/*欢迎领导*/
+#welWordid{
+    display: inline-block;
+    height: 100%;
+    background: none;
     outline:medium;
     text-align:center;
-    padding:10px 20px;
-    font:bold 160px/600px '黑体';
-    font-size: 20px;
+    font-size: 8rem;
+    font-family: "Heiti SC";
+    color: rgb(255, 253, 160);
+    line-height:8rem;
+    text-shadow:0px 6px 12px rgba(97, 22, 0, 0.7);
+    -moz-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
+    -webkit-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
+    -ms-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
     border:0 none;
-    color:#fff;
-    cursor:pointer;
-    letter-spacing:6px;
-    line-height:52px;
 }
-#word_div{
-    margin:-463px auto 0;
-    max-width:100%;
-    height:auto;
+#welWord_div{
+    position: absolute;
+    top:34.8rem;
+    margin: 0 auto;
+    text-align:center;
+    width:100%;
+    height:20rem;
+}
+/*节日庆祝*/
+#celWordid{
+    display: inline-block;
+    height: 100%;
+    background: none;
+    outline:medium;
+    text-align:center;
+    font-size: 8rem;
+    font-family: "Lantinghei SC";
+    color: rgb(255, 253, 160);
+    line-height:8rem;
+    text-shadow:0px 6px 12px rgba(97, 22, 0, 0.7);
+    -moz-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
+    -webkit-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
+    -ms-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
+    border:0 none;
+}
+#celWord_div{
+    position: absolute;
+    top:34.8rem;
+    margin: 0 auto;
+    text-align:center;
+    width:100%;
+    height:20rem;
+}
+/*通知*/
+#annWordid{
+    display: inline-block;
+    height: 38rem;
+    width: 70%;
+    margin: 196px auto;
+    background: none;
+    outline:medium;
+    text-align:center;
+    font-size: 5rem;
+    font-family: "Lantinghei SC";
+    color: rgb(51, 51, 51);
+    line-height:8rem;
+    text-shadow:0px 6px 12px rgba(97, 22, 0, 0.7);
+    -moz-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
+    -webkit-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
+    -ms-transform: matrix( 1.50007267793982,0,0,1.50014077897701,0,0);
+    border:0 none;
+}
+#annWord_div{
+    position: absolute;
+    top: 12.8rem;
+    left: 12rem;
+    margin: 0 auto;
+    text-align: center;
+    width: 70%;
+    height: 38rem;
 }

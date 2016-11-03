@@ -7,15 +7,15 @@ import ReactEcharts from '../../src/echarts-for-react';
 import store from '../../../../stores/second-store';
 import actions from '../../../../actions/second-actions';
 
-// 指定图表的配置项和数据？？？？
-var x_data = [['学校','医院','码头','酒店','公园']];
-var y_data = [[37, 77.4, 58, 14.7, 25]];
+// 指定图表的配置项和数据
+var typeName = [[]];
+var hotareaNum = [[]];
 const Scatter_HotSpot_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
     getInitialState: function() {
-        return {option: this.getOption([],[]),typeName:[],hotareaNum:[]};
+        return {option: this.getOption(), typeName:[], hotareaNum:[]};
     },
     showToolTip: function(echartObj) {
         let option = this.state.option;
@@ -26,11 +26,11 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
             currentIndex++;
             if(currentIndex == dataLen) {
                 currentIndex = -1;
-                hotspot_index = (hotspot_index + 1) % x_data.length;
+                hotspot_index = (hotspot_index + 1) % typeName.length;
                 
                 // 重新加载图表内容
-                option.xAxis.data = x_data[hotspot_index];
-                option.series[0].data = y_data[hotspot_index];
+                option.xAxis.data = typeName[hotspot_index];
+                option.series[0].data = hotareaNum[hotspot_index];
                 echartObj.setOption(option, true);
                 
                 // 取消之前高亮的图形
@@ -66,14 +66,6 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
     componentDidMount: function() {
         actions.getScatter_hotspot_data();
     },
-    componentDidUpdate: function(){
-        //console.log(this.state.deviceNum+"*sbpm*"+this.state.province);
-        //let option = this.state.option;
-        if(this.state.typeName.length>0){
-            x_data = this.state.typeName;
-            y_data = this.state.hotareaNum;
-        }
-    },
     getOption: function() {
         const option = {
             tooltip: {
@@ -91,7 +83,7 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
             //  }]),
             xAxis: {
                 type : 'category',
-                data : x_data[0],
+                data : typeName[0],
                 axisLine: {
                     show: true,
                     onZero: true,
@@ -128,11 +120,11 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
             },
             series: [{
                 name: '',
-                data: y_data[0],
+                data: hotareaNum[0],
                 type: 'scatter',
-                // symbolSize: function(data) {
-                //     return data;
-                // },
+                symbolSize: function(data) {
+                    return 10 + Math.pow(data, 1/2);
+                },
                 label: {
                     emphasis: {
                         show: true,
@@ -162,6 +154,10 @@ const Scatter_HotSpot_ChartComponent = React.createClass({
         return option;
     },
     render: function() {
+        if(this.state.typeName.length > 0) {
+            typeName = this.state.typeName;
+            hotareaNum = this.state.hotareaNum;
+        }
         return (
             <div className="right col-md-12 col-lg-12 col-sm-12">
                 <div className="topH">

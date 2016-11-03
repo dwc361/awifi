@@ -7,30 +7,17 @@ import ReactEcharts from '../../src/echarts-for-react';
 import store from '../../../../stores/second-store';
 import actions from '../../../../actions/second-actions';
 
-var typeNameArray = [['浙江', '河北', '陜西', '河南', '山东', '甘肃']];
-var numberArray = [[812, 899, 890, 880, 870, 850]];
+var province = [[]];
+var deviceNum = [[]];
 const Funnel_SBPM_ChartComponent = React.createClass({
     propTypes: {
     },
     timeTicket: null,
     getInitialState: function() {
-        return {option: this.getOption(),deviceNum:[],province:[]};
+        return {option: this.getOption(), deviceNum:[], province:[]};
     },
     componentDidMount: function() {
         actions.getFunnel_sbpm_data();
-    },
-    componentDidUpdate: function(){
-        //console.log(this.state.deviceNum+"*sbpm*"+this.state.province);
-        //let option = this.state.option;
-        if(this.state.deviceNum.length>0){
-            typeNameArray = this.state.province;
-            //option.yAxis.data = typeNameArray;
-            numberArray = this.state.deviceNum;
-            //option.series[0].data = numberArray;
-            //this.option = option;
-        }
-    },
-    componentWillUnmount: function() {
     },
     getOption: function() {
         const option = {
@@ -83,7 +70,7 @@ const Funnel_SBPM_ChartComponent = React.createClass({
                         fontSize: 12
                     }
                 },
-                data: typeNameArray[0],
+                data: province[0],
                 nameTextStyle: {
                     color: '#fff',
                     fontStyle: 'normal',
@@ -103,7 +90,7 @@ const Funnel_SBPM_ChartComponent = React.createClass({
             },
             series: [{
                 type: 'bar',
-                data: numberArray[0],
+                data: deviceNum[0],
                 itemStyle: {
                     normal: {
                         color: function(params) {
@@ -126,11 +113,11 @@ const Funnel_SBPM_ChartComponent = React.createClass({
             currentIndex++;
             if(currentIndex == dataLen) {
                 currentIndex = -1;
-                rank_index = (rank_index + 1) % typeNameArray.length;
+                rank_index = (rank_index + 1) % province.length;
                 
                 // 重新加载图表内容
-                option.yAxis.data = typeNameArray[rank_index];
-                option.series[0].data = numberArray[rank_index];
+                option.yAxis.data = province[rank_index];
+                option.series[0].data = deviceNum[rank_index];
                 echartObj.setOption(option, true);
                 
                 // 取消之前高亮的图形
@@ -164,6 +151,10 @@ const Funnel_SBPM_ChartComponent = React.createClass({
         }, 2000);
     },
     render: function() {
+        if(this.state.province.length > 0) {
+            province = this.state.province;
+            deviceNum = this.state.deviceNum;
+        }
         return (
             <div className="left col-md-12 col-lg-12 col-sm-12">
                 <div className="topH">
