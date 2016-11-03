@@ -54,7 +54,6 @@ public class Mix_JHL_Chart_DataTransform implements IDataTransform<Set<Map<Strin
 			result_list.add(result_map);
 		}
 		
-		System.out.println(JSON.toJSONString(result_list));
 		return JSON.toJSONString(result_list);
 	}
 	
