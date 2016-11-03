@@ -34248,7 +34248,7 @@
 	    timeTicket: null,
 	    currentIndex: -1,
 	    getInitialState: function getInitialState() {
-	        return { successNum: [], createTime: [], option: this.getOption([], []) };
+	        return { createTime: [], successNum: [], option: this.getOption([], []) };
 	    },
 	    showToolTip: function showToolTip(echartObj) {
 	        var option = this.state.option;
@@ -34276,30 +34276,8 @@
 	            });
 	        }, 2000);
 	    },
-	    fetchNewDate: function fetchNewDate() {
-	        // let option = this.state.option;
-	        // let dataLen = option.series[0].data.length;
-	        // this.currentIndex = (this.currentIndex + 1) % dataLen;
-	    },
 	    componentDidMount: function componentDidMount() {
-	        if (this.timeTicket) {
-	            clearInterval(this.timeTicket);
-	        }
-	        this.timeTicket = setInterval(this.fetchNewDate, 1000);
 	        _secondActions2.default.getLine_yhrz_data();
-	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	        //console.log(this.state.successNum+"*yhrz*"+this.state.createTime);
-	        var option = this.state.option;
-	        option.series[0].data = this.state.successNum;
-	        option.xAxis[0].data = this.state.createTime;
-	        this.option = option;
-	        this.getOption(this.state.successNum, this.state.createTime);
-	    },
-	    componentWillUnmount: function componentWillUnmount() {
-	        if (this.timeTicket) {
-	            clearInterval(this.timeTicket);
-	        }
 	    },
 	    getOption: function getOption(successNum, createTime) {
 	        var option = {
@@ -34396,6 +34374,10 @@
 	        return option;
 	    },
 	    render: function render() {
+	        if (this.state.successNum.length > 0) {
+	            this.state.option.series[0].data = this.state.successNum;
+	            this.state.option.xAxis[0].data = this.state.createTime;
+	        }
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'right col-md-12 col-lg-12 col-sm-12' },
@@ -98872,21 +98854,11 @@
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { onlineNum: [], offlineNum: [], option: this.getOption([], [], []), createTime: [] };
+	        return { createTime: [], onlineNum: [], offlineNum: [], option: this.getOption([], [], []) };
 	    },
 	    componentDidMount: function componentDidMount() {
 	        _secondActions2.default.getMix_nas_data();
 	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	        // console.log(this.state.offlineNum+"*3*"+this.state.createTime);
-	        var option = this.state.option;
-	        option.series[0].data = this.state.onlineNum;
-	        option.series[1].data = this.state.offlineNum;
-	        option.xAxis[0].data = this.state.createTime;
-	        this.option = option;
-	        this.getOption(this.state.onlineNum, this.state.offlineNum, this.state.createTime);
-	    },
-	    componentWillUnmount: function componentWillUnmount() {},
 	    showToolTip: function showToolTip(echartObj) {
 	        var option = this.state.option;
 	        var currentIndex = -1;
@@ -99052,6 +99024,11 @@
 	        return option;
 	    },
 	    render: function render() {
+	        if (this.state.createTime.length > 0) {
+	            this.state.option.series[0].data = this.state.onlineNum;
+	            this.state.option.series[1].data = this.state.offlineNum;
+	            this.state.option.xAxis[0].data = this.state.createTime;
+	        }
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'right col-md-12 col-lg-12 col-sm-12' },
@@ -99131,20 +99108,11 @@
 	    propTypes: {},
 	    timeTicket: null,
 	    getInitialState: function getInitialState() {
-	        return { onlineNum: [], offlineNum: [], option: this.getOption([], [], []), createTime: [] };
+	        return { createTime: [], onlineNum: [], offlineNum: [], option: this.getOption([], [], []) };
 	    },
 	    componentDidMount: function componentDidMount() {
 	        _secondActions2.default.getMix_Dzzd_data();
 	    },
-	    componentDidUpdate: function componentDidUpdate() {
-	        var option = this.state.option;
-	        option.series[0].data = this.state.onlineNum;
-	        option.series[1].data = this.state.offlineNum;
-	        option.xAxis[0].data = this.state.createTime;
-	        this.option = option;
-	        this.getOption(this.state.onlineNum, this.state.offlineNum, this.state.createTime);
-	    },
-	    componentWillUnmount: function componentWillUnmount() {},
 	    getOption: function getOption(onlineNum, offlineNum, createTime) {
 	        var option = {
 	            title: {
@@ -99299,6 +99267,11 @@
 	        echartObj.setOption(option);
 	    },
 	    render: function render() {
+	        if (this.state.createTime.length > 0) {
+	            this.state.option.series[0].data = this.state.onlineNum;
+	            this.state.option.series[1].data = this.state.offlineNum;
+	            this.state.option.xAxis[0].data = this.state.createTime;
+	        }
 	        return _react2.default.createElement(
 	            'div',
 	            { className: 'left col-md-12 col-lg-12 col-sm-12' },

@@ -12,7 +12,7 @@ const Mix_JHL_ChartComponent = React.createClass({
     },
     timeTicket: null,
     getInitialState: function() {
-        return {activateNum:[], activatePer:[], createTime:[], option: this.getOption([], [], [])};
+        return {activateNum:[], activatePer:[], createTime:[], option:this.getOption([], [], [])};
     },
     componentDidMount: function() {
         actions.getMix_jhl_data();

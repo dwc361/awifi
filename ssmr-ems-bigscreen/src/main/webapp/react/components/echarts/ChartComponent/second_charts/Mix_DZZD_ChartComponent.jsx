@@ -11,20 +11,10 @@ const Mix_DZZD_ChartComponent = React.createClass({
     },
     timeTicket: null,
     getInitialState: function() {
-        return {onlineNum:[],offlineNum:[],option:this.getOption([],[],[]),createTime:[]};
+        return {createTime:[], onlineNum:[], offlineNum:[], option:this.getOption([], [], [])};
     },
     componentDidMount: function() {
         actions.getMix_Dzzd_data();
-    },
-    componentDidUpdate: function(){
-        let option = this.state.option;
-        option.series[0].data = this.state.onlineNum;
-        option.series[1].data = this.state.offlineNum;
-        option.xAxis[0].data = this.state.createTime;
-        this.option = option;
-        this.getOption(this.state.onlineNum,this.state.offlineNum,this.state.createTime);
-    },
-    componentWillUnmount: function() {
     },
     getOption: function(onlineNum,offlineNum,createTime) {
         const option = {
@@ -192,6 +182,11 @@ const Mix_DZZD_ChartComponent = React.createClass({
         echartObj.setOption(option);
     },
     render: function() {
+        if(this.state.createTime.length > 0) {
+            this.state.option.series[0].data = this.state.onlineNum;
+            this.state.option.series[1].data = this.state.offlineNum;
+            this.state.option.xAxis[0].data = this.state.createTime;
+        }
         return (
             <div className="left col-md-12 col-lg-12 col-sm-12">
                 <div className="topH">

@@ -14,7 +14,7 @@ const Funnel_SBPM_ChartComponent = React.createClass({
     },
     timeTicket: null,
     getInitialState: function() {
-        return {option: this.getOption(), deviceNum:[], province:[]};
+        return {option:this.getOption(), deviceNum:[], province:[]};
     },
     componentDidMount: function() {
         actions.getFunnel_sbpm_data();
