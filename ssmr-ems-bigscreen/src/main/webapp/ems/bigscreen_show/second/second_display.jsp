@@ -155,8 +155,8 @@
 <script type="text/javascript">
 	var chartNameList = ${list};
 </script>
-<script src="http://localhost:8081/secondScreen.js"></script>
-<!-- <script src="${basePath}/react/build/secondScreen.js"></script> -->
+<!-- <script src="http://localhost:8081/secondScreen.js"></script> -->
+<script src="${basePath}/react/build/secondScreen.js"></script>
 <!-- <script src="${basePath}/ems/bigscreen_show/index/bigscreen_display/second/js/second_display_react_charts_templates.js"></script> -->
 
 <!--以下是map-->
