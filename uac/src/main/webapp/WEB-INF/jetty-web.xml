@@ -8,7 +8,7 @@
 					<Item>src\main\webapp</Item>
 					<Item>..\roof-web1.2\src\main\webapp</Item>
 					<Item>..\cas-server-webapp\src\main\webapp</Item>
-					<Item>E:\Users\hc_workspace_2016\webc</Item>
+					<Item>..\webc</Item>
 				</Array>
 			</Arg>
 		</New>

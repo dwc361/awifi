@@ -23,7 +23,7 @@
 	<!-- 扫描组件 -->
 	<context:component-scan base-package="*,org.roof.*,com.zjhcsoft.*" />
 
-	<import resource="classpath:spring-db.xml" />
+	<import resource="classpath:spring-db-oracle.xml" />
 	<import resource="classpath:spring-cache.xml" />
 	<import resource="classpath:spring-excel.xml" />
 	<import resource="classpath:spring-security.xml" />
@@ -50,7 +50,7 @@
 		<property name="locations">
 			<list>
 				<value>classpath:tk-filters.properties</value>
-				<value>classpath:app-ds.properties</value>
+				<value>classpath:app-ds-oracle.properties</value>
 				<value>classpath:project.properties</value>
 				<value>classpath:mail.properties</value>
 				<value>classpath:cas/cas.properties</value>

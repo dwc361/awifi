@@ -9,6 +9,7 @@
 		<property name="port" value="${redis.port}" />
 		<property name="poolConfig" ref="poolConfig" />
 		<property name="usePool" value="true" />
+<!-- 		<property name="password" value="asdfghjkl" /> -->
 	</bean>
 	<bean id="poolConfig" class="redis.clients.jedis.JedisPoolConfig">
 	</bean>
