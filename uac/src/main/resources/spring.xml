@@ -23,7 +23,7 @@
 	<!-- 扫描组件 -->
 	<context:component-scan base-package="*,org.roof.*,com.zjhcsoft.*" />
 
-	<import resource="classpath:spring-db-oracle.xml" />
+	<import resource="classpath:spring-db.xml" />
 	<import resource="classpath:spring-cache.xml" />
 	<import resource="classpath:spring-excel.xml" />
 	<import resource="classpath:spring-security.xml" />
